@@ -18,9 +18,10 @@ def main():
     parser.add_argument("--n_jobs", type=int, default=1, help="Number of jobs for parallel processing")
     args = parser.parse_args()
     
-    image_path = REPO_ROOT / "examples" / "data" / "reference_volume.nii.gz"
+    image_path = REPO_ROOT / "tests" / "neutube_image_output" / "17302_00007.v3dpbd"
+    # image_path = REPO_ROOT / "examples" / "data" / "reference_volume.nii.gz"
     output_swc = REPO_ROOT / "examples" / "reference_volume_trace.swc"
-    output_overlay = REPO_ROOT / "examples" / "reference_volume_trace.png"
+    output_vis = REPO_ROOT / "examples" / "reference_volume_trace_visualization"
 
     result = trace_file(
         image_path,
@@ -28,11 +29,10 @@ def main():
         n_jobs=args.n_jobs,
         verbose=1,
         overwrite=True,
+        visualization_dir=output_vis,
+        # seed_strategy="lazy",
     )
-    if result.neuron is not None:
-        save_overlay_figure(image_path, result.neuron, output_overlay, title=image_path.name)
     print(output_swc)
-    print(output_overlay)
     return result
 
 
