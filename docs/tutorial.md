@@ -2,18 +2,10 @@
 
 ## 1. Install
 
-Install PyNeuTube first. The recommended published-package installs are:
+Install PyTube first. The recommended published-package installs are:
 
 ```bash
-python -m pip install pyneutube
-# or
-conda install -c conda-forge pyneutube
-```
-
-If you need the latest source version instead of a published package:
-
-```bash
-python -m pip install "git+https://github.com/YunZhixi98/pyNeuTube.git"
+python -m pip install "git+https://github.com/YunZhixi98/pyTube.git"
 ```
 
 For a local repository checkout, the fuller source-install options are documented in the main `README.md`.

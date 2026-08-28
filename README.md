@@ -1,10 +1,10 @@
-# PyNeuTube
+# PyTube
 
-PyNeuTube is a Python reimplementation of the NeuTube tracing workflow for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
+PyTube is a Python reimplementation of the NeuTube tracing workflow for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
 
 ## Current scope
 
-PyNeuTube currently provides:
+PyTube currently provides:
 
 - multi-format 3D image I/O through `ImageParser`
 - SWC parsing and export through `Neuron`
@@ -19,16 +19,10 @@ Heavy debug inspection modules are intentionally not part of the release surface
 
 Recommended Python versions: `3.10` to `3.12`.
 
-Install from PyPI with `pip`:
-
-```bash
-python -m pip install pyneutube
-```
-
 If you need the latest source version instead of a published package, install from GitHub:
 
 ```bash
-python -m pip install "git+https://github.com/YunZhixi98/pyNeuTube.git"
+python -m pip install "git+https://github.com/YunZhixi98/pyTube.git"
 ```
 
 For a local source tree:
@@ -262,7 +256,7 @@ chains = generate_trace_chains(seeds, image)
 
 ## Trace config
 
-Tracing APIs accept an optional `config` argument. By default, PyNeuTube uses the built-in tracer config in `pyneutube.tracers.pyNeuTube.config`. To override it, pass a Python module path that exposes `Defaults` and optionally `Optimization` with the same attribute names as the built-in config:
+Tracing APIs accept an optional `config` argument. By default, PyTube uses the built-in tracer config in `pyneutube.tracers.pyNeuTube.config`. To override it, pass a Python module path that exposes `Defaults` and optionally `Optimization` with the same attribute names as the built-in config:
 
 ```python
 result = trace_file(
