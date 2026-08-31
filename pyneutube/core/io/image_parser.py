@@ -187,6 +187,15 @@ def save_v3draw(image: np.ndarray, path: str | os.PathLike[str]) -> None:
         )
 
 
+def save_v3dpbd(image: np.ndarray, path: str | os.PathLike[str]) -> None:
+    path = Path(path)
+    volume = np.ascontiguousarray(_normalized_volume(np.asarray(image)))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if vaa3d_accel is None:
+        raise RuntimeError("Vaa3D PBD saving requires the compiled image I/O extension.")
+    vaa3d_accel.save_v3dpbd(volume, path)
+
+
 class PBD:
     """Loader for Vaa3D PBD-compressed volumes."""
 
@@ -697,6 +706,11 @@ class ImageParser:
         if fmt == "v3draw":
             save_v3draw(volume, out_path)
             _vprint(verbose, f"Saved Vaa3D raw volume to {out_path}")
+            return
+
+        if fmt == "v3dpbd":
+            save_v3dpbd(volume, out_path)
+            _vprint(verbose, f"Saved Vaa3D PBD volume to {out_path}")
             return
 
         if fmt == "nifti":

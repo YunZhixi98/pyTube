@@ -1399,6 +1399,7 @@ static const char *__pyx_filename;
 static const char* const __pyx_f[] = {
   "pyneutube/core/io/vaa3d_accel.pyx",
   "../../../../software/anaconda3/Lib/site-packages/numpy/__init__.cython-30.pxd",
+  "<stringsource>",
   "cpython/type.pxd",
 };
 /* #### Code section: utility_code_proto_before_types ### */
@@ -1806,6 +1807,7 @@ static CYTHON_INLINE __pyx_t_double_complex __pyx_t_double_complex_from_parts(do
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
+struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
 
 /* "../../../../software/anaconda3/Lib/site-packages/numpy/__init__.cython-30.pxd":767
  * ctypedef npy_longdouble longdouble_t
@@ -1842,6 +1844,32 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  * cdef inline object PyArray_MultiIterNew1(a):
 */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":23
+ * 
+ * 
+ * cdef class _PBDStreamWriter:             # <<<<<<<<<<<<<<
+ *     cdef:
+ *         object handle
+*/
+struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_vtab;
+  PyObject *handle;
+  PyObject *buffer;
+  uint8_t *data;
+  Py_ssize_t pos;
+  Py_ssize_t capacity;
+};
+
+
+
+struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter {
+  void (*flush)(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *);
+  void (*write_byte)(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *, uint8_t);
+};
+static struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_vtabptr_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+static CYTHON_INLINE void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *, uint8_t);
 /* #### Code section: utility_code_proto ### */
 
 /* --- Runtime support code (head) --- */
@@ -2028,9 +2056,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_FastCallDict(PyObject *func, PyObj
 /* RaiseException.export */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
-/* PyValueError_Check.proto */
-#define __Pyx_PyExc_ValueError_Check(obj)  __Pyx_TypeCheck(obj, PyExc_ValueError)
-
 /* TupleAndListFromArray.proto (used by fastcall) */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n);
@@ -2208,6 +2233,22 @@ static CYTHON_INLINE int __Pyx_ParseKeywords(
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
+/* PyObjectFastCallMethod.proto */
+#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
+#define __Pyx_PyObject_FastCallMethod(name, args, nargsf) PyObject_VectorcallMethod(name, args, nargsf, NULL)
+#else
+static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
+#endif
+
+/* RejectKeywords.export */
+static void __Pyx_RejectKeywords(const char* function_name, PyObject *kwds);
+
+/* PyTypeError_Check.proto */
+#define __Pyx_PyExc_TypeError_Check(obj)  __Pyx_TypeCheck(obj, PyExc_TypeError)
+
+/* PyValueError_Check.proto */
+#define __Pyx_PyExc_ValueError_Check(obj)  __Pyx_TypeCheck(obj, PyExc_ValueError)
+
 /* PyDictVersioning.proto (used by GetModuleGlobalName) */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 #define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
@@ -2263,13 +2304,6 @@ static CYTHON_INLINE PyObject* __Pyx__PyObject_LookupSpecial(PyObject* obj, PyOb
 #else
 #define __Pyx_PyObject_LookupSpecialNoError(o,n) __Pyx_PyObject_GetAttrStrNoError(o,n)
 #define __Pyx_PyObject_LookupSpecial(o,n) __Pyx_PyObject_GetAttrStr(o,n)
-#endif
-
-/* PyObjectFastCallMethod.proto */
-#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
-#define __Pyx_PyObject_FastCallMethod(name, args, nargsf) PyObject_VectorcallMethod(name, args, nargsf, NULL)
-#else
-static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
 #endif
 
 /* RaiseUnexpectedTypeError.proto */
@@ -2401,6 +2435,70 @@ static void __Pyx_RaiseBufferFallbackError(void);
 /* PyNotImplementedError_Check.proto */
 #define __Pyx_PyExc_NotImplementedError_Check(obj)  __Pyx_TypeCheck(obj, PyExc_NotImplementedError)
 
+/* PyLongCompare.proto */
+static CYTHON_INLINE int __Pyx_PyLong_BoolNeObjC(PyObject *op1, PyObject *op2, long intval, long inplace);
+
+/* PyObjectFormatAndDecref.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f);
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f);
+
+/* AllocateExtensionType.proto */
+static PyObject *__Pyx_AllocateExtensionType(PyTypeObject *t, int is_final);
+
+/* CallTypeTraverse.proto */
+#if !CYTHON_USE_TYPE_SPECS || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x03090000)
+#define __Pyx_call_type_traverse(o, always_call, visit, arg) 0
+#else
+static int __Pyx_call_type_traverse(PyObject *o, int always_call, visitproc visit, void *arg);
+#endif
+
+/* LimitedApiGetTypeDict.proto (used by SetItemOnTypeDict) */
+#if CYTHON_COMPILING_IN_LIMITED_API
+static PyObject *__Pyx_GetTypeDict(PyTypeObject *tp);
+#endif
+
+/* SetItemOnTypeDict.proto (used by FixUpExtensionType) */
+static int __Pyx__SetItemOnTypeDict(PyTypeObject *tp, PyObject *k, PyObject *v);
+#define __Pyx_SetItemOnTypeDict(tp, k, v) __Pyx__SetItemOnTypeDict((PyTypeObject*)tp, k, v)
+
+/* FixUpExtensionType.proto */
+static CYTHON_INLINE int __Pyx_fix_up_extension_type_from_spec(PyType_Spec *spec, PyTypeObject *type);
+
+/* PyObjectCallNoArg.proto (used by PyObjectCallMethod0) */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+
+/* PyObjectGetMethod.proto (used by PyObjectCallMethod0) */
+#if !(CYTHON_VECTORCALL && (__PYX_LIMITED_VERSION_HEX >= 0x030C0000 || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x03090000)))
+static int __Pyx_PyObject_GetMethod(PyObject *obj, PyObject *name, PyObject **method);
+#endif
+
+/* PyObjectCallMethod0.proto (used by PyType_Ready) */
+static PyObject* __Pyx_PyObject_CallMethod0(PyObject* obj, PyObject* method_name);
+
+/* ValidateBasesTuple.proto (used by PyType_Ready) */
+#if CYTHON_COMPILING_IN_CPYTHON || CYTHON_COMPILING_IN_LIMITED_API || CYTHON_USE_TYPE_SPECS
+static int __Pyx_validate_bases_tuple(const char *type_name, Py_ssize_t dictoffset, PyObject *bases);
+#endif
+
+/* PyType_Ready.proto */
+CYTHON_UNUSED static int __Pyx_PyType_Ready(PyTypeObject *t);
+
+/* SetVTable.proto */
+static int __Pyx_SetVtable(PyTypeObject* typeptr , void* vtable);
+
+/* GetVTable.proto (used by MergeVTables) */
+static void* __Pyx_GetVtable(PyTypeObject *type);
+
+/* MergeVTables.proto */
+static int __Pyx_MergeVtables(PyTypeObject *type);
+
+/* DelItemOnTypeDict.proto (used by SetupReduce) */
+static int __Pyx__DelItemOnTypeDict(PyTypeObject *tp, PyObject *k);
+#define __Pyx_DelItemOnTypeDict(tp, k) __Pyx__DelItemOnTypeDict((PyTypeObject*)tp, k)
+
+/* SetupReduce.proto */
+static int __Pyx_setup_reduce(PyObject* type_obj);
+
 /* TypeImport.proto */
 #ifndef __PYX_HAVE_RT_ImportType_proto_3_2_4
 #define __PYX_HAVE_RT_ImportType_proto_3_2_4
@@ -2436,18 +2534,6 @@ static CYTHON_INLINE PyObject *__Pyx_Import(PyObject *name, PyObject *const *imp
 /* dict_setdefault.proto (used by FetchCommonType) */
 static CYTHON_INLINE PyObject *__Pyx_PyDict_SetDefault(PyObject *d, PyObject *key, PyObject *default_value);
 
-/* LimitedApiGetTypeDict.proto (used by SetItemOnTypeDict) */
-#if CYTHON_COMPILING_IN_LIMITED_API
-static PyObject *__Pyx_GetTypeDict(PyTypeObject *tp);
-#endif
-
-/* SetItemOnTypeDict.proto (used by FixUpExtensionType) */
-static int __Pyx__SetItemOnTypeDict(PyTypeObject *tp, PyObject *k, PyObject *v);
-#define __Pyx_SetItemOnTypeDict(tp, k, v) __Pyx__SetItemOnTypeDict((PyTypeObject*)tp, k, v)
-
-/* FixUpExtensionType.proto (used by FetchCommonType) */
-static CYTHON_INLINE int __Pyx_fix_up_extension_type_from_spec(PyType_Spec *spec, PyTypeObject *type);
-
 /* AddModuleRef.proto (used by FetchSharedCythonModule) */
 #if ((CYTHON_COMPILING_IN_CPYTHON_FREETHREADING ) ||\
      __PYX_LIMITED_VERSION_HEX < 0x030d0000)
@@ -2465,13 +2551,6 @@ static PyTypeObject* __Pyx_FetchCommonTypeFromSpec(PyTypeObject *metaclass, PyOb
 /* CommonTypesMetaclass.proto (used by CythonFunctionShared) */
 static int __pyx_CommonTypesMetaclass_init(PyObject *module);
 #define __Pyx_CommonTypesMetaclass_USED
-
-/* CallTypeTraverse.proto (used by CythonFunctionShared) */
-#if !CYTHON_USE_TYPE_SPECS || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x03090000)
-#define __Pyx_call_type_traverse(o, always_call, visit, arg) 0
-#else
-static int __Pyx_call_type_traverse(PyObject *o, int always_call, visitproc visit, void *arg);
-#endif
 
 /* PyMethodNew.proto (used by CythonFunctionShared) */
 static PyObject *__Pyx_PyMethod_New(PyObject *func, PyObject *self, PyObject *typ);
@@ -2723,6 +2802,9 @@ typedef struct {
     #endif
 #endif
 
+/* CIntFromPy.proto */
+static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *);
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyLong_From_unsigned_int(unsigned int value);
 
@@ -2737,6 +2819,9 @@ static CYTHON_INLINE PY_LONG_LONG __Pyx_PyLong_As_PY_LONG_LONG(PyObject *);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyLong_From_PY_LONG_LONG(PY_LONG_LONG value);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyLong_From_short(short value);
 
 /* FormatTypeName.proto */
 #if CYTHON_COMPILING_IN_LIMITED_API
@@ -2757,9 +2842,6 @@ typedef const char *__Pyx_TypeName;
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyLong_As_long(PyObject *);
-
-/* CIntFromPy.proto */
-static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *);
 
 /* FastTypeChecks.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -2854,6 +2936,8 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape_shape(PyArrayObjec
 static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides_strides(PyArrayObject *__pyx_v_self); /* proto*/
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size_size(PyArrayObject *__pyx_v_self); /* proto*/
 static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__pyx_v_self); /* proto*/
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_flush(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self); /* proto*/
+static CYTHON_INLINE void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, uint8_t __pyx_v_value); /* proto*/
 
 /* Module declarations from "libc.string" */
 
@@ -2873,11 +2957,17 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "numpy" */
 
+/* Module declarations from "cpython.bytearray" */
+
 /* Module declarations from "cpython.bytes" */
 
 /* Module declarations from "libc.stdint" */
 
 /* Module declarations from "pyneutube.core.io.vaa3d_accel" */
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *, uint8_t *, Py_ssize_t); /*proto*/
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd8(uint8_t const *, Py_ssize_t, struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *); /*proto*/
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *, uint16_t *, Py_ssize_t); /*proto*/
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd16(uint16_t const *, Py_ssize_t, struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *); /*proto*/
 static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u16(uint8_t const *, Py_ssize_t, int); /*proto*/
 static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(unsigned int, unsigned int); /*proto*/
 static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t const *, Py_ssize_t, uint8_t *, Py_ssize_t); /*proto*/
@@ -2896,8 +2986,13 @@ static PyObject *__pyx_builtin_open;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_Cython_accelerators_for_Vaa3D_im[] = "Cython accelerators for Vaa3D image loading.";
 /* #### Code section: decls ### */
+static int __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter___cinit__(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, PyObject *__pyx_v_handle, Py_ssize_t __pyx_v_capacity); /* proto */
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_path); /* proto */
 static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_path); /* proto */
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_4save_v3dpbd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_image, PyObject *__pyx_v_path); /* proto */
+static PyObject *__pyx_tp_new_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 /* SmallCodeConfig */
@@ -2934,13 +3029,15 @@ typedef struct {
   PyTypeObject *__pyx_ptype_5numpy_flexible;
   PyTypeObject *__pyx_ptype_5numpy_character;
   PyTypeObject *__pyx_ptype_5numpy_ufunc;
+  PyObject *__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+  PyTypeObject *__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_tuple[1];
-  PyObject *__pyx_codeobj_tab[2];
-  PyObject *__pyx_string_tab[95];
-  PyObject *__pyx_number_tab[1];
+  PyObject *__pyx_codeobj_tab[5];
+  PyObject *__pyx_string_tab[130];
+  PyObject *__pyx_number_tab[3];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2982,101 +3079,138 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #endif
 /* #### Code section: constant_name_defines ### */
 #define __pyx_kp_u_ __pyx_string_tab[0]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD16_delta_bloc __pyx_string_tab[1]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD16_literal_bl __pyx_string_tab[2]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD16_repeat_blo __pyx_string_tab[3]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD8_delta_block __pyx_string_tab[4]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD8_literal_blo __pyx_string_tab[5]
-#define __pyx_kp_u_Malformed_Vaa3D_PBD8_repeat_bloc __pyx_string_tab[6]
-#define __pyx_kp_u_Unsupported_Vaa3D_PBD_datatype_c __pyx_string_tab[7]
-#define __pyx_kp_u_Unsupported_Vaa3D_PBD_header_in __pyx_string_tab[8]
-#define __pyx_kp_u_Unsupported_Vaa3D_datatype_code __pyx_string_tab[9]
-#define __pyx_kp_u_Unsupported_Vaa3D_endian_code_in __pyx_string_tab[10]
-#define __pyx_kp_u_Unsupported_Vaa3D_raw_header_in __pyx_string_tab[11]
-#define __pyx_kp_u_Vaa3D_PBD16_decompressed_size_do __pyx_string_tab[12]
-#define __pyx_kp_u_Vaa3D_PBD8_decompressed_size_doe __pyx_string_tab[13]
-#define __pyx_kp_u_Vaa3D_PBD_datatype_33_is_not_imp __pyx_string_tab[14]
-#define __pyx_kp_u_Vaa3D_PBD_file_is_truncated __pyx_string_tab[15]
+#define __pyx_kp_u_Expected_a_3D_volume_got_array_w __pyx_string_tab[1]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD16_delta_bloc __pyx_string_tab[2]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD16_literal_bl __pyx_string_tab[3]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD16_repeat_blo __pyx_string_tab[4]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD8_delta_block __pyx_string_tab[5]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD8_literal_blo __pyx_string_tab[6]
+#define __pyx_kp_u_Malformed_Vaa3D_PBD8_repeat_bloc __pyx_string_tab[7]
+#define __pyx_kp_u_Unsupported_Vaa3D_PBD_datatype_c __pyx_string_tab[8]
+#define __pyx_kp_u_Unsupported_Vaa3D_PBD_header_in __pyx_string_tab[9]
+#define __pyx_kp_u_Unsupported_Vaa3D_datatype_code __pyx_string_tab[10]
+#define __pyx_kp_u_Unsupported_Vaa3D_endian_code_in __pyx_string_tab[11]
+#define __pyx_kp_u_Unsupported_Vaa3D_raw_header_in __pyx_string_tab[12]
+#define __pyx_kp_u_Vaa3D_PBD_datatype_33_is_not_imp __pyx_string_tab[13]
+#define __pyx_kp_u_Vaa3D_PBD_file_is_truncated __pyx_string_tab[14]
+#define __pyx_kp_u_Vaa3D_PBD_saving_supports_uint8 __pyx_string_tab[15]
 #define __pyx_kp_u_Vaa3D_raw_file_is_truncated __pyx_string_tab[16]
 #define __pyx_kp_u_Vaa3D_raw_file_size_does_not_mat __pyx_string_tab[17]
 #define __pyx_kp_u__2 __pyx_string_tab[18]
 #define __pyx_kp_u__3 __pyx_string_tab[19]
 #define __pyx_kp_u__4 __pyx_string_tab[20]
 #define __pyx_kp_u__5 __pyx_string_tab[21]
-#define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_string_tab[22]
-#define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_string_tab[23]
-#define __pyx_kp_u_pyneutube_core_io_vaa3d_accel_py __pyx_string_tab[24]
-#define __pyx_n_u_FORMAT_KEY_V3DPBD __pyx_string_tab[25]
-#define __pyx_n_u_FORMAT_KEY_V3DRAW __pyx_string_tab[26]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[27]
-#define __pyx_n_u_astype __pyx_string_tab[28]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[29]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[30]
-#define __pyx_n_u_comp __pyx_string_tab[31]
-#define __pyx_n_u_comp_len __pyx_string_tab[32]
-#define __pyx_n_u_copy __pyx_string_tab[33]
-#define __pyx_n_u_count __pyx_string_tab[34]
-#define __pyx_n_u_data __pyx_string_tab[35]
-#define __pyx_n_u_datatype __pyx_string_tab[36]
-#define __pyx_n_u_dims __pyx_string_tab[37]
-#define __pyx_n_u_dtype __pyx_string_tab[38]
-#define __pyx_n_u_empty __pyx_string_tab[39]
-#define __pyx_n_u_endian __pyx_string_tab[40]
-#define __pyx_n_u_enter __pyx_string_tab[41]
-#define __pyx_n_u_exit __pyx_string_tab[42]
-#define __pyx_n_u_expected_size __pyx_string_tab[43]
-#define __pyx_n_u_f4 __pyx_string_tab[44]
-#define __pyx_n_u_fromfile __pyx_string_tab[45]
-#define __pyx_n_u_fspath __pyx_string_tab[46]
-#define __pyx_n_u_func __pyx_string_tab[47]
-#define __pyx_n_u_getsize __pyx_string_tab[48]
-#define __pyx_n_u_h __pyx_string_tab[49]
-#define __pyx_n_u_handle __pyx_string_tab[50]
-#define __pyx_n_u_header __pyx_string_tab[51]
-#define __pyx_n_u_iiii __pyx_string_tab[52]
-#define __pyx_n_u_image __pyx_string_tab[53]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[54]
-#define __pyx_n_u_items __pyx_string_tab[55]
-#define __pyx_n_u_little __pyx_string_tab[56]
-#define __pyx_n_u_load_v3dpbd __pyx_string_tab[57]
-#define __pyx_n_u_load_v3draw __pyx_string_tab[58]
-#define __pyx_n_u_main __pyx_string_tab[59]
-#define __pyx_n_u_module __pyx_string_tab[60]
-#define __pyx_n_u_name __pyx_string_tab[61]
-#define __pyx_n_u_native_dtype __pyx_string_tab[62]
-#define __pyx_n_u_newbyteorder __pyx_string_tab[63]
-#define __pyx_n_u_np __pyx_string_tab[64]
-#define __pyx_n_u_numpy __pyx_string_tab[65]
-#define __pyx_n_u_offset __pyx_string_tab[66]
-#define __pyx_n_u_open __pyx_string_tab[67]
-#define __pyx_n_u_os __pyx_string_tab[68]
-#define __pyx_n_u_out16 __pyx_string_tab[69]
-#define __pyx_n_u_out8 __pyx_string_tab[70]
-#define __pyx_n_u_path __pyx_string_tab[71]
-#define __pyx_n_u_pop __pyx_string_tab[72]
-#define __pyx_n_u_pyneutube_core_io_vaa3d_accel __pyx_string_tab[73]
-#define __pyx_n_u_qualname __pyx_string_tab[74]
-#define __pyx_n_u_rb __pyx_string_tab[75]
-#define __pyx_n_u_read __pyx_string_tab[76]
-#define __pyx_n_u_reshape __pyx_string_tab[77]
-#define __pyx_n_u_set_name __pyx_string_tab[78]
-#define __pyx_n_u_setdefault __pyx_string_tab[79]
-#define __pyx_n_u_struct __pyx_string_tab[80]
-#define __pyx_n_u_test __pyx_string_tab[81]
-#define __pyx_n_u_total_units __pyx_string_tab[82]
-#define __pyx_n_u_u1 __pyx_string_tab[83]
-#define __pyx_n_u_u2 __pyx_string_tab[84]
-#define __pyx_n_u_uint16 __pyx_string_tab[85]
-#define __pyx_n_u_uint8 __pyx_string_tab[86]
-#define __pyx_n_u_unpack __pyx_string_tab[87]
-#define __pyx_n_u_values __pyx_string_tab[88]
-#define __pyx_kp_b_iso88591_2WAQ_QfIQ_uAQ_s_82Q_j_8_vRs_s_j __pyx_string_tab[89]
-#define __pyx_kp_b_iso88591_2WAQ_QfIQ_vU_q_b_j_8_t2S_S_j_1A __pyx_string_tab[90]
-#define __pyx_n_b_B __pyx_string_tab[91]
-#define __pyx_n_b_L __pyx_string_tab[92]
-#define __pyx_n_b_raw_image_stack_by_hpeng __pyx_string_tab[93]
-#define __pyx_n_b_v3d_volume_pkbitdf_encod __pyx_string_tab[94]
-#define __pyx_int_43 __pyx_number_tab[0]
+#define __pyx_kp_u_disable __pyx_string_tab[22]
+#define __pyx_kp_u_enable __pyx_string_tab[23]
+#define __pyx_kp_u_gc __pyx_string_tab[24]
+#define __pyx_kp_u_hiiii __pyx_string_tab[25]
+#define __pyx_kp_u_isenabled __pyx_string_tab[26]
+#define __pyx_kp_u_no_default___reduce___due_to_non __pyx_string_tab[27]
+#define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_string_tab[28]
+#define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_string_tab[29]
+#define __pyx_kp_u_pyneutube_core_io_vaa3d_accel_py __pyx_string_tab[30]
+#define __pyx_kp_u_stringsource __pyx_string_tab[31]
+#define __pyx_n_u_FORMAT_KEY_V3DPBD __pyx_string_tab[32]
+#define __pyx_n_u_FORMAT_KEY_V3DRAW __pyx_string_tab[33]
+#define __pyx_n_u_PBDStreamWriter __pyx_string_tab[34]
+#define __pyx_n_u_PBDStreamWriter___reduce_cython __pyx_string_tab[35]
+#define __pyx_n_u_PBDStreamWriter___setstate_cyth __pyx_string_tab[36]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[37]
+#define __pyx_n_u_asarray __pyx_string_tab[38]
+#define __pyx_n_u_ascontiguousarray __pyx_string_tab[39]
+#define __pyx_n_u_astype __pyx_string_tab[40]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[41]
+#define __pyx_n_u_capacity __pyx_string_tab[42]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[43]
+#define __pyx_n_u_comp __pyx_string_tab[44]
+#define __pyx_n_u_comp_len __pyx_string_tab[45]
+#define __pyx_n_u_copy __pyx_string_tab[46]
+#define __pyx_n_u_count __pyx_string_tab[47]
+#define __pyx_n_u_data __pyx_string_tab[48]
+#define __pyx_n_u_datatype __pyx_string_tab[49]
+#define __pyx_n_u_dims __pyx_string_tab[50]
+#define __pyx_n_u_dtype __pyx_string_tab[51]
+#define __pyx_n_u_endian __pyx_string_tab[52]
+#define __pyx_n_u_enter __pyx_string_tab[53]
+#define __pyx_n_u_exit __pyx_string_tab[54]
+#define __pyx_n_u_expected_size __pyx_string_tab[55]
+#define __pyx_n_u_f4 __pyx_string_tab[56]
+#define __pyx_n_u_fromfile __pyx_string_tab[57]
+#define __pyx_n_u_fspath __pyx_string_tab[58]
+#define __pyx_n_u_func __pyx_string_tab[59]
+#define __pyx_n_u_getsize __pyx_string_tab[60]
+#define __pyx_n_u_getstate __pyx_string_tab[61]
+#define __pyx_n_u_h __pyx_string_tab[62]
+#define __pyx_n_u_handle __pyx_string_tab[63]
+#define __pyx_n_u_header __pyx_string_tab[64]
+#define __pyx_n_u_iiii __pyx_string_tab[65]
+#define __pyx_n_u_image __pyx_string_tab[66]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[67]
+#define __pyx_n_u_items __pyx_string_tab[68]
+#define __pyx_n_u_little __pyx_string_tab[69]
+#define __pyx_n_u_load_v3dpbd __pyx_string_tab[70]
+#define __pyx_n_u_load_v3draw __pyx_string_tab[71]
+#define __pyx_n_u_main __pyx_string_tab[72]
+#define __pyx_n_u_module __pyx_string_tab[73]
+#define __pyx_n_u_name __pyx_string_tab[74]
+#define __pyx_n_u_native_dtype __pyx_string_tab[75]
+#define __pyx_n_u_ndim __pyx_string_tab[76]
+#define __pyx_n_u_newbyteorder __pyx_string_tab[77]
+#define __pyx_n_u_np __pyx_string_tab[78]
+#define __pyx_n_u_numpy __pyx_string_tab[79]
+#define __pyx_n_u_offset __pyx_string_tab[80]
+#define __pyx_n_u_open __pyx_string_tab[81]
+#define __pyx_n_u_os __pyx_string_tab[82]
+#define __pyx_n_u_out16 __pyx_string_tab[83]
+#define __pyx_n_u_out8 __pyx_string_tab[84]
+#define __pyx_n_u_pack __pyx_string_tab[85]
+#define __pyx_n_u_path __pyx_string_tab[86]
+#define __pyx_n_u_pop __pyx_string_tab[87]
+#define __pyx_n_u_pyneutube_core_io_vaa3d_accel __pyx_string_tab[88]
+#define __pyx_n_u_pyx_state __pyx_string_tab[89]
+#define __pyx_n_u_pyx_vtable __pyx_string_tab[90]
+#define __pyx_n_u_qualname __pyx_string_tab[91]
+#define __pyx_n_u_rb __pyx_string_tab[92]
+#define __pyx_n_u_read __pyx_string_tab[93]
+#define __pyx_n_u_reduce __pyx_string_tab[94]
+#define __pyx_n_u_reduce_cython __pyx_string_tab[95]
+#define __pyx_n_u_reduce_ex __pyx_string_tab[96]
+#define __pyx_n_u_reshape __pyx_string_tab[97]
+#define __pyx_n_u_save_v3dpbd __pyx_string_tab[98]
+#define __pyx_n_u_self __pyx_string_tab[99]
+#define __pyx_n_u_set_name __pyx_string_tab[100]
+#define __pyx_n_u_setdefault __pyx_string_tab[101]
+#define __pyx_n_u_setstate __pyx_string_tab[102]
+#define __pyx_n_u_setstate_cython __pyx_string_tab[103]
+#define __pyx_n_u_shape __pyx_string_tab[104]
+#define __pyx_n_u_size __pyx_string_tab[105]
+#define __pyx_n_u_src16 __pyx_string_tab[106]
+#define __pyx_n_u_src8 __pyx_string_tab[107]
+#define __pyx_n_u_struct __pyx_string_tab[108]
+#define __pyx_n_u_test __pyx_string_tab[109]
+#define __pyx_n_u_total_units __pyx_string_tab[110]
+#define __pyx_n_u_u1 __pyx_string_tab[111]
+#define __pyx_n_u_u2 __pyx_string_tab[112]
+#define __pyx_n_u_uint16 __pyx_string_tab[113]
+#define __pyx_n_u_uint8 __pyx_string_tab[114]
+#define __pyx_n_u_unpack __pyx_string_tab[115]
+#define __pyx_n_u_values __pyx_string_tab[116]
+#define __pyx_n_u_volume __pyx_string_tab[117]
+#define __pyx_n_u_wb __pyx_string_tab[118]
+#define __pyx_n_u_write __pyx_string_tab[119]
+#define __pyx_n_u_writer __pyx_string_tab[120]
+#define __pyx_n_u_zeros __pyx_string_tab[121]
+#define __pyx_kp_b_iso88591_2WAQ_QfIQ_uAQ_s_82Q_j_8_vRs_s_j __pyx_string_tab[122]
+#define __pyx_kp_b_iso88591_2WAQ_QfIQ_vU_q_b_j_8_t2S_S_j_1A __pyx_string_tab[123]
+#define __pyx_kp_b_iso88591_Q __pyx_string_tab[124]
+#define __pyx_kp_b_iso88591_Rxq_vV3a_j_FavQ_vWCr_1_wc_1_1_j __pyx_string_tab[125]
+#define __pyx_n_b_B __pyx_string_tab[126]
+#define __pyx_n_b_L __pyx_string_tab[127]
+#define __pyx_n_b_raw_image_stack_by_hpeng __pyx_string_tab[128]
+#define __pyx_n_b_v3d_volume_pkbitdf_encod __pyx_string_tab[129]
+#define __pyx_int_1 __pyx_number_tab[0]
+#define __pyx_int_3 __pyx_number_tab[1]
+#define __pyx_int_43 __pyx_number_tab[2]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -3107,10 +3241,12 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_flexible);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_character);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
+  Py_CLEAR(clear_module_state->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter);
+  Py_CLEAR(clear_module_state->__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter);
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<95; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<130; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<3; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -3149,10 +3285,12 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_flexible);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_character);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
+  Py_VISIT(traverse_module_state->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter);
+  Py_VISIT(traverse_module_state->__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter);
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<95; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<130; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<3; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -4458,7 +4596,2293 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":22
+/* "pyneutube/core/io/vaa3d_accel.pyx":31
+ *         Py_ssize_t capacity
+ * 
+ *     def __cinit__(self, object handle, Py_ssize_t capacity=1024 * 1024):             # <<<<<<<<<<<<<<
+ *         self.handle = handle
+ *         self.buffer = bytearray(capacity)
+*/
+
+/* Python wrapper */
+static int __pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_handle = 0;
+  Py_ssize_t __pyx_v_capacity;
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return -1;
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_handle,&__pyx_mstate_global->__pyx_n_u_capacity,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_VARARGS(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 31, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 31, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 31, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__cinit__", 0) < (0)) __PYX_ERR(0, 31, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 2, i); __PYX_ERR(0, 31, __pyx_L3_error) }
+      }
+    } else {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 31, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 31, __pyx_L3_error)
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_handle = values[0];
+    if (values[1]) {
+      __pyx_v_capacity = __Pyx_PyIndex_AsSsize_t(values[1]); if (unlikely((__pyx_v_capacity == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L3_error)
+    } else {
+      __pyx_v_capacity = ((Py_ssize_t)0x100000);
+    }
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 31, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return -1;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter___cinit__(((struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_v_self), __pyx_v_handle, __pyx_v_capacity);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter___cinit__(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, PyObject *__pyx_v_handle, Py_ssize_t __pyx_v_capacity) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  size_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":32
+ * 
+ *     def __cinit__(self, object handle, Py_ssize_t capacity=1024 * 1024):
+ *         self.handle = handle             # <<<<<<<<<<<<<<
+ *         self.buffer = bytearray(capacity)
+ *         self.data = <uint8_t*>PyByteArray_AsString(self.buffer)
+*/
+  __Pyx_INCREF(__pyx_v_handle);
+  __Pyx_GIVEREF(__pyx_v_handle);
+  __Pyx_GOTREF(__pyx_v_self->handle);
+  __Pyx_DECREF(__pyx_v_self->handle);
+  __pyx_v_self->handle = __pyx_v_handle;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":33
+ *     def __cinit__(self, object handle, Py_ssize_t capacity=1024 * 1024):
+ *         self.handle = handle
+ *         self.buffer = bytearray(capacity)             # <<<<<<<<<<<<<<
+ *         self.data = <uint8_t*>PyByteArray_AsString(self.buffer)
+ *         self.pos = 0
+*/
+  __pyx_t_2 = NULL;
+  __pyx_t_3 = PyLong_FromSsize_t(__pyx_v_capacity); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = 1;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)(&PyByteArray_Type), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF(__pyx_v_self->buffer);
+  __Pyx_DECREF(__pyx_v_self->buffer);
+  __pyx_v_self->buffer = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":34
+ *         self.handle = handle
+ *         self.buffer = bytearray(capacity)
+ *         self.data = <uint8_t*>PyByteArray_AsString(self.buffer)             # <<<<<<<<<<<<<<
+ *         self.pos = 0
+ *         self.capacity = capacity
+*/
+  __pyx_t_1 = __pyx_v_self->buffer;
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_v_self->data = ((uint8_t *)PyByteArray_AsString(__pyx_t_1));
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":35
+ *         self.buffer = bytearray(capacity)
+ *         self.data = <uint8_t*>PyByteArray_AsString(self.buffer)
+ *         self.pos = 0             # <<<<<<<<<<<<<<
+ *         self.capacity = capacity
+ * 
+*/
+  __pyx_v_self->pos = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":36
+ *         self.data = <uint8_t*>PyByteArray_AsString(self.buffer)
+ *         self.pos = 0
+ *         self.capacity = capacity             # <<<<<<<<<<<<<<
+ * 
+ *     cdef void flush(self):
+*/
+  __pyx_v_self->capacity = __pyx_v_capacity;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":31
+ *         Py_ssize_t capacity
+ * 
+ *     def __cinit__(self, object handle, Py_ssize_t capacity=1024 * 1024):             # <<<<<<<<<<<<<<
+ *         self.handle = handle
+ *         self.buffer = bytearray(capacity)
+*/
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":38
+ *         self.capacity = capacity
+ * 
+ *     cdef void flush(self):             # <<<<<<<<<<<<<<
+ *         if self.pos > 0:
+ *             self.handle.write(self.buffer[:self.pos])
+*/
+
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_flush(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  size_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("flush", 0);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":39
+ * 
+ *     cdef void flush(self):
+ *         if self.pos > 0:             # <<<<<<<<<<<<<<
+ *             self.handle.write(self.buffer[:self.pos])
+ *             self.pos = 0
+*/
+  __pyx_t_1 = (__pyx_v_self->pos > 0);
+  if (__pyx_t_1) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":40
+ *     cdef void flush(self):
+ *         if self.pos > 0:
+ *             self.handle.write(self.buffer[:self.pos])             # <<<<<<<<<<<<<<
+ *             self.pos = 0
+ * 
+*/
+    __pyx_t_3 = __pyx_v_self->handle;
+    __Pyx_INCREF(__pyx_t_3);
+    if (unlikely(__pyx_v_self->buffer == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 40, __pyx_L1_error)
+    }
+    __pyx_t_4 = PySequence_GetSlice(__pyx_v_self->buffer, 0, __pyx_v_self->pos); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = 0;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_4};
+      __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+    }
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":41
+ *         if self.pos > 0:
+ *             self.handle.write(self.buffer[:self.pos])
+ *             self.pos = 0             # <<<<<<<<<<<<<<
+ * 
+ *     cdef inline void write_byte(self, uint8_t value):
+*/
+    __pyx_v_self->pos = 0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":39
+ * 
+ *     cdef void flush(self):
+ *         if self.pos > 0:             # <<<<<<<<<<<<<<
+ *             self.handle.write(self.buffer[:self.pos])
+ *             self.pos = 0
+*/
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":38
+ *         self.capacity = capacity
+ * 
+ *     cdef void flush(self):             # <<<<<<<<<<<<<<
+ *         if self.pos > 0:
+ *             self.handle.write(self.buffer[:self.pos])
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.flush", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":43
+ *             self.pos = 0
+ * 
+ *     cdef inline void write_byte(self, uint8_t value):             # <<<<<<<<<<<<<<
+ *         if self.pos == self.capacity:
+ *             self.flush()
+*/
+
+static CYTHON_INLINE void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, uint8_t __pyx_v_value) {
+  int __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":44
+ * 
+ *     cdef inline void write_byte(self, uint8_t value):
+ *         if self.pos == self.capacity:             # <<<<<<<<<<<<<<
+ *             self.flush()
+ *         self.data[self.pos] = value
+*/
+  __pyx_t_1 = (__pyx_v_self->pos == __pyx_v_self->capacity);
+  if (__pyx_t_1) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":45
+ *     cdef inline void write_byte(self, uint8_t value):
+ *         if self.pos == self.capacity:
+ *             self.flush()             # <<<<<<<<<<<<<<
+ *         self.data[self.pos] = value
+ *         self.pos += 1
+*/
+    ((struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_v_self->__pyx_vtab)->flush(__pyx_v_self); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 45, __pyx_L1_error)
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":44
+ * 
+ *     cdef inline void write_byte(self, uint8_t value):
+ *         if self.pos == self.capacity:             # <<<<<<<<<<<<<<
+ *             self.flush()
+ *         self.data[self.pos] = value
+*/
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":46
+ *         if self.pos == self.capacity:
+ *             self.flush()
+ *         self.data[self.pos] = value             # <<<<<<<<<<<<<<
+ *         self.pos += 1
+ * 
+*/
+  (__pyx_v_self->data[__pyx_v_self->pos]) = __pyx_v_value;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":47
+ *             self.flush()
+ *         self.data[self.pos] = value
+ *         self.pos += 1             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_v_self->pos = (__pyx_v_self->pos + 1);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":43
+ *             self.pos = 0
+ * 
+ *     cdef inline void write_byte(self, uint8_t value):             # <<<<<<<<<<<<<<
+ *         if self.pos == self.capacity:
+ *             self.flush()
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.write_byte", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__, "_PBDStreamWriter.__reduce_cython__(self)");
+static PyMethodDef __pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__};
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  if (unlikely(__pyx_nargs > 0)) { __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL; }
+  const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+  if (unlikely(__pyx_kwds_len < 0)) return NULL;
+  if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("__reduce_cython__", __pyx_kwds); return NULL;}
+  __pyx_r = __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__(((struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+*/
+  __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_TypeError))), __pyx_mstate_global->__pyx_kp_u_no_default___reduce___due_to_non, 0, 0);
+  __PYX_ERR(2, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__, "_PBDStreamWriter.__setstate_cython__(self, __pyx_state)");
+static PyMethodDef __pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__};
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  CYTHON_UNUSED PyObject *__pyx_v___pyx_state = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[1] = {0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_pyx_state,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(2, 3, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(2, 3, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__setstate_cython__", 0) < (0)) __PYX_ERR(2, 3, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__setstate_cython__", 1, 1, 1, i); __PYX_ERR(2, 3, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 1)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(2, 3, __pyx_L3_error)
+    }
+    __pyx_v___pyx_state = values[0];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__setstate_cython__", 1, 1, 1, __pyx_nargs); __PYX_ERR(2, 3, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__(((struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_v_self), __pyx_v___pyx_state);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"             # <<<<<<<<<<<<<<
+*/
+  __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_TypeError))), __pyx_mstate_global->__pyx_kp_u_no_default___reduce___due_to_non, 0, 0);
+  __PYX_ERR(2, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._PBDStreamWriter.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":50
+ * 
+ * 
+ * cdef void _flush_literal8(             # <<<<<<<<<<<<<<
+ *     _PBDStreamWriter writer,
+ *     uint8_t* literal,
+*/
+
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_writer, uint8_t *__pyx_v_literal, Py_ssize_t __pyx_v_count) {
+  Py_ssize_t __pyx_v_index;
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  Py_ssize_t __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":56
+ * ):
+ *     cdef Py_ssize_t index
+ *     if count == 0:             # <<<<<<<<<<<<<<
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+*/
+  __pyx_t_1 = (__pyx_v_count == 0);
+  if (__pyx_t_1) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":57
+ *     cdef Py_ssize_t index
+ *     if count == 0:
+ *         return             # <<<<<<<<<<<<<<
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):
+*/
+    goto __pyx_L0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":56
+ * ):
+ *     cdef Py_ssize_t index
+ *     if count == 0:             # <<<<<<<<<<<<<<
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+*/
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":58
+ *     if count == 0:
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))             # <<<<<<<<<<<<<<
+ *     for index in range(count):
+ *         writer.write_byte(literal[index])
+*/
+  __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_count - 1))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L1_error)
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":59
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):             # <<<<<<<<<<<<<<
+ *         writer.write_byte(literal[index])
+ * 
+*/
+  __pyx_t_2 = __pyx_v_count;
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_index = __pyx_t_4;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":60
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):
+ *         writer.write_byte(literal[index])             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, (__pyx_v_literal[__pyx_v_index])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":50
+ * 
+ * 
+ * cdef void _flush_literal8(             # <<<<<<<<<<<<<<
+ *     _PBDStreamWriter writer,
+ *     uint8_t* literal,
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._flush_literal8", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":63
+ * 
+ * 
+ * cdef void _compress_pbd8(             # <<<<<<<<<<<<<<
+ *     const uint8_t* src,
+ *     Py_ssize_t length,
+*/
+
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd8(uint8_t const *__pyx_v_src, Py_ssize_t __pyx_v_length, struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_writer) {
+  Py_ssize_t __pyx_v_pos;
+  Py_ssize_t __pyx_v_scan;
+  Py_ssize_t __pyx_v_run_len;
+  Py_ssize_t __pyx_v_delta_len;
+  Py_ssize_t __pyx_v_delta_bytes;
+  Py_ssize_t __pyx_v_literal_count;
+  Py_ssize_t __pyx_v_index;
+  Py_ssize_t __pyx_v_group_index;
+  int __pyx_v_delta;
+  int __pyx_v_prior;
+  double __pyx_v_run_efficiency;
+  double __pyx_v_delta_efficiency;
+  uint8_t __pyx_v_value;
+  uint8_t __pyx_v_packed;
+  uint8_t __pyx_v_literal[33];
+  uint8_t __pyx_v_delta_codes[95];
+  int __pyx_t_1;
+  int __pyx_t_2;
+  uint8_t __pyx_t_3;
+  double __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  Py_ssize_t __pyx_t_8;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":69
+ * ):
+ *     cdef:
+ *         Py_ssize_t pos = 0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t scan
+ *         Py_ssize_t run_len
+*/
+  __pyx_v_pos = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":74
+ *         Py_ssize_t delta_len
+ *         Py_ssize_t delta_bytes
+ *         Py_ssize_t literal_count = 0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t index
+ *         Py_ssize_t group_index
+*/
+  __pyx_v_literal_count = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":86
+ *         uint8_t delta_codes[95]
+ * 
+ *     while pos < length:             # <<<<<<<<<<<<<<
+ *         value = src[pos]
+ *         run_len = 1
+*/
+  while (1) {
+    __pyx_t_1 = (__pyx_v_pos < __pyx_v_length);
+    if (!__pyx_t_1) break;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":87
+ * 
+ *     while pos < length:
+ *         value = src[pos]             # <<<<<<<<<<<<<<
+ *         run_len = 1
+ *         while (
+*/
+    __pyx_v_value = (__pyx_v_src[__pyx_v_pos]);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":88
+ *     while pos < length:
+ *         value = src[pos]
+ *         run_len = 1             # <<<<<<<<<<<<<<
+ *         while (
+ *             run_len < 128
+*/
+    __pyx_v_run_len = 1;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":89
+ *         value = src[pos]
+ *         run_len = 1
+ *         while (             # <<<<<<<<<<<<<<
+ *             run_len < 128
+ *             and pos + run_len < length
+*/
+    while (1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":90
+ *         run_len = 1
+ *         while (
+ *             run_len < 128             # <<<<<<<<<<<<<<
+ *             and pos + run_len < length
+ *             and src[pos + run_len] == value
+*/
+      __pyx_t_2 = (__pyx_v_run_len < 0x80);
+      if (__pyx_t_2) {
+      } else {
+        __pyx_t_1 = __pyx_t_2;
+        goto __pyx_L7_bool_binop_done;
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":91
+ *         while (
+ *             run_len < 128
+ *             and pos + run_len < length             # <<<<<<<<<<<<<<
+ *             and src[pos + run_len] == value
+ *         ):
+*/
+      __pyx_t_2 = ((__pyx_v_pos + __pyx_v_run_len) < __pyx_v_length);
+      if (__pyx_t_2) {
+      } else {
+        __pyx_t_1 = __pyx_t_2;
+        goto __pyx_L7_bool_binop_done;
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":92
+ *             run_len < 128
+ *             and pos + run_len < length
+ *             and src[pos + run_len] == value             # <<<<<<<<<<<<<<
+ *         ):
+ *             run_len += 1
+*/
+      __pyx_t_2 = ((__pyx_v_src[(__pyx_v_pos + __pyx_v_run_len)]) == __pyx_v_value);
+      __pyx_t_1 = __pyx_t_2;
+      __pyx_L7_bool_binop_done:;
+      if (!__pyx_t_1) break;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":94
+ *             and src[pos + run_len] == value
+ *         ):
+ *             run_len += 1             # <<<<<<<<<<<<<<
+ * 
+ *         delta_len = 0
+*/
+      __pyx_v_run_len = (__pyx_v_run_len + 1);
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":96
+ *             run_len += 1
+ * 
+ *         delta_len = 0             # <<<<<<<<<<<<<<
+ *         if pos > 0:
+ *             prior = src[pos - 1]
+*/
+    __pyx_v_delta_len = 0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":97
+ * 
+ *         delta_len = 0
+ *         if pos > 0:             # <<<<<<<<<<<<<<
+ *             prior = src[pos - 1]
+ *             scan = pos
+*/
+    __pyx_t_1 = (__pyx_v_pos > 0);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":98
+ *         delta_len = 0
+ *         if pos > 0:
+ *             prior = src[pos - 1]             # <<<<<<<<<<<<<<
+ *             scan = pos
+ *             while delta_len < 95 and scan < length:
+*/
+      __pyx_v_prior = (__pyx_v_src[(__pyx_v_pos - 1)]);
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":99
+ *         if pos > 0:
+ *             prior = src[pos - 1]
+ *             scan = pos             # <<<<<<<<<<<<<<
+ *             while delta_len < 95 and scan < length:
+ *                 delta = <int>src[scan] - prior
+*/
+      __pyx_v_scan = __pyx_v_pos;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":100
+ *             prior = src[pos - 1]
+ *             scan = pos
+ *             while delta_len < 95 and scan < length:             # <<<<<<<<<<<<<<
+ *                 delta = <int>src[scan] - prior
+ *                 if delta < -1 or delta > 2:
+*/
+      while (1) {
+        __pyx_t_2 = (__pyx_v_delta_len < 95);
+        if (__pyx_t_2) {
+        } else {
+          __pyx_t_1 = __pyx_t_2;
+          goto __pyx_L13_bool_binop_done;
+        }
+        __pyx_t_2 = (__pyx_v_scan < __pyx_v_length);
+        __pyx_t_1 = __pyx_t_2;
+        __pyx_L13_bool_binop_done:;
+        if (!__pyx_t_1) break;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":101
+ *             scan = pos
+ *             while delta_len < 95 and scan < length:
+ *                 delta = <int>src[scan] - prior             # <<<<<<<<<<<<<<
+ *                 if delta < -1 or delta > 2:
+ *                     break
+*/
+        __pyx_v_delta = (((int)(__pyx_v_src[__pyx_v_scan])) - __pyx_v_prior);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":102
+ *             while delta_len < 95 and scan < length:
+ *                 delta = <int>src[scan] - prior
+ *                 if delta < -1 or delta > 2:             # <<<<<<<<<<<<<<
+ *                     break
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta
+*/
+        __pyx_t_2 = (__pyx_v_delta < -1L);
+        if (!__pyx_t_2) {
+        } else {
+          __pyx_t_1 = __pyx_t_2;
+          goto __pyx_L16_bool_binop_done;
+        }
+        __pyx_t_2 = (__pyx_v_delta > 2);
+        __pyx_t_1 = __pyx_t_2;
+        __pyx_L16_bool_binop_done:;
+        if (__pyx_t_1) {
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":103
+ *                 delta = <int>src[scan] - prior
+ *                 if delta < -1 or delta > 2:
+ *                     break             # <<<<<<<<<<<<<<
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta
+ *                 prior = src[scan]
+*/
+          goto __pyx_L12_break;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":102
+ *             while delta_len < 95 and scan < length:
+ *                 delta = <int>src[scan] - prior
+ *                 if delta < -1 or delta > 2:             # <<<<<<<<<<<<<<
+ *                     break
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta
+*/
+        }
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":104
+ *                 if delta < -1 or delta > 2:
+ *                     break
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta             # <<<<<<<<<<<<<<
+ *                 prior = src[scan]
+ *                 delta_len += 1
+*/
+        __pyx_t_1 = (__pyx_v_delta == -1L);
+        if (__pyx_t_1) {
+          __pyx_t_3 = 3;
+        } else {
+          __pyx_t_3 = ((uint8_t)__pyx_v_delta);
+        }
+        (__pyx_v_delta_codes[__pyx_v_delta_len]) = __pyx_t_3;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":105
+ *                     break
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta
+ *                 prior = src[scan]             # <<<<<<<<<<<<<<
+ *                 delta_len += 1
+ *                 scan += 1
+*/
+        __pyx_v_prior = (__pyx_v_src[__pyx_v_scan]);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":106
+ *                 delta_codes[delta_len] = 3 if delta == -1 else <uint8_t>delta
+ *                 prior = src[scan]
+ *                 delta_len += 1             # <<<<<<<<<<<<<<
+ *                 scan += 1
+ * 
+*/
+        __pyx_v_delta_len = (__pyx_v_delta_len + 1);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":107
+ *                 prior = src[scan]
+ *                 delta_len += 1
+ *                 scan += 1             # <<<<<<<<<<<<<<
+ * 
+ *         run_efficiency = run_len / 2.0
+*/
+        __pyx_v_scan = (__pyx_v_scan + 1);
+      }
+      __pyx_L12_break:;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":97
+ * 
+ *         delta_len = 0
+ *         if pos > 0:             # <<<<<<<<<<<<<<
+ *             prior = src[pos - 1]
+ *             scan = pos
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":109
+ *                 scan += 1
+ * 
+ *         run_efficiency = run_len / 2.0             # <<<<<<<<<<<<<<
+ *         delta_bytes = 1 + ((delta_len + 3) >> 2)
+ *         delta_efficiency = delta_len / <double>delta_bytes if delta_len > 0 else 0.0
+*/
+    __pyx_v_run_efficiency = (((double)__pyx_v_run_len) / 2.0);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":110
+ * 
+ *         run_efficiency = run_len / 2.0
+ *         delta_bytes = 1 + ((delta_len + 3) >> 2)             # <<<<<<<<<<<<<<
+ *         delta_efficiency = delta_len / <double>delta_bytes if delta_len > 0 else 0.0
+ * 
+*/
+    __pyx_v_delta_bytes = (1 + ((__pyx_v_delta_len + 3) >> 2));
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":111
+ *         run_efficiency = run_len / 2.0
+ *         delta_bytes = 1 + ((delta_len + 3) >> 2)
+ *         delta_efficiency = delta_len / <double>delta_bytes if delta_len > 0 else 0.0             # <<<<<<<<<<<<<<
+ * 
+ *         if run_efficiency > 1.0 and run_efficiency >= delta_efficiency:
+*/
+    __pyx_t_1 = (__pyx_v_delta_len > 0);
+    if (__pyx_t_1) {
+      __pyx_t_4 = (((double)__pyx_v_delta_len) / ((double)__pyx_v_delta_bytes));
+    } else {
+      __pyx_t_4 = 0.0;
+    }
+    __pyx_v_delta_efficiency = __pyx_t_4;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":113
+ *         delta_efficiency = delta_len / <double>delta_bytes if delta_len > 0 else 0.0
+ * 
+ *         if run_efficiency > 1.0 and run_efficiency >= delta_efficiency:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_2 = (__pyx_v_run_efficiency > 1.0);
+    if (__pyx_t_2) {
+    } else {
+      __pyx_t_1 = __pyx_t_2;
+      goto __pyx_L19_bool_binop_done;
+    }
+    __pyx_t_2 = (__pyx_v_run_efficiency >= __pyx_v_delta_efficiency);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_L19_bool_binop_done:;
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":114
+ * 
+ *         if run_efficiency > 1.0 and run_efficiency >= delta_efficiency:
+ *             _flush_literal8(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 127))
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":115
+ *         if run_efficiency > 1.0 and run_efficiency >= delta_efficiency:
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(run_len + 127))
+ *             writer.write_byte(value)
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":116
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 127))             # <<<<<<<<<<<<<<
+ *             writer.write_byte(value)
+ *             pos += run_len
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_run_len + 0x7F))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":117
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 127))
+ *             writer.write_byte(value)             # <<<<<<<<<<<<<<
+ *             pos += run_len
+ *             continue
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, __pyx_v_value); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 117, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":118
+ *             writer.write_byte(<uint8_t>(run_len + 127))
+ *             writer.write_byte(value)
+ *             pos += run_len             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+*/
+      __pyx_v_pos = (__pyx_v_pos + __pyx_v_run_len);
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":119
+ *             writer.write_byte(value)
+ *             pos += run_len
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         if delta_efficiency > 1.0:
+*/
+      goto __pyx_L3_continue;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":113
+ *         delta_efficiency = delta_len / <double>delta_bytes if delta_len > 0 else 0.0
+ * 
+ *         if run_efficiency > 1.0 and run_efficiency >= delta_efficiency:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":121
+ *             continue
+ * 
+ *         if delta_efficiency > 1.0:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_1 = (__pyx_v_delta_efficiency > 1.0);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":122
+ * 
+ *         if delta_efficiency > 1.0:
+ *             _flush_literal8(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(delta_len + 32))
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":123
+ *         if delta_efficiency > 1.0:
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(delta_len + 32))
+ *             for index in range(0, delta_len, 4):
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":124
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(delta_len + 32))             # <<<<<<<<<<<<<<
+ *             for index in range(0, delta_len, 4):
+ *                 packed = 0
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_delta_len + 32))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":125
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(delta_len + 32))
+ *             for index in range(0, delta_len, 4):             # <<<<<<<<<<<<<<
+ *                 packed = 0
+ *                 for group_index in range(4):
+*/
+      __pyx_t_5 = __pyx_v_delta_len;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=4) {
+        __pyx_v_index = __pyx_t_7;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":126
+ *             writer.write_byte(<uint8_t>(delta_len + 32))
+ *             for index in range(0, delta_len, 4):
+ *                 packed = 0             # <<<<<<<<<<<<<<
+ *                 for group_index in range(4):
+ *                     if index + group_index < delta_len:
+*/
+        __pyx_v_packed = 0;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":127
+ *             for index in range(0, delta_len, 4):
+ *                 packed = 0
+ *                 for group_index in range(4):             # <<<<<<<<<<<<<<
+ *                     if index + group_index < delta_len:
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)
+*/
+        for (__pyx_t_8 = 0; __pyx_t_8 < 4; __pyx_t_8+=1) {
+          __pyx_v_group_index = __pyx_t_8;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":128
+ *                 packed = 0
+ *                 for group_index in range(4):
+ *                     if index + group_index < delta_len:             # <<<<<<<<<<<<<<
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)
+ *                 writer.write_byte(packed)
+*/
+          __pyx_t_1 = ((__pyx_v_index + __pyx_v_group_index) < __pyx_v_delta_len);
+          if (__pyx_t_1) {
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":129
+ *                 for group_index in range(4):
+ *                     if index + group_index < delta_len:
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)             # <<<<<<<<<<<<<<
+ *                 writer.write_byte(packed)
+ *             pos += delta_len
+*/
+            __pyx_v_packed = (__pyx_v_packed | ((__pyx_v_delta_codes[(__pyx_v_index + __pyx_v_group_index)]) << (2 * __pyx_v_group_index)));
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":128
+ *                 packed = 0
+ *                 for group_index in range(4):
+ *                     if index + group_index < delta_len:             # <<<<<<<<<<<<<<
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)
+ *                 writer.write_byte(packed)
+*/
+          }
+        }
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":130
+ *                     if index + group_index < delta_len:
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)
+ *                 writer.write_byte(packed)             # <<<<<<<<<<<<<<
+ *             pos += delta_len
+ *             continue
+*/
+        __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, __pyx_v_packed); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L1_error)
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":131
+ *                         packed |= delta_codes[index + group_index] << (2 * group_index)
+ *                 writer.write_byte(packed)
+ *             pos += delta_len             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+*/
+      __pyx_v_pos = (__pyx_v_pos + __pyx_v_delta_len);
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":132
+ *                 writer.write_byte(packed)
+ *             pos += delta_len
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         literal[literal_count] = value
+*/
+      goto __pyx_L3_continue;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":121
+ *             continue
+ * 
+ *         if delta_efficiency > 1.0:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":134
+ *             continue
+ * 
+ *         literal[literal_count] = value             # <<<<<<<<<<<<<<
+ *         literal_count += 1
+ *         pos += 1
+*/
+    (__pyx_v_literal[__pyx_v_literal_count]) = __pyx_v_value;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":135
+ * 
+ *         literal[literal_count] = value
+ *         literal_count += 1             # <<<<<<<<<<<<<<
+ *         pos += 1
+ *         if literal_count == 33:
+*/
+    __pyx_v_literal_count = (__pyx_v_literal_count + 1);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":136
+ *         literal[literal_count] = value
+ *         literal_count += 1
+ *         pos += 1             # <<<<<<<<<<<<<<
+ *         if literal_count == 33:
+ *             _flush_literal8(writer, literal, literal_count)
+*/
+    __pyx_v_pos = (__pyx_v_pos + 1);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":137
+ *         literal_count += 1
+ *         pos += 1
+ *         if literal_count == 33:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_1 = (__pyx_v_literal_count == 33);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":138
+ *         pos += 1
+ *         if literal_count == 33:
+ *             _flush_literal8(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ * 
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":139
+ *         if literal_count == 33:
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ * 
+ *     _flush_literal8(writer, literal, literal_count)
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":137
+ *         literal_count += 1
+ *         pos += 1
+ *         if literal_count == 33:             # <<<<<<<<<<<<<<
+ *             _flush_literal8(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+    __pyx_L3_continue:;
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":141
+ *             literal_count = 0
+ * 
+ *     _flush_literal8(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal8(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":63
+ * 
+ * 
+ * cdef void _compress_pbd8(             # <<<<<<<<<<<<<<
+ *     const uint8_t* src,
+ *     Py_ssize_t length,
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._compress_pbd8", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":144
+ * 
+ * 
+ * cdef void _flush_literal16(             # <<<<<<<<<<<<<<
+ *     _PBDStreamWriter writer,
+ *     uint16_t* literal,
+*/
+
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_writer, uint16_t *__pyx_v_literal, Py_ssize_t __pyx_v_count) {
+  Py_ssize_t __pyx_v_index;
+  uint16_t __pyx_v_value;
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  Py_ssize_t __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":152
+ *         Py_ssize_t index
+ *         uint16_t value
+ *     if count == 0:             # <<<<<<<<<<<<<<
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+*/
+  __pyx_t_1 = (__pyx_v_count == 0);
+  if (__pyx_t_1) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":153
+ *         uint16_t value
+ *     if count == 0:
+ *         return             # <<<<<<<<<<<<<<
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):
+*/
+    goto __pyx_L0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":152
+ *         Py_ssize_t index
+ *         uint16_t value
+ *     if count == 0:             # <<<<<<<<<<<<<<
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+*/
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":154
+ *     if count == 0:
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))             # <<<<<<<<<<<<<<
+ *     for index in range(count):
+ *         value = literal[index]
+*/
+  __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_count - 1))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 154, __pyx_L1_error)
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":155
+ *         return
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):             # <<<<<<<<<<<<<<
+ *         value = literal[index]
+ *         writer.write_byte(<uint8_t>(value & 0xFF))
+*/
+  __pyx_t_2 = __pyx_v_count;
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_index = __pyx_t_4;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":156
+ *     writer.write_byte(<uint8_t>(count - 1))
+ *     for index in range(count):
+ *         value = literal[index]             # <<<<<<<<<<<<<<
+ *         writer.write_byte(<uint8_t>(value & 0xFF))
+ *         writer.write_byte(<uint8_t>(value >> 8))
+*/
+    __pyx_v_value = (__pyx_v_literal[__pyx_v_index]);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":157
+ *     for index in range(count):
+ *         value = literal[index]
+ *         writer.write_byte(<uint8_t>(value & 0xFF))             # <<<<<<<<<<<<<<
+ *         writer.write_byte(<uint8_t>(value >> 8))
+ * 
+*/
+    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_value & 0xFF))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L1_error)
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":158
+ *         value = literal[index]
+ *         writer.write_byte(<uint8_t>(value & 0xFF))
+ *         writer.write_byte(<uint8_t>(value >> 8))             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_value >> 8))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L1_error)
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":144
+ * 
+ * 
+ * cdef void _flush_literal16(             # <<<<<<<<<<<<<<
+ *     _PBDStreamWriter writer,
+ *     uint16_t* literal,
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._flush_literal16", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":161
+ * 
+ * 
+ * cdef void _compress_pbd16(             # <<<<<<<<<<<<<<
+ *     const uint16_t* src,
+ *     Py_ssize_t length,
+*/
+
+static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd16(uint16_t const *__pyx_v_src, Py_ssize_t __pyx_v_length, struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_writer) {
+  Py_ssize_t __pyx_v_pos;
+  Py_ssize_t __pyx_v_scan;
+  Py_ssize_t __pyx_v_run_len;
+  Py_ssize_t __pyx_v_literal_count;
+  Py_ssize_t __pyx_v_index;
+  Py_ssize_t __pyx_v_delta_bytes;
+  Py_ssize_t __pyx_v_delta_lengths[3];
+  Py_ssize_t __pyx_v_max_lengths[3];
+  int __pyx_v_code_offsets[3];
+  int __pyx_v_mode;
+  int __pyx_v_best_mode;
+  int __pyx_v_bits;
+  int __pyx_v_threshold;
+  int __pyx_v_delta;
+  int __pyx_v_bit_count;
+  unsigned int __pyx_v_accumulator;
+  double __pyx_v_run_efficiency;
+  double __pyx_v_delta_efficiency;
+  double __pyx_v_best_delta_efficiency;
+  uint16_t __pyx_v_value;
+  uint16_t __pyx_v_prior;
+  uint16_t __pyx_v_literal[32];
+  uint8_t __pyx_v_delta_codes[3][103];
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  uint8_t __pyx_t_4;
+  int __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  Py_ssize_t __pyx_t_8;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":167
+ * ):
+ *     cdef:
+ *         Py_ssize_t pos = 0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t scan
+ *         Py_ssize_t run_len
+*/
+  __pyx_v_pos = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":170
+ *         Py_ssize_t scan
+ *         Py_ssize_t run_len
+ *         Py_ssize_t literal_count = 0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t index
+ *         Py_ssize_t delta_bytes
+*/
+  __pyx_v_literal_count = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":191
+ *         uint8_t delta_codes[3][103]
+ * 
+ *     max_lengths[0] = 48             # <<<<<<<<<<<<<<
+ *     max_lengths[1] = 103
+ *     max_lengths[2] = 40
+*/
+  (__pyx_v_max_lengths[0]) = 48;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":192
+ * 
+ *     max_lengths[0] = 48
+ *     max_lengths[1] = 103             # <<<<<<<<<<<<<<
+ *     max_lengths[2] = 40
+ *     code_offsets[0] = 31
+*/
+  (__pyx_v_max_lengths[1]) = 0x67;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":193
+ *     max_lengths[0] = 48
+ *     max_lengths[1] = 103
+ *     max_lengths[2] = 40             # <<<<<<<<<<<<<<
+ *     code_offsets[0] = 31
+ *     code_offsets[1] = 79
+*/
+  (__pyx_v_max_lengths[2]) = 40;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":194
+ *     max_lengths[1] = 103
+ *     max_lengths[2] = 40
+ *     code_offsets[0] = 31             # <<<<<<<<<<<<<<
+ *     code_offsets[1] = 79
+ *     code_offsets[2] = 182
+*/
+  (__pyx_v_code_offsets[0]) = 31;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":195
+ *     max_lengths[2] = 40
+ *     code_offsets[0] = 31
+ *     code_offsets[1] = 79             # <<<<<<<<<<<<<<
+ *     code_offsets[2] = 182
+ * 
+*/
+  (__pyx_v_code_offsets[1]) = 79;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":196
+ *     code_offsets[0] = 31
+ *     code_offsets[1] = 79
+ *     code_offsets[2] = 182             # <<<<<<<<<<<<<<
+ * 
+ *     while pos < length:
+*/
+  (__pyx_v_code_offsets[2]) = 0xB6;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":198
+ *     code_offsets[2] = 182
+ * 
+ *     while pos < length:             # <<<<<<<<<<<<<<
+ *         value = src[pos]
+ *         run_len = 1
+*/
+  while (1) {
+    __pyx_t_1 = (__pyx_v_pos < __pyx_v_length);
+    if (!__pyx_t_1) break;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":199
+ * 
+ *     while pos < length:
+ *         value = src[pos]             # <<<<<<<<<<<<<<
+ *         run_len = 1
+ *         while (
+*/
+    __pyx_v_value = (__pyx_v_src[__pyx_v_pos]);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":200
+ *     while pos < length:
+ *         value = src[pos]
+ *         run_len = 1             # <<<<<<<<<<<<<<
+ *         while (
+ *             run_len < 33
+*/
+    __pyx_v_run_len = 1;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":201
+ *         value = src[pos]
+ *         run_len = 1
+ *         while (             # <<<<<<<<<<<<<<
+ *             run_len < 33
+ *             and pos + run_len < length
+*/
+    while (1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":202
+ *         run_len = 1
+ *         while (
+ *             run_len < 33             # <<<<<<<<<<<<<<
+ *             and pos + run_len < length
+ *             and src[pos + run_len] == value
+*/
+      __pyx_t_2 = (__pyx_v_run_len < 33);
+      if (__pyx_t_2) {
+      } else {
+        __pyx_t_1 = __pyx_t_2;
+        goto __pyx_L7_bool_binop_done;
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":203
+ *         while (
+ *             run_len < 33
+ *             and pos + run_len < length             # <<<<<<<<<<<<<<
+ *             and src[pos + run_len] == value
+ *         ):
+*/
+      __pyx_t_2 = ((__pyx_v_pos + __pyx_v_run_len) < __pyx_v_length);
+      if (__pyx_t_2) {
+      } else {
+        __pyx_t_1 = __pyx_t_2;
+        goto __pyx_L7_bool_binop_done;
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":204
+ *             run_len < 33
+ *             and pos + run_len < length
+ *             and src[pos + run_len] == value             # <<<<<<<<<<<<<<
+ *         ):
+ *             run_len += 1
+*/
+      __pyx_t_2 = ((__pyx_v_src[(__pyx_v_pos + __pyx_v_run_len)]) == __pyx_v_value);
+      __pyx_t_1 = __pyx_t_2;
+      __pyx_L7_bool_binop_done:;
+      if (!__pyx_t_1) break;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":206
+ *             and src[pos + run_len] == value
+ *         ):
+ *             run_len += 1             # <<<<<<<<<<<<<<
+ * 
+ *         best_mode = -1
+*/
+      __pyx_v_run_len = (__pyx_v_run_len + 1);
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":208
+ *             run_len += 1
+ * 
+ *         best_mode = -1             # <<<<<<<<<<<<<<
+ *         best_delta_efficiency = 0.0
+ *         if pos > 0:
+*/
+    __pyx_v_best_mode = -1;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":209
+ * 
+ *         best_mode = -1
+ *         best_delta_efficiency = 0.0             # <<<<<<<<<<<<<<
+ *         if pos > 0:
+ *             for mode in range(3):
+*/
+    __pyx_v_best_delta_efficiency = 0.0;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":210
+ *         best_mode = -1
+ *         best_delta_efficiency = 0.0
+ *         if pos > 0:             # <<<<<<<<<<<<<<
+ *             for mode in range(3):
+ *                 bits = mode + 3
+*/
+    __pyx_t_1 = (__pyx_v_pos > 0);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":211
+ *         best_delta_efficiency = 0.0
+ *         if pos > 0:
+ *             for mode in range(3):             # <<<<<<<<<<<<<<
+ *                 bits = mode + 3
+ *                 threshold = 1 << (bits - 1)
+*/
+      for (__pyx_t_3 = 0; __pyx_t_3 < 3; __pyx_t_3+=1) {
+        __pyx_v_mode = __pyx_t_3;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":212
+ *         if pos > 0:
+ *             for mode in range(3):
+ *                 bits = mode + 3             # <<<<<<<<<<<<<<
+ *                 threshold = 1 << (bits - 1)
+ *                 prior = src[pos - 1]
+*/
+        __pyx_v_bits = (__pyx_v_mode + 3);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":213
+ *             for mode in range(3):
+ *                 bits = mode + 3
+ *                 threshold = 1 << (bits - 1)             # <<<<<<<<<<<<<<
+ *                 prior = src[pos - 1]
+ *                 scan = pos
+*/
+        __pyx_v_threshold = (1 << (__pyx_v_bits - 1));
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":214
+ *                 bits = mode + 3
+ *                 threshold = 1 << (bits - 1)
+ *                 prior = src[pos - 1]             # <<<<<<<<<<<<<<
+ *                 scan = pos
+ *                 delta_lengths[mode] = 0
+*/
+        __pyx_v_prior = (__pyx_v_src[(__pyx_v_pos - 1)]);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":215
+ *                 threshold = 1 << (bits - 1)
+ *                 prior = src[pos - 1]
+ *                 scan = pos             # <<<<<<<<<<<<<<
+ *                 delta_lengths[mode] = 0
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:
+*/
+        __pyx_v_scan = __pyx_v_pos;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":216
+ *                 prior = src[pos - 1]
+ *                 scan = pos
+ *                 delta_lengths[mode] = 0             # <<<<<<<<<<<<<<
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:
+ *                     delta = <int>src[scan] - <int>prior
+*/
+        (__pyx_v_delta_lengths[__pyx_v_mode]) = 0;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":217
+ *                 scan = pos
+ *                 delta_lengths[mode] = 0
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:             # <<<<<<<<<<<<<<
+ *                     delta = <int>src[scan] - <int>prior
+ *                     if delta < 1 - threshold or delta > threshold:
+*/
+        while (1) {
+          __pyx_t_2 = ((__pyx_v_delta_lengths[__pyx_v_mode]) < (__pyx_v_max_lengths[__pyx_v_mode]));
+          if (__pyx_t_2) {
+          } else {
+            __pyx_t_1 = __pyx_t_2;
+            goto __pyx_L15_bool_binop_done;
+          }
+          __pyx_t_2 = (__pyx_v_scan < __pyx_v_length);
+          __pyx_t_1 = __pyx_t_2;
+          __pyx_L15_bool_binop_done:;
+          if (!__pyx_t_1) break;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":218
+ *                 delta_lengths[mode] = 0
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:
+ *                     delta = <int>src[scan] - <int>prior             # <<<<<<<<<<<<<<
+ *                     if delta < 1 - threshold or delta > threshold:
+ *                         break
+*/
+          __pyx_v_delta = (((int)(__pyx_v_src[__pyx_v_scan])) - ((int)__pyx_v_prior));
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":219
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:
+ *                     delta = <int>src[scan] - <int>prior
+ *                     if delta < 1 - threshold or delta > threshold:             # <<<<<<<<<<<<<<
+ *                         break
+ *                     delta_codes[mode][delta_lengths[mode]] = (
+*/
+          __pyx_t_2 = (__pyx_v_delta < (1 - __pyx_v_threshold));
+          if (!__pyx_t_2) {
+          } else {
+            __pyx_t_1 = __pyx_t_2;
+            goto __pyx_L18_bool_binop_done;
+          }
+          __pyx_t_2 = (__pyx_v_delta > __pyx_v_threshold);
+          __pyx_t_1 = __pyx_t_2;
+          __pyx_L18_bool_binop_done:;
+          if (__pyx_t_1) {
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":220
+ *                     delta = <int>src[scan] - <int>prior
+ *                     if delta < 1 - threshold or delta > threshold:
+ *                         break             # <<<<<<<<<<<<<<
+ *                     delta_codes[mode][delta_lengths[mode]] = (
+ *                         <uint8_t>(threshold - delta) if delta < 0 else <uint8_t>delta
+*/
+            goto __pyx_L14_break;
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":219
+ *                 while delta_lengths[mode] < max_lengths[mode] and scan < length:
+ *                     delta = <int>src[scan] - <int>prior
+ *                     if delta < 1 - threshold or delta > threshold:             # <<<<<<<<<<<<<<
+ *                         break
+ *                     delta_codes[mode][delta_lengths[mode]] = (
+*/
+          }
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":222
+ *                         break
+ *                     delta_codes[mode][delta_lengths[mode]] = (
+ *                         <uint8_t>(threshold - delta) if delta < 0 else <uint8_t>delta             # <<<<<<<<<<<<<<
+ *                     )
+ *                     prior = src[scan]
+*/
+          __pyx_t_1 = (__pyx_v_delta < 0);
+          if (__pyx_t_1) {
+            __pyx_t_4 = ((uint8_t)(__pyx_v_threshold - __pyx_v_delta));
+          } else {
+            __pyx_t_4 = ((uint8_t)__pyx_v_delta);
+          }
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":221
+ *                     if delta < 1 - threshold or delta > threshold:
+ *                         break
+ *                     delta_codes[mode][delta_lengths[mode]] = (             # <<<<<<<<<<<<<<
+ *                         <uint8_t>(threshold - delta) if delta < 0 else <uint8_t>delta
+ *                     )
+*/
+          ((__pyx_v_delta_codes[__pyx_v_mode])[(__pyx_v_delta_lengths[__pyx_v_mode])]) = __pyx_t_4;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":224
+ *                         <uint8_t>(threshold - delta) if delta < 0 else <uint8_t>delta
+ *                     )
+ *                     prior = src[scan]             # <<<<<<<<<<<<<<
+ *                     delta_lengths[mode] += 1
+ *                     scan += 1
+*/
+          __pyx_v_prior = (__pyx_v_src[__pyx_v_scan]);
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":225
+ *                     )
+ *                     prior = src[scan]
+ *                     delta_lengths[mode] += 1             # <<<<<<<<<<<<<<
+ *                     scan += 1
+ * 
+*/
+          __pyx_t_5 = __pyx_v_mode;
+          (__pyx_v_delta_lengths[__pyx_t_5]) = ((__pyx_v_delta_lengths[__pyx_t_5]) + 1);
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":226
+ *                     prior = src[scan]
+ *                     delta_lengths[mode] += 1
+ *                     scan += 1             # <<<<<<<<<<<<<<
+ * 
+ *                 delta_bytes = 1 + ((delta_lengths[mode] * bits + 7) >> 3)
+*/
+          __pyx_v_scan = (__pyx_v_scan + 1);
+        }
+        __pyx_L14_break:;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":228
+ *                     scan += 1
+ * 
+ *                 delta_bytes = 1 + ((delta_lengths[mode] * bits + 7) >> 3)             # <<<<<<<<<<<<<<
+ *                 delta_efficiency = delta_lengths[mode] / <double>delta_bytes
+ *                 if delta_efficiency > best_delta_efficiency:
+*/
+        __pyx_v_delta_bytes = (1 + ((((__pyx_v_delta_lengths[__pyx_v_mode]) * __pyx_v_bits) + 7) >> 3));
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":229
+ * 
+ *                 delta_bytes = 1 + ((delta_lengths[mode] * bits + 7) >> 3)
+ *                 delta_efficiency = delta_lengths[mode] / <double>delta_bytes             # <<<<<<<<<<<<<<
+ *                 if delta_efficiency > best_delta_efficiency:
+ *                     best_delta_efficiency = delta_efficiency
+*/
+        __pyx_v_delta_efficiency = (((double)(__pyx_v_delta_lengths[__pyx_v_mode])) / ((double)__pyx_v_delta_bytes));
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":230
+ *                 delta_bytes = 1 + ((delta_lengths[mode] * bits + 7) >> 3)
+ *                 delta_efficiency = delta_lengths[mode] / <double>delta_bytes
+ *                 if delta_efficiency > best_delta_efficiency:             # <<<<<<<<<<<<<<
+ *                     best_delta_efficiency = delta_efficiency
+ *                     best_mode = mode
+*/
+        __pyx_t_1 = (__pyx_v_delta_efficiency > __pyx_v_best_delta_efficiency);
+        if (__pyx_t_1) {
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":231
+ *                 delta_efficiency = delta_lengths[mode] / <double>delta_bytes
+ *                 if delta_efficiency > best_delta_efficiency:
+ *                     best_delta_efficiency = delta_efficiency             # <<<<<<<<<<<<<<
+ *                     best_mode = mode
+ * 
+*/
+          __pyx_v_best_delta_efficiency = __pyx_v_delta_efficiency;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":232
+ *                 if delta_efficiency > best_delta_efficiency:
+ *                     best_delta_efficiency = delta_efficiency
+ *                     best_mode = mode             # <<<<<<<<<<<<<<
+ * 
+ *         run_efficiency = run_len / 3.0
+*/
+          __pyx_v_best_mode = __pyx_v_mode;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":230
+ *                 delta_bytes = 1 + ((delta_lengths[mode] * bits + 7) >> 3)
+ *                 delta_efficiency = delta_lengths[mode] / <double>delta_bytes
+ *                 if delta_efficiency > best_delta_efficiency:             # <<<<<<<<<<<<<<
+ *                     best_delta_efficiency = delta_efficiency
+ *                     best_mode = mode
+*/
+        }
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":210
+ *         best_mode = -1
+ *         best_delta_efficiency = 0.0
+ *         if pos > 0:             # <<<<<<<<<<<<<<
+ *             for mode in range(3):
+ *                 bits = mode + 3
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":234
+ *                     best_mode = mode
+ * 
+ *         run_efficiency = run_len / 3.0             # <<<<<<<<<<<<<<
+ *         if run_efficiency > 1.0 and run_efficiency >= best_delta_efficiency:
+ *             _flush_literal16(writer, literal, literal_count)
+*/
+    __pyx_v_run_efficiency = (((double)__pyx_v_run_len) / 3.0);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":235
+ * 
+ *         run_efficiency = run_len / 3.0
+ *         if run_efficiency > 1.0 and run_efficiency >= best_delta_efficiency:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_2 = (__pyx_v_run_efficiency > 1.0);
+    if (__pyx_t_2) {
+    } else {
+      __pyx_t_1 = __pyx_t_2;
+      goto __pyx_L22_bool_binop_done;
+    }
+    __pyx_t_2 = (__pyx_v_run_efficiency >= __pyx_v_best_delta_efficiency);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_L22_bool_binop_done:;
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":236
+ *         run_efficiency = run_len / 3.0
+ *         if run_efficiency > 1.0 and run_efficiency >= best_delta_efficiency:
+ *             _flush_literal16(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 222))
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":237
+ *         if run_efficiency > 1.0 and run_efficiency >= best_delta_efficiency:
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(run_len + 222))
+ *             writer.write_byte(<uint8_t>(value & 0xFF))
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":238
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 222))             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(value & 0xFF))
+ *             writer.write_byte(<uint8_t>(value >> 8))
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_run_len + 0xDE))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":239
+ *             literal_count = 0
+ *             writer.write_byte(<uint8_t>(run_len + 222))
+ *             writer.write_byte(<uint8_t>(value & 0xFF))             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(value >> 8))
+ *             pos += run_len
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_value & 0xFF))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":240
+ *             writer.write_byte(<uint8_t>(run_len + 222))
+ *             writer.write_byte(<uint8_t>(value & 0xFF))
+ *             writer.write_byte(<uint8_t>(value >> 8))             # <<<<<<<<<<<<<<
+ *             pos += run_len
+ *             continue
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)(__pyx_v_value >> 8))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":241
+ *             writer.write_byte(<uint8_t>(value & 0xFF))
+ *             writer.write_byte(<uint8_t>(value >> 8))
+ *             pos += run_len             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+*/
+      __pyx_v_pos = (__pyx_v_pos + __pyx_v_run_len);
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":242
+ *             writer.write_byte(<uint8_t>(value >> 8))
+ *             pos += run_len
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         if best_delta_efficiency > 1.0:
+*/
+      goto __pyx_L3_continue;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":235
+ * 
+ *         run_efficiency = run_len / 3.0
+ *         if run_efficiency > 1.0 and run_efficiency >= best_delta_efficiency:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":244
+ *             continue
+ * 
+ *         if best_delta_efficiency > 1.0:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_1 = (__pyx_v_best_delta_efficiency > 1.0);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":245
+ * 
+ *         if best_delta_efficiency > 1.0:
+ *             _flush_literal16(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ *             bits = best_mode + 3
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 245, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":246
+ *         if best_delta_efficiency > 1.0:
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ *             bits = best_mode + 3
+ *             writer.write_byte(<uint8_t>(delta_lengths[best_mode] + code_offsets[best_mode]))
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":247
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+ *             bits = best_mode + 3             # <<<<<<<<<<<<<<
+ *             writer.write_byte(<uint8_t>(delta_lengths[best_mode] + code_offsets[best_mode]))
+ *             accumulator = 0
+*/
+      __pyx_v_bits = (__pyx_v_best_mode + 3);
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":248
+ *             literal_count = 0
+ *             bits = best_mode + 3
+ *             writer.write_byte(<uint8_t>(delta_lengths[best_mode] + code_offsets[best_mode]))             # <<<<<<<<<<<<<<
+ *             accumulator = 0
+ *             bit_count = 0
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)((__pyx_v_delta_lengths[__pyx_v_best_mode]) + (__pyx_v_code_offsets[__pyx_v_best_mode])))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":249
+ *             bits = best_mode + 3
+ *             writer.write_byte(<uint8_t>(delta_lengths[best_mode] + code_offsets[best_mode]))
+ *             accumulator = 0             # <<<<<<<<<<<<<<
+ *             bit_count = 0
+ *             for index in range(delta_lengths[best_mode]):
+*/
+      __pyx_v_accumulator = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":250
+ *             writer.write_byte(<uint8_t>(delta_lengths[best_mode] + code_offsets[best_mode]))
+ *             accumulator = 0
+ *             bit_count = 0             # <<<<<<<<<<<<<<
+ *             for index in range(delta_lengths[best_mode]):
+ *                 accumulator = (accumulator << bits) | delta_codes[best_mode][index]
+*/
+      __pyx_v_bit_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":251
+ *             accumulator = 0
+ *             bit_count = 0
+ *             for index in range(delta_lengths[best_mode]):             # <<<<<<<<<<<<<<
+ *                 accumulator = (accumulator << bits) | delta_codes[best_mode][index]
+ *                 bit_count += bits
+*/
+      __pyx_t_6 = (__pyx_v_delta_lengths[__pyx_v_best_mode]);
+      __pyx_t_7 = __pyx_t_6;
+      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
+        __pyx_v_index = __pyx_t_8;
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":252
+ *             bit_count = 0
+ *             for index in range(delta_lengths[best_mode]):
+ *                 accumulator = (accumulator << bits) | delta_codes[best_mode][index]             # <<<<<<<<<<<<<<
+ *                 bit_count += bits
+ *                 while bit_count >= 8:
+*/
+        __pyx_v_accumulator = ((__pyx_v_accumulator << __pyx_v_bits) | ((__pyx_v_delta_codes[__pyx_v_best_mode])[__pyx_v_index]));
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":253
+ *             for index in range(delta_lengths[best_mode]):
+ *                 accumulator = (accumulator << bits) | delta_codes[best_mode][index]
+ *                 bit_count += bits             # <<<<<<<<<<<<<<
+ *                 while bit_count >= 8:
+ *                     bit_count -= 8
+*/
+        __pyx_v_bit_count = (__pyx_v_bit_count + __pyx_v_bits);
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":254
+ *                 accumulator = (accumulator << bits) | delta_codes[best_mode][index]
+ *                 bit_count += bits
+ *                 while bit_count >= 8:             # <<<<<<<<<<<<<<
+ *                     bit_count -= 8
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))
+*/
+        while (1) {
+          __pyx_t_1 = (__pyx_v_bit_count >= 8);
+          if (!__pyx_t_1) break;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":255
+ *                 bit_count += bits
+ *                 while bit_count >= 8:
+ *                     bit_count -= 8             # <<<<<<<<<<<<<<
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))
+ *                     if bit_count == 0:
+*/
+          __pyx_v_bit_count = (__pyx_v_bit_count - 8);
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":256
+ *                 while bit_count >= 8:
+ *                     bit_count -= 8
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))             # <<<<<<<<<<<<<<
+ *                     if bit_count == 0:
+ *                         accumulator = 0
+*/
+          __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)((__pyx_v_accumulator >> __pyx_v_bit_count) & 0xFF))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 256, __pyx_L1_error)
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":257
+ *                     bit_count -= 8
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))
+ *                     if bit_count == 0:             # <<<<<<<<<<<<<<
+ *                         accumulator = 0
+ *                     else:
+*/
+          __pyx_t_1 = (__pyx_v_bit_count == 0);
+          if (__pyx_t_1) {
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":258
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))
+ *                     if bit_count == 0:
+ *                         accumulator = 0             # <<<<<<<<<<<<<<
+ *                     else:
+ *                         accumulator &= (1 << bit_count) - 1
+*/
+            __pyx_v_accumulator = 0;
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":257
+ *                     bit_count -= 8
+ *                     writer.write_byte(<uint8_t>((accumulator >> bit_count) & 0xFF))
+ *                     if bit_count == 0:             # <<<<<<<<<<<<<<
+ *                         accumulator = 0
+ *                     else:
+*/
+            goto __pyx_L29;
+          }
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":260
+ *                         accumulator = 0
+ *                     else:
+ *                         accumulator &= (1 << bit_count) - 1             # <<<<<<<<<<<<<<
+ *             if bit_count > 0:
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))
+*/
+          /*else*/ {
+            __pyx_v_accumulator = (__pyx_v_accumulator & ((1 << __pyx_v_bit_count) - 1));
+          }
+          __pyx_L29:;
+        }
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":261
+ *                     else:
+ *                         accumulator &= (1 << bit_count) - 1
+ *             if bit_count > 0:             # <<<<<<<<<<<<<<
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))
+ *             pos += delta_lengths[best_mode]
+*/
+      __pyx_t_1 = (__pyx_v_bit_count > 0);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":262
+ *                         accumulator &= (1 << bit_count) - 1
+ *             if bit_count > 0:
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))             # <<<<<<<<<<<<<<
+ *             pos += delta_lengths[best_mode]
+ *             continue
+*/
+        __pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte(__pyx_v_writer, ((uint8_t)((__pyx_v_accumulator << (8 - __pyx_v_bit_count)) & 0xFF))); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 262, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":261
+ *                     else:
+ *                         accumulator &= (1 << bit_count) - 1
+ *             if bit_count > 0:             # <<<<<<<<<<<<<<
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))
+ *             pos += delta_lengths[best_mode]
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":263
+ *             if bit_count > 0:
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))
+ *             pos += delta_lengths[best_mode]             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+*/
+      __pyx_v_pos = (__pyx_v_pos + (__pyx_v_delta_lengths[__pyx_v_best_mode]));
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":264
+ *                 writer.write_byte(<uint8_t>((accumulator << (8 - bit_count)) & 0xFF))
+ *             pos += delta_lengths[best_mode]
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         literal[literal_count] = value
+*/
+      goto __pyx_L3_continue;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":244
+ *             continue
+ * 
+ *         if best_delta_efficiency > 1.0:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":266
+ *             continue
+ * 
+ *         literal[literal_count] = value             # <<<<<<<<<<<<<<
+ *         literal_count += 1
+ *         pos += 1
+*/
+    (__pyx_v_literal[__pyx_v_literal_count]) = __pyx_v_value;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":267
+ * 
+ *         literal[literal_count] = value
+ *         literal_count += 1             # <<<<<<<<<<<<<<
+ *         pos += 1
+ *         if literal_count == 32:
+*/
+    __pyx_v_literal_count = (__pyx_v_literal_count + 1);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":268
+ *         literal[literal_count] = value
+ *         literal_count += 1
+ *         pos += 1             # <<<<<<<<<<<<<<
+ *         if literal_count == 32:
+ *             _flush_literal16(writer, literal, literal_count)
+*/
+    __pyx_v_pos = (__pyx_v_pos + 1);
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":269
+ *         literal_count += 1
+ *         pos += 1
+ *         if literal_count == 32:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    __pyx_t_1 = (__pyx_v_literal_count == 32);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":270
+ *         pos += 1
+ *         if literal_count == 32:
+ *             _flush_literal16(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ *             literal_count = 0
+ * 
+*/
+      __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 270, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":271
+ *         if literal_count == 32:
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0             # <<<<<<<<<<<<<<
+ * 
+ *     _flush_literal16(writer, literal, literal_count)
+*/
+      __pyx_v_literal_count = 0;
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":269
+ *         literal_count += 1
+ *         pos += 1
+ *         if literal_count == 32:             # <<<<<<<<<<<<<<
+ *             _flush_literal16(writer, literal, literal_count)
+ *             literal_count = 0
+*/
+    }
+    __pyx_L3_continue:;
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":273
+ *             literal_count = 0
+ * 
+ *     _flush_literal16(writer, literal, literal_count)             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__flush_literal16(__pyx_v_writer, __pyx_v_literal, __pyx_v_literal_count); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 273, __pyx_L1_error)
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":161
+ * 
+ * 
+ * cdef void _compress_pbd16(             # <<<<<<<<<<<<<<
+ *     const uint16_t* src,
+ *     Py_ssize_t length,
+*/
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._compress_pbd16", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+}
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":276
  * 
  * 
  * cdef inline uint16_t _read_u16(const uint8_t* data, Py_ssize_t pos, bint little) noexcept:             # <<<<<<<<<<<<<<
@@ -4469,7 +6893,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
 static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u16(uint8_t const *__pyx_v_data, Py_ssize_t __pyx_v_pos, int __pyx_v_little) {
   uint16_t __pyx_r;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":23
+  /* "pyneutube/core/io/vaa3d_accel.pyx":277
  * 
  * cdef inline uint16_t _read_u16(const uint8_t* data, Py_ssize_t pos, bint little) noexcept:
  *     if little:             # <<<<<<<<<<<<<<
@@ -4478,7 +6902,7 @@ static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u
 */
   if (__pyx_v_little) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":24
+    /* "pyneutube/core/io/vaa3d_accel.pyx":278
  * cdef inline uint16_t _read_u16(const uint8_t* data, Py_ssize_t pos, bint little) noexcept:
  *     if little:
  *         return <uint16_t>(data[pos] | (data[pos + 1] << 8))             # <<<<<<<<<<<<<<
@@ -4488,7 +6912,7 @@ static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u
     __pyx_r = ((uint16_t)((__pyx_v_data[__pyx_v_pos]) | ((__pyx_v_data[(__pyx_v_pos + 1)]) << 8)));
     goto __pyx_L0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":23
+    /* "pyneutube/core/io/vaa3d_accel.pyx":277
  * 
  * cdef inline uint16_t _read_u16(const uint8_t* data, Py_ssize_t pos, bint little) noexcept:
  *     if little:             # <<<<<<<<<<<<<<
@@ -4497,7 +6921,7 @@ static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":25
+  /* "pyneutube/core/io/vaa3d_accel.pyx":279
  *     if little:
  *         return <uint16_t>(data[pos] | (data[pos + 1] << 8))
  *     return <uint16_t>((data[pos] << 8) | data[pos + 1])             # <<<<<<<<<<<<<<
@@ -4507,7 +6931,7 @@ static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u
   __pyx_r = ((uint16_t)(((__pyx_v_data[__pyx_v_pos]) << 8) | (__pyx_v_data[(__pyx_v_pos + 1)])));
   goto __pyx_L0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":22
+  /* "pyneutube/core/io/vaa3d_accel.pyx":276
  * 
  * 
  * cdef inline uint16_t _read_u16(const uint8_t* data, Py_ssize_t pos, bint little) noexcept:             # <<<<<<<<<<<<<<
@@ -4520,7 +6944,7 @@ static CYTHON_INLINE uint16_t __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u
   return __pyx_r;
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":28
+/* "pyneutube/core/io/vaa3d_accel.pyx":282
  * 
  * 
  * cdef inline int _pbd_delta(unsigned int encoded, unsigned int threshold) noexcept:             # <<<<<<<<<<<<<<
@@ -4532,7 +6956,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
   int __pyx_r;
   int __pyx_t_1;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":29
+  /* "pyneutube/core/io/vaa3d_accel.pyx":283
  * 
  * cdef inline int _pbd_delta(unsigned int encoded, unsigned int threshold) noexcept:
  *     if encoded > threshold:             # <<<<<<<<<<<<<<
@@ -4542,7 +6966,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
   __pyx_t_1 = (__pyx_v_encoded > __pyx_v_threshold);
   if (__pyx_t_1) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":30
+    /* "pyneutube/core/io/vaa3d_accel.pyx":284
  * cdef inline int _pbd_delta(unsigned int encoded, unsigned int threshold) noexcept:
  *     if encoded > threshold:
  *         return <int>threshold - <int>encoded             # <<<<<<<<<<<<<<
@@ -4552,7 +6976,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
     __pyx_r = (((int)__pyx_v_threshold) - ((int)__pyx_v_encoded));
     goto __pyx_L0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":29
+    /* "pyneutube/core/io/vaa3d_accel.pyx":283
  * 
  * cdef inline int _pbd_delta(unsigned int encoded, unsigned int threshold) noexcept:
  *     if encoded > threshold:             # <<<<<<<<<<<<<<
@@ -4561,7 +6985,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":31
+  /* "pyneutube/core/io/vaa3d_accel.pyx":285
  *     if encoded > threshold:
  *         return <int>threshold - <int>encoded
  *     return <int>encoded             # <<<<<<<<<<<<<<
@@ -4571,7 +6995,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
   __pyx_r = ((int)__pyx_v_encoded);
   goto __pyx_L0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":28
+  /* "pyneutube/core/io/vaa3d_accel.pyx":282
  * 
  * 
  * cdef inline int _pbd_delta(unsigned int encoded, unsigned int threshold) noexcept:             # <<<<<<<<<<<<<<
@@ -4584,7 +7008,7 @@ static CYTHON_INLINE int __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(u
   return __pyx_r;
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":34
+/* "pyneutube/core/io/vaa3d_accel.pyx":288
  * 
  * 
  * cdef void _decompress_pbd8(             # <<<<<<<<<<<<<<
@@ -4606,20 +7030,19 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
   uint8_t __pyx_v_repeat_value;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  int __pyx_t_2;
+  PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  size_t __pyx_t_5;
+  size_t __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   Py_ssize_t __pyx_t_7;
-  Py_ssize_t __pyx_t_8;
-  int __pyx_t_9;
+  int __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_decompress_pbd8", 0);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":41
+  /* "pyneutube/core/io/vaa3d_accel.pyx":295
  * ):
  *     cdef:
  *         Py_ssize_t cp = 0             # <<<<<<<<<<<<<<
@@ -4628,7 +7051,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
   __pyx_v_cp = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":42
+  /* "pyneutube/core/io/vaa3d_accel.pyx":296
  *     cdef:
  *         Py_ssize_t cp = 0
  *         Py_ssize_t dp = 0             # <<<<<<<<<<<<<<
@@ -4637,7 +7060,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
   __pyx_v_dp = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":46
+  /* "pyneutube/core/io/vaa3d_accel.pyx":300
  *         Py_ssize_t j
  *         unsigned int code
  *         unsigned int packed = 0             # <<<<<<<<<<<<<<
@@ -4646,7 +7069,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
   __pyx_v_packed = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":49
+  /* "pyneutube/core/io/vaa3d_accel.pyx":303
  *         unsigned int delta_code
  *         int delta
  *         int prior = 0             # <<<<<<<<<<<<<<
@@ -4655,7 +7078,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
   __pyx_v_prior = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":53
+  /* "pyneutube/core/io/vaa3d_accel.pyx":307
  *         uint8_t repeat_value
  * 
  *     while cp < comp_len:             # <<<<<<<<<<<<<<
@@ -4666,7 +7089,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
     __pyx_t_1 = (__pyx_v_cp < __pyx_v_comp_len);
     if (!__pyx_t_1) break;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":54
+    /* "pyneutube/core/io/vaa3d_accel.pyx":308
  * 
  *     while cp < comp_len:
  *         code = comp[cp]             # <<<<<<<<<<<<<<
@@ -4675,7 +7098,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
     __pyx_v_code = (__pyx_v_comp[__pyx_v_cp]);
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":55
+    /* "pyneutube/core/io/vaa3d_accel.pyx":309
  *     while cp < comp_len:
  *         code = comp[cp]
  *         cp += 1             # <<<<<<<<<<<<<<
@@ -4684,86 +7107,106 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
     __pyx_v_cp = (__pyx_v_cp + 1);
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":57
+    /* "pyneutube/core/io/vaa3d_accel.pyx":311
  *         cp += 1
  * 
  *         if code < 33:             # <<<<<<<<<<<<<<
  *             count = code + 1
- *             if cp + count > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     __pyx_t_1 = (__pyx_v_code < 33);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":58
+      /* "pyneutube/core/io/vaa3d_accel.pyx":312
  * 
  *         if code < 33:
  *             count = code + 1             # <<<<<<<<<<<<<<
- *             if cp + count > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
 */
       __pyx_v_count = (__pyx_v_code + 1);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":59
+      /* "pyneutube/core/io/vaa3d_accel.pyx":313
  *         if code < 33:
  *             count = code + 1
- *             if cp + count > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
  *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
- *             for j in range(count):
+ *             if cp + count > comp_len:
 */
-      __pyx_t_2 = ((__pyx_v_cp + __pyx_v_count) > __pyx_v_comp_len);
-      if (!__pyx_t_2) {
-      } else {
-        __pyx_t_1 = __pyx_t_2;
-        goto __pyx_L7_bool_binop_done;
-      }
-      __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-      __pyx_t_1 = __pyx_t_2;
-      __pyx_L7_bool_binop_done:;
+      __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
       if (unlikely(__pyx_t_1)) {
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":60
+        /* "pyneutube/core/io/vaa3d_accel.pyx":314
  *             count = code + 1
- *             if cp + count > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")             # <<<<<<<<<<<<<<
+ *             if cp + count > comp_len:
+ *                 break
+*/
+        __pyx_t_3 = NULL;
+        __pyx_t_4 = 1;
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_literal_blo};
+          __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+        }
+        __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __PYX_ERR(0, 314, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":313
+ *         if code < 33:
+ *             count = code + 1
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+ *             if cp + count > comp_len:
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":315
+ *             if dp + count > out_len:
+ *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+ *             if cp + count > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
+ *             for j in range(count):
+*/
+      __pyx_t_1 = ((__pyx_v_cp + __pyx_v_count) > __pyx_v_comp_len);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":316
+ *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+ *             if cp + count > comp_len:
+ *                 break             # <<<<<<<<<<<<<<
  *             for j in range(count):
  *                 out[dp + j] = comp[cp + j]
 */
-        __pyx_t_4 = NULL;
-        __pyx_t_5 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_literal_blo};
-          __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
-        }
-        __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 60, __pyx_L1_error)
+        goto __pyx_L4_break;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":59
- *         if code < 33:
- *             count = code + 1
- *             if cp + count > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+        /* "pyneutube/core/io/vaa3d_accel.pyx":315
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+ *             if cp + count > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
  *             for j in range(count):
 */
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":61
- *             if cp + count > comp_len or dp + count > out_len:
- *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":317
+ *             if cp + count > comp_len:
+ *                 break
  *             for j in range(count):             # <<<<<<<<<<<<<<
  *                 out[dp + j] = comp[cp + j]
  *             prior = out[dp + count - 1]
 */
-      __pyx_t_6 = __pyx_v_count;
-      __pyx_t_7 = __pyx_t_6;
-      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-        __pyx_v_j = __pyx_t_8;
+      __pyx_t_5 = __pyx_v_count;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_j = __pyx_t_7;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":62
- *                 raise ValueError("Malformed Vaa3D PBD8 literal block.")
+        /* "pyneutube/core/io/vaa3d_accel.pyx":318
+ *                 break
  *             for j in range(count):
  *                 out[dp + j] = comp[cp + j]             # <<<<<<<<<<<<<<
  *             prior = out[dp + count - 1]
@@ -4772,7 +7215,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
         (__pyx_v_out[(__pyx_v_dp + __pyx_v_j)]) = (__pyx_v_comp[(__pyx_v_cp + __pyx_v_j)]);
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":63
+      /* "pyneutube/core/io/vaa3d_accel.pyx":319
  *             for j in range(count):
  *                 out[dp + j] = comp[cp + j]
  *             prior = out[dp + count - 1]             # <<<<<<<<<<<<<<
@@ -4781,7 +7224,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
       __pyx_v_prior = (__pyx_v_out[((__pyx_v_dp + __pyx_v_count) - 1)]);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":64
+      /* "pyneutube/core/io/vaa3d_accel.pyx":320
  *                 out[dp + j] = comp[cp + j]
  *             prior = out[dp + count - 1]
  *             dp += count             # <<<<<<<<<<<<<<
@@ -4790,7 +7233,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
       __pyx_v_dp = (__pyx_v_dp + __pyx_v_count);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":65
+      /* "pyneutube/core/io/vaa3d_accel.pyx":321
  *             prior = out[dp + count - 1]
  *             dp += count
  *             cp += count             # <<<<<<<<<<<<<<
@@ -4799,96 +7242,116 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
       __pyx_v_cp = (__pyx_v_cp + __pyx_v_count);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":57
+      /* "pyneutube/core/io/vaa3d_accel.pyx":311
  *         cp += 1
  * 
  *         if code < 33:             # <<<<<<<<<<<<<<
  *             count = code + 1
- *             if cp + count > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
       goto __pyx_L5;
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":66
+    /* "pyneutube/core/io/vaa3d_accel.pyx":322
  *             dp += count
  *             cp += count
  *         elif code < 128:             # <<<<<<<<<<<<<<
  *             count = code - 32
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     __pyx_t_1 = (__pyx_v_code < 0x80);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":67
+      /* "pyneutube/core/io/vaa3d_accel.pyx":323
  *             cp += count
  *         elif code < 128:
  *             count = code - 32             # <<<<<<<<<<<<<<
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
 */
       __pyx_v_count = (__pyx_v_code - 32);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":68
+      /* "pyneutube/core/io/vaa3d_accel.pyx":324
  *         elif code < 128:
  *             count = code - 32
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
  *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
- *             for j in range(count):
+ *             if cp + ((count + 3) >> 2) > comp_len:
 */
-      __pyx_t_2 = ((__pyx_v_cp + ((__pyx_v_count + 3) >> 2)) > __pyx_v_comp_len);
-      if (!__pyx_t_2) {
-      } else {
-        __pyx_t_1 = __pyx_t_2;
-        goto __pyx_L12_bool_binop_done;
-      }
-      __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-      __pyx_t_1 = __pyx_t_2;
-      __pyx_L12_bool_binop_done:;
+      __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
       if (unlikely(__pyx_t_1)) {
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":69
+        /* "pyneutube/core/io/vaa3d_accel.pyx":325
  *             count = code - 32
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")             # <<<<<<<<<<<<<<
+ *             if cp + ((count + 3) >> 2) > comp_len:
+ *                 break
+*/
+        __pyx_t_3 = NULL;
+        __pyx_t_4 = 1;
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_delta_block};
+          __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 325, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+        }
+        __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __PYX_ERR(0, 325, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":324
+ *         elif code < 128:
+ *             count = code - 32
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+ *             if cp + ((count + 3) >> 2) > comp_len:
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":326
+ *             if dp + count > out_len:
+ *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+ *             if cp + ((count + 3) >> 2) > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
+ *             for j in range(count):
+*/
+      __pyx_t_1 = ((__pyx_v_cp + ((__pyx_v_count + 3) >> 2)) > __pyx_v_comp_len);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":327
+ *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+ *             if cp + ((count + 3) >> 2) > comp_len:
+ *                 break             # <<<<<<<<<<<<<<
  *             for j in range(count):
  *                 if (j & 3) == 0:
 */
-        __pyx_t_4 = NULL;
-        __pyx_t_5 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_delta_block};
-          __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
-        }
-        __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 69, __pyx_L1_error)
+        goto __pyx_L4_break;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":68
- *         elif code < 128:
- *             count = code - 32
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+        /* "pyneutube/core/io/vaa3d_accel.pyx":326
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+ *             if cp + ((count + 3) >> 2) > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
  *             for j in range(count):
 */
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":70
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:
- *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":328
+ *             if cp + ((count + 3) >> 2) > comp_len:
+ *                 break
  *             for j in range(count):             # <<<<<<<<<<<<<<
  *                 if (j & 3) == 0:
  *                     packed = comp[cp]
 */
-      __pyx_t_6 = __pyx_v_count;
-      __pyx_t_7 = __pyx_t_6;
-      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-        __pyx_v_j = __pyx_t_8;
+      __pyx_t_5 = __pyx_v_count;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_j = __pyx_t_7;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":71
- *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+        /* "pyneutube/core/io/vaa3d_accel.pyx":329
+ *                 break
  *             for j in range(count):
  *                 if (j & 3) == 0:             # <<<<<<<<<<<<<<
  *                     packed = comp[cp]
@@ -4897,7 +7360,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
         __pyx_t_1 = ((__pyx_v_j & 3) == 0);
         if (__pyx_t_1) {
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":72
+          /* "pyneutube/core/io/vaa3d_accel.pyx":330
  *             for j in range(count):
  *                 if (j & 3) == 0:
  *                     packed = comp[cp]             # <<<<<<<<<<<<<<
@@ -4906,7 +7369,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
           __pyx_v_packed = (__pyx_v_comp[__pyx_v_cp]);
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":73
+          /* "pyneutube/core/io/vaa3d_accel.pyx":331
  *                 if (j & 3) == 0:
  *                     packed = comp[cp]
  *                     cp += 1             # <<<<<<<<<<<<<<
@@ -4915,8 +7378,8 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
           __pyx_v_cp = (__pyx_v_cp + 1);
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":71
- *                 raise ValueError("Malformed Vaa3D PBD8 delta block.")
+          /* "pyneutube/core/io/vaa3d_accel.pyx":329
+ *                 break
  *             for j in range(count):
  *                 if (j & 3) == 0:             # <<<<<<<<<<<<<<
  *                     packed = comp[cp]
@@ -4924,7 +7387,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         }
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":74
+        /* "pyneutube/core/io/vaa3d_accel.pyx":332
  *                     packed = comp[cp]
  *                     cp += 1
  *                 delta_code = (packed >> (2 * (j & 3))) & 3             # <<<<<<<<<<<<<<
@@ -4933,7 +7396,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         __pyx_v_delta_code = ((__pyx_v_packed >> (2 * (__pyx_v_j & 3))) & 3);
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":75
+        /* "pyneutube/core/io/vaa3d_accel.pyx":333
  *                     cp += 1
  *                 delta_code = (packed >> (2 * (j & 3))) & 3
  *                 delta = -1 if delta_code == 3 else <int>delta_code             # <<<<<<<<<<<<<<
@@ -4942,13 +7405,13 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         __pyx_t_1 = (__pyx_v_delta_code == 3);
         if (__pyx_t_1) {
-          __pyx_t_9 = -1;
+          __pyx_t_8 = -1;
         } else {
-          __pyx_t_9 = ((int)__pyx_v_delta_code);
+          __pyx_t_8 = ((int)__pyx_v_delta_code);
         }
-        __pyx_v_delta = __pyx_t_9;
+        __pyx_v_delta = __pyx_t_8;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":76
+        /* "pyneutube/core/io/vaa3d_accel.pyx":334
  *                 delta_code = (packed >> (2 * (j & 3))) & 3
  *                 delta = -1 if delta_code == 3 else <int>delta_code
  *                 value = prior + delta             # <<<<<<<<<<<<<<
@@ -4957,7 +7420,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         __pyx_v_value = (__pyx_v_prior + __pyx_v_delta);
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":77
+        /* "pyneutube/core/io/vaa3d_accel.pyx":335
  *                 delta = -1 if delta_code == 3 else <int>delta_code
  *                 value = prior + delta
  *                 out[dp] = <uint8_t>value             # <<<<<<<<<<<<<<
@@ -4966,7 +7429,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         (__pyx_v_out[__pyx_v_dp]) = ((uint8_t)__pyx_v_value);
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":78
+        /* "pyneutube/core/io/vaa3d_accel.pyx":336
  *                 value = prior + delta
  *                 out[dp] = <uint8_t>value
  *                 prior = out[dp]             # <<<<<<<<<<<<<<
@@ -4975,7 +7438,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
         __pyx_v_prior = (__pyx_v_out[__pyx_v_dp]);
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":79
+        /* "pyneutube/core/io/vaa3d_accel.pyx":337
  *                 out[dp] = <uint8_t>value
  *                 prior = out[dp]
  *                 dp += 1             # <<<<<<<<<<<<<<
@@ -4985,84 +7448,104 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
         __pyx_v_dp = (__pyx_v_dp + 1);
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":66
+      /* "pyneutube/core/io/vaa3d_accel.pyx":322
  *             dp += count
  *             cp += count
  *         elif code < 128:             # <<<<<<<<<<<<<<
  *             count = code - 32
- *             if cp + ((count + 3) >> 2) > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
       goto __pyx_L5;
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":81
+    /* "pyneutube/core/io/vaa3d_accel.pyx":339
  *                 dp += 1
  *         else:
  *             count = code - 127             # <<<<<<<<<<<<<<
- *             if cp >= comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
 */
     /*else*/ {
       __pyx_v_count = (__pyx_v_code - 0x7F);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":82
+      /* "pyneutube/core/io/vaa3d_accel.pyx":340
  *         else:
  *             count = code - 127
- *             if cp >= comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
  *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
- *             repeat_value = comp[cp]
+ *             if cp >= comp_len:
 */
-      __pyx_t_2 = (__pyx_v_cp >= __pyx_v_comp_len);
-      if (!__pyx_t_2) {
-      } else {
-        __pyx_t_1 = __pyx_t_2;
-        goto __pyx_L18_bool_binop_done;
-      }
-      __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-      __pyx_t_1 = __pyx_t_2;
-      __pyx_L18_bool_binop_done:;
+      __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
       if (unlikely(__pyx_t_1)) {
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":83
+        /* "pyneutube/core/io/vaa3d_accel.pyx":341
  *             count = code - 127
- *             if cp >= comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")             # <<<<<<<<<<<<<<
+ *             if cp >= comp_len:
+ *                 break
+*/
+        __pyx_t_3 = NULL;
+        __pyx_t_4 = 1;
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_repeat_bloc};
+          __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 341, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+        }
+        __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __PYX_ERR(0, 341, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":340
+ *         else:
+ *             count = code - 127
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+ *             if cp >= comp_len:
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":342
+ *             if dp + count > out_len:
+ *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+ *             if cp >= comp_len:             # <<<<<<<<<<<<<<
+ *                 break
+ *             repeat_value = comp[cp]
+*/
+      __pyx_t_1 = (__pyx_v_cp >= __pyx_v_comp_len);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":343
+ *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+ *             if cp >= comp_len:
+ *                 break             # <<<<<<<<<<<<<<
  *             repeat_value = comp[cp]
  *             cp += 1
 */
-        __pyx_t_4 = NULL;
-        __pyx_t_5 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD8_repeat_bloc};
-          __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
-        }
-        __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 83, __pyx_L1_error)
+        goto __pyx_L4_break;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":82
- *         else:
- *             count = code - 127
- *             if cp >= comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+        /* "pyneutube/core/io/vaa3d_accel.pyx":342
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+ *             if cp >= comp_len:             # <<<<<<<<<<<<<<
+ *                 break
  *             repeat_value = comp[cp]
 */
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":84
- *             if cp >= comp_len or dp + count > out_len:
- *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":344
+ *             if cp >= comp_len:
+ *                 break
  *             repeat_value = comp[cp]             # <<<<<<<<<<<<<<
  *             cp += 1
  *             for j in range(count):
 */
       __pyx_v_repeat_value = (__pyx_v_comp[__pyx_v_cp]);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":85
- *                 raise ValueError("Malformed Vaa3D PBD8 repeat block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":345
+ *                 break
  *             repeat_value = comp[cp]
  *             cp += 1             # <<<<<<<<<<<<<<
  *             for j in range(count):
@@ -5070,19 +7553,19 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
       __pyx_v_cp = (__pyx_v_cp + 1);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":86
+      /* "pyneutube/core/io/vaa3d_accel.pyx":346
  *             repeat_value = comp[cp]
  *             cp += 1
  *             for j in range(count):             # <<<<<<<<<<<<<<
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value
 */
-      __pyx_t_6 = __pyx_v_count;
-      __pyx_t_7 = __pyx_t_6;
-      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-        __pyx_v_j = __pyx_t_8;
+      __pyx_t_5 = __pyx_v_count;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_j = __pyx_t_7;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":87
+        /* "pyneutube/core/io/vaa3d_accel.pyx":347
  *             cp += 1
  *             for j in range(count):
  *                 out[dp + j] = repeat_value             # <<<<<<<<<<<<<<
@@ -5092,7 +7575,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
         (__pyx_v_out[(__pyx_v_dp + __pyx_v_j)]) = __pyx_v_repeat_value;
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":88
+      /* "pyneutube/core/io/vaa3d_accel.pyx":348
  *             for j in range(count):
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value             # <<<<<<<<<<<<<<
@@ -5101,58 +7584,20 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
 */
       __pyx_v_prior = __pyx_v_repeat_value;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":89
+      /* "pyneutube/core/io/vaa3d_accel.pyx":349
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value
  *             dp += count             # <<<<<<<<<<<<<<
  * 
- *     if dp != out_len:
+ * cdef void _decompress_pbd16(
 */
       __pyx_v_dp = (__pyx_v_dp + __pyx_v_count);
     }
     __pyx_L5:;
   }
+  __pyx_L4_break:;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":91
- *             dp += count
- * 
- *     if dp != out_len:             # <<<<<<<<<<<<<<
- *         raise ValueError("Vaa3D PBD8 decompressed size does not match the header.")
- * 
-*/
-  __pyx_t_1 = (__pyx_v_dp != __pyx_v_out_len);
-  if (unlikely(__pyx_t_1)) {
-
-    /* "pyneutube/core/io/vaa3d_accel.pyx":92
- * 
- *     if dp != out_len:
- *         raise ValueError("Vaa3D PBD8 decompressed size does not match the header.")             # <<<<<<<<<<<<<<
- * 
- * 
-*/
-    __pyx_t_4 = NULL;
-    __pyx_t_5 = 1;
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD8_decompressed_size_doe};
-      __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 92, __pyx_L1_error)
-
-    /* "pyneutube/core/io/vaa3d_accel.pyx":91
- *             dp += count
- * 
- *     if dp != out_len:             # <<<<<<<<<<<<<<
- *         raise ValueError("Vaa3D PBD8 decompressed size does not match the header.")
- * 
-*/
-  }
-
-  /* "pyneutube/core/io/vaa3d_accel.pyx":34
+  /* "pyneutube/core/io/vaa3d_accel.pyx":288
  * 
  * 
  * cdef void _decompress_pbd8(             # <<<<<<<<<<<<<<
@@ -5163,15 +7608,15 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(uint8_t 
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._decompress_pbd8", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":95
- * 
+/* "pyneutube/core/io/vaa3d_accel.pyx":351
+ *             dp += count
  * 
  * cdef void _decompress_pbd16(             # <<<<<<<<<<<<<<
  *     const uint8_t* comp,
@@ -5196,22 +7641,21 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
   uint16_t __pyx_v_repeat_value;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  int __pyx_t_2;
+  PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  size_t __pyx_t_5;
+  size_t __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   Py_ssize_t __pyx_t_7;
-  Py_ssize_t __pyx_t_8;
+  unsigned int __pyx_t_8;
   unsigned int __pyx_t_9;
-  unsigned int __pyx_t_10;
-  Py_ssize_t __pyx_t_11;
+  Py_ssize_t __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_decompress_pbd16", 0);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":103
+  /* "pyneutube/core/io/vaa3d_accel.pyx":359
  * ):
  *     cdef:
  *         Py_ssize_t cp = 0             # <<<<<<<<<<<<<<
@@ -5220,7 +7664,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
   __pyx_v_cp = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":104
+  /* "pyneutube/core/io/vaa3d_accel.pyx":360
  *     cdef:
  *         Py_ssize_t cp = 0
  *         Py_ssize_t dp = 0             # <<<<<<<<<<<<<<
@@ -5229,7 +7673,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
   __pyx_v_dp = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":116
+  /* "pyneutube/core/io/vaa3d_accel.pyx":372
  *         int delta
  *         int value
  *         unsigned int prior = 0             # <<<<<<<<<<<<<<
@@ -5238,7 +7682,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
   __pyx_v_prior = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":119
+  /* "pyneutube/core/io/vaa3d_accel.pyx":375
  *         uint16_t repeat_value
  * 
  *     while cp < comp_len:             # <<<<<<<<<<<<<<
@@ -5249,7 +7693,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
     __pyx_t_1 = (__pyx_v_cp < __pyx_v_comp_len);
     if (!__pyx_t_1) break;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":120
+    /* "pyneutube/core/io/vaa3d_accel.pyx":376
  * 
  *     while cp < comp_len:
  *         code = comp[cp]             # <<<<<<<<<<<<<<
@@ -5258,7 +7702,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
     __pyx_v_code = (__pyx_v_comp[__pyx_v_cp]);
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":121
+    /* "pyneutube/core/io/vaa3d_accel.pyx":377
  *     while cp < comp_len:
  *         code = comp[cp]
  *         cp += 1             # <<<<<<<<<<<<<<
@@ -5267,86 +7711,106 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
     __pyx_v_cp = (__pyx_v_cp + 1);
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":123
+    /* "pyneutube/core/io/vaa3d_accel.pyx":379
  *         cp += 1
  * 
  *         if code < 32:             # <<<<<<<<<<<<<<
  *             count = code + 1
- *             if cp + count * 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     __pyx_t_1 = (__pyx_v_code < 32);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":124
+      /* "pyneutube/core/io/vaa3d_accel.pyx":380
  * 
  *         if code < 32:
  *             count = code + 1             # <<<<<<<<<<<<<<
- *             if cp + count * 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
 */
       __pyx_v_count = (__pyx_v_code + 1);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":125
+      /* "pyneutube/core/io/vaa3d_accel.pyx":381
  *         if code < 32:
  *             count = code + 1
- *             if cp + count * 2 > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
  *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
- *             for j in range(count):
+ *             if cp + count * 2 > comp_len:
 */
-      __pyx_t_2 = ((__pyx_v_cp + (__pyx_v_count * 2)) > __pyx_v_comp_len);
-      if (!__pyx_t_2) {
-      } else {
-        __pyx_t_1 = __pyx_t_2;
-        goto __pyx_L7_bool_binop_done;
-      }
-      __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-      __pyx_t_1 = __pyx_t_2;
-      __pyx_L7_bool_binop_done:;
+      __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
       if (unlikely(__pyx_t_1)) {
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":126
+        /* "pyneutube/core/io/vaa3d_accel.pyx":382
  *             count = code + 1
- *             if cp + count * 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")             # <<<<<<<<<<<<<<
+ *             if cp + count * 2 > comp_len:
+ *                 break
+*/
+        __pyx_t_3 = NULL;
+        __pyx_t_4 = 1;
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_literal_bl};
+          __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 382, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+        }
+        __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __PYX_ERR(0, 382, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":381
+ *         if code < 32:
+ *             count = code + 1
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+ *             if cp + count * 2 > comp_len:
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":383
+ *             if dp + count > out_len:
+ *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+ *             if cp + count * 2 > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
+ *             for j in range(count):
+*/
+      __pyx_t_1 = ((__pyx_v_cp + (__pyx_v_count * 2)) > __pyx_v_comp_len);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":384
+ *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+ *             if cp + count * 2 > comp_len:
+ *                 break             # <<<<<<<<<<<<<<
  *             for j in range(count):
  *                 out[dp + j] = _read_u16(comp, cp + j * 2, little)
 */
-        __pyx_t_4 = NULL;
-        __pyx_t_5 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_literal_bl};
-          __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
-        }
-        __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 126, __pyx_L1_error)
+        goto __pyx_L4_break;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":125
- *         if code < 32:
- *             count = code + 1
- *             if cp + count * 2 > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+        /* "pyneutube/core/io/vaa3d_accel.pyx":383
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+ *             if cp + count * 2 > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
  *             for j in range(count):
 */
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":127
- *             if cp + count * 2 > comp_len or dp + count > out_len:
- *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":385
+ *             if cp + count * 2 > comp_len:
+ *                 break
  *             for j in range(count):             # <<<<<<<<<<<<<<
  *                 out[dp + j] = _read_u16(comp, cp + j * 2, little)
  *             prior = out[dp + count - 1]
 */
-      __pyx_t_6 = __pyx_v_count;
-      __pyx_t_7 = __pyx_t_6;
-      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-        __pyx_v_j = __pyx_t_8;
+      __pyx_t_5 = __pyx_v_count;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_j = __pyx_t_7;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":128
- *                 raise ValueError("Malformed Vaa3D PBD16 literal block.")
+        /* "pyneutube/core/io/vaa3d_accel.pyx":386
+ *                 break
  *             for j in range(count):
  *                 out[dp + j] = _read_u16(comp, cp + j * 2, little)             # <<<<<<<<<<<<<<
  *             prior = out[dp + count - 1]
@@ -5355,7 +7819,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
         (__pyx_v_out[(__pyx_v_dp + __pyx_v_j)]) = __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u16(__pyx_v_comp, (__pyx_v_cp + (__pyx_v_j * 2)), __pyx_v_little);
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":129
+      /* "pyneutube/core/io/vaa3d_accel.pyx":387
  *             for j in range(count):
  *                 out[dp + j] = _read_u16(comp, cp + j * 2, little)
  *             prior = out[dp + count - 1]             # <<<<<<<<<<<<<<
@@ -5364,7 +7828,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_prior = (__pyx_v_out[((__pyx_v_dp + __pyx_v_count) - 1)]);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":130
+      /* "pyneutube/core/io/vaa3d_accel.pyx":388
  *                 out[dp + j] = _read_u16(comp, cp + j * 2, little)
  *             prior = out[dp + count - 1]
  *             dp += count             # <<<<<<<<<<<<<<
@@ -5373,7 +7837,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_dp = (__pyx_v_dp + __pyx_v_count);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":131
+      /* "pyneutube/core/io/vaa3d_accel.pyx":389
  *             prior = out[dp + count - 1]
  *             dp += count
  *             cp += count * 2             # <<<<<<<<<<<<<<
@@ -5382,7 +7846,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_cp = (__pyx_v_cp + (__pyx_v_count * 2));
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":132
+      /* "pyneutube/core/io/vaa3d_accel.pyx":390
  *             dp += count
  *             cp += count * 2
  *             continue             # <<<<<<<<<<<<<<
@@ -5391,92 +7855,112 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       goto __pyx_L3_continue;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":123
+      /* "pyneutube/core/io/vaa3d_accel.pyx":379
  *         cp += 1
  * 
  *         if code < 32:             # <<<<<<<<<<<<<<
  *             count = code + 1
- *             if cp + count * 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":134
+    /* "pyneutube/core/io/vaa3d_accel.pyx":392
  *             continue
  * 
  *         if code >= 223:             # <<<<<<<<<<<<<<
  *             count = code - 222
- *             if cp + 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     __pyx_t_1 = (__pyx_v_code >= 0xDF);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":135
+      /* "pyneutube/core/io/vaa3d_accel.pyx":393
  * 
  *         if code >= 223:
  *             count = code - 222             # <<<<<<<<<<<<<<
- *             if cp + 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
 */
       __pyx_v_count = (__pyx_v_code - 0xDE);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":136
+      /* "pyneutube/core/io/vaa3d_accel.pyx":394
  *         if code >= 223:
  *             count = code - 222
- *             if cp + 2 > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
  *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
- *             repeat_value = _read_u16(comp, cp, little)
+ *             if cp + 2 > comp_len:
 */
-      __pyx_t_2 = ((__pyx_v_cp + 2) > __pyx_v_comp_len);
-      if (!__pyx_t_2) {
-      } else {
-        __pyx_t_1 = __pyx_t_2;
-        goto __pyx_L13_bool_binop_done;
-      }
-      __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-      __pyx_t_1 = __pyx_t_2;
-      __pyx_L13_bool_binop_done:;
+      __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
       if (unlikely(__pyx_t_1)) {
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":137
+        /* "pyneutube/core/io/vaa3d_accel.pyx":395
  *             count = code - 222
- *             if cp + 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")             # <<<<<<<<<<<<<<
+ *             if cp + 2 > comp_len:
+ *                 break
+*/
+        __pyx_t_3 = NULL;
+        __pyx_t_4 = 1;
+        {
+          PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_repeat_blo};
+          __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 395, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+        }
+        __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __PYX_ERR(0, 395, __pyx_L1_error)
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":394
+ *         if code >= 223:
+ *             count = code - 222
+ *             if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+ *             if cp + 2 > comp_len:
+*/
+      }
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":396
+ *             if dp + count > out_len:
+ *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+ *             if cp + 2 > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
+ *             repeat_value = _read_u16(comp, cp, little)
+*/
+      __pyx_t_1 = ((__pyx_v_cp + 2) > __pyx_v_comp_len);
+      if (__pyx_t_1) {
+
+        /* "pyneutube/core/io/vaa3d_accel.pyx":397
+ *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+ *             if cp + 2 > comp_len:
+ *                 break             # <<<<<<<<<<<<<<
  *             repeat_value = _read_u16(comp, cp, little)
  *             cp += 2
 */
-        __pyx_t_4 = NULL;
-        __pyx_t_5 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_repeat_blo};
-          __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
-        }
-        __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 137, __pyx_L1_error)
+        goto __pyx_L4_break;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":136
- *         if code >= 223:
- *             count = code - 222
- *             if cp + 2 > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+        /* "pyneutube/core/io/vaa3d_accel.pyx":396
+ *             if dp + count > out_len:
  *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+ *             if cp + 2 > comp_len:             # <<<<<<<<<<<<<<
+ *                 break
  *             repeat_value = _read_u16(comp, cp, little)
 */
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":138
- *             if cp + 2 > comp_len or dp + count > out_len:
- *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":398
+ *             if cp + 2 > comp_len:
+ *                 break
  *             repeat_value = _read_u16(comp, cp, little)             # <<<<<<<<<<<<<<
  *             cp += 2
  *             for j in range(count):
 */
       __pyx_v_repeat_value = __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__read_u16(__pyx_v_comp, __pyx_v_cp, __pyx_v_little);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":139
- *                 raise ValueError("Malformed Vaa3D PBD16 repeat block.")
+      /* "pyneutube/core/io/vaa3d_accel.pyx":399
+ *                 break
  *             repeat_value = _read_u16(comp, cp, little)
  *             cp += 2             # <<<<<<<<<<<<<<
  *             for j in range(count):
@@ -5484,19 +7968,19 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_cp = (__pyx_v_cp + 2);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":140
+      /* "pyneutube/core/io/vaa3d_accel.pyx":400
  *             repeat_value = _read_u16(comp, cp, little)
  *             cp += 2
  *             for j in range(count):             # <<<<<<<<<<<<<<
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value
 */
-      __pyx_t_6 = __pyx_v_count;
-      __pyx_t_7 = __pyx_t_6;
-      for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-        __pyx_v_j = __pyx_t_8;
+      __pyx_t_5 = __pyx_v_count;
+      __pyx_t_6 = __pyx_t_5;
+      for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+        __pyx_v_j = __pyx_t_7;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":141
+        /* "pyneutube/core/io/vaa3d_accel.pyx":401
  *             cp += 2
  *             for j in range(count):
  *                 out[dp + j] = repeat_value             # <<<<<<<<<<<<<<
@@ -5506,7 +7990,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
         (__pyx_v_out[(__pyx_v_dp + __pyx_v_j)]) = __pyx_v_repeat_value;
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":142
+      /* "pyneutube/core/io/vaa3d_accel.pyx":402
  *             for j in range(count):
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value             # <<<<<<<<<<<<<<
@@ -5515,7 +7999,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_prior = __pyx_v_repeat_value;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":143
+      /* "pyneutube/core/io/vaa3d_accel.pyx":403
  *                 out[dp + j] = repeat_value
  *             prior = repeat_value
  *             dp += count             # <<<<<<<<<<<<<<
@@ -5524,7 +8008,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_dp = (__pyx_v_dp + __pyx_v_count);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":144
+      /* "pyneutube/core/io/vaa3d_accel.pyx":404
  *             prior = repeat_value
  *             dp += count
  *             continue             # <<<<<<<<<<<<<<
@@ -5533,16 +8017,16 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       goto __pyx_L3_continue;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":134
+      /* "pyneutube/core/io/vaa3d_accel.pyx":392
  *             continue
  * 
  *         if code >= 223:             # <<<<<<<<<<<<<<
  *             count = code - 222
- *             if cp + 2 > comp_len or dp + count > out_len:
+ *             if dp + count > out_len:
 */
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":146
+    /* "pyneutube/core/io/vaa3d_accel.pyx":406
  *             continue
  * 
  *         if code < 80:             # <<<<<<<<<<<<<<
@@ -5552,7 +8036,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
     __pyx_t_1 = (__pyx_v_code < 80);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":147
+      /* "pyneutube/core/io/vaa3d_accel.pyx":407
  * 
  *         if code < 80:
  *             count = code - 31             # <<<<<<<<<<<<<<
@@ -5561,7 +8045,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_count = (__pyx_v_code - 31);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":148
+      /* "pyneutube/core/io/vaa3d_accel.pyx":408
  *         if code < 80:
  *             count = code - 31
  *             bits = 3             # <<<<<<<<<<<<<<
@@ -5570,7 +8054,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_bits = 3;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":149
+      /* "pyneutube/core/io/vaa3d_accel.pyx":409
  *             count = code - 31
  *             bits = 3
  *             threshold = 4             # <<<<<<<<<<<<<<
@@ -5579,17 +8063,17 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_threshold = 4;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":146
+      /* "pyneutube/core/io/vaa3d_accel.pyx":406
  *             continue
  * 
  *         if code < 80:             # <<<<<<<<<<<<<<
  *             count = code - 31
  *             bits = 3
 */
-      goto __pyx_L17;
+      goto __pyx_L15;
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":150
+    /* "pyneutube/core/io/vaa3d_accel.pyx":410
  *             bits = 3
  *             threshold = 4
  *         elif code < 183:             # <<<<<<<<<<<<<<
@@ -5599,7 +8083,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
     __pyx_t_1 = (__pyx_v_code < 0xB7);
     if (__pyx_t_1) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":151
+      /* "pyneutube/core/io/vaa3d_accel.pyx":411
  *             threshold = 4
  *         elif code < 183:
  *             count = code - 79             # <<<<<<<<<<<<<<
@@ -5608,7 +8092,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_count = (__pyx_v_code - 79);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":152
+      /* "pyneutube/core/io/vaa3d_accel.pyx":412
  *         elif code < 183:
  *             count = code - 79
  *             bits = 4             # <<<<<<<<<<<<<<
@@ -5617,7 +8101,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_bits = 4;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":153
+      /* "pyneutube/core/io/vaa3d_accel.pyx":413
  *             count = code - 79
  *             bits = 4
  *             threshold = 8             # <<<<<<<<<<<<<<
@@ -5626,17 +8110,17 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_threshold = 8;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":150
+      /* "pyneutube/core/io/vaa3d_accel.pyx":410
  *             bits = 3
  *             threshold = 4
  *         elif code < 183:             # <<<<<<<<<<<<<<
  *             count = code - 79
  *             bits = 4
 */
-      goto __pyx_L17;
+      goto __pyx_L15;
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":155
+    /* "pyneutube/core/io/vaa3d_accel.pyx":415
  *             threshold = 8
  *         else:
  *             count = code - 182             # <<<<<<<<<<<<<<
@@ -5646,7 +8130,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
     /*else*/ {
       __pyx_v_count = (__pyx_v_code - 0xB6);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":156
+      /* "pyneutube/core/io/vaa3d_accel.pyx":416
  *         else:
  *             count = code - 182
  *             bits = 5             # <<<<<<<<<<<<<<
@@ -5655,7 +8139,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_bits = 5;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":157
+      /* "pyneutube/core/io/vaa3d_accel.pyx":417
  *             count = code - 182
  *             bits = 5
  *             threshold = 16             # <<<<<<<<<<<<<<
@@ -5664,66 +8148,86 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_threshold = 16;
     }
-    __pyx_L17:;
+    __pyx_L15:;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":159
+    /* "pyneutube/core/io/vaa3d_accel.pyx":419
  *             threshold = 16
  * 
  *         byte_count = (count * bits + 7) >> 3             # <<<<<<<<<<<<<<
- *         if cp + byte_count > comp_len or dp + count > out_len:
+ *         if dp + count > out_len:
  *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
 */
     __pyx_v_byte_count = (((__pyx_v_count * __pyx_v_bits) + 7) >> 3);
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":160
+    /* "pyneutube/core/io/vaa3d_accel.pyx":420
  * 
  *         byte_count = (count * bits + 7) >> 3
- *         if cp + byte_count > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+ *         if dp + count > out_len:             # <<<<<<<<<<<<<<
  *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
- * 
+ *         if cp + byte_count > comp_len:
 */
-    __pyx_t_2 = ((__pyx_v_cp + __pyx_v_byte_count) > __pyx_v_comp_len);
-    if (!__pyx_t_2) {
-    } else {
-      __pyx_t_1 = __pyx_t_2;
-      goto __pyx_L19_bool_binop_done;
-    }
-    __pyx_t_2 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
-    __pyx_t_1 = __pyx_t_2;
-    __pyx_L19_bool_binop_done:;
+    __pyx_t_1 = ((__pyx_v_dp + __pyx_v_count) > __pyx_v_out_len);
     if (unlikely(__pyx_t_1)) {
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":161
+      /* "pyneutube/core/io/vaa3d_accel.pyx":421
  *         byte_count = (count * bits + 7) >> 3
- *         if cp + byte_count > comp_len or dp + count > out_len:
+ *         if dp + count > out_len:
  *             raise ValueError("Malformed Vaa3D PBD16 delta block.")             # <<<<<<<<<<<<<<
+ *         if cp + byte_count > comp_len:
+ *             break
+*/
+      __pyx_t_3 = NULL;
+      __pyx_t_4 = 1;
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_delta_bloc};
+        __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 421, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_2);
+      }
+      __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __PYX_ERR(0, 421, __pyx_L1_error)
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":420
+ * 
+ *         byte_count = (count * bits + 7) >> 3
+ *         if dp + count > out_len:             # <<<<<<<<<<<<<<
+ *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
+ *         if cp + byte_count > comp_len:
+*/
+    }
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":422
+ *         if dp + count > out_len:
+ *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
+ *         if cp + byte_count > comp_len:             # <<<<<<<<<<<<<<
+ *             break
+ * 
+*/
+    __pyx_t_1 = ((__pyx_v_cp + __pyx_v_byte_count) > __pyx_v_comp_len);
+    if (__pyx_t_1) {
+
+      /* "pyneutube/core/io/vaa3d_accel.pyx":423
+ *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
+ *         if cp + byte_count > comp_len:
+ *             break             # <<<<<<<<<<<<<<
  * 
  *         bitpos = 0
 */
-      __pyx_t_4 = NULL;
-      __pyx_t_5 = 1;
-      {
-        PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Malformed_Vaa3D_PBD16_delta_bloc};
-        __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-      }
-      __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 161, __pyx_L1_error)
+      goto __pyx_L4_break;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":160
- * 
- *         byte_count = (count * bits + 7) >> 3
- *         if cp + byte_count > comp_len or dp + count > out_len:             # <<<<<<<<<<<<<<
+      /* "pyneutube/core/io/vaa3d_accel.pyx":422
+ *         if dp + count > out_len:
  *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
+ *         if cp + byte_count > comp_len:             # <<<<<<<<<<<<<<
+ *             break
  * 
 */
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":163
- *             raise ValueError("Malformed Vaa3D PBD16 delta block.")
+    /* "pyneutube/core/io/vaa3d_accel.pyx":425
+ *             break
  * 
  *         bitpos = 0             # <<<<<<<<<<<<<<
  *         for j in range(count):
@@ -5731,19 +8235,19 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
     __pyx_v_bitpos = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":164
+    /* "pyneutube/core/io/vaa3d_accel.pyx":426
  * 
  *         bitpos = 0
  *         for j in range(count):             # <<<<<<<<<<<<<<
  *             delta_code = 0
  *             for k in range(bits):
 */
-    __pyx_t_6 = __pyx_v_count;
-    __pyx_t_7 = __pyx_t_6;
-    for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
-      __pyx_v_j = __pyx_t_8;
+    __pyx_t_5 = __pyx_v_count;
+    __pyx_t_6 = __pyx_t_5;
+    for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
+      __pyx_v_j = __pyx_t_7;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":165
+      /* "pyneutube/core/io/vaa3d_accel.pyx":427
  *         bitpos = 0
  *         for j in range(count):
  *             delta_code = 0             # <<<<<<<<<<<<<<
@@ -5752,19 +8256,19 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_delta_code = 0;
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":166
+      /* "pyneutube/core/io/vaa3d_accel.pyx":428
  *         for j in range(count):
  *             delta_code = 0
  *             for k in range(bits):             # <<<<<<<<<<<<<<
  *                 delta_code = (
  *                     (delta_code << 1)
 */
-      __pyx_t_9 = __pyx_v_bits;
-      __pyx_t_10 = __pyx_t_9;
-      for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
-        __pyx_v_k = __pyx_t_11;
+      __pyx_t_8 = __pyx_v_bits;
+      __pyx_t_9 = __pyx_t_8;
+      for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
+        __pyx_v_k = __pyx_t_10;
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":169
+        /* "pyneutube/core/io/vaa3d_accel.pyx":431
  *                 delta_code = (
  *                     (delta_code << 1)
  *                     | ((comp[cp + (bitpos >> 3)] >> (7 - (bitpos & 7))) & 1)             # <<<<<<<<<<<<<<
@@ -5773,7 +8277,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
         __pyx_v_delta_code = ((__pyx_v_delta_code << 1) | (((__pyx_v_comp[(__pyx_v_cp + (__pyx_v_bitpos >> 3))]) >> (7 - (__pyx_v_bitpos & 7))) & 1));
 
-        /* "pyneutube/core/io/vaa3d_accel.pyx":171
+        /* "pyneutube/core/io/vaa3d_accel.pyx":433
  *                     | ((comp[cp + (bitpos >> 3)] >> (7 - (bitpos & 7))) & 1)
  *                 )
  *                 bitpos += 1             # <<<<<<<<<<<<<<
@@ -5783,7 +8287,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
         __pyx_v_bitpos = (__pyx_v_bitpos + 1);
       }
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":172
+      /* "pyneutube/core/io/vaa3d_accel.pyx":434
  *                 )
  *                 bitpos += 1
  *             delta = _pbd_delta(delta_code, threshold)             # <<<<<<<<<<<<<<
@@ -5792,7 +8296,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_delta = __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__pbd_delta(__pyx_v_delta_code, __pyx_v_threshold);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":173
+      /* "pyneutube/core/io/vaa3d_accel.pyx":435
  *                 bitpos += 1
  *             delta = _pbd_delta(delta_code, threshold)
  *             value = <int>prior + delta             # <<<<<<<<<<<<<<
@@ -5801,7 +8305,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_value = (((int)__pyx_v_prior) + __pyx_v_delta);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":174
+      /* "pyneutube/core/io/vaa3d_accel.pyx":436
  *             delta = _pbd_delta(delta_code, threshold)
  *             value = <int>prior + delta
  *             out[dp] = <uint16_t>(value & 0xFFFF)             # <<<<<<<<<<<<<<
@@ -5810,7 +8314,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       (__pyx_v_out[__pyx_v_dp]) = ((uint16_t)(__pyx_v_value & 0xFFFF));
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":175
+      /* "pyneutube/core/io/vaa3d_accel.pyx":437
  *             value = <int>prior + delta
  *             out[dp] = <uint16_t>(value & 0xFFFF)
  *             prior = out[dp]             # <<<<<<<<<<<<<<
@@ -5819,7 +8323,7 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
 */
       __pyx_v_prior = (__pyx_v_out[__pyx_v_dp]);
 
-      /* "pyneutube/core/io/vaa3d_accel.pyx":176
+      /* "pyneutube/core/io/vaa3d_accel.pyx":438
  *             out[dp] = <uint16_t>(value & 0xFFFF)
  *             prior = out[dp]
  *             dp += 1             # <<<<<<<<<<<<<<
@@ -5829,58 +8333,20 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
       __pyx_v_dp = (__pyx_v_dp + 1);
     }
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":178
+    /* "pyneutube/core/io/vaa3d_accel.pyx":440
  *             dp += 1
  * 
  *         cp += byte_count             # <<<<<<<<<<<<<<
  * 
- *     if dp != out_len:
+ * def load_v3draw(path):
 */
     __pyx_v_cp = (__pyx_v_cp + __pyx_v_byte_count);
     __pyx_L3_continue:;
   }
+  __pyx_L4_break:;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":180
- *         cp += byte_count
- * 
- *     if dp != out_len:             # <<<<<<<<<<<<<<
- *         raise ValueError("Vaa3D PBD16 decompressed size does not match the header.")
- * 
-*/
-  __pyx_t_1 = (__pyx_v_dp != __pyx_v_out_len);
-  if (unlikely(__pyx_t_1)) {
-
-    /* "pyneutube/core/io/vaa3d_accel.pyx":181
- * 
- *     if dp != out_len:
- *         raise ValueError("Vaa3D PBD16 decompressed size does not match the header.")             # <<<<<<<<<<<<<<
- * 
- * 
-*/
-    __pyx_t_4 = NULL;
-    __pyx_t_5 = 1;
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD16_decompressed_size_do};
-      __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 181, __pyx_L1_error)
-
-    /* "pyneutube/core/io/vaa3d_accel.pyx":180
- *         cp += byte_count
- * 
- *     if dp != out_len:             # <<<<<<<<<<<<<<
- *         raise ValueError("Vaa3D PBD16 decompressed size does not match the header.")
- * 
-*/
-  }
-
-  /* "pyneutube/core/io/vaa3d_accel.pyx":95
- * 
+  /* "pyneutube/core/io/vaa3d_accel.pyx":351
+ *             dp += count
  * 
  * cdef void _decompress_pbd16(             # <<<<<<<<<<<<<<
  *     const uint8_t* comp,
@@ -5890,15 +8356,15 @@ static void __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(uint8_t
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel._decompress_pbd16", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":184
- * 
+/* "pyneutube/core/io/vaa3d_accel.pyx":442
+ *         cp += byte_count
  * 
  * def load_v3draw(path):             # <<<<<<<<<<<<<<
  *     """Load a Vaa3D v3draw/raw file using direct NumPy file reads."""
@@ -5945,32 +8411,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_path,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 184, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 442, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 184, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 442, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "load_v3draw", 0) < (0)) __PYX_ERR(0, 184, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "load_v3draw", 0) < (0)) __PYX_ERR(0, 442, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("load_v3draw", 1, 1, 1, i); __PYX_ERR(0, 184, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("load_v3draw", 1, 1, 1, i); __PYX_ERR(0, 442, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 184, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 442, __pyx_L3_error)
     }
     __pyx_v_path = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("load_v3draw", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 184, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("load_v3draw", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 442, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6028,7 +8494,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   __Pyx_RefNannySetupContext("load_v3draw", 0);
   __Pyx_INCREF(__pyx_v_path);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":197
+  /* "pyneutube/core/io/vaa3d_accel.pyx":455
  *         long long expected_size
  * 
  *     path = os.fspath(path)             # <<<<<<<<<<<<<<
@@ -6036,9 +8502,9 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *         header = handle.read(V3DRAW_HEADER_SIZE)
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fspath); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fspath); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 455, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = 1;
@@ -6058,13 +8524,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 455, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF_SET(__pyx_v_path, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":198
+  /* "pyneutube/core/io/vaa3d_accel.pyx":456
  * 
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:             # <<<<<<<<<<<<<<
@@ -6078,13 +8544,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_v_path, __pyx_mstate_global->__pyx_n_u_rb};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_open, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 456, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_2 = NULL;
-    __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L3_error)
+    __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 456, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = 1;
     #if CYTHON_UNPACK_METHODS
@@ -6103,7 +8569,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L3_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 456, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __pyx_t_3 = __pyx_t_4;
@@ -6121,7 +8587,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
           __pyx_v_handle = __pyx_t_3;
           __pyx_t_3 = 0;
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":199
+          /* "pyneutube/core/io/vaa3d_accel.pyx":457
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:
  *         header = handle.read(V3DRAW_HEADER_SIZE)             # <<<<<<<<<<<<<<
@@ -6135,14 +8601,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
             PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_mstate_global->__pyx_int_43};
             __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_read, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 199, __pyx_L7_error)
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 457, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_3);
           }
-          if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("bytes", __pyx_t_3))) __PYX_ERR(0, 199, __pyx_L7_error)
+          if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("bytes", __pyx_t_3))) __PYX_ERR(0, 457, __pyx_L7_error)
           __pyx_v_header = ((PyObject*)__pyx_t_3);
           __pyx_t_3 = 0;
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":198
+          /* "pyneutube/core/io/vaa3d_accel.pyx":456
  * 
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:             # <<<<<<<<<<<<<<
@@ -6161,20 +8627,20 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel.load_v3draw", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 198, __pyx_L9_except_error)
+          if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 456, __pyx_L9_except_error)
           __Pyx_XGOTREF(__pyx_t_3);
           __Pyx_XGOTREF(__pyx_t_1);
           __Pyx_XGOTREF(__pyx_t_4);
-          __pyx_t_2 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L9_except_error)
+          __pyx_t_2 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 456, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_2);
           __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 198, __pyx_L9_except_error)
+          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 456, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_10);
           __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          if (__pyx_t_11 < (0)) __PYX_ERR(0, 198, __pyx_L9_except_error)
+          if (__pyx_t_11 < (0)) __PYX_ERR(0, 456, __pyx_L9_except_error)
           __pyx_t_12 = (!__pyx_t_11);
           if (unlikely(__pyx_t_12)) {
             __Pyx_GIVEREF(__pyx_t_3);
@@ -6182,7 +8648,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
             __Pyx_XGIVEREF(__pyx_t_4);
             __Pyx_ErrRestoreWithState(__pyx_t_3, __pyx_t_1, __pyx_t_4);
             __pyx_t_3 = 0;  __pyx_t_1 = 0;  __pyx_t_4 = 0; 
-            __PYX_ERR(0, 198, __pyx_L9_except_error)
+            __PYX_ERR(0, 456, __pyx_L9_except_error)
           }
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6208,7 +8674,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
         if (__pyx_t_6) {
           __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_mstate_global->__pyx_tuple[0], NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 198, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 456, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
@@ -6223,23 +8689,23 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __pyx_L16:;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":201
+  /* "pyneutube/core/io/vaa3d_accel.pyx":459
  *         header = handle.read(V3DRAW_HEADER_SIZE)
  * 
  *     if len(header) < V3DRAW_HEADER_SIZE:             # <<<<<<<<<<<<<<
  *         raise ValueError(f"Vaa3D raw file is truncated: {path}")
  *     if header[:len(FORMAT_KEY_V3DRAW)] != FORMAT_KEY_V3DRAW:
 */
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 201, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 459, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 201, __pyx_L1_error)
+    __PYX_ERR(0, 459, __pyx_L1_error)
   }
-  __pyx_t_13 = __Pyx_PyBytes_GET_SIZE(__pyx_v_header); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBytes_GET_SIZE(__pyx_v_header); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 459, __pyx_L1_error)
   __pyx_t_12 = (__pyx_t_13 < 43);
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":202
+    /* "pyneutube/core/io/vaa3d_accel.pyx":460
  * 
  *     if len(header) < V3DRAW_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D raw file is truncated: {path}")             # <<<<<<<<<<<<<<
@@ -6247,9 +8713,9 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *         raise ValueError(f"Unsupported Vaa3D raw header in {path}.")
 */
     __pyx_t_1 = NULL;
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 202, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 460, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_raw_file_is_truncated, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 202, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_raw_file_is_truncated, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_5 = 1;
@@ -6258,14 +8724,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 202, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 460, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 202, __pyx_L1_error)
+    __PYX_ERR(0, 460, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":201
+    /* "pyneutube/core/io/vaa3d_accel.pyx":459
  *         header = handle.read(V3DRAW_HEADER_SIZE)
  * 
  *     if len(header) < V3DRAW_HEADER_SIZE:             # <<<<<<<<<<<<<<
@@ -6274,32 +8740,32 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":203
+  /* "pyneutube/core/io/vaa3d_accel.pyx":461
  *     if len(header) < V3DRAW_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D raw file is truncated: {path}")
  *     if header[:len(FORMAT_KEY_V3DRAW)] != FORMAT_KEY_V3DRAW:             # <<<<<<<<<<<<<<
  *         raise ValueError(f"Unsupported Vaa3D raw header in {path}.")
  * 
 */
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 203, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 461, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 203, __pyx_L1_error)
+    __PYX_ERR(0, 461, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_13 = PyObject_Length(__pyx_t_4); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_4); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PySequence_GetSlice(__pyx_v_header, 0, __pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_4 = PySequence_GetSlice(__pyx_v_header, 0, __pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_4, __pyx_t_2, Py_NE)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_4, __pyx_t_2, Py_NE)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 461, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":204
+    /* "pyneutube/core/io/vaa3d_accel.pyx":462
  *         raise ValueError(f"Vaa3D raw file is truncated: {path}")
  *     if header[:len(FORMAT_KEY_V3DRAW)] != FORMAT_KEY_V3DRAW:
  *         raise ValueError(f"Unsupported Vaa3D raw header in {path}.")             # <<<<<<<<<<<<<<
@@ -6307,13 +8773,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":
 */
     __pyx_t_4 = NULL;
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_raw_header_in;
     __pyx_t_14[1] = __pyx_t_1;
     __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
     __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 32 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1));
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 462, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = 1;
@@ -6322,14 +8788,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 462, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 204, __pyx_L1_error)
+    __PYX_ERR(0, 462, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":203
+    /* "pyneutube/core/io/vaa3d_accel.pyx":461
  *     if len(header) < V3DRAW_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D raw file is truncated: {path}")
  *     if header[:len(FORMAT_KEY_V3DRAW)] != FORMAT_KEY_V3DRAW:             # <<<<<<<<<<<<<<
@@ -6338,33 +8804,33 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":206
+  /* "pyneutube/core/io/vaa3d_accel.pyx":464
  *         raise ValueError(f"Unsupported Vaa3D raw header in {path}.")
  * 
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":             # <<<<<<<<<<<<<<
  *         endian = ">"
  *     elif header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"L":
 */
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 206, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 464, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 206, __pyx_L1_error)
+    __PYX_ERR(0, 464, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_header, __pyx_t_13, (__pyx_t_15 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_header, __pyx_t_13, (__pyx_t_15 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_B, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_B, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_12) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":207
+    /* "pyneutube/core/io/vaa3d_accel.pyx":465
  * 
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":
  *         endian = ">"             # <<<<<<<<<<<<<<
@@ -6374,7 +8840,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u__2);
     __pyx_v_endian = __pyx_mstate_global->__pyx_kp_u__2;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":206
+    /* "pyneutube/core/io/vaa3d_accel.pyx":464
  *         raise ValueError(f"Unsupported Vaa3D raw header in {path}.")
  * 
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":             # <<<<<<<<<<<<<<
@@ -6384,33 +8850,33 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     goto __pyx_L19;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":208
+  /* "pyneutube/core/io/vaa3d_accel.pyx":466
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":
  *         endian = ">"
  *     elif header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"L":             # <<<<<<<<<<<<<<
  *         endian = "<"
  *     else:
 */
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 208, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 466, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 208, __pyx_L1_error)
+    __PYX_ERR(0, 466, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_header, __pyx_t_15, (__pyx_t_13 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_header, __pyx_t_15, (__pyx_t_13 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_L, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_L, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":209
+    /* "pyneutube/core/io/vaa3d_accel.pyx":467
  *         endian = ">"
  *     elif header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"L":
  *         endian = "<"             # <<<<<<<<<<<<<<
@@ -6420,7 +8886,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u__3);
     __pyx_v_endian = __pyx_mstate_global->__pyx_kp_u__3;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":208
+    /* "pyneutube/core/io/vaa3d_accel.pyx":466
  *     if header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"B":
  *         endian = ">"
  *     elif header[len(FORMAT_KEY_V3DRAW):len(FORMAT_KEY_V3DRAW) + 1] == b"L":             # <<<<<<<<<<<<<<
@@ -6430,7 +8896,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     goto __pyx_L19;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":211
+  /* "pyneutube/core/io/vaa3d_accel.pyx":469
  *         endian = "<"
  *     else:
  *         raise ValueError(f"Unsupported Vaa3D endian code in {path}.")             # <<<<<<<<<<<<<<
@@ -6439,13 +8905,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
 */
   /*else*/ {
     __pyx_t_3 = NULL;
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 211, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 469, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_endian_code_in;
     __pyx_t_14[1] = __pyx_t_4;
     __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
     __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 33 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4));
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 469, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_5 = 1;
@@ -6454,16 +8920,16 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 211, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 469, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 211, __pyx_L1_error)
+    __PYX_ERR(0, 469, __pyx_L1_error)
   }
   __pyx_L19:;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":213
+  /* "pyneutube/core/io/vaa3d_accel.pyx":471
  *         raise ValueError(f"Unsupported Vaa3D endian code in {path}.")
  * 
  *     datatype = struct.unpack(f"{endian}h", header[25:27])[0]             # <<<<<<<<<<<<<<
@@ -6471,19 +8937,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *     if datatype == 1:
 */
   __pyx_t_1 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_h); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_h); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 213, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 471, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 213, __pyx_L1_error)
+    __PYX_ERR(0, 471, __pyx_L1_error)
   }
-  __pyx_t_16 = PySequence_GetSlice(__pyx_v_header, 25, 27); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_16 = PySequence_GetSlice(__pyx_v_header, 25, 27); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __pyx_t_5 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -6504,17 +8970,17 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 213, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 471, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_17 = __Pyx_PyLong_As_short(__pyx_t_4); if (unlikely((__pyx_t_17 == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_17 = __Pyx_PyLong_As_short(__pyx_t_4); if (unlikely((__pyx_t_17 == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_datatype = __pyx_t_17;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":214
+  /* "pyneutube/core/io/vaa3d_accel.pyx":472
  * 
  *     datatype = struct.unpack(f"{endian}h", header[25:27])[0]
  *     dims = struct.unpack(f"{endian}iiii", header[27:43])             # <<<<<<<<<<<<<<
@@ -6522,19 +8988,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *         dtype = np.dtype("u1")
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-  __pyx_t_16 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_iiii); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_16 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_iiii); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 214, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_header)) { __Pyx_RaiseUnboundLocalError("header"); __PYX_ERR(0, 472, __pyx_L1_error) }
   if (unlikely(__pyx_v_header == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 214, __pyx_L1_error)
+    __PYX_ERR(0, 472, __pyx_L1_error)
   }
-  __pyx_t_1 = PySequence_GetSlice(__pyx_v_header, 27, 43); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_1 = PySequence_GetSlice(__pyx_v_header, 27, 43); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -6555,14 +9021,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 472, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
-  if (!(likely(PyTuple_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_4))) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (!(likely(PyTuple_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_4))) __PYX_ERR(0, 472, __pyx_L1_error)
   __pyx_v_dims = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":215
+  /* "pyneutube/core/io/vaa3d_accel.pyx":473
  *     datatype = struct.unpack(f"{endian}h", header[25:27])[0]
  *     dims = struct.unpack(f"{endian}iiii", header[27:43])
  *     if datatype == 1:             # <<<<<<<<<<<<<<
@@ -6572,7 +9038,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   switch (__pyx_v_datatype) {
     case 1:
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":216
+    /* "pyneutube/core/io/vaa3d_accel.pyx":474
  *     dims = struct.unpack(f"{endian}iiii", header[27:43])
  *     if datatype == 1:
  *         dtype = np.dtype("u1")             # <<<<<<<<<<<<<<
@@ -6585,13 +9051,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_n_u_u1};
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_5numpy_dtype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 216, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 474, __pyx_L1_error)
       __Pyx_GOTREF((PyObject *)__pyx_t_4);
     }
     __pyx_v_dtype = ((PyObject *)__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":215
+    /* "pyneutube/core/io/vaa3d_accel.pyx":473
  *     datatype = struct.unpack(f"{endian}h", header[25:27])[0]
  *     dims = struct.unpack(f"{endian}iiii", header[27:43])
  *     if datatype == 1:             # <<<<<<<<<<<<<<
@@ -6601,7 +9067,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     break;
     case 2:
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":218
+    /* "pyneutube/core/io/vaa3d_accel.pyx":476
  *         dtype = np.dtype("u1")
  *     elif datatype == 2:
  *         dtype = np.dtype(f"{endian}u2")             # <<<<<<<<<<<<<<
@@ -6609,7 +9075,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *         dtype = np.dtype(f"{endian}f4")
 */
     __pyx_t_3 = NULL;
-    __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_u2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_u2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_5 = 1;
     {
@@ -6617,13 +9083,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_5numpy_dtype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 218, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L1_error)
       __Pyx_GOTREF((PyObject *)__pyx_t_4);
     }
     __pyx_v_dtype = ((PyObject *)__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":217
+    /* "pyneutube/core/io/vaa3d_accel.pyx":475
  *     if datatype == 1:
  *         dtype = np.dtype("u1")
  *     elif datatype == 2:             # <<<<<<<<<<<<<<
@@ -6633,7 +9099,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     break;
     case 4:
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":220
+    /* "pyneutube/core/io/vaa3d_accel.pyx":478
  *         dtype = np.dtype(f"{endian}u2")
  *     elif datatype == 4:
  *         dtype = np.dtype(f"{endian}f4")             # <<<<<<<<<<<<<<
@@ -6641,7 +9107,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *         raise ValueError(f"Unsupported Vaa3D datatype code {datatype!r}.")
 */
     __pyx_t_1 = NULL;
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_f4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_f4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 478, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = 1;
     {
@@ -6649,13 +9115,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_5numpy_dtype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 220, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
       __Pyx_GOTREF((PyObject *)__pyx_t_4);
     }
     __pyx_v_dtype = ((PyObject *)__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":219
+    /* "pyneutube/core/io/vaa3d_accel.pyx":477
  *     elif datatype == 2:
  *         dtype = np.dtype(f"{endian}u2")
  *     elif datatype == 4:             # <<<<<<<<<<<<<<
@@ -6665,7 +9131,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     break;
     default:
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":222
+    /* "pyneutube/core/io/vaa3d_accel.pyx":480
  *         dtype = np.dtype(f"{endian}f4")
  *     else:
  *         raise ValueError(f"Unsupported Vaa3D datatype code {datatype!r}.")             # <<<<<<<<<<<<<<
@@ -6673,13 +9139,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *     total_units = <long long>dims[0] * dims[1] * dims[2] * dims[3]
 */
     __pyx_t_3 = NULL;
-    __pyx_t_1 = __Pyx_PyUnicode_From_short(__pyx_v_datatype, 0, ' ', 'd'); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_From_short(__pyx_v_datatype, 0, ' ', 'd'); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 480, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_datatype_code;
     __pyx_t_14[1] = __pyx_t_1;
     __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
     __pyx_t_16 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 32 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1, 127);
-    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 222, __pyx_L1_error)
+    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 480, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = 1;
@@ -6688,16 +9154,16 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 222, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 480, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 222, __pyx_L1_error)
+    __PYX_ERR(0, 480, __pyx_L1_error)
     break;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":224
+  /* "pyneutube/core/io/vaa3d_accel.pyx":482
  *         raise ValueError(f"Unsupported Vaa3D datatype code {datatype!r}.")
  * 
  *     total_units = <long long>dims[0] * dims[1] * dims[2] * dims[3]             # <<<<<<<<<<<<<<
@@ -6706,37 +9172,37 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
 */
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 482, __pyx_L1_error)
   }
-  __pyx_t_18 = __Pyx_PyLong_As_PY_LONG_LONG(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)); if (unlikely((__pyx_t_18 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyLong_From_PY_LONG_LONG(((PY_LONG_LONG)__pyx_t_18)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyLong_As_PY_LONG_LONG(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)); if (unlikely((__pyx_t_18 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_PY_LONG_LONG(((PY_LONG_LONG)__pyx_t_18)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 482, __pyx_L1_error)
   }
-  __pyx_t_16 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_16 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 482, __pyx_L1_error)
   }
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_16, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_16, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 482, __pyx_L1_error)
   }
-  __pyx_t_16 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_16 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_18 = __Pyx_PyLong_As_PY_LONG_LONG(__pyx_t_16); if (unlikely((__pyx_t_18 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyLong_As_PY_LONG_LONG(__pyx_t_16); if (unlikely((__pyx_t_18 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __pyx_v_total_units = __pyx_t_18;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":225
+  /* "pyneutube/core/io/vaa3d_accel.pyx":483
  * 
  *     total_units = <long long>dims[0] * dims[1] * dims[2] * dims[3]
  *     expected_size = V3DRAW_HEADER_SIZE + total_units * np.dtype(dtype).itemsize             # <<<<<<<<<<<<<<
@@ -6749,22 +9215,22 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_dtype};
     __pyx_t_16 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_5numpy_dtype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 225, __pyx_L1_error)
+    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_16);
   }
   __pyx_v_expected_size = (43 + (__pyx_v_total_units * ((PyArray_Descr *)__pyx_t_16)->elsize));
   __Pyx_DECREF((PyObject *)__pyx_t_16); __pyx_t_16 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":226
+  /* "pyneutube/core/io/vaa3d_accel.pyx":484
  *     total_units = <long long>dims[0] * dims[1] * dims[2] * dims[3]
  *     expected_size = V3DRAW_HEADER_SIZE + total_units * np.dtype(dtype).itemsize
  *     if os.path.getsize(path) != expected_size:             # <<<<<<<<<<<<<<
  *         raise ValueError(f"Vaa3D raw file size does not match the header: {path}")
  * 
 */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __pyx_t_1;
@@ -6775,19 +9241,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __pyx_t_16 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getsize, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 226, __pyx_L1_error)
+    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 484, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
   }
-  __pyx_t_1 = __Pyx_PyLong_From_PY_LONG_LONG(__pyx_v_expected_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_PY_LONG_LONG(__pyx_v_expected_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_16, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_16, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":227
+    /* "pyneutube/core/io/vaa3d_accel.pyx":485
  *     expected_size = V3DRAW_HEADER_SIZE + total_units * np.dtype(dtype).itemsize
  *     if os.path.getsize(path) != expected_size:
  *         raise ValueError(f"Vaa3D raw file size does not match the header: {path}")             # <<<<<<<<<<<<<<
@@ -6795,9 +9261,9 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *     image = np.fromfile(path, dtype=dtype, count=total_units, offset=V3DRAW_HEADER_SIZE)
 */
     __pyx_t_1 = NULL;
-    __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_16 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_raw_file_size_does_not_mat, __pyx_t_16); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_raw_file_size_does_not_mat, __pyx_t_16); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __pyx_t_5 = 1;
@@ -6806,14 +9272,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 227, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 485, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 227, __pyx_L1_error)
+    __PYX_ERR(0, 485, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":226
+    /* "pyneutube/core/io/vaa3d_accel.pyx":484
  *     total_units = <long long>dims[0] * dims[1] * dims[2] * dims[3]
  *     expected_size = V3DRAW_HEADER_SIZE + total_units * np.dtype(dtype).itemsize
  *     if os.path.getsize(path) != expected_size:             # <<<<<<<<<<<<<<
@@ -6822,7 +9288,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":229
+  /* "pyneutube/core/io/vaa3d_accel.pyx":487
  *         raise ValueError(f"Vaa3D raw file size does not match the header: {path}")
  * 
  *     image = np.fromfile(path, dtype=dtype, count=total_units, offset=V3DRAW_HEADER_SIZE)             # <<<<<<<<<<<<<<
@@ -6830,12 +9296,12 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
  *     native_dtype = np.dtype(dtype).newbyteorder("=")
 */
   __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 487, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_fromfile); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_fromfile); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 487, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyLong_From_PY_LONG_LONG(__pyx_v_total_units); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_PY_LONG_LONG(__pyx_v_total_units); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 487, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -6851,23 +9317,23 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_3, __pyx_v_path};
-    __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_dtype, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 229, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_count, __pyx_t_1, __pyx_t_2, __pyx_callargs+2, 1) < (0)) __PYX_ERR(0, 229, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_offset, __pyx_mstate_global->__pyx_int_43, __pyx_t_2, __pyx_callargs+2, 2) < (0)) __PYX_ERR(0, 229, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_dtype, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 487, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_count, __pyx_t_1, __pyx_t_2, __pyx_callargs+2, 1) < (0)) __PYX_ERR(0, 487, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_offset, __pyx_mstate_global->__pyx_int_43, __pyx_t_2, __pyx_callargs+2, 2) < (0)) __PYX_ERR(0, 487, __pyx_L1_error)
     __pyx_t_4 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_16, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_v_image = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":230
+  /* "pyneutube/core/io/vaa3d_accel.pyx":488
  * 
  *     image = np.fromfile(path, dtype=dtype, count=total_units, offset=V3DRAW_HEADER_SIZE)
  *     image = image.reshape((dims[3], dims[2], dims[1], dims[0]))             # <<<<<<<<<<<<<<
@@ -6878,47 +9344,47 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   __Pyx_INCREF(__pyx_t_16);
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 230, __pyx_L1_error)
+    __PYX_ERR(0, 488, __pyx_L1_error)
   }
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 230, __pyx_L1_error)
+    __PYX_ERR(0, 488, __pyx_L1_error)
   }
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 230, __pyx_L1_error)
+    __PYX_ERR(0, 488, __pyx_L1_error)
   }
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 230, __pyx_L1_error)
+    __PYX_ERR(0, 488, __pyx_L1_error)
   }
-  __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
   __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 230, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 488, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
   __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 230, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 488, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
   __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 230, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 488, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
   __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 230, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 488, __pyx_L1_error);
   __pyx_t_5 = 0;
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_16, __pyx_t_2};
     __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 230, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 488, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __Pyx_DECREF_SET(__pyx_v_image, __pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":231
+  /* "pyneutube/core/io/vaa3d_accel.pyx":489
  *     image = np.fromfile(path, dtype=dtype, count=total_units, offset=V3DRAW_HEADER_SIZE)
  *     image = image.reshape((dims[3], dims[2], dims[1], dims[0]))
  *     native_dtype = np.dtype(dtype).newbyteorder("=")             # <<<<<<<<<<<<<<
@@ -6931,7 +9397,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_dtype};
     __pyx_t_16 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_5numpy_dtype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 231, __pyx_L1_error)
+    if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 489, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_16);
   }
   __pyx_t_2 = ((PyObject *)__pyx_t_16);
@@ -6942,13 +9408,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
     __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_newbyteorder, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF((PyObject *)__pyx_t_16); __pyx_t_16 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 231, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 489, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_v_native_dtype = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":232
+  /* "pyneutube/core/io/vaa3d_accel.pyx":490
  *     image = image.reshape((dims[3], dims[2], dims[1], dims[0]))
  *     native_dtype = np.dtype(dtype).newbyteorder("=")
  *     return image.astype(native_dtype, copy=False)             # <<<<<<<<<<<<<<
@@ -6961,21 +9427,21 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   __pyx_t_5 = 0;
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_16, __pyx_v_native_dtype};
-    __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 490, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_copy, Py_False, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 232, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_copy, Py_False, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 490, __pyx_L1_error)
     __pyx_t_4 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_astype, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 232, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 490, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":184
- * 
+  /* "pyneutube/core/io/vaa3d_accel.pyx":442
+ *         cp += byte_count
  * 
  * def load_v3draw(path):             # <<<<<<<<<<<<<<
  *     """Load a Vaa3D v3draw/raw file using direct NumPy file reads."""
@@ -7005,7 +9471,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_load_v3draw(CYTHON_
   return __pyx_r;
 }
 
-/* "pyneutube/core/io/vaa3d_accel.pyx":235
+/* "pyneutube/core/io/vaa3d_accel.pyx":493
  * 
  * 
  * def load_v3dpbd(path):             # <<<<<<<<<<<<<<
@@ -7053,32 +9519,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_path,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 235, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 493, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 235, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 493, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "load_v3dpbd", 0) < (0)) __PYX_ERR(0, 235, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "load_v3dpbd", 0) < (0)) __PYX_ERR(0, 493, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("load_v3dpbd", 1, 1, 1, i); __PYX_ERR(0, 235, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("load_v3dpbd", 1, 1, 1, i); __PYX_ERR(0, 493, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 235, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 493, __pyx_L3_error)
     }
     __pyx_v_path = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("load_v3dpbd", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 235, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("load_v3dpbd", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 493, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7151,7 +9617,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
   __pyx_pybuffernd_out16.data = NULL;
   __pyx_pybuffernd_out16.rcbuffer = &__pyx_pybuffer_out16;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":249
+  /* "pyneutube/core/io/vaa3d_accel.pyx":507
  *         np.ndarray[np.uint16_t, ndim=1] out16
  * 
  *     path = os.fspath(path)             # <<<<<<<<<<<<<<
@@ -7159,9 +9625,9 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
  *         data = handle.read()
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 507, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fspath); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fspath); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 507, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = 1;
@@ -7181,13 +9647,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF_SET(__pyx_v_path, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":250
+  /* "pyneutube/core/io/vaa3d_accel.pyx":508
  * 
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:             # <<<<<<<<<<<<<<
@@ -7201,13 +9667,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_v_path, __pyx_mstate_global->__pyx_n_u_rb};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_open, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 508, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 250, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 508, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_2 = NULL;
-    __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 250, __pyx_L3_error)
+    __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 508, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = 1;
     #if CYTHON_UNPACK_METHODS
@@ -7226,7 +9692,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 250, __pyx_L3_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 508, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __pyx_t_3 = __pyx_t_4;
@@ -7244,7 +9710,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
           __pyx_v_handle = __pyx_t_3;
           __pyx_t_3 = 0;
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":251
+          /* "pyneutube/core/io/vaa3d_accel.pyx":509
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:
  *         data = handle.read()             # <<<<<<<<<<<<<<
@@ -7258,14 +9724,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
             PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
             __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_read, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 251, __pyx_L7_error)
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 509, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_3);
           }
-          if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("bytes", __pyx_t_3))) __PYX_ERR(0, 251, __pyx_L7_error)
+          if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("bytes", __pyx_t_3))) __PYX_ERR(0, 509, __pyx_L7_error)
           __pyx_v_data = ((PyObject*)__pyx_t_3);
           __pyx_t_3 = 0;
 
-          /* "pyneutube/core/io/vaa3d_accel.pyx":250
+          /* "pyneutube/core/io/vaa3d_accel.pyx":508
  * 
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:             # <<<<<<<<<<<<<<
@@ -7284,20 +9750,20 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel.load_v3dpbd", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 250, __pyx_L9_except_error)
+          if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 508, __pyx_L9_except_error)
           __Pyx_XGOTREF(__pyx_t_3);
           __Pyx_XGOTREF(__pyx_t_1);
           __Pyx_XGOTREF(__pyx_t_4);
-          __pyx_t_2 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L9_except_error)
+          __pyx_t_2 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_2);
           __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 250, __pyx_L9_except_error)
+          if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 508, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_10);
           __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          if (__pyx_t_11 < (0)) __PYX_ERR(0, 250, __pyx_L9_except_error)
+          if (__pyx_t_11 < (0)) __PYX_ERR(0, 508, __pyx_L9_except_error)
           __pyx_t_12 = (!__pyx_t_11);
           if (unlikely(__pyx_t_12)) {
             __Pyx_GIVEREF(__pyx_t_3);
@@ -7305,7 +9771,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
             __Pyx_XGIVEREF(__pyx_t_4);
             __Pyx_ErrRestoreWithState(__pyx_t_3, __pyx_t_1, __pyx_t_4);
             __pyx_t_3 = 0;  __pyx_t_1 = 0;  __pyx_t_4 = 0; 
-            __PYX_ERR(0, 250, __pyx_L9_except_error)
+            __PYX_ERR(0, 508, __pyx_L9_except_error)
           }
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7331,7 +9797,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
         if (__pyx_t_6) {
           __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_mstate_global->__pyx_tuple[0], NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 250, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 508, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
@@ -7346,18 +9812,18 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __pyx_L16:;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":253
+  /* "pyneutube/core/io/vaa3d_accel.pyx":511
  *         data = handle.read()
  * 
  *     if PyBytes_GET_SIZE(data) < V3DPBD_HEADER_SIZE:             # <<<<<<<<<<<<<<
  *         raise ValueError(f"Vaa3D PBD file is truncated: {path}")
  *     if data[:len(FORMAT_KEY_V3DPBD)] != FORMAT_KEY_V3DPBD:
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 253, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 511, __pyx_L1_error) }
   __pyx_t_12 = (PyBytes_GET_SIZE(__pyx_v_data) < 43);
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":254
+    /* "pyneutube/core/io/vaa3d_accel.pyx":512
  * 
  *     if PyBytes_GET_SIZE(data) < V3DPBD_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D PBD file is truncated: {path}")             # <<<<<<<<<<<<<<
@@ -7365,9 +9831,9 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
  *         raise ValueError(f"Unsupported Vaa3D PBD header in {path}.")
 */
     __pyx_t_1 = NULL;
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 512, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD_file_is_truncated, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD_file_is_truncated, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 512, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_5 = 1;
@@ -7376,14 +9842,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 254, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 512, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 254, __pyx_L1_error)
+    __PYX_ERR(0, 512, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":253
+    /* "pyneutube/core/io/vaa3d_accel.pyx":511
  *         data = handle.read()
  * 
  *     if PyBytes_GET_SIZE(data) < V3DPBD_HEADER_SIZE:             # <<<<<<<<<<<<<<
@@ -7392,32 +9858,32 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":255
+  /* "pyneutube/core/io/vaa3d_accel.pyx":513
  *     if PyBytes_GET_SIZE(data) < V3DPBD_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D PBD file is truncated: {path}")
  *     if data[:len(FORMAT_KEY_V3DPBD)] != FORMAT_KEY_V3DPBD:             # <<<<<<<<<<<<<<
  *         raise ValueError(f"Unsupported Vaa3D PBD header in {path}.")
  * 
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 255, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 513, __pyx_L1_error) }
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 255, __pyx_L1_error)
+    __PYX_ERR(0, 513, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_13 = PyObject_Length(__pyx_t_4); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_4); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PySequence_GetSlice(__pyx_v_data, 0, __pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_4 = PySequence_GetSlice(__pyx_v_data, 0, __pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_4, __pyx_t_2, Py_NE)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_4, __pyx_t_2, Py_NE)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":256
+    /* "pyneutube/core/io/vaa3d_accel.pyx":514
  *         raise ValueError(f"Vaa3D PBD file is truncated: {path}")
  *     if data[:len(FORMAT_KEY_V3DPBD)] != FORMAT_KEY_V3DPBD:
  *         raise ValueError(f"Unsupported Vaa3D PBD header in {path}.")             # <<<<<<<<<<<<<<
@@ -7425,13 +9891,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
  *     if data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"B":
 */
     __pyx_t_4 = NULL;
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_PBD_header_in;
     __pyx_t_14[1] = __pyx_t_1;
     __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
     __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 32 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1));
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 514, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = 1;
@@ -7440,14 +9906,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 256, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 514, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 256, __pyx_L1_error)
+    __PYX_ERR(0, 514, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":255
+    /* "pyneutube/core/io/vaa3d_accel.pyx":513
  *     if PyBytes_GET_SIZE(data) < V3DPBD_HEADER_SIZE:
  *         raise ValueError(f"Vaa3D PBD file is truncated: {path}")
  *     if data[:len(FORMAT_KEY_V3DPBD)] != FORMAT_KEY_V3DPBD:             # <<<<<<<<<<<<<<
@@ -7456,33 +9922,33 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":258
+  /* "pyneutube/core/io/vaa3d_accel.pyx":516
  *         raise ValueError(f"Unsupported Vaa3D PBD header in {path}.")
  * 
  *     if data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"B":             # <<<<<<<<<<<<<<
  *         endian = ">"
  *         little = False
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 258, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 516, __pyx_L1_error) }
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 258, __pyx_L1_error)
+    __PYX_ERR(0, 516, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_t_13, (__pyx_t_15 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_t_13, (__pyx_t_15 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_B, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_B, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 516, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_12) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":259
+    /* "pyneutube/core/io/vaa3d_accel.pyx":517
  * 
  *     if data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"B":
  *         endian = ">"             # <<<<<<<<<<<<<<
@@ -7492,7 +9958,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u__2);
     __pyx_v_endian = __pyx_mstate_global->__pyx_kp_u__2;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":260
+    /* "pyneutube/core/io/vaa3d_accel.pyx":518
  *     if data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"B":
  *         endian = ">"
  *         little = False             # <<<<<<<<<<<<<<
@@ -7501,7 +9967,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
     __pyx_v_little = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":258
+    /* "pyneutube/core/io/vaa3d_accel.pyx":516
  *         raise ValueError(f"Unsupported Vaa3D PBD header in {path}.")
  * 
  *     if data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"B":             # <<<<<<<<<<<<<<
@@ -7511,33 +9977,33 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     goto __pyx_L19;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":261
+  /* "pyneutube/core/io/vaa3d_accel.pyx":519
  *         endian = ">"
  *         little = False
  *     elif data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"L":             # <<<<<<<<<<<<<<
  *         endian = "<"
  *         little = True
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 261, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 519, __pyx_L1_error) }
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 261, __pyx_L1_error)
+    __PYX_ERR(0, 519, __pyx_L1_error)
   }
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_15 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_13 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_13 == ((Py_ssize_t)-1))) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_t_15, (__pyx_t_13 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_t_15, (__pyx_t_13 + 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_L, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_12 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_b_L, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 519, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":262
+    /* "pyneutube/core/io/vaa3d_accel.pyx":520
  *         little = False
  *     elif data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"L":
  *         endian = "<"             # <<<<<<<<<<<<<<
@@ -7547,7 +10013,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u__3);
     __pyx_v_endian = __pyx_mstate_global->__pyx_kp_u__3;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":263
+    /* "pyneutube/core/io/vaa3d_accel.pyx":521
  *     elif data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"L":
  *         endian = "<"
  *         little = True             # <<<<<<<<<<<<<<
@@ -7556,7 +10022,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
     __pyx_v_little = 1;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":261
+    /* "pyneutube/core/io/vaa3d_accel.pyx":519
  *         endian = ">"
  *         little = False
  *     elif data[len(FORMAT_KEY_V3DPBD):len(FORMAT_KEY_V3DPBD) + 1] == b"L":             # <<<<<<<<<<<<<<
@@ -7566,7 +10032,7 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     goto __pyx_L19;
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":265
+  /* "pyneutube/core/io/vaa3d_accel.pyx":523
  *         little = True
  *     else:
  *         raise ValueError(f"Unsupported Vaa3D endian code in {path}.")             # <<<<<<<<<<<<<<
@@ -7575,13 +10041,13 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
   /*else*/ {
     __pyx_t_3 = NULL;
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 265, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_path, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_endian_code_in;
     __pyx_t_14[1] = __pyx_t_4;
     __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
     __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 33 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4));
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_5 = 1;
@@ -7590,16 +10056,16 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 265, __pyx_L1_error)
+    __PYX_ERR(0, 523, __pyx_L1_error)
   }
   __pyx_L19:;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":267
+  /* "pyneutube/core/io/vaa3d_accel.pyx":525
  *         raise ValueError(f"Unsupported Vaa3D endian code in {path}.")
  * 
  *     datatype = struct.unpack(f"{endian}h", data[25:27])[0]             # <<<<<<<<<<<<<<
@@ -7607,19 +10073,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
  *     total_units = <Py_ssize_t>dims[0] * dims[1] * dims[2] * dims[3]
 */
   __pyx_t_1 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_h); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_h); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 267, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 525, __pyx_L1_error) }
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 267, __pyx_L1_error)
+    __PYX_ERR(0, 525, __pyx_L1_error)
   }
-  __pyx_t_16 = PySequence_GetSlice(__pyx_v_data, 25, 27); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_16 = PySequence_GetSlice(__pyx_v_data, 25, 27); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __pyx_t_5 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -7640,17 +10106,17 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_17 = __Pyx_PyLong_As_short(__pyx_t_4); if (unlikely((__pyx_t_17 == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_17 = __Pyx_PyLong_As_short(__pyx_t_4); if (unlikely((__pyx_t_17 == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 525, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_datatype = __pyx_t_17;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":268
+  /* "pyneutube/core/io/vaa3d_accel.pyx":526
  * 
  *     datatype = struct.unpack(f"{endian}h", data[25:27])[0]
  *     dims = struct.unpack(f"{endian}iiii", data[27:43])             # <<<<<<<<<<<<<<
@@ -7658,19 +10124,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
  *     comp = <const uint8_t*>PyBytes_AS_STRING(data) + V3DPBD_HEADER_SIZE
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 526, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_unpack); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 526, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-  __pyx_t_16 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_iiii); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_t_16 = __Pyx_PyUnicode_Concat(__pyx_v_endian, __pyx_mstate_global->__pyx_n_u_iiii); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 526, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 268, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 526, __pyx_L1_error) }
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 268, __pyx_L1_error)
+    __PYX_ERR(0, 526, __pyx_L1_error)
   }
-  __pyx_t_1 = PySequence_GetSlice(__pyx_v_data, 27, 43); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_t_1 = PySequence_GetSlice(__pyx_v_data, 27, 43); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 526, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -7691,14 +10157,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 526, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
-  if (!(likely(PyTuple_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_4))) __PYX_ERR(0, 268, __pyx_L1_error)
+  if (!(likely(PyTuple_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_4))) __PYX_ERR(0, 526, __pyx_L1_error)
   __pyx_v_dims = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":269
+  /* "pyneutube/core/io/vaa3d_accel.pyx":527
  *     datatype = struct.unpack(f"{endian}h", data[25:27])[0]
  *     dims = struct.unpack(f"{endian}iiii", data[27:43])
  *     total_units = <Py_ssize_t>dims[0] * dims[1] * dims[2] * dims[3]             # <<<<<<<<<<<<<<
@@ -7707,84 +10173,84 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 269, __pyx_L1_error)
+    __PYX_ERR(0, 527, __pyx_L1_error)
   }
-  __pyx_t_13 = __Pyx_PyIndex_AsSsize_t(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)); if (unlikely((__pyx_t_13 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L1_error)
-  __pyx_t_4 = PyLong_FromSsize_t(((Py_ssize_t)__pyx_t_13)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyIndex_AsSsize_t(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)); if (unlikely((__pyx_t_13 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 527, __pyx_L1_error)
+  __pyx_t_4 = PyLong_FromSsize_t(((Py_ssize_t)__pyx_t_13)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 269, __pyx_L1_error)
+    __PYX_ERR(0, 527, __pyx_L1_error)
   }
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 269, __pyx_L1_error)
+    __PYX_ERR(0, 527, __pyx_L1_error)
   }
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (unlikely(__pyx_v_dims == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 269, __pyx_L1_error)
+    __PYX_ERR(0, 527, __pyx_L1_error)
   }
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_13 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_13 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_13 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_total_units = __pyx_t_13;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":270
+  /* "pyneutube/core/io/vaa3d_accel.pyx":528
  *     dims = struct.unpack(f"{endian}iiii", data[27:43])
  *     total_units = <Py_ssize_t>dims[0] * dims[1] * dims[2] * dims[3]
  *     comp = <const uint8_t*>PyBytes_AS_STRING(data) + V3DPBD_HEADER_SIZE             # <<<<<<<<<<<<<<
  *     comp_len = PyBytes_GET_SIZE(data) - V3DPBD_HEADER_SIZE
  * 
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 270, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 528, __pyx_L1_error) }
   __pyx_v_comp = (((uint8_t const *)PyBytes_AS_STRING(__pyx_v_data)) + 43);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":271
+  /* "pyneutube/core/io/vaa3d_accel.pyx":529
  *     total_units = <Py_ssize_t>dims[0] * dims[1] * dims[2] * dims[3]
  *     comp = <const uint8_t*>PyBytes_AS_STRING(data) + V3DPBD_HEADER_SIZE
  *     comp_len = PyBytes_GET_SIZE(data) - V3DPBD_HEADER_SIZE             # <<<<<<<<<<<<<<
  * 
- *     if datatype == 1:
+ *     # Match Vaa3D: an undersized payload leaves the unwritten image tail at zero.
 */
-  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 271, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_data)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 529, __pyx_L1_error) }
   __pyx_v_comp_len = (PyBytes_GET_SIZE(__pyx_v_data) - 43);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":273
- *     comp_len = PyBytes_GET_SIZE(data) - V3DPBD_HEADER_SIZE
- * 
+  /* "pyneutube/core/io/vaa3d_accel.pyx":533
+ *     # Match Vaa3D: an undersized payload leaves the unwritten image tail at zero.
+ *     # Block output that would exceed the header-declared size is still rejected.
  *     if datatype == 1:             # <<<<<<<<<<<<<<
- *         out8 = np.empty(total_units, dtype=np.uint8)
+ *         out8 = np.zeros(total_units, dtype=np.uint8)
  *         _decompress_pbd8(comp, comp_len, <uint8_t*>out8.data, total_units)
 */
   __pyx_t_12 = (__pyx_v_datatype == 1);
   if (__pyx_t_12) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":274
- * 
+    /* "pyneutube/core/io/vaa3d_accel.pyx":534
+ *     # Block output that would exceed the header-declared size is still rejected.
  *     if datatype == 1:
- *         out8 = np.empty(total_units, dtype=np.uint8)             # <<<<<<<<<<<<<<
+ *         out8 = np.zeros(total_units, dtype=np.uint8)             # <<<<<<<<<<<<<<
  *         _decompress_pbd8(comp, comp_len, <uint8_t*>out8.data, total_units)
  *         return out8.reshape((dims[3], dims[2], dims[1], dims[0]))
 */
     __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 534, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 534, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyLong_FromSsize_t(__pyx_v_total_units); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_1 = PyLong_FromSsize_t(__pyx_v_total_units); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 534, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 534, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 534, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_5 = 1;
@@ -7801,19 +10267,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_1};
-      __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 534, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_18, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 274, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_18, __pyx_t_2, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 534, __pyx_L1_error)
       __pyx_t_3 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_16, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_2);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 534, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 274, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 534, __pyx_L1_error)
     {
       __Pyx_BufFmt_StackElem __pyx_stack[1];
       __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_out8.rcbuffer->pybuffer);
@@ -7829,23 +10295,23 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
         __pyx_t_6 = __pyx_t_9 = __pyx_t_8 = 0;
       }
       __pyx_pybuffernd_out8.diminfo[0].strides = __pyx_pybuffernd_out8.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_out8.diminfo[0].shape = __pyx_pybuffernd_out8.rcbuffer->pybuffer.shape[0];
-      if (unlikely((__pyx_t_19 < 0))) __PYX_ERR(0, 274, __pyx_L1_error)
+      if (unlikely((__pyx_t_19 < 0))) __PYX_ERR(0, 534, __pyx_L1_error)
     }
     __pyx_v_out8 = ((PyArrayObject *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":275
+    /* "pyneutube/core/io/vaa3d_accel.pyx":535
  *     if datatype == 1:
- *         out8 = np.empty(total_units, dtype=np.uint8)
+ *         out8 = np.zeros(total_units, dtype=np.uint8)
  *         _decompress_pbd8(comp, comp_len, <uint8_t*>out8.data, total_units)             # <<<<<<<<<<<<<<
  *         return out8.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
 */
-    __pyx_t_20 = __pyx_f_5numpy_7ndarray_4data_data(((PyArrayObject *)__pyx_v_out8)); if (unlikely(__pyx_t_20 == ((void *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L1_error)
-    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(__pyx_v_comp, __pyx_v_comp_len, ((uint8_t *)__pyx_t_20), __pyx_v_total_units); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_5numpy_7ndarray_4data_data(((PyArrayObject *)__pyx_v_out8)); if (unlikely(__pyx_t_20 == ((void *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 535, __pyx_L1_error)
+    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd8(__pyx_v_comp, __pyx_v_comp_len, ((uint8_t *)__pyx_t_20), __pyx_v_total_units); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 535, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":276
- *         out8 = np.empty(total_units, dtype=np.uint8)
+    /* "pyneutube/core/io/vaa3d_accel.pyx":536
+ *         out8 = np.zeros(total_units, dtype=np.uint8)
  *         _decompress_pbd8(comp, comp_len, <uint8_t*>out8.data, total_units)
  *         return out8.reshape((dims[3], dims[2], dims[1], dims[0]))             # <<<<<<<<<<<<<<
  * 
@@ -7856,84 +10322,84 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_INCREF(__pyx_t_16);
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 276, __pyx_L1_error)
+      __PYX_ERR(0, 536, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 276, __pyx_L1_error)
+      __PYX_ERR(0, 536, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 276, __pyx_L1_error)
+      __PYX_ERR(0, 536, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 276, __pyx_L1_error)
+      __PYX_ERR(0, 536, __pyx_L1_error)
     }
-    __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 536, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 276, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 536, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 276, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 536, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 276, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 536, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 276, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 536, __pyx_L1_error);
     __pyx_t_5 = 0;
     {
       PyObject *__pyx_callargs[2] = {__pyx_t_16, __pyx_t_2};
       __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 536, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __pyx_r = __pyx_t_3;
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":273
- *     comp_len = PyBytes_GET_SIZE(data) - V3DPBD_HEADER_SIZE
- * 
+    /* "pyneutube/core/io/vaa3d_accel.pyx":533
+ *     # Match Vaa3D: an undersized payload leaves the unwritten image tail at zero.
+ *     # Block output that would exceed the header-declared size is still rejected.
  *     if datatype == 1:             # <<<<<<<<<<<<<<
- *         out8 = np.empty(total_units, dtype=np.uint8)
+ *         out8 = np.zeros(total_units, dtype=np.uint8)
  *         _decompress_pbd8(comp, comp_len, <uint8_t*>out8.data, total_units)
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":278
+  /* "pyneutube/core/io/vaa3d_accel.pyx":538
  *         return out8.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
  *     if datatype == 2:             # <<<<<<<<<<<<<<
- *         out16 = np.empty(total_units, dtype=np.uint16)
+ *         out16 = np.zeros(total_units, dtype=np.uint16)
  *         _decompress_pbd16(comp, comp_len, <uint16_t*>out16.data, total_units, little)
 */
   __pyx_t_12 = (__pyx_v_datatype == 2);
   if (__pyx_t_12) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":279
+    /* "pyneutube/core/io/vaa3d_accel.pyx":539
  * 
  *     if datatype == 2:
- *         out16 = np.empty(total_units, dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *         out16 = np.zeros(total_units, dtype=np.uint16)             # <<<<<<<<<<<<<<
  *         _decompress_pbd16(comp, comp_len, <uint16_t*>out16.data, total_units, little)
  *         return out16.reshape((dims[3], dims[2], dims[1], dims[0]))
 */
     __pyx_t_2 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 279, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
-    __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 279, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-    __pyx_t_16 = PyLong_FromSsize_t(__pyx_v_total_units); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 279, __pyx_L1_error)
+    __pyx_t_16 = PyLong_FromSsize_t(__pyx_v_total_units); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 279, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_uint16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 279, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_uint16); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = 1;
@@ -7950,19 +10416,19 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_16};
-      __pyx_t_1 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 279, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 539, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_1, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 279, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_1, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 539, __pyx_L1_error)
       __pyx_t_3 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_18, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_1);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 539, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 279, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 539, __pyx_L1_error)
     {
       __Pyx_BufFmt_StackElem __pyx_stack[1];
       __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_out16.rcbuffer->pybuffer);
@@ -7978,23 +10444,23 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
         __pyx_t_8 = __pyx_t_9 = __pyx_t_6 = 0;
       }
       __pyx_pybuffernd_out16.diminfo[0].strides = __pyx_pybuffernd_out16.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_out16.diminfo[0].shape = __pyx_pybuffernd_out16.rcbuffer->pybuffer.shape[0];
-      if (unlikely((__pyx_t_19 < 0))) __PYX_ERR(0, 279, __pyx_L1_error)
+      if (unlikely((__pyx_t_19 < 0))) __PYX_ERR(0, 539, __pyx_L1_error)
     }
     __pyx_v_out16 = ((PyArrayObject *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":280
+    /* "pyneutube/core/io/vaa3d_accel.pyx":540
  *     if datatype == 2:
- *         out16 = np.empty(total_units, dtype=np.uint16)
+ *         out16 = np.zeros(total_units, dtype=np.uint16)
  *         _decompress_pbd16(comp, comp_len, <uint16_t*>out16.data, total_units, little)             # <<<<<<<<<<<<<<
  *         return out16.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
 */
-    __pyx_t_20 = __pyx_f_5numpy_7ndarray_4data_data(((PyArrayObject *)__pyx_v_out16)); if (unlikely(__pyx_t_20 == ((void *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
-    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(__pyx_v_comp, __pyx_v_comp_len, ((uint16_t *)__pyx_t_20), __pyx_v_total_units, __pyx_v_little); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_5numpy_7ndarray_4data_data(((PyArrayObject *)__pyx_v_out16)); if (unlikely(__pyx_t_20 == ((void *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 540, __pyx_L1_error)
+    __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__decompress_pbd16(__pyx_v_comp, __pyx_v_comp_len, ((uint16_t *)__pyx_t_20), __pyx_v_total_units, __pyx_v_little); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 540, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":281
- *         out16 = np.empty(total_units, dtype=np.uint16)
+    /* "pyneutube/core/io/vaa3d_accel.pyx":541
+ *         out16 = np.zeros(total_units, dtype=np.uint16)
  *         _decompress_pbd16(comp, comp_len, <uint16_t*>out16.data, total_units, little)
  *         return out16.reshape((dims[3], dims[2], dims[1], dims[0]))             # <<<<<<<<<<<<<<
  * 
@@ -8005,57 +10471,57 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __Pyx_INCREF(__pyx_t_18);
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 281, __pyx_L1_error)
+      __PYX_ERR(0, 541, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 281, __pyx_L1_error)
+      __PYX_ERR(0, 541, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 281, __pyx_L1_error)
+      __PYX_ERR(0, 541, __pyx_L1_error)
     }
     if (unlikely(__pyx_v_dims == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 281, __pyx_L1_error)
+      __PYX_ERR(0, 541, __pyx_L1_error)
     }
-    __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 541, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 281, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 3)) != (0)) __PYX_ERR(0, 541, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 281, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 2)) != (0)) __PYX_ERR(0, 541, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 281, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 1)) != (0)) __PYX_ERR(0, 541, __pyx_L1_error);
     __Pyx_INCREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
     __Pyx_GIVEREF(__Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0));
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 281, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __Pyx_PyTuple_GET_ITEM(__pyx_v_dims, 0)) != (0)) __PYX_ERR(0, 541, __pyx_L1_error);
     __pyx_t_5 = 0;
     {
       PyObject *__pyx_callargs[2] = {__pyx_t_18, __pyx_t_1};
       __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 281, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 541, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __pyx_r = __pyx_t_3;
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":278
+    /* "pyneutube/core/io/vaa3d_accel.pyx":538
  *         return out8.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
  *     if datatype == 2:             # <<<<<<<<<<<<<<
- *         out16 = np.empty(total_units, dtype=np.uint16)
+ *         out16 = np.zeros(total_units, dtype=np.uint16)
  *         _decompress_pbd16(comp, comp_len, <uint16_t*>out16.data, total_units, little)
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":283
+  /* "pyneutube/core/io/vaa3d_accel.pyx":543
  *         return out16.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
  *     if datatype == 33:             # <<<<<<<<<<<<<<
@@ -8065,11 +10531,12 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
   __pyx_t_12 = (__pyx_v_datatype == 33);
   if (unlikely(__pyx_t_12)) {
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":284
+    /* "pyneutube/core/io/vaa3d_accel.pyx":544
  * 
  *     if datatype == 33:
  *         raise NotImplementedError("Vaa3D PBD datatype 33 is not implemented.")             # <<<<<<<<<<<<<<
  *     raise ValueError(f"Unsupported Vaa3D PBD datatype code {datatype!r}.")
+ * 
 */
     __pyx_t_1 = NULL;
     __pyx_t_5 = 1;
@@ -8077,14 +10544,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
       PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD_datatype_33_is_not_imp};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_NotImplementedError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 284, __pyx_L1_error)
+    __PYX_ERR(0, 544, __pyx_L1_error)
 
-    /* "pyneutube/core/io/vaa3d_accel.pyx":283
+    /* "pyneutube/core/io/vaa3d_accel.pyx":543
  *         return out16.reshape((dims[3], dims[2], dims[1], dims[0]))
  * 
  *     if datatype == 33:             # <<<<<<<<<<<<<<
@@ -8093,19 +10560,21 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
 */
   }
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":285
+  /* "pyneutube/core/io/vaa3d_accel.pyx":545
  *     if datatype == 33:
  *         raise NotImplementedError("Vaa3D PBD datatype 33 is not implemented.")
  *     raise ValueError(f"Unsupported Vaa3D PBD datatype code {datatype!r}.")             # <<<<<<<<<<<<<<
+ * 
+ * 
 */
   __pyx_t_1 = NULL;
-  __pyx_t_18 = __Pyx_PyUnicode_From_short(__pyx_v_datatype, 0, ' ', 'd'); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyUnicode_From_short(__pyx_v_datatype, 0, ' ', 'd'); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_Unsupported_Vaa3D_PBD_datatype_c;
   __pyx_t_14[1] = __pyx_t_18;
   __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u_;
   __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_14, 3, 36 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_18) + 1, 127);
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 285, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_t_5 = 1;
@@ -8114,14 +10583,14 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
     __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 545, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __Pyx_Raise(__pyx_t_3, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __PYX_ERR(0, 285, __pyx_L1_error)
+  __PYX_ERR(0, 545, __pyx_L1_error)
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":235
+  /* "pyneutube/core/io/vaa3d_accel.pyx":493
  * 
  * 
  * def load_v3dpbd(path):             # <<<<<<<<<<<<<<
@@ -8162,7 +10631,990 @@ static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_2load_v3dpbd(CYTHON
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
+
+/* "pyneutube/core/io/vaa3d_accel.pyx":548
+ * 
+ * 
+ * def save_v3dpbd(image, path):             # <<<<<<<<<<<<<<
+ *     """Save a 3D uint8 or uint16 volume using Vaa3D PBD compression."""
+ *     cdef:
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_5save_v3dpbd(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_4save_v3dpbd, "save_v3dpbd(image, path)\n\nSave a 3D uint8 or uint16 volume using Vaa3D PBD compression.");
+static PyMethodDef __pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_5save_v3dpbd = {"save_v3dpbd", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_5save_v3dpbd, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_4save_v3dpbd};
+static PyObject *__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_5save_v3dpbd(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_image = 0;
+  PyObject *__pyx_v_path = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("save_v3dpbd (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_image,&__pyx_mstate_global->__pyx_n_u_path,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 548, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 548, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 548, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "save_v3dpbd", 0) < (0)) __PYX_ERR(0, 548, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("save_v3dpbd", 1, 2, 2, i); __PYX_ERR(0, 548, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 548, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 548, __pyx_L3_error)
+    }
+    __pyx_v_image = values[0];
+    __pyx_v_path = values[1];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("save_v3dpbd", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 548, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel.save_v3dpbd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_4save_v3dpbd(__pyx_self, __pyx_v_image, __pyx_v_path);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9pyneutube_4core_2io_11vaa3d_accel_4save_v3dpbd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_image, PyObject *__pyx_v_path) {
+  PyObject *__pyx_v_volume = 0;
+  PyObject *__pyx_v_handle = 0;
+  PyObject *__pyx_v_header = 0;
+  struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *__pyx_v_writer = 0;
+  uint8_t const *__pyx_v_src8;
+  uint16_t const *__pyx_v_src16;
+  Py_ssize_t __pyx_v_total_units;
+  short __pyx_v_datatype;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  size_t __pyx_t_5;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7[3];
+  Py_ssize_t __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  PyObject *__pyx_t_12 = NULL;
+  PyObject *__pyx_t_13 = NULL;
+  PyObject *__pyx_t_14 = NULL;
+  PyObject *__pyx_t_15 = NULL;
+  PyObject *__pyx_t_16 = NULL;
+  PyObject *__pyx_t_17 = NULL;
+  PyObject *__pyx_t_18 = NULL;
+  int __pyx_t_19;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("save_v3dpbd", 0);
+  __Pyx_INCREF(__pyx_v_path);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":560
+ *         short datatype
+ * 
+ *     volume = np.asarray(image)             # <<<<<<<<<<<<<<
+ *     if volume.ndim != 3:
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 560, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_asarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 560, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_5 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_image};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  __pyx_v_volume = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":561
+ * 
+ *     volume = np.asarray(image)
+ *     if volume.ndim != 3:             # <<<<<<<<<<<<<<
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+ *     if volume.dtype == np.uint8:
+*/
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 561, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_6 = (__Pyx_PyLong_BoolNeObjC(__pyx_t_1, __pyx_mstate_global->__pyx_int_3, 3, 0)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 561, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (unlikely(__pyx_t_6)) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":562
+ *     volume = np.asarray(image)
+ *     if volume.ndim != 3:
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")             # <<<<<<<<<<<<<<
+ *     if volume.dtype == np.uint8:
+ *         datatype = 1
+*/
+    __pyx_t_4 = NULL;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Repr(__pyx_t_2), __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 562, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_7[0] = __pyx_mstate_global->__pyx_kp_u_Expected_a_3D_volume_got_array_w;
+    __pyx_t_7[1] = __pyx_t_3;
+    __pyx_t_7[2] = __pyx_mstate_global->__pyx_kp_u_;
+    __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, 43 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_3) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3));
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_5 = 1;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+    }
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 562, __pyx_L1_error)
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":561
+ * 
+ *     volume = np.asarray(image)
+ *     if volume.ndim != 3:             # <<<<<<<<<<<<<<
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+ *     if volume.dtype == np.uint8:
+*/
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":563
+ *     if volume.ndim != 3:
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+ *     if volume.dtype == np.uint8:             # <<<<<<<<<<<<<<
+ *         datatype = 1
+ *     elif volume.dtype == np.uint16:
+*/
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 563, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 563, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 563, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_6) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":564
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+ *     if volume.dtype == np.uint8:
+ *         datatype = 1             # <<<<<<<<<<<<<<
+ *     elif volume.dtype == np.uint16:
+ *         datatype = 2
+*/
+    __pyx_v_datatype = 1;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":563
+ *     if volume.ndim != 3:
+ *         raise ValueError(f"Expected a 3D volume, got array with shape {volume.shape!r}.")
+ *     if volume.dtype == np.uint8:             # <<<<<<<<<<<<<<
+ *         datatype = 1
+ *     elif volume.dtype == np.uint16:
+*/
+    goto __pyx_L4;
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":565
+ *     if volume.dtype == np.uint8:
+ *         datatype = 1
+ *     elif volume.dtype == np.uint16:             # <<<<<<<<<<<<<<
+ *         datatype = 2
+ *     else:
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_uint16); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (likely(__pyx_t_6)) {
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":566
+ *         datatype = 1
+ *     elif volume.dtype == np.uint16:
+ *         datatype = 2             # <<<<<<<<<<<<<<
+ *     else:
+ *         raise ValueError("Vaa3D PBD saving supports uint8 and uint16 volumes only.")
+*/
+    __pyx_v_datatype = 2;
+
+    /* "pyneutube/core/io/vaa3d_accel.pyx":565
+ *     if volume.dtype == np.uint8:
+ *         datatype = 1
+ *     elif volume.dtype == np.uint16:             # <<<<<<<<<<<<<<
+ *         datatype = 2
+ *     else:
+*/
+    goto __pyx_L4;
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":568
+ *         datatype = 2
+ *     else:
+ *         raise ValueError("Vaa3D PBD saving supports uint8 and uint16 volumes only.")             # <<<<<<<<<<<<<<
+ * 
+ *     volume = np.ascontiguousarray(volume)
+*/
+  /*else*/ {
+    __pyx_t_1 = NULL;
+    __pyx_t_5 = 1;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_mstate_global->__pyx_kp_u_Vaa3D_PBD_saving_supports_uint8};
+      __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 568, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+    }
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(0, 568, __pyx_L1_error)
+  }
+  __pyx_L4:;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":570
+ *         raise ValueError("Vaa3D PBD saving supports uint8 and uint16 volumes only.")
+ * 
+ *     volume = np.ascontiguousarray(volume)             # <<<<<<<<<<<<<<
+ *     total_units = volume.size
+ *     header = (
+*/
+  __pyx_t_1 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_5 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
+    assert(__pyx_t_1);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
+    __Pyx_INCREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
+    __pyx_t_5 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_volume};
+    __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 570, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+  }
+  __Pyx_DECREF_SET(__pyx_v_volume, __pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":571
+ * 
+ *     volume = np.ascontiguousarray(volume)
+ *     total_units = volume.size             # <<<<<<<<<<<<<<
+ *     header = (
+ *         FORMAT_KEY_V3DPBD
+*/
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 571, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_8 = __Pyx_PyIndex_AsSsize_t(__pyx_t_4); if (unlikely((__pyx_t_8 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 571, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_v_total_units = __pyx_t_8;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":573
+ *     total_units = volume.size
+ *     header = (
+ *         FORMAT_KEY_V3DPBD             # <<<<<<<<<<<<<<
+ *         + b"L"
+ *         + struct.pack(
+*/
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 573, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":574
+ *     header = (
+ *         FORMAT_KEY_V3DPBD
+ *         + b"L"             # <<<<<<<<<<<<<<
+ *         + struct.pack(
+ *             "<hiiii",
+*/
+  __pyx_t_3 = PyNumber_Add(__pyx_t_4, __pyx_mstate_global->__pyx_n_b_L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":575
+ *         FORMAT_KEY_V3DPBD
+ *         + b"L"
+ *         + struct.pack(             # <<<<<<<<<<<<<<
+ *             "<hiiii",
+ *             datatype,
+*/
+  __pyx_t_1 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_struct); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 575, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_pack); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 575, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_9);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":577
+ *         + struct.pack(
+ *             "<hiiii",
+ *             datatype,             # <<<<<<<<<<<<<<
+ *             volume.shape[2],
+ *             volume.shape[1],
+*/
+  __pyx_t_2 = __Pyx_PyLong_From_short(__pyx_v_datatype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 577, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":578
+ *             "<hiiii",
+ *             datatype,
+ *             volume.shape[2],             # <<<<<<<<<<<<<<
+ *             volume.shape[1],
+ *             volume.shape[0],
+*/
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 578, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_10, 2, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 578, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":579
+ *             datatype,
+ *             volume.shape[2],
+ *             volume.shape[1],             # <<<<<<<<<<<<<<
+ *             volume.shape[0],
+ *             1,
+*/
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_12 = __Pyx_GetItemInt(__pyx_t_10, 1, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":580
+ *             volume.shape[2],
+ *             volume.shape[1],
+ *             volume.shape[0],             # <<<<<<<<<<<<<<
+ *             1,
+ *         )
+*/
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_volume, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 580, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_10, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 580, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_5 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_9))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_9);
+    assert(__pyx_t_1);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_9);
+    __Pyx_INCREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_9, __pyx__function);
+    __pyx_t_5 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[7] = {__pyx_t_1, __pyx_mstate_global->__pyx_kp_u_hiiii, __pyx_t_2, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_mstate_global->__pyx_int_1};
+    __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_9, __pyx_callargs+__pyx_t_5, (7-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 575, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":575
+ *         FORMAT_KEY_V3DPBD
+ *         + b"L"
+ *         + struct.pack(             # <<<<<<<<<<<<<<
+ *             "<hiiii",
+ *             datatype,
+*/
+  __pyx_t_9 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 575, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_9);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (!(likely(PyBytes_CheckExact(__pyx_t_9))||((__pyx_t_9) == Py_None) || __Pyx_RaiseUnexpectedTypeError("bytes", __pyx_t_9))) __PYX_ERR(0, 575, __pyx_L1_error)
+  __pyx_v_header = ((PyObject*)__pyx_t_9);
+  __pyx_t_9 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":585
+ *     )
+ * 
+ *     path = os.fspath(path)             # <<<<<<<<<<<<<<
+ *     with open(path, "wb") as handle:
+ *         handle.write(header)
+*/
+  __pyx_t_4 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fspath); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_13))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_13);
+    assert(__pyx_t_4);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_13);
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_13, __pyx__function);
+    __pyx_t_5 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_path};
+    __pyx_t_9 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_13, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 585, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+  }
+  __Pyx_DECREF_SET(__pyx_v_path, __pyx_t_9);
+  __pyx_t_9 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":586
+ * 
+ *     path = os.fspath(path)
+ *     with open(path, "wb") as handle:             # <<<<<<<<<<<<<<
+ *         handle.write(header)
+ *         writer = _PBDStreamWriter(handle)
+*/
+  /*with:*/ {
+    __pyx_t_13 = NULL;
+    __pyx_t_5 = 1;
+    {
+      PyObject *__pyx_callargs[3] = {__pyx_t_13, __pyx_v_path, __pyx_mstate_global->__pyx_n_u_wb};
+      __pyx_t_9 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_open, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+      if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 586, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_9);
+    }
+    __pyx_t_14 = __Pyx_PyObject_LookupSpecial(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 586, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_14);
+    __pyx_t_4 = NULL;
+    __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 586, __pyx_L5_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = 1;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      assert(__pyx_t_4);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(__pyx__function);
+      __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
+      __pyx_t_5 = 0;
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
+      __pyx_t_13 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 586, __pyx_L5_error)
+      __Pyx_GOTREF(__pyx_t_13);
+    }
+    __pyx_t_3 = __pyx_t_13;
+    __pyx_t_13 = 0;
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    /*try:*/ {
+      {
+        __Pyx_PyThreadState_declare
+        __Pyx_PyThreadState_assign
+        __Pyx_ExceptionSave(&__pyx_t_15, &__pyx_t_16, &__pyx_t_17);
+        __Pyx_XGOTREF(__pyx_t_15);
+        __Pyx_XGOTREF(__pyx_t_16);
+        __Pyx_XGOTREF(__pyx_t_17);
+        /*try:*/ {
+          __pyx_v_handle = __pyx_t_3;
+          __pyx_t_3 = 0;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":587
+ *     path = os.fspath(path)
+ *     with open(path, "wb") as handle:
+ *         handle.write(header)             # <<<<<<<<<<<<<<
+ *         writer = _PBDStreamWriter(handle)
+ *         if datatype == 1:
+*/
+          __pyx_t_9 = __pyx_v_handle;
+          __Pyx_INCREF(__pyx_t_9);
+          __pyx_t_5 = 0;
+          {
+            PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_header};
+            __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+            __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 587, __pyx_L9_error)
+            __Pyx_GOTREF(__pyx_t_3);
+          }
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":588
+ *     with open(path, "wb") as handle:
+ *         handle.write(header)
+ *         writer = _PBDStreamWriter(handle)             # <<<<<<<<<<<<<<
+ *         if datatype == 1:
+ *             src8 = <const uint8_t*>np.PyArray_DATA(volume)
+*/
+          __pyx_t_9 = NULL;
+          __pyx_t_5 = 1;
+          {
+            PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_handle};
+            __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+            __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 588, __pyx_L9_error)
+            __Pyx_GOTREF((PyObject *)__pyx_t_3);
+          }
+          __pyx_v_writer = ((struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_t_3);
+          __pyx_t_3 = 0;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":589
+ *         handle.write(header)
+ *         writer = _PBDStreamWriter(handle)
+ *         if datatype == 1:             # <<<<<<<<<<<<<<
+ *             src8 = <const uint8_t*>np.PyArray_DATA(volume)
+ *             _compress_pbd8(src8, total_units, writer)
+*/
+          __pyx_t_6 = (__pyx_v_datatype == 1);
+          if (__pyx_t_6) {
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":590
+ *         writer = _PBDStreamWriter(handle)
+ *         if datatype == 1:
+ *             src8 = <const uint8_t*>np.PyArray_DATA(volume)             # <<<<<<<<<<<<<<
+ *             _compress_pbd8(src8, total_units, writer)
+ *         else:
+*/
+            if (!(likely(((__pyx_v_volume) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_volume, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 590, __pyx_L9_error)
+            __pyx_v_src8 = ((uint8_t const *)PyArray_DATA(((PyArrayObject *)__pyx_v_volume)));
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":591
+ *         if datatype == 1:
+ *             src8 = <const uint8_t*>np.PyArray_DATA(volume)
+ *             _compress_pbd8(src8, total_units, writer)             # <<<<<<<<<<<<<<
+ *         else:
+ *             src16 = <const uint16_t*>np.PyArray_DATA(volume)
+*/
+            __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd8(__pyx_v_src8, __pyx_v_total_units, __pyx_v_writer); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 591, __pyx_L9_error)
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":589
+ *         handle.write(header)
+ *         writer = _PBDStreamWriter(handle)
+ *         if datatype == 1:             # <<<<<<<<<<<<<<
+ *             src8 = <const uint8_t*>np.PyArray_DATA(volume)
+ *             _compress_pbd8(src8, total_units, writer)
+*/
+            goto __pyx_L15;
+          }
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":593
+ *             _compress_pbd8(src8, total_units, writer)
+ *         else:
+ *             src16 = <const uint16_t*>np.PyArray_DATA(volume)             # <<<<<<<<<<<<<<
+ *             _compress_pbd16(src16, total_units, writer)
+ *         writer.flush()
+*/
+          /*else*/ {
+            if (!(likely(((__pyx_v_volume) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_volume, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 593, __pyx_L9_error)
+            __pyx_v_src16 = ((uint16_t const *)PyArray_DATA(((PyArrayObject *)__pyx_v_volume)));
+
+            /* "pyneutube/core/io/vaa3d_accel.pyx":594
+ *         else:
+ *             src16 = <const uint16_t*>np.PyArray_DATA(volume)
+ *             _compress_pbd16(src16, total_units, writer)             # <<<<<<<<<<<<<<
+ *         writer.flush()
+*/
+            __pyx_f_9pyneutube_4core_2io_11vaa3d_accel__compress_pbd16(__pyx_v_src16, __pyx_v_total_units, __pyx_v_writer); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 594, __pyx_L9_error)
+          }
+          __pyx_L15:;
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":595
+ *             src16 = <const uint16_t*>np.PyArray_DATA(volume)
+ *             _compress_pbd16(src16, total_units, writer)
+ *         writer.flush()             # <<<<<<<<<<<<<<
+*/
+          ((struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)__pyx_v_writer->__pyx_vtab)->flush(__pyx_v_writer); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 595, __pyx_L9_error)
+
+          /* "pyneutube/core/io/vaa3d_accel.pyx":586
+ * 
+ *     path = os.fspath(path)
+ *     with open(path, "wb") as handle:             # <<<<<<<<<<<<<<
+ *         handle.write(header)
+ *         writer = _PBDStreamWriter(handle)
+*/
+        }
+        __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+        __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
+        __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
+        goto __pyx_L14_try_end;
+        __pyx_L9_error:;
+        __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+        /*except:*/ {
+          __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel.save_v3dpbd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+          if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_9, &__pyx_t_13) < 0) __PYX_ERR(0, 586, __pyx_L11_except_error)
+          __Pyx_XGOTREF(__pyx_t_3);
+          __Pyx_XGOTREF(__pyx_t_9);
+          __Pyx_XGOTREF(__pyx_t_13);
+          __pyx_t_4 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_9, __pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 586, __pyx_L11_except_error)
+          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_4, NULL);
+          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+          if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 586, __pyx_L11_except_error)
+          __Pyx_GOTREF(__pyx_t_18);
+          __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_18);
+          __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
+          if (__pyx_t_6 < (0)) __PYX_ERR(0, 586, __pyx_L11_except_error)
+          __pyx_t_19 = (!__pyx_t_6);
+          if (unlikely(__pyx_t_19)) {
+            __Pyx_GIVEREF(__pyx_t_3);
+            __Pyx_GIVEREF(__pyx_t_9);
+            __Pyx_XGIVEREF(__pyx_t_13);
+            __Pyx_ErrRestoreWithState(__pyx_t_3, __pyx_t_9, __pyx_t_13);
+            __pyx_t_3 = 0;  __pyx_t_9 = 0;  __pyx_t_13 = 0; 
+            __PYX_ERR(0, 586, __pyx_L11_except_error)
+          }
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+          __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+          goto __pyx_L10_exception_handled;
+        }
+        __pyx_L11_except_error:;
+        __Pyx_XGIVEREF(__pyx_t_15);
+        __Pyx_XGIVEREF(__pyx_t_16);
+        __Pyx_XGIVEREF(__pyx_t_17);
+        __Pyx_ExceptionReset(__pyx_t_15, __pyx_t_16, __pyx_t_17);
+        goto __pyx_L1_error;
+        __pyx_L10_exception_handled:;
+        __Pyx_XGIVEREF(__pyx_t_15);
+        __Pyx_XGIVEREF(__pyx_t_16);
+        __Pyx_XGIVEREF(__pyx_t_17);
+        __Pyx_ExceptionReset(__pyx_t_15, __pyx_t_16, __pyx_t_17);
+        __pyx_L14_try_end:;
+      }
+    }
+    /*finally:*/ {
+      /*normal exit:*/{
+        if (__pyx_t_14) {
+          __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_mstate_global->__pyx_tuple[0], NULL);
+          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 586, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_17);
+          __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+        }
+        goto __pyx_L8;
+      }
+      __pyx_L8:;
+    }
+    goto __pyx_L19;
+    __pyx_L5_error:;
+    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+    goto __pyx_L1_error;
+    __pyx_L19:;
+  }
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":548
+ * 
+ * 
+ * def save_v3dpbd(image, path):             # <<<<<<<<<<<<<<
+ *     """Save a 3D uint8 or uint16 volume using Vaa3D PBD compression."""
+ *     cdef:
+*/
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
+  __Pyx_XDECREF(__pyx_t_13);
+  __Pyx_AddTraceback("pyneutube.core.io.vaa3d_accel.save_v3dpbd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_volume);
+  __Pyx_XDECREF(__pyx_v_handle);
+  __Pyx_XDECREF(__pyx_v_header);
+  __Pyx_XDECREF((PyObject *)__pyx_v_writer);
+  __Pyx_XDECREF(__pyx_v_path);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
 /* #### Code section: module_exttypes ### */
+static struct __pyx_vtabstruct_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter __pyx_vtable_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+
+static PyObject *__pyx_tp_new_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter(PyTypeObject *t, PyObject *a, PyObject *k) {
+  struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *p;
+  PyObject *o;
+  o = __Pyx_AllocateExtensionType(t, 0);
+  if (unlikely(!o)) return 0;
+  p = ((struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)o);
+  p->__pyx_vtab = __pyx_vtabptr_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+  p->handle = Py_None; Py_INCREF(Py_None);
+  p->buffer = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  if (unlikely(__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_1__cinit__(o, a, k) < 0)) goto bad;
+  return o;
+  bad:
+  Py_DECREF(o); o = 0;
+  return NULL;
+}
+
+static void __pyx_tp_dealloc_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter(PyObject *o) {
+  struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *p = (struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)o;
+  #if CYTHON_USE_TP_FINALIZE
+  if (unlikely(__Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && !__Pyx_PyObject_GC_IsFinalized(o)) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) {
+      if (PyObject_CallFinalizerFromDealloc(o)) return;
+    }
+  }
+  #endif
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->handle);
+  Py_CLEAR(p->buffer);
+  PyTypeObject *tp = Py_TYPE(o);
+  #if CYTHON_USE_TYPE_SLOTS
+  (*tp->tp_free)(o);
+  #else
+  {
+    freefunc tp_free = (freefunc)PyType_GetSlot(tp, Py_tp_free);
+    if (tp_free) tp_free(o);
+  }
+  #endif
+  #if CYTHON_USE_TYPE_SPECS
+  Py_DECREF(tp);
+  #endif
+}
+
+static int __pyx_tp_traverse_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *p = (struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)o;
+  {
+    e = __Pyx_call_type_traverse(o, 1, v, a);
+    if (e) return e;
+  }
+  if (p->handle) {
+    e = (*v)(p->handle, a); if (e) return e;
+  }
+  return 0;
+}
+
+static int __pyx_tp_clear_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter(PyObject *o) {
+  PyObject* tmp;
+  struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *p = (struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *)o;
+  tmp = ((PyObject*)p->handle);
+  p->handle = Py_None; Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  return 0;
+}
+
+static PyMethodDef __pyx_methods_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter[] = {
+  {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_2__reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_4__setstate_cython__},
+  {0, 0, 0, 0}
+};
+#if CYTHON_USE_TYPE_SPECS
+static PyType_Slot __pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter},
+  {Py_tp_traverse, (void *)__pyx_tp_traverse_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter},
+  {Py_tp_clear, (void *)__pyx_tp_clear_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter},
+  {Py_tp_methods, (void *)__pyx_methods_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter},
+  {Py_tp_new, (void *)__pyx_tp_new_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter},
+  {0, 0},
+};
+static PyType_Spec __pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter_spec = {
+  "pyneutube.core.io.vaa3d_accel._PBDStreamWriter",
+  sizeof(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter),
+  0,
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
+  __pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter_slots,
+};
+#else
+
+static PyTypeObject __pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "pyneutube.core.io.vaa3d_accel.""_PBDStreamWriter", /*tp_name*/
+  sizeof(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, /*tp_dealloc*/
+  0, /*tp_vectorcall_offset*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  0, /*tp_as_async*/
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, /*tp_traverse*/
+  __pyx_tp_clear_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  #if !CYTHON_USE_TYPE_SPECS
+  0, /*tp_dictoffset*/
+  #endif
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if CYTHON_USE_TP_FINALIZE
+  0, /*tp_finalize*/
+  #else
+  NULL, /*tp_finalize*/
+  #endif
+  #if !CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800
+  0, /*tp_vectorcall*/
+  #endif
+  #if __PYX_NEED_TP_PRINT_SLOT == 1
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030C0000
+  0, /*tp_watched*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030d00A4
+  0, /*tp_versions_used*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000 && PY_VERSION_HEX < 0x030a0000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+#endif
 
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
@@ -8212,10 +11664,42 @@ static int __Pyx_modinit_function_export_code(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   __Pyx_RefNannyDeclarations
   CYTHON_UNUSED_VAR(__pyx_mstate);
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
+  __pyx_vtabptr_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter = &__pyx_vtable_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+  __pyx_vtable_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter.flush = (void (*)(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *))__pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_flush;
+  __pyx_vtable_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter.write_byte = (void (*)(struct __pyx_obj_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter *, uint8_t))__pyx_f_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_write_byte;
+  #if CYTHON_USE_TYPE_SPECS
+  __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter)) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter_spec, __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
+  #else
+  __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter = &__pyx_type_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter;
+  #endif
+  #if !CYTHON_COMPILING_IN_LIMITED_API
+  #endif
+  #if !CYTHON_USE_TYPE_SPECS
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
+  #endif
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount((PyObject*)__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter);
+  #endif
+  #if !CYTHON_COMPILING_IN_LIMITED_API
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter->tp_dictoffset && __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter->tp_getattro = PyObject_GenericGetAttr;
+  }
+  #endif
+  if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter, __pyx_vtabptr_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_PBDStreamWriter, (PyObject *) __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_9pyneutube_4core_2io_11vaa3d_accel__PBDStreamWriter) < (0)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_import_code(__pyx_mstatetype *__pyx_mstate) {
@@ -8227,7 +11711,7 @@ static int __Pyx_modinit_type_import_code(__pyx_mstatetype *__pyx_mstate) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_mstate->__pyx_ptype_7cpython_4type_type = __Pyx_ImportType_3_2_4(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type",
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -8237,7 +11721,7 @@ static int __Pyx_modinit_type_import_code(__pyx_mstatetype *__pyx_mstate) {
   #else
   sizeof(PyHeapTypeObject), __PYX_GET_STRUCT_ALIGNMENT_3_2_4(PyHeapTypeObject),
   #endif
-  __Pyx_ImportType_CheckSize_Warn_3_2_4); if (!__pyx_mstate->__pyx_ptype_7cpython_4type_type) __PYX_ERR(2, 9, __pyx_L1_error)
+  __Pyx_ImportType_CheckSize_Warn_3_2_4); if (!__pyx_mstate->__pyx_ptype_7cpython_4type_type) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("numpy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8663,7 +12147,7 @@ __Pyx_RefNannySetupContext("PyInit_vaa3d_accel", 0);
   (void)__Pyx_modinit_global_init_code(__pyx_mstate);
   (void)__Pyx_modinit_variable_export_code(__pyx_mstate);
   (void)__Pyx_modinit_function_export_code(__pyx_mstate);
-  (void)__Pyx_modinit_type_init_code(__pyx_mstate);
+  if (unlikely((__Pyx_modinit_type_init_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
   if (unlikely((__Pyx_modinit_type_import_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code(__pyx_mstate);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
@@ -8700,7 +12184,7 @@ __Pyx_RefNannySetupContext("PyInit_vaa3d_accel", 0);
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
- * from cpython.bytes cimport PyBytes_AS_STRING, PyBytes_GET_SIZE
+ * from cpython.bytearray cimport PyByteArray_AsString
 */
   __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_numpy, 0, 0, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __pyx_t_2 = __pyx_t_1;
@@ -8708,52 +12192,94 @@ __Pyx_RefNannySetupContext("PyInit_vaa3d_accel", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_np, __pyx_t_2) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":18
+  /* "pyneutube/core/io/vaa3d_accel.pyx":19
  * DEF V3DPBD_HEADER_SIZE = 43
  * 
  * FORMAT_KEY_V3DRAW = b"raw_image_stack_by_hpeng"             # <<<<<<<<<<<<<<
  * FORMAT_KEY_V3DPBD = b"v3d_volume_pkbitdf_encod"
  * 
 */
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW, __pyx_mstate_global->__pyx_n_b_raw_image_stack_by_hpeng) < (0)) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DRAW, __pyx_mstate_global->__pyx_n_b_raw_image_stack_by_hpeng) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":19
+  /* "pyneutube/core/io/vaa3d_accel.pyx":20
  * 
  * FORMAT_KEY_V3DRAW = b"raw_image_stack_by_hpeng"
  * FORMAT_KEY_V3DPBD = b"v3d_volume_pkbitdf_encod"             # <<<<<<<<<<<<<<
  * 
  * 
 */
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD, __pyx_mstate_global->__pyx_n_b_v3d_volume_pkbitdf_encod) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_FORMAT_KEY_V3DPBD, __pyx_mstate_global->__pyx_n_b_v3d_volume_pkbitdf_encod) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":184
- * 
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_3__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_PBDStreamWriter___reduce_cython, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_reduce_cython, __pyx_t_2) < (0)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_16_PBDStreamWriter_5__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_PBDStreamWriter___setstate_cyth, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_setstate_cython, __pyx_t_2) < (0)) __PYX_ERR(2, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":442
+ *         cp += byte_count
  * 
  * def load_v3draw(path):             # <<<<<<<<<<<<<<
  *     """Load a Vaa3D v3draw/raw file using direct NumPy file reads."""
  *     cdef:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_1load_v3draw, 0, __pyx_mstate_global->__pyx_n_u_load_v3draw, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_1load_v3draw, 0, __pyx_mstate_global->__pyx_n_u_load_v3draw, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 442, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_load_v3draw, __pyx_t_2) < (0)) __PYX_ERR(0, 184, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_load_v3draw, __pyx_t_2) < (0)) __PYX_ERR(0, 442, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":235
+  /* "pyneutube/core/io/vaa3d_accel.pyx":493
  * 
  * 
  * def load_v3dpbd(path):             # <<<<<<<<<<<<<<
  *     """Load a Vaa3D PBD-compressed file with C-level decompression loops."""
  *     cdef:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_3load_v3dpbd, 0, __pyx_mstate_global->__pyx_n_u_load_v3dpbd, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_3load_v3dpbd, 0, __pyx_mstate_global->__pyx_n_u_load_v3dpbd, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 493, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_load_v3dpbd, __pyx_t_2) < (0)) __PYX_ERR(0, 235, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_load_v3dpbd, __pyx_t_2) < (0)) __PYX_ERR(0, 493, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pyneutube/core/io/vaa3d_accel.pyx":548
+ * 
+ * 
+ * def save_v3dpbd(image, path):             # <<<<<<<<<<<<<<
+ *     """Save a 3D uint8 or uint16 volume using Vaa3D PBD compression."""
+ *     cdef:
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9pyneutube_4core_2io_11vaa3d_accel_5save_v3dpbd, 0, __pyx_mstate_global->__pyx_n_u_save_v3dpbd, NULL, __pyx_mstate_global->__pyx_n_u_pyneutube_core_io_vaa3d_accel, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 548, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_save_v3dpbd, __pyx_t_2) < (0)) __PYX_ERR(0, 548, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pyneutube/core/io/vaa3d_accel.pyx":1
@@ -8802,7 +12328,7 @@ __Pyx_RefNannySetupContext("PyInit_vaa3d_accel", 0);
 
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_open); if (!__pyx_builtin_open) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_open); if (!__pyx_builtin_open) __PYX_ERR(0, 456, __pyx_L1_error)
 
   /* Cached unbound methods */
   __pyx_mstate->__pyx_umethod_PyDict_Type_items.type = (PyObject*)&PyDict_Type;
@@ -8822,14 +12348,14 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pyneutube/core/io/vaa3d_accel.pyx":198
+  /* "pyneutube/core/io/vaa3d_accel.pyx":456
  * 
  *     path = os.fspath(path)
  *     with open(path, "rb") as handle:             # <<<<<<<<<<<<<<
  *         header = handle.read(V3DRAW_HEADER_SIZE)
  * 
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -8862,34 +12388,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 9; } index[] = {{1},{34},{36},{35},{33},{35},{34},{36},{32},{32},{33},{32},{56},{55},{41},{29},{29},{47},{1},{1},{1},{1},{38},{33},{33},{17},{17},{20},{6},{18},{18},{4},{8},{4},{5},{4},{8},{4},{5},{5},{6},{9},{8},{13},{2},{8},{6},{8},{7},{1},{6},{6},{4},{5},{13},{5},{6},{11},{11},{8},{10},{8},{12},{12},{2},{5},{6},{4},{2},{5},{4},{4},{3},{29},{12},{2},{4},{7},{12},{10},{6},{8},{11},{2},{2},{6},{5},{6},{6},{462},{484},{1},{1},{24},{24}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (1338 bytes) */
-const char* const cstring = "BZh91AY&SY\001\326\362\202\000\000\304\377\377\377\377\377\376\377\277\277_\277\377\377\240\277\377\377\360@@@@@@@@@@@@@\000@\000P\004\251\211\245\000\000@\301\242F\244\365@2i\3431\022\201\352i\372\232\215\222mF\217j\237\244\217Pz\215\251\240h\033$\332@h=\023\036\232)\355@\222B2\0014\0010F\210\236\210\332LC@\000\001\240\000\000\320\r\r\r\032h\364A\251\210\324S\322\000\003CF\200\000\006\232\000\000\0324\000\000\000\006\200\000\034\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\3108\000\000\000\000\000\000\000\000\000\000\000\000\000\000\001\220\305\353\226\317\001\024\230e\030\245H\001!)N&\314\345\031S\214\201\247$\300\314\314\214\314\201\263\014\314\243\031\245iI4\273\270\204T\324\205I\220'O3\223\206\3061\235Q6p\034\316{\202\t\356fJ\023\253\013*\030\255\3013\021($\250&\214\316\007\337\010&Q\312\337\303\200>\352D\020\023\300\003\376\201)\221\037\205/S\325\227$\006\037\211\027X\"\0004\027L\257s3P\2572D\200Mb~J?\260D\326?\352>\020\244\230\202\005g\310\022\314kf\202\302a\205\021.b\212:\217\352\204ka\244:V\205\027o<O\030\214#(\017\272,q\036\247\2274go*\274=\261ise\330kq\276\316a\265\006\263\376\262\354N2\341\013\331\203Db\237\030\307o\237\302\200\375\3069VSgn\227\322R]g\300& a\014#\360z&}\003Z\323ex\307\250]\243\355\275\231\372\033\274\321@\263D\371\304\332\035\tl\217\001\002\333\236\323\211\r!\020\001u\306\030d\310\030\346j\232\251\373\004\273\272\352\225\3137\244[\204\372D\370\237\211\234\0250+\013\256\310\353(\030\275\207L\245\3318(\275\247NR\312<u*\353B\267\332B\014\304\014\300\r\2719\316@ln\007\013|r\347\265 2\220\312\235\232\247\225\024\272\211\3222H\250+\306\337F\260\342\242\007,(g\260P\347\026U\0051\323H:\210\016\241\022\371\273\225uG\326\227)\200h\220\344\027V\254\013\3343\rE*\364T\263\ri*\3026\013^\377\026\356w;\306t\317\272\274F\316h\253\321\257\216\302\234+Z\310cO\322(-\367\326\256\267\001\0165\371\340v\355X\343\306h\302=%\201\227Hk\307a\275>d\341\354<Y\237\200\213n\235H\216;\351\314f\267.\321\216\362\340O\346+p\246gn\"\3348y^\324\n3\255\224\216""\312DL\260\225\016\010\026x1\230}t\017\200\331\245\215\371\265T\254\232{J\020\344\306U\\\0244\340Xf^\365\035\314\367\327\200qc\225\267\213\263\307=;MUk!v\334y\323i\310\345\201\025\222}{\370\207\364\336h\275\\4\251Re\007\342\240\320]\273\206J<\233\257\244\310\325bF$\025\245\261\213\211\r\211`e}\021\266qJ\342\247\323+D\342\242\032~K*\245O:l\202\224\2661$\303\346OvG(\2634\370i\"\267\344\021\212x\362\rP:\256TN>c\265\217\033\023*\300\306\033\370\325\234\313&\tP\352\2304\211\207\245\241\023\077\077ZEs\303\255d,X\332\303S\226\335\354\361\252\030\020\363*'r\031\367\277zZ\372!\302t\016\177\0215\342\245\215\253\037\373\236\274\010\341\234\236\362S\t\2658\316\311T\276[;\353\370(L\233.\263\001\\.O\252z\347\235M5\215\274\207B\333m-\311\222%a\242\226m[q6+x\007QC%)\243\235\017\201(l\203\214S\031SU`\354t\314U\027\265\220!*\n\014\324\250\266s)\227)\226\177O\275y}\275\256\032\365[\301>U\256\2037\016\234\010`\316c\335\320\211\317\263\245\252\033\304\224\257E;\266\216O\326y\334N\323\205\311\311=\320\250,G6;>!\031\237\327\250\373O\215v\035&\373\371\030n%\220\017M\277\210\003bS\214\310MwB\000%\256.\202t\364E\305^!\3711\270B\263\376\201%\212\341{\343\330 |\307\207\0048!:\262\022F\3628\200\024\200\330\270\223\005\253\007\275\345\321x}\206J\310\023\007\2351}\234\030\364Q\356\302\3135\224\030\201\335\332\032\301E\267\234\221\273\013X\313\277\263\317<q\342\376\025\232?<\322\240!\277\025\016\360\276<\267,\n\266\326s2\233\375\201\235\016\361\262\034\212\363XD9\357\234\036*\224\240i\372\226\215\214\265\215u\324\362\264\027\377\322~\341\251g\020R\224\241m\002\027xWf`!\324u_\340\20210[\305\373w\207<w\036\216\243\312\355\232\3264\335\353S\033QE\304\314\315]8\365\362\362\372\241\306R} \0140\240)\274\034\215\004\221\001\243\304\204\204\201CM\252\244Ns\211\206\206\0104\310\"\242\251\207\005\016\037\342\356H\247\n\022\000:\336P@";
-    PyObject *data = __Pyx_DecompressString(cstring, 1338, 2);
+    const struct { const unsigned int length: 9; } index[] = {{1},{43},{34},{36},{35},{33},{35},{34},{36},{32},{32},{33},{32},{41},{29},{56},{29},{47},{1},{1},{1},{1},{7},{6},{2},{6},{9},{50},{38},{33},{33},{14},{17},{17},{16},{34},{36},{20},{7},{17},{6},{18},{8},{18},{4},{8},{4},{5},{4},{8},{4},{5},{6},{9},{8},{13},{2},{8},{6},{8},{7},{12},{1},{6},{6},{4},{5},{13},{5},{6},{11},{11},{8},{10},{8},{12},{4},{12},{2},{5},{6},{4},{2},{5},{4},{4},{4},{3},{29},{11},{14},{12},{2},{4},{10},{17},{13},{7},{11},{4},{12},{10},{12},{19},{5},{4},{5},{4},{6},{8},{11},{2},{2},{6},{5},{6},{6},{6},{2},{5},{6},{5},{462},{486},{9},{265},{1},{1},{24},{24}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (1704 bytes) */
+const char* const cstring = "BZh91AY&SYV\261\203 \000\001\001\377\377\377\377\377\376\377\277\277\177\277\377\377\242\277\377\377\362@@@@@@@@@@@@@\000@\000P\006\036\367=\351\356\275\233\254h\025\210N\360<\r\n\246\214\221\221\246jf\321\223\020\230\236\244\362O&\214\324\032M\352jmC\324\332\203F\2311\031\017LCL&\232\207\224\364\202I\0024\004\323T\374\212zL\247\350MM\212\000\000h\003@\000\000\000\003@h\r\032h\r\0014S\324\023Q\350F\232h\365<\241\352\000\006\200\320\000\000\000\000\000\000\000\r\003\025OSS\312z&\206@\320\r\006\200\000\000\000\r\000\0004\000\003M\r\000\000%\020M$\323'\251\264\2305'\251\241\342\203M\244\017H\r\000\000\003@='\250\000\000\032x\211\241\031\2335\216\370\030\rdC\016,f\2767\240<S\024QD\315x\225^\220r\240\257\331?\241$PI\002\222($[m\247&\210rq\360m\337\327\244\206\227\360|\013\364\003&I\032\230\016b\211:\\\236\361\320JLI<\330\r^\352\234f\n\014\362N\t\016g\275\206J\023E\345\360\264qs\2110\310b\202d\253LT\244' \301@\245\0049c4M\337=j),\265\027l\244\310\004ZU\2231\232\227-x\231\255R\212{\310\201\3323\025\303\243\000\031\331\274\224\221\343\244DGa\333\302\271\355y\213\013\027\005\244\2769\010\222\255\201\370S\347\240\263fR\374\225\t\335+\037D\320\005\200\206\361o\006\217o\223\233\244\031yx\177\330Y\330\336\3026\232\262\02072\231\302\r\320\256\356\263\000X\215V\360H\354\250\2038\226Bp5\024ka\021jg\021\260\262\302\322\261E\2313\215e\330\312\2230aZ\230J\252\016V\314\310@\035\032%\303\322\343\000o\320q\376\005:\215\275Z\337YY}\276\332LJ&\030\246\305\243gHe{\007o\242\364\301;e\246\241\202Z\366|\036i>g\342\263B\252U+\216G2a\356E\373\242\036xlq\240\307\003\031\020\221\320\020A\024\221(#Y\005\247\362\322G\023\2644\363\020\323\260\000\376\211v&\272\321\nN\231\004\212\240\036uV\243F\216]O\256L2\305\201\357\222\253\250qTb\320M$\365=c\307Ma\240,~\201\344\030C18\316\211\365\224B'\310\212r\006\261Gt\3346\361\r\002\322\240p\210\225\250\253##\345\356\336s\225\327\230B\355K[7\206\252\t\014\333|(!5C!\212\322\217\343P\302\230\005D\262\242\266\335\314=\270/\010\032@\032Cge,\362\235\007\3540\241\305""\034\300\262J.\244c\370\002q\250\306\224\022\203\r\233\031=\370\026\353)Y\242\373\221P\354\013 \024\2234 \333\303\317\344\340hrr\276Om\026\231\233wC![\267u\270\357,\211\322\313\026*!b\035\250\316\311CxL\033\037z\303\013!\302\272u:\235\333\262\"\034\206\315\314\210\211W\203\226\035\330\347\016\307\024\370\247=\202\201\216\260Q\360L+\024%\275q\310=r\206U\315\020\276\014g\340\\E\223\206\345\3423\314\016\033)\264\231\207\271\233\211\331m\213B\233\001\225\252\206)(\023\005C\003\335\0243\252\356n \254\231\233\3404\337\226p\315\365\253cE\244\307\014\300\305\256\316T[C\245,mZY\230\240\245\243_p\335]W\341\243\001\353\007*\342/\313\222UmF\345w\307x\221\\7\333n\223\232\333\231'P\252\237F\000\346\272\263w\"\035\323@7l\305`5T\332\231\224\037\224\312\347\243p\033\213\261\251N\276\327>\014\253W\014rE\366_\035A\232D\022\340e\212\250l\3266\270a\232\372\351\321M\"\236\005\217\2053\025c\306\206\360hr\370n\262\272\010\246\320)\270R/\240BR6\310B\207$44a-\r\2012\3268\231\221\301(\276\201\215\351\215lX\205\275dP\017\211Eye\245\312\205x\031\005\327_\260/\211>p`\372\354u\352\031\242(\320!\035\246\020}yW\257\002J\235\211\321hJE,\025$6\243\022Z\317+B{\345A\242\310$\032+i6h\311\254\350!p\272ow#\337*$\3656\211\231\216\300P\256K*\026\262\021\351\226d\014\236\353\311pdb;l\254,\002\200\344m\372T\263\352\\\210R\206'\204/g\354\317\217I\241\214i\245\356\255\317\247\213M0\347\264\250\031\216\313\212\347\360\"\312!Vy\344e\275\275\307E#\025\352a\233\213\241\260\241\335\205\3578\337UNC\2219R\364o\242qx\350t\031A\226\246\21372 \353%p\374\252\241WS\333\254\255\3524\210\311\026\225\rR\223m5\232\365\232\345\346\377\270\024\242\326\306\377\325\267\241q\277\313@j[\365\032\366\363\2704\211\302\346\225-\276\t\243B\354\331j\264\342\\\226L\023\322\177\016\010P#\\\370\256m\307(\272j:\005]\023\2419\305\227H\250\304G\\\006\304\244\201I+\256\372\327+\371\223n\372\005\365';\334\022\032\251\252\222S\311u\331l\212\216\362\311\210\250\001\350G[A\200\210\376\353)\002\2577\356\252\300\363\365\2108\001P\347\r\010\037`\007I""\227Q\016a;\342\306\260\242]\327\221\307E\312\313WA\225x\220\314S\371S\366[\231n^\200Mh\200a0\354YLB\000\343\220\346\213\276B;\264\005k\201\250Ucg\233p\241\210\302\373a\006\002\206\311\210\261n\330m9o3E\265\303\010\036\225A7\204*B\254\254a\202\344\307W\312\201\351\275;\364?\266\313\322\242tyI\360\221ZVv\340\2547\270(\tt\3255U\212\264\201\035\256\323U\245j+>z5\243mtcG\314\313\030\230X\221H\327\202\275-\236\366&\257\005u\345\036\rX[\347\005s\236\026Ye\203\210$?\375\254\346\020\026q\363\373\001\010\306\021\001B\336}zH\222\247\242J\217\347\034\010\001\267\321\263\307N\336\326\324N\3704\036\323\330s\267\304\275\213\034\305\332\351\360\035\371\020\034\313\250$i0\227\344\352F\314\020,\372\277\326\014\346f\223I\004\014\2159\231\273\2070\250\212\250F\246\313\311R;N\301\304\222\032\024:\232\207\234\314\277\342\356H\247\n\022\n\3260d\000";
+    PyObject *data = __Pyx_DecompressString(cstring, 1704, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (1210 bytes) */
-const char* const cstring = "x\332\235TMs\323F\030\256\300\345+\220`'\341\233\251\334P\230\026\232\214\3434\343\241\224\216\203\201~Aq\022\302\364\264\263\226V\261\032}Y\27321'\216:\356QG\035\367\250\343\036}\344\250\243\217\371\t\375\t}W\206\3404\201\314T3\332Y\355\373\365\274\317\363j\027\237a\307\362C\227\230\372\026\306\365\226\376b\255U[\325M\3420\254w\034\337\330Y<\332\303\261\031\t\261\363Y\237\220\004\004\263O\2734\216\253\3238\276L\343`\225\227\036\215\202\300\017\331\244\217nb\206\331  \272\341\233D?\332\247K\260IB\335\366\216\260\037\027O<\323\306\336\330zd\202\020\277\236(p\220i\303w\203\220P\n\316\324~Ct\323'T\367|\246\273\230\031]\235u\311\373\320\305\003\304\375\217\260\217}\324\353\272=\366\266\335\300!.\361\000\353\204\243e;Dy\2600\362\014\014\266\373\023\215\034o\374<\240\373\372\303\007?\375\354En0X4\374\220,\272\221\303l\034\206x\240[\030\342M\235\371\n\03008\341\025A\236\356!\207`\340\221\210E\035\262\244\234\226l\177\251\017XL\204\r\2038\213\301`\367\311\237\353\317\232\233\350\367\307\177\241\255z\013\232;x\260\336|\205\320\213\301.\274-\333`\3509\331e\353\304\302T\361\204\351\3003l_\325\367#f{\204\032\016\254\310\366\020\013\261A:\330\330Q:\250\0279\3043\374``\370\221\307\024\321\037\3106m\227\232jC\334\200\r\306\243\202\220b<D\360\220]\233\2515 \006P\211\024u\326\212\025\372\256b\322\242\0014\215\220\005L#\264M\2302w\273\3303\0352&\323V\217\213\267\001\024E\3738\341\257q)\374;\314!\216\217M\324\257\233A\307\374\260\005\235\020r1t\001\217\353\233\221C\324\316\303.Q+\263\373\004\025\210=\362\2723`\304\017\241\220\027\024Z\370\226E\t\363\301\346S\250U[\205\245\241@\006~\260\257\305X0 nB\013\204z\021v\3065\302N\010\340az\2738\200OH\370\2768\354L \037\346\201\302t\201\034\210\021\252V\237a\007E\236\315hT\213\226#\333\203\312jmD^\000\"\364\261\023\021\372V\373\347\332\027_\236\217\227\343W\274\311\333\243\263\027\342vl\361_\223\366\350L\231_\342Q\322L\332{\245\323oi\\\215\033|\031\\\316L\307\177'Z~\265!5Y\036\201\251\037\257\307\224W\363\331;)\025\325}\373\217\262&\233{\205""\275\035\033\274\234W\276I7\204\226\177\373@\256Ic8;l\252\022\345\321\331\231\270\307O\362Z>W\304\347w\037\312\316\360\344\260>\304\205}\357C\276\007\262)\001\312L\334\347\257\000\325F:%V\263r\266\220m\312\262\254\216JS\361*\277\234h\311l\362\\\334\316\264l6k*t\003\225{t\246\302o\203\r\252U\370\202jb\374=\2334\017\237\354\375\247\203\n\277\233l\246\345t!]O\231\250\211G\"\314\346\262vf\310\212\\\221\275\2416*\315)\360\241\270\001X.\301\311)\300\016\245\303x>\356r\314\373\000V\333\347\345\267w\325w\265\275\322\371x-\266y/9\225X\351S\350\344\246\334\036\266Gp\374\230_I*\311J\322KKiKhbNlB\233\2672SVemT\232\347[I-y\222~/z\231\246\272\376\201\237\2064\323)\0215P\363\306\247\324T\274\275L\252 H~\372rQ\2673\001j_L\006\301\033\\\313\313\205X\207\305dq-~\024\367\362\213\013i=\305\371\235\373\362k\371H\322au,\346X\321\013\237W\3748YW\240\265\223\331J\326\223\332AYo\t,h\006ZW\370\275\304L\253\000\241#J\242)6\262\023\300\020\316(\240i\r\265!\2642\225O]\317\257\337\003\343V\266\234\001\2633\371\314W@\352)\010\321\366>\016\306L\034\302\234\367\222\013\351\226X\026@\324\025(v)y#\256\001\202\327\022+\017\306\033\311r1\003\267RST\001 \313jYK\226\306\330\367s]\344'\212!\272\231ZbM@\350\325\244\234\334N\317\211\273\331Kygx\363]\221-\342\277$k\005\374\225b\236ZY)k\302\344\314\311\266\304\023\331\246\363\351*\224\204v\317\305\337\361f>_\210\260\366\207\272\213\306\367\027e\360#\243\316\000u\341r\331\206k\n\365}'\202[!\330\351\330\314\264\220\272_\315\177\001\207\250O\314";
-    PyObject *data = __Pyx_DecompressString(cstring, 1210, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (1580 bytes) */
+const char* const cstring = "x\332\205UKs\323H\020F\213\003\206\274p\022\336\244V\336\360\250\335@('\331\224\227\rl9\004\330\027,N \251=lM\215\245\261\255\215^\326\214\234\230\252\255\342\250\343\034u\324QG\035u\3641G\035}\314O\340'l\217\344\030C\014I\305S3\323=\323_\367\367\365h\351\331\201M\024FT\031\313+\233r\333\322]\203\334\227\033\026\223\261\343\340\216\274\257\261\246L\233\330&\362K\254\327-\307\000\337\035\214\301\371\365\306fiMV\211\316\260\\\323-eoi\264\207\2561\342`\375\253>\016\261\tf_v)\237\026\247|z\230\362\247Q\336\232\324\265m\313a\303>\262\212\031f\035\310V\261T\"\217\366i\022\254\022G\326\314\021\366\323\316\023S\325\260\231YG^\340\340\375\241\000#\200\255\254\310\032\225M`H3l\235\030\304\204\303K\037\035\353\232N\204\007s\\S\301`{4t\013\305m\315l\310\375\240Tv5\223\225el\252\351\014\210\310\024@e\313\324;K\037\021}\361\322\201\221j\357\210\254Z$\203f`\2464e\326$\375\\\036\311O\326\037\377\242j\024\327tBL16\224\365\246&\376h\266VM\013H\256cWg2B\016Q]\205 $\253.\221\231\005\227\232\017\230\243\2655`\030!E35\206\220\351\032vgI\261\034\262d\3001-\223l\035\003\036U\034\202\002A\226C^.\340j\236p\260;&q\231[#\017\205\323C\315z\330\206\334T\204\025\205\350Kv\347`\235Bh\263A-\327Q\310\223\347\177m\275\254\274A\177<\373\033\355\254lBU?\335\330\252\354\"\330\334f\016\301\306\256#T\371\371zi\220\237\322aM\313Dh\204\007%\214\002\345C>\350u\347\000~\233\232\302\320+r\300\266\240Z4\315\031S\3052\231\326p-\367xCh\005\323\216\251h\226\310\335r\231f\022\252`\033+\032\353(:\254\220f\"\346`\205\324\260\262\247X\206-~H'\246b\331\035\305rM&Dw,<U3\250*&\231\204\021\022\302s\004,r \310 \375\227\004\t%\324W\353\216e\010a\324\251\r5G\250\016\302A\250\001I\2019\233\244\331\241f\023\344\247\223L'\251 \014\334\000l\024\r`CE\014\n\375\315t\242[XE\355\025\325\256\251\307S\220 B\006\326\322\022\031\226\352\352D\314Ll\02012\255MP\n\034p\033&\331\257u\030\261\034\010f\332\2514\254z\035jm\201\335\002\206\241\t`(C\231\366\004p\333\262\007\362\3104\004\365\034\222\007B\240\017\324OEL\333L\210Y\000h\271X\317@85`""V\375(\352\223\364\037o\220\0031M\337[hU\322\317\224\022\275\236\n\242\237\024\314\372\2352$\0234B2\331EPp\352(\2455\030\312\240d\027\344\203\030\241b\264\030\326\221\013\315D\335\222\273\234\275\001\351\233\340\232\242\002m\254\273\204fo\302~m_H3\035\234w\304\261\350{\351\303\2153c\023\336\262\267\313+\274\332\2730\351U\275:\377\315\257\366\362\005~\205\273~\305\257\036\345\316\277\247^\321+\363ep\311Oy\377\372Rr\275\034Kq\241\007\246\266\267\345Q^Lf\357\0054,\016\354?\307\245\270r\224\332\253\236\302\013\311\314\235`;\224\222\357\327\343\215X\351\316v+\"D\241wa\332k\361\263\274\224\314\245\347\223\305'q\255{\266\273\322\305\251\375\350\370\276\365\270\022\003\224i\257\315w\001\325v0\036\256E\205h!z\023\027\342b/7\356\255\361\253\276\344\317\372\257\302\273\221\024\315F\025\201\256#\356\356\345g\370]\260A\264\031\276 \222\310\326\263~\345\344\316\321g\031\314\360E\377MP\010\026\202\255\200\205\245\360i\350DsQ5R\342\231x5nu\245^nN\200w\302[\200\345\n\354\234\003\354\020\332\361.{M\216y\033\300J\203\272\374~X<,\035\345&\274\rO\343-\377\234_\017^@&\363q\243[\355\301\3663~\315\237\361W\375V\220\0136C)\234\013\337@\232\267#5.\306\245^\3562\337\361K\376\363\340A\330\212$\221\365\217\374<\\3\025\220\260\004l\336\372\022\233\242no\375\"\020\222\234\277\232\306\255\r\201\032\220\311\340\3606\227\222BJ\326I2\231W\362\236z\255\344\322B\260\022\340\344\336\243\370\273\370iL\273\305\214\314\214\321\311\2573~\032\255\253\220\332\331h5j\305\322\247\264\336\016qH#\340z\206\337\367\325\240\010\020ja.\254\204\333\3217P!\034Q@\263\331\225\272\220\312x2~3\271y\037\214;\321r\004\225\235N\246\277\205\242\236\203#\322\207\374\231\261\374\2614\246=\007\224\336\362'\203\235p9\204R]\203pW\374w\341\r\300\260\037c\341\301x\331_NUp;P\303\"@dQ)\332\214s\031\372\201\314.\361oR\031\315\007\365p#\204\243\327\375\202\1777\270\030.Fo\343{\335\371\303\3646\227\377\352o\244\t\254\246\212\332\214rQ\005\2643\027Wc<t\333T2U\204\220\220\360E\357\007^I.\2474\274\227\304z\221W\201\356kg\306\246\240\375\016""\000\276\224\365\342\016_\341x\300\333\363.\356\266\017\253\231i\227?\345\016\364@~\026.\207\266\333\347\n(\255\224\256\373|\370\205\243\334\244\267\225L\367\343\246M\321\313\215\365\362\027z\371\213^Q\014w\371\030hkb2\375?\356\253\021\223IQ\345\321b\234\202\211\330\313\027\222B\026)?\356\375\004\360Z\275\211\331d\366N\360OT\214J\275\211\033~\321_\013\346C|4\221\266\330\177P&\010}\023:\340E\3608\222\3727m\374)> \331G\007^Oe\017\325:\250\t_\203\006<\276({\373\220\275W\323\230ZG\342\333\250\376\017s\032H:";
+    PyObject *data = __Pyx_DecompressString(cstring, 1580, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (2225 bytes) */
-const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PBD16 literal block.Malformed Vaa3D PBD16 repeat block.Malformed Vaa3D PBD8 delta block.Malformed Vaa3D PBD8 literal block.Malformed Vaa3D PBD8 repeat block.Unsupported Vaa3D PBD datatype code Unsupported Vaa3D PBD header in Unsupported Vaa3D datatype code Unsupported Vaa3D endian code in Unsupported Vaa3D raw header in Vaa3D PBD16 decompressed size does not match the header.Vaa3D PBD8 decompressed size does not match the header.Vaa3D PBD datatype 33 is not implemented.Vaa3D PBD file is truncated: Vaa3D raw file is truncated: Vaa3D raw file size does not match the header: ><=?numpy.core.multiarray failed to importnumpy.core.umath failed to importpyneutube/core/io/vaa3d_accel.pyxFORMAT_KEY_V3DPBDFORMAT_KEY_V3DRAW__Pyx_PyDict_NextRefastypeasyncio.coroutinescline_in_tracebackcompcomp_lencopycountdatadatatypedimsdtypeemptyendian__enter____exit__expected_sizef4fromfilefspath__func__getsizehhandleheaderiiiiimage_is_coroutineitemslittleload_v3dpbdload_v3draw__main____module____name__native_dtypenewbyteordernpnumpyoffsetopenosout16out8pathpoppyneutube.core.io.vaa3d_accel__qualname__rbreadreshape__set_name__setdefaultstruct__test__total_unitsu1u2uint16uint8unpackvalues\200\001\360\032\000\005\014\2102\210W\220A\220Q\330\t\r\210Q\210f\220I\230Q\330\010\021\220\026\220u\230A\230Q\340\004\007\200s\210!\2108\2202\220Q\330\010\016\210j\230\001\320\0318\270\001\270\021\330\004\007\200v\210R\210s\220!\320\023'\240s\250!\330\010\016\210j\230\001\320\031;\2701\270A\340\004\007\200v\210Q\210c\220\021\320\022%\240S\250\001\320)<\270B\270c\300\023\300A\330\010\021\220\021\330\t\017\210q\220\003\2201\320\024'\240s\250!\320+>\270b\300\003\3003\300a\330\010\021\220\021\340\010\016\210j\230\001\320\031<\270A\270Q\340\004\017\210v\220W\230A\230S\240\013\2506\260\021\260#\260T\270\021\270!\330\004\013\2106\220\027\230\001\230\023\230N\250&\260\001\260\023\260A\330\004\007\200y\220\003\2201\330\010\022\220&\230\001\230\021\330\t\022\220#\220Q""\330\010\022\220&\230\001\230\023\230A\330\t\022\220#\220Q\330\010\022\220&\230\001\230\023\230A\340\010\016\210j\230\001\320\031;\2701\270A\340\004\022\220+\230T\240\021\240#\240R\240t\2501\250C\250r\260\024\260Q\260c\270\022\2704\270q\300\001\330\004\024\320\024'\240r\250\034\260T\270\026\270q\300\006\300a\330\004\007\200r\210\025\210h\220a\220v\230S\240\001\330\010\016\210j\230\001\320\031J\310!\3101\340\004\014\210B\210i\220q\230\006\230f\240G\2506\260\035\270g\300Q\330\004\014\210E\220\030\230\022\2304\230q\240\004\240D\250\001\250\024\250T\260\021\260$\260d\270!\2701\330\004\025\220V\2301\230F\240-\250q\260\001\330\004\013\2105\220\007\220q\230\016\240e\2501\200\001\360\034\000\005\014\2102\210W\220A\220Q\330\t\r\210Q\210f\220I\230Q\330\010\017\210v\220U\230!\340\004\007\320\007\027\220q\230\006\230b\240\001\330\010\016\210j\230\001\320\0318\270\001\270\021\330\004\007\200t\2102\210S\220\001\320\021%\240S\250\001\330\010\016\210j\230\001\320\031;\2701\270A\340\004\007\200t\2101\210C\210q\320\020#\2403\240a\320':\270\"\270C\270s\300!\330\010\021\220\021\330\010\021\220\021\330\t\r\210Q\210c\220\021\320\022%\240S\250\001\320)<\270B\270c\300\023\300A\330\010\021\220\021\330\010\021\220\021\340\010\016\210j\230\001\320\031<\270A\270Q\340\004\017\210v\220W\230A\230S\240\013\2504\250q\260\003\2604\260q\270\001\330\004\013\2106\220\027\230\001\230\023\230N\250$\250a\250s\260!\330\004\022\220,\230d\240!\2403\240b\250\004\250A\250S\260\002\260$\260a\260s\270\"\270D\300\001\300\021\330\004\013\320\013\033\320\033,\250A\250V\2602\260Q\330\004\017\320\017\037\230q\240\006\240b\250\001\340\004\007\200y\220\003\2201\330\010\017\210r\220\026\220q\230\r\240V\2502\250Q\330\010\030\230\001\230\026\230z\250\032\2604\260w\270a\330\010\017\210t\2208\2302\230T\240\021\240$\240d\250!\2504\250t\2601\260D\270\004\270A\270Q\340\004\007\200y\220\003\2201\330\010\020\220\002\220&\230\001\230\035\240f\250B\250a\330\010\031\230\021\230&\240\n\250+\260U\270'\300\035\310a\330\010\017\210u""\220H\230B\230d\240!\2404\240t\2501\250D\260\004\260A\260T\270\024\270Q\270a\340\004\007\200y\220\003\2201\330\010\016\320\016!\240\021\240!\330\004\n\210*\220A\320\025;\2701\270ABLraw_image_stack_by_hpengv3d_volume_pkbitdf_encod";
+    #else /* compression: none (2869 bytes) */
+const char* const bytes = ".Expected a 3D volume, got array with shape Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PBD16 literal block.Malformed Vaa3D PBD16 repeat block.Malformed Vaa3D PBD8 delta block.Malformed Vaa3D PBD8 literal block.Malformed Vaa3D PBD8 repeat block.Unsupported Vaa3D PBD datatype code Unsupported Vaa3D PBD header in Unsupported Vaa3D datatype code Unsupported Vaa3D endian code in Unsupported Vaa3D raw header in Vaa3D PBD datatype 33 is not implemented.Vaa3D PBD file is truncated: Vaa3D PBD saving supports uint8 and uint16 volumes only.Vaa3D raw file is truncated: Vaa3D raw file size does not match the header: ><=?disableenablegc<hiiiiisenabledno default __reduce__ due to non-trivial __cinit__numpy.core.multiarray failed to importnumpy.core.umath failed to importpyneutube/core/io/vaa3d_accel.pyx<stringsource>FORMAT_KEY_V3DPBDFORMAT_KEY_V3DRAW_PBDStreamWriter_PBDStreamWriter.__reduce_cython___PBDStreamWriter.__setstate_cython____Pyx_PyDict_NextRefasarrayascontiguousarrayastypeasyncio.coroutinescapacitycline_in_tracebackcompcomp_lencopycountdatadatatypedimsdtypeendian__enter____exit__expected_sizef4fromfilefspath__func__getsize__getstate__hhandleheaderiiiiimage_is_coroutineitemslittleload_v3dpbdload_v3draw__main____module____name__native_dtypendimnewbyteordernpnumpyoffsetopenosout16out8packpathpoppyneutube.core.io.vaa3d_accel__pyx_state__pyx_vtable____qualname__rbread__reduce____reduce_cython____reduce_ex__reshapesave_v3dpbdself__set_name__setdefault__setstate____setstate_cython__shapesizesrc16src8struct__test__total_unitsu1u2uint16uint8unpackvaluesvolumewbwritewriterzeros\200\001\360\032\000\005\014\2102\210W\220A\220Q\330\t\r\210Q\210f\220I\230Q\330\010\021\220\026\220u\230A\230Q\340\004\007\200s\210!\2108\2202\220Q\330\010\016\210j\230\001\320\0318\270\001\270\021\330\004\007\200v\210R\210s\220!\320\023'\240s\250!\330\010\016\210j\230\001\320\031;\2701\270A\340\004\007\200v\210Q\210c\220\021\320\022%\240S\250\001\320)<\270B\270c\300\023\300A\330\010\021\220\021""\330\t\017\210q\220\003\2201\320\024'\240s\250!\320+>\270b\300\003\3003\300a\330\010\021\220\021\340\010\016\210j\230\001\320\031<\270A\270Q\340\004\017\210v\220W\230A\230S\240\013\2506\260\021\260#\260T\270\021\270!\330\004\013\2106\220\027\230\001\230\023\230N\250&\260\001\260\023\260A\330\004\007\200y\220\003\2201\330\010\022\220&\230\001\230\021\330\t\022\220#\220Q\330\010\022\220&\230\001\230\023\230A\330\t\022\220#\220Q\330\010\022\220&\230\001\230\023\230A\340\010\016\210j\230\001\320\031;\2701\270A\340\004\022\220+\230T\240\021\240#\240R\240t\2501\250C\250r\260\024\260Q\260c\270\022\2704\270q\300\001\330\004\024\320\024'\240r\250\034\260T\270\026\270q\300\006\300a\330\004\007\200r\210\025\210h\220a\220v\230S\240\001\330\010\016\210j\230\001\320\031J\310!\3101\340\004\014\210B\210i\220q\230\006\230f\240G\2506\260\035\270g\300Q\330\004\014\210E\220\030\230\022\2304\230q\240\004\240D\250\001\250\024\250T\260\021\260$\260d\270!\2701\330\004\025\220V\2301\230F\240-\250q\260\001\330\004\013\2105\220\007\220q\230\016\240e\2501\200\001\360\034\000\005\014\2102\210W\220A\220Q\330\t\r\210Q\210f\220I\230Q\330\010\017\210v\220U\230!\340\004\007\320\007\027\220q\230\006\230b\240\001\330\010\016\210j\230\001\320\0318\270\001\270\021\330\004\007\200t\2102\210S\220\001\320\021%\240S\250\001\330\010\016\210j\230\001\320\031;\2701\270A\340\004\007\200t\2101\210C\210q\320\020#\2403\240a\320':\270\"\270C\270s\300!\330\010\021\220\021\330\010\021\220\021\330\t\r\210Q\210c\220\021\320\022%\240S\250\001\320)<\270B\270c\300\023\300A\330\010\021\220\021\330\010\021\220\021\340\010\016\210j\230\001\320\031<\270A\270Q\340\004\017\210v\220W\230A\230S\240\013\2504\250q\260\003\2604\260q\270\001\330\004\013\2106\220\027\230\001\230\023\230N\250$\250a\250s\260!\330\004\022\220,\230d\240!\2403\240b\250\004\250A\250S\260\002\260$\260a\260s\270\"\270D\300\001\300\021\330\004\013\320\013\033\320\033,\250A\250V\2602\260Q\330\004\017\320\017\037\230q\240\006\240b\250\001\360\010\000\005\010""\200y\220\003\2201\330\010\017\210r\220\026\220q\230\r\240V\2502\250Q\330\010\030\230\001\230\026\230z\250\032\2604\260w\270a\330\010\017\210t\2208\2302\230T\240\021\240$\240d\250!\2504\250t\2601\260D\270\004\270A\270Q\340\004\007\200y\220\003\2201\330\010\020\220\002\220&\230\001\230\035\240f\250B\250a\330\010\031\230\021\230&\240\n\250+\260U\270'\300\035\310a\330\010\017\210u\220H\230B\230d\240!\2404\240t\2501\250D\260\004\260A\260T\270\024\270Q\270a\340\004\007\200y\220\003\2201\330\010\016\320\016!\240\021\240!\330\004\n\210*\220A\320\025;\2701\270A\200\001\330\004\n\210+\220Q\200\001\360\030\000\005\016\210R\210x\220q\230\001\330\004\007\200v\210V\2203\220a\330\010\016\210j\230\001\320\031F\300a\300v\310Q\330\004\007\200v\210W\220C\220r\230\021\330\010\023\2201\330\t\017\210w\220c\230\022\2301\330\010\023\2201\340\010\016\210j\230\001\230\021\340\004\r\210R\320\017!\240\021\240!\330\004\022\220&\230\001\330\004\005\330\010\t\330\010\n\210!\330\010\n\210&\220\005\220Q\330\014\r\330\014\r\330\014\022\220&\230\001\230\021\330\014\022\220&\230\001\230\021\330\014\022\220&\230\001\230\021\330\014\r\360\010\000\005\014\2102\210W\220A\220Q\330\t\r\210Q\210f\220I\230Q\330\010\016\210f\220A\220Q\330\010\021\320\021!\240\021\240!\330\010\013\2109\220C\220q\330\014\023\320\023%\240]\260!\2601\330\014\032\230!\2306\240\035\250a\340\014\024\320\024'\240}\260A\260Q\330\014\033\2301\230G\240=\260\001\330\010\016\210f\220ABLraw_image_stack_by_hpengv3d_volume_pkbitdf_encod";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 89; i++) {
+    for (int i = 0; i < 122; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 25) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 32) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -8897,7 +12423,7 @@ const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PB
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 89; i < 95; i++) {
+    for (int i = 122; i < 130; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -8908,15 +12434,15 @@ const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PB
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 95; i++) {
+    for (Py_ssize_t i = 0; i < 130; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 89;
-      for (Py_ssize_t i=0; i<6; ++i) {
+      PyObject **table = stringtab + 122;
+      for (Py_ssize_t i=0; i<8; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
         if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
@@ -8935,8 +12461,8 @@ const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PB
   }
   {
     PyObject **numbertab = __pyx_mstate->__pyx_number_tab + 0;
-    int8_t const cint_constants_1[] = {43};
-    for (int i = 0; i < 1; i++) {
+    int8_t const cint_constants_1[] = {1,3,43};
+    for (int i = 0; i < 3; i++) {
       numbertab[i] = PyLong_FromLong(cint_constants_1[i - 0]);
       if (unlikely(!numbertab[i])) __PYX_ERR(0, 1, __pyx_L1_error)
     }
@@ -8944,7 +12470,7 @@ const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PB
   #if CYTHON_IMMORTAL_CONSTANTS
   {
     PyObject **table = __pyx_mstate->__pyx_number_tab;
-    for (Py_ssize_t i=0; i<1; ++i) {
+    for (Py_ssize_t i=0; i<3; ++i) {
       #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
       #if PY_VERSION_HEX < 0x030E0000
       if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
@@ -8966,12 +12492,12 @@ const char* const bytes = ".Malformed Vaa3D PBD16 delta block.Malformed Vaa3D PB
 }
 /* #### Code section: init_codeobjects ### */
 typedef struct {
-    unsigned int argcount : 1;
+    unsigned int argcount : 2;
     unsigned int num_posonly_args : 1;
     unsigned int num_kwonly_args : 1;
     unsigned int nlocals : 4;
     unsigned int flags : 10;
-    unsigned int first_line : 8;
+    unsigned int first_line : 10;
 } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
 static PyObject* __Pyx_PyCode_New(
@@ -8988,14 +12514,29 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 11, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 184};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_path, __pyx_mstate->__pyx_n_u_header, __pyx_mstate->__pyx_n_u_endian, __pyx_mstate->__pyx_n_u_datatype, __pyx_mstate->__pyx_n_u_dims, __pyx_mstate->__pyx_n_u_dtype, __pyx_mstate->__pyx_n_u_native_dtype, __pyx_mstate->__pyx_n_u_image, __pyx_mstate->__pyx_n_u_total_units, __pyx_mstate->__pyx_n_u_expected_size, __pyx_mstate->__pyx_n_u_handle};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_pyneutube_core_io_vaa3d_accel_py, __pyx_mstate->__pyx_n_u_load_v3draw, __pyx_mstate->__pyx_kp_b_iso88591_2WAQ_QfIQ_uAQ_s_82Q_j_8_vRs_s_j, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_reduce_cython, __pyx_mstate->__pyx_kp_b_iso88591_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 12, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 235};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 3};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_pyx_state};
+    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 11, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 442};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_path, __pyx_mstate->__pyx_n_u_header, __pyx_mstate->__pyx_n_u_endian, __pyx_mstate->__pyx_n_u_datatype, __pyx_mstate->__pyx_n_u_dims, __pyx_mstate->__pyx_n_u_dtype, __pyx_mstate->__pyx_n_u_native_dtype, __pyx_mstate->__pyx_n_u_image, __pyx_mstate->__pyx_n_u_total_units, __pyx_mstate->__pyx_n_u_expected_size, __pyx_mstate->__pyx_n_u_handle};
+    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_pyneutube_core_io_vaa3d_accel_py, __pyx_mstate->__pyx_n_u_load_v3draw, __pyx_mstate->__pyx_kp_b_iso88591_2WAQ_QfIQ_uAQ_s_82Q_j_8_vRs_s_j, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 12, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 493};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_path, __pyx_mstate->__pyx_n_u_data, __pyx_mstate->__pyx_n_u_comp, __pyx_mstate->__pyx_n_u_comp_len, __pyx_mstate->__pyx_n_u_endian, __pyx_mstate->__pyx_n_u_little, __pyx_mstate->__pyx_n_u_datatype, __pyx_mstate->__pyx_n_u_dims, __pyx_mstate->__pyx_n_u_total_units, __pyx_mstate->__pyx_n_u_out8, __pyx_mstate->__pyx_n_u_out16, __pyx_mstate->__pyx_n_u_handle};
-    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_pyneutube_core_io_vaa3d_accel_py, __pyx_mstate->__pyx_n_u_load_v3dpbd, __pyx_mstate->__pyx_kp_b_iso88591_2WAQ_QfIQ_vU_q_b_j_8_t2S_S_j_1A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_pyneutube_core_io_vaa3d_accel_py, __pyx_mstate->__pyx_n_u_load_v3dpbd, __pyx_mstate->__pyx_kp_b_iso88591_2WAQ_QfIQ_vU_q_b_j_8_t2S_S_j_1A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 10, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 548};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_image, __pyx_mstate->__pyx_n_u_path, __pyx_mstate->__pyx_n_u_volume, __pyx_mstate->__pyx_n_u_handle, __pyx_mstate->__pyx_n_u_header, __pyx_mstate->__pyx_n_u_writer, __pyx_mstate->__pyx_n_u_src8, __pyx_mstate->__pyx_n_u_src16, __pyx_mstate->__pyx_n_u_total_units, __pyx_mstate->__pyx_n_u_datatype};
+    __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_pyneutube_core_io_vaa3d_accel_py, __pyx_mstate->__pyx_n_u_save_v3dpbd, __pyx_mstate->__pyx_kp_b_iso88591_Rxq_vV3a_j_FavQ_vWCr_1_wc_1_1_j, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
@@ -10564,6 +14105,46 @@ static void __Pyx_RaiseArgtupleInvalid(
                  (num_expected == 1) ? "" : "s", num_found);
 }
 
+/* PyObjectFastCallMethod */
+#if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
+static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf) {
+    PyObject *result;
+    PyObject *attr = PyObject_GetAttr(args[0], name);
+    if (unlikely(!attr))
+        return NULL;
+    result = __Pyx_PyObject_FastCall(attr, args+1, nargsf - 1);
+    Py_DECREF(attr);
+    return result;
+}
+#endif
+
+/* RejectKeywords */
+static void __Pyx_RejectKeywords(const char* function_name, PyObject *kwds) {
+    PyObject *key = NULL;
+    if (CYTHON_METH_FASTCALL && likely(PyTuple_Check(kwds))) {
+        key = __Pyx_PySequence_ITEM(kwds, 0);
+    } else {
+#if CYTHON_AVOID_BORROWED_REFS
+        PyObject *pos = NULL;
+#else
+        Py_ssize_t pos = 0;
+#endif
+#if !CYTHON_COMPILING_IN_PYPY || defined(PyArg_ValidateKeywordArguments)
+        if (unlikely(!PyArg_ValidateKeywordArguments(kwds))) return;
+#endif
+        __Pyx_PyDict_NextRef(kwds, &pos, &key, NULL);
+#if CYTHON_AVOID_BORROWED_REFS
+        Py_XDECREF(pos);
+#endif
+    }
+    if (likely(key)) {
+        PyErr_Format(PyExc_TypeError,
+            "%s() got an unexpected keyword argument '%U'",
+            function_name, key);
+        Py_DECREF(key);
+    }
+}
+
 /* PyDictVersioning (used by GetModuleGlobalName) */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
@@ -10643,19 +14224,6 @@ static CYTHON_INLINE PyObject* __Pyx__PyObject_LookupSpecial(PyObject* obj, PyOb
         PyErr_SetObject(PyExc_AttributeError, attr_name);
     }
     return res;
-}
-#endif
-
-/* PyObjectFastCallMethod */
-#if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
-static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf) {
-    PyObject *result;
-    PyObject *attr = PyObject_GetAttr(args[0], name);
-    if (unlikely(!attr))
-        return NULL;
-    result = __Pyx_PyObject_FastCall(attr, args+1, nargsf - 1);
-    Py_DECREF(attr);
-    return result;
 }
 #endif
 
@@ -11729,6 +15297,828 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
        "Buffer acquisition failed on assignment; and then reacquiring the old buffer failed too!");
   }
   
+/* PyLongCompare */
+  static CYTHON_INLINE int __Pyx_PyLong_BoolNeObjC(PyObject *op1, PyObject *op2, long intval, long inplace) {
+      CYTHON_MAYBE_UNUSED_VAR(intval);
+      CYTHON_UNUSED_VAR(inplace);
+      if (op1 == op2) {
+          return 0;
+      }
+      #if CYTHON_USE_PYLONG_INTERNALS
+      if (likely(PyLong_CheckExact(op1))) {
+          int unequal;
+          unsigned long uintval;
+          Py_ssize_t size = __Pyx_PyLong_DigitCount(op1);
+          const digit* digits = __Pyx_PyLong_Digits(op1);
+          if (intval == 0) {
+              return (__Pyx_PyLong_IsZero(op1) != 1);
+          } else if (intval < 0) {
+              if (__Pyx_PyLong_IsNonNeg(op1))
+                  return 1;
+              intval = -intval;
+          } else {
+              if (__Pyx_PyLong_IsNeg(op1))
+                  return 1;
+          }
+          uintval = (unsigned long) intval;
+  #if PyLong_SHIFT * 4 < SIZEOF_LONG*8
+          if (uintval >> (PyLong_SHIFT * 4)) {
+              unequal = (size != 5) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
+                   | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[4] != ((uintval >> (4 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
+          } else
+  #endif
+  #if PyLong_SHIFT * 3 < SIZEOF_LONG*8
+          if (uintval >> (PyLong_SHIFT * 3)) {
+              unequal = (size != 4) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
+                   | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
+          } else
+  #endif
+  #if PyLong_SHIFT * 2 < SIZEOF_LONG*8
+          if (uintval >> (PyLong_SHIFT * 2)) {
+              unequal = (size != 3) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
+                   | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
+          } else
+  #endif
+  #if PyLong_SHIFT * 1 < SIZEOF_LONG*8
+          if (uintval >> (PyLong_SHIFT * 1)) {
+              unequal = (size != 2) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
+                   | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
+          } else
+  #endif
+              unequal = (size != 1) || (((unsigned long) digits[0]) != (uintval & (unsigned long) PyLong_MASK));
+          return (unequal != 0);
+      }
+      #endif
+      if (PyFloat_CheckExact(op1)) {
+          const long b = intval;
+          double a = __Pyx_PyFloat_AS_DOUBLE(op1);
+          return ((double)a != (double)b);
+      }
+      return __Pyx_PyObject_IsTrueAndDecref(
+          PyObject_RichCompare(op1, op2, Py_NE));
+  }
+  
+/* PyObjectFormatAndDecref */
+  static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f) {
+      if (unlikely(!s)) return NULL;
+      if (likely(PyUnicode_CheckExact(s))) return s;
+      return __Pyx_PyObject_FormatAndDecref(s, f);
+  }
+  static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f) {
+      PyObject *result;
+      if (unlikely(!s)) return NULL;
+      result = PyObject_Format(s, f);
+      Py_DECREF(s);
+      return result;
+  }
+  
+/* AllocateExtensionType */
+  static PyObject *__Pyx_AllocateExtensionType(PyTypeObject *t, int is_final) {
+      if (is_final || likely(!__Pyx_PyType_HasFeature(t, Py_TPFLAGS_IS_ABSTRACT))) {
+          allocfunc alloc_func = __Pyx_PyType_GetSlot(t, tp_alloc, allocfunc);
+          return alloc_func(t, 0);
+      } else {
+          newfunc tp_new = __Pyx_PyType_TryGetSlot(&PyBaseObject_Type, tp_new, newfunc);
+      #if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x030A0000
+          if (!tp_new) {
+              PyObject *new_str = PyUnicode_FromString("__new__");
+              if (likely(new_str)) {
+                  PyObject *o = PyObject_CallMethodObjArgs((PyObject *)&PyBaseObject_Type, new_str, t, NULL);
+                  Py_DECREF(new_str);
+                  return o;
+              } else
+                  return NULL;
+          } else
+      #endif
+          return tp_new(t, __pyx_mstate_global->__pyx_empty_tuple, 0);
+      }
+  }
+  
+/* CallTypeTraverse */
+  #if !CYTHON_USE_TYPE_SPECS || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x03090000)
+  #else
+  static int __Pyx_call_type_traverse(PyObject *o, int always_call, visitproc visit, void *arg) {
+      #if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x03090000
+      if (__Pyx_get_runtime_version() < 0x03090000) return 0;
+      #endif
+      if (!always_call) {
+          PyTypeObject *base = __Pyx_PyObject_GetSlot(o, tp_base, PyTypeObject*);
+          unsigned long flags = PyType_GetFlags(base);
+          if (flags & Py_TPFLAGS_HEAPTYPE) {
+              return 0;
+          }
+      }
+      Py_VISIT((PyObject*)Py_TYPE(o));
+      return 0;
+  }
+  #endif
+  
+/* LimitedApiGetTypeDict (used by SetItemOnTypeDict) */
+  #if CYTHON_COMPILING_IN_LIMITED_API
+  static Py_ssize_t __Pyx_GetTypeDictOffset(void) {
+      PyObject *tp_dictoffset_o;
+      Py_ssize_t tp_dictoffset;
+      tp_dictoffset_o = PyObject_GetAttrString((PyObject*)(&PyType_Type), "__dictoffset__");
+      if (unlikely(!tp_dictoffset_o)) return -1;
+      tp_dictoffset = PyLong_AsSsize_t(tp_dictoffset_o);
+      Py_DECREF(tp_dictoffset_o);
+      if (unlikely(tp_dictoffset == 0)) {
+          PyErr_SetString(
+              PyExc_TypeError,
+              "'type' doesn't have a dictoffset");
+          return -1;
+      } else if (unlikely(tp_dictoffset < 0)) {
+          PyErr_SetString(
+              PyExc_TypeError,
+              "'type' has an unexpected negative dictoffset. "
+              "Please report this as Cython bug");
+          return -1;
+      }
+      return tp_dictoffset;
+  }
+  static PyObject *__Pyx_GetTypeDict(PyTypeObject *tp) {
+      static Py_ssize_t tp_dictoffset = 0;
+      if (unlikely(tp_dictoffset == 0)) {
+          tp_dictoffset = __Pyx_GetTypeDictOffset();
+          if (unlikely(tp_dictoffset == -1 && PyErr_Occurred())) {
+              tp_dictoffset = 0; // try again next time?
+              return NULL;
+          }
+      }
+      return *(PyObject**)((char*)tp + tp_dictoffset);
+  }
+  #endif
+  
+/* SetItemOnTypeDict (used by FixUpExtensionType) */
+  static int __Pyx__SetItemOnTypeDict(PyTypeObject *tp, PyObject *k, PyObject *v) {
+      int result;
+      PyObject *tp_dict;
+  #if CYTHON_COMPILING_IN_LIMITED_API
+      tp_dict = __Pyx_GetTypeDict(tp);
+      if (unlikely(!tp_dict)) return -1;
+  #else
+      tp_dict = tp->tp_dict;
+  #endif
+      result = PyDict_SetItem(tp_dict, k, v);
+      if (likely(!result)) {
+          PyType_Modified(tp);
+          if (unlikely(PyObject_HasAttr(v, __pyx_mstate_global->__pyx_n_u_set_name))) {
+              PyObject *setNameResult = PyObject_CallMethodObjArgs(v, __pyx_mstate_global->__pyx_n_u_set_name,  (PyObject *) tp, k, NULL);
+              if (!setNameResult) return -1;
+              Py_DECREF(setNameResult);
+          }
+      }
+      return result;
+  }
+  
+/* FixUpExtensionType */
+  static int __Pyx_fix_up_extension_type_from_spec(PyType_Spec *spec, PyTypeObject *type) {
+  #if __PYX_LIMITED_VERSION_HEX > 0x030900B1
+      CYTHON_UNUSED_VAR(spec);
+      CYTHON_UNUSED_VAR(type);
+      CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
+  #else
+      const PyType_Slot *slot = spec->slots;
+      int changed = 0;
+  #if !CYTHON_COMPILING_IN_LIMITED_API
+      while (slot && slot->slot && slot->slot != Py_tp_members)
+          slot++;
+      if (slot && slot->slot == Py_tp_members) {
+  #if !CYTHON_COMPILING_IN_CPYTHON
+          const
+  #endif  // !CYTHON_COMPILING_IN_CPYTHON)
+              PyMemberDef *memb = (PyMemberDef*) slot->pfunc;
+          while (memb && memb->name) {
+              if (memb->name[0] == '_' && memb->name[1] == '_') {
+                  if (strcmp(memb->name, "__weaklistoffset__") == 0) {
+                      assert(memb->type == T_PYSSIZET);
+                      assert(memb->flags == READONLY);
+                      type->tp_weaklistoffset = memb->offset;
+                      changed = 1;
+                  }
+                  else if (strcmp(memb->name, "__dictoffset__") == 0) {
+                      assert(memb->type == T_PYSSIZET);
+                      assert(memb->flags == READONLY);
+                      type->tp_dictoffset = memb->offset;
+                      changed = 1;
+                  }
+  #if CYTHON_METH_FASTCALL
+                  else if (strcmp(memb->name, "__vectorcalloffset__") == 0) {
+                      assert(memb->type == T_PYSSIZET);
+                      assert(memb->flags == READONLY);
+                      type->tp_vectorcall_offset = memb->offset;
+                      changed = 1;
+                  }
+  #endif  // CYTHON_METH_FASTCALL
+  #if !CYTHON_COMPILING_IN_PYPY
+                  else if (strcmp(memb->name, "__module__") == 0) {
+                      PyObject *descr;
+                      assert(memb->type == T_OBJECT);
+                      assert(memb->flags == 0 || memb->flags == READONLY);
+                      descr = PyDescr_NewMember(type, memb);
+                      if (unlikely(!descr))
+                          return -1;
+                      int set_item_result = PyDict_SetItem(type->tp_dict, PyDescr_NAME(descr), descr);
+                      Py_DECREF(descr);
+                      if (unlikely(set_item_result < 0)) {
+                          return -1;
+                      }
+                      changed = 1;
+                  }
+  #endif  // !CYTHON_COMPILING_IN_PYPY
+              }
+              memb++;
+          }
+      }
+  #endif  // !CYTHON_COMPILING_IN_LIMITED_API
+  #if !CYTHON_COMPILING_IN_PYPY
+      slot = spec->slots;
+      while (slot && slot->slot && slot->slot != Py_tp_getset)
+          slot++;
+      if (slot && slot->slot == Py_tp_getset) {
+          PyGetSetDef *getset = (PyGetSetDef*) slot->pfunc;
+          while (getset && getset->name) {
+              if (getset->name[0] == '_' && getset->name[1] == '_' && strcmp(getset->name, "__module__") == 0) {
+                  PyObject *descr = PyDescr_NewGetSet(type, getset);
+                  if (unlikely(!descr))
+                      return -1;
+                  #if CYTHON_COMPILING_IN_LIMITED_API
+                  PyObject *pyname = PyUnicode_FromString(getset->name);
+                  if (unlikely(!pyname)) {
+                      Py_DECREF(descr);
+                      return -1;
+                  }
+                  int set_item_result = __Pyx_SetItemOnTypeDict(type, pyname, descr);
+                  Py_DECREF(pyname);
+                  #else
+                  CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
+                  int set_item_result = PyDict_SetItem(type->tp_dict, PyDescr_NAME(descr), descr);
+                  #endif
+                  Py_DECREF(descr);
+                  if (unlikely(set_item_result < 0)) {
+                      return -1;
+                  }
+                  changed = 1;
+              }
+              ++getset;
+          }
+      }
+  #else
+      CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
+  #endif  // !CYTHON_COMPILING_IN_PYPY
+      if (changed)
+          PyType_Modified(type);
+  #endif  // PY_VERSION_HEX > 0x030900B1
+      return 0;
+  }
+  
+/* PyObjectCallNoArg (used by PyObjectCallMethod0) */
+  static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+      PyObject *arg[2] = {NULL, NULL};
+      return __Pyx_PyObject_FastCall(func, arg + 1, 0 | __Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET);
+  }
+  
+/* PyObjectGetMethod (used by PyObjectCallMethod0) */
+  #if !(CYTHON_VECTORCALL && (__PYX_LIMITED_VERSION_HEX >= 0x030C0000 || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x03090000)))
+  static int __Pyx_PyObject_GetMethod(PyObject *obj, PyObject *name, PyObject **method) {
+      PyObject *attr;
+  #if CYTHON_UNPACK_METHODS && CYTHON_COMPILING_IN_CPYTHON && CYTHON_USE_PYTYPE_LOOKUP
+      __Pyx_TypeName type_name;
+      PyTypeObject *tp = Py_TYPE(obj);
+      PyObject *descr;
+      descrgetfunc f = NULL;
+      PyObject **dictptr, *dict;
+      int meth_found = 0;
+      assert (*method == NULL);
+      if (unlikely(tp->tp_getattro != PyObject_GenericGetAttr)) {
+          attr = __Pyx_PyObject_GetAttrStr(obj, name);
+          goto try_unpack;
+      }
+      if (unlikely(tp->tp_dict == NULL) && unlikely(PyType_Ready(tp) < 0)) {
+          return 0;
+      }
+      descr = _PyType_Lookup(tp, name);
+      if (likely(descr != NULL)) {
+          Py_INCREF(descr);
+  #if defined(Py_TPFLAGS_METHOD_DESCRIPTOR) && Py_TPFLAGS_METHOD_DESCRIPTOR
+          if (__Pyx_PyType_HasFeature(Py_TYPE(descr), Py_TPFLAGS_METHOD_DESCRIPTOR))
+  #else
+          #ifdef __Pyx_CyFunction_USED
+          if (likely(PyFunction_Check(descr) || __Pyx_IS_TYPE(descr, &PyMethodDescr_Type) || __Pyx_CyFunction_Check(descr)))
+          #else
+          if (likely(PyFunction_Check(descr) || __Pyx_IS_TYPE(descr, &PyMethodDescr_Type)))
+          #endif
+  #endif
+          {
+              meth_found = 1;
+          } else {
+              f = Py_TYPE(descr)->tp_descr_get;
+              if (f != NULL && PyDescr_IsData(descr)) {
+                  attr = f(descr, obj, (PyObject *)Py_TYPE(obj));
+                  Py_DECREF(descr);
+                  goto try_unpack;
+              }
+          }
+      }
+      dictptr = _PyObject_GetDictPtr(obj);
+      if (dictptr != NULL && (dict = *dictptr) != NULL) {
+          Py_INCREF(dict);
+          attr = __Pyx_PyDict_GetItemStr(dict, name);
+          if (attr != NULL) {
+              Py_INCREF(attr);
+              Py_DECREF(dict);
+              Py_XDECREF(descr);
+              goto try_unpack;
+          }
+          Py_DECREF(dict);
+      }
+      if (meth_found) {
+          *method = descr;
+          return 1;
+      }
+      if (f != NULL) {
+          attr = f(descr, obj, (PyObject *)Py_TYPE(obj));
+          Py_DECREF(descr);
+          goto try_unpack;
+      }
+      if (likely(descr != NULL)) {
+          *method = descr;
+          return 0;
+      }
+      type_name = __Pyx_PyType_GetFullyQualifiedName(tp);
+      PyErr_Format(PyExc_AttributeError,
+                   "'" __Pyx_FMT_TYPENAME "' object has no attribute '%U'",
+                   type_name, name);
+      __Pyx_DECREF_TypeName(type_name);
+      return 0;
+  #else
+      attr = __Pyx_PyObject_GetAttrStr(obj, name);
+      goto try_unpack;
+  #endif
+  try_unpack:
+  #if CYTHON_UNPACK_METHODS
+      if (likely(attr) && PyMethod_Check(attr) && likely(PyMethod_GET_SELF(attr) == obj)) {
+          PyObject *function = PyMethod_GET_FUNCTION(attr);
+          Py_INCREF(function);
+          Py_DECREF(attr);
+          *method = function;
+          return 1;
+      }
+  #endif
+      *method = attr;
+      return 0;
+  }
+  #endif
+  
+/* PyObjectCallMethod0 (used by PyType_Ready) */
+  static PyObject* __Pyx_PyObject_CallMethod0(PyObject* obj, PyObject* method_name) {
+  #if CYTHON_VECTORCALL && (__PYX_LIMITED_VERSION_HEX >= 0x030C0000 || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x03090000))
+      PyObject *args[1] = {obj};
+      (void) __Pyx_PyObject_CallOneArg;
+      (void) __Pyx_PyObject_CallNoArg;
+      return PyObject_VectorcallMethod(method_name, args, 1 | PY_VECTORCALL_ARGUMENTS_OFFSET, NULL);
+  #else
+      PyObject *method = NULL, *result = NULL;
+      int is_method = __Pyx_PyObject_GetMethod(obj, method_name, &method);
+      if (likely(is_method)) {
+          result = __Pyx_PyObject_CallOneArg(method, obj);
+          Py_DECREF(method);
+          return result;
+      }
+      if (unlikely(!method)) goto bad;
+      result = __Pyx_PyObject_CallNoArg(method);
+      Py_DECREF(method);
+  bad:
+      return result;
+  #endif
+  }
+  
+/* ValidateBasesTuple (used by PyType_Ready) */
+  #if CYTHON_COMPILING_IN_CPYTHON || CYTHON_COMPILING_IN_LIMITED_API || CYTHON_USE_TYPE_SPECS
+  static int __Pyx_validate_bases_tuple(const char *type_name, Py_ssize_t dictoffset, PyObject *bases) {
+      Py_ssize_t i, n;
+  #if CYTHON_ASSUME_SAFE_SIZE
+      n = PyTuple_GET_SIZE(bases);
+  #else
+      n = PyTuple_Size(bases);
+      if (unlikely(n < 0)) return -1;
+  #endif
+      for (i = 1; i < n; i++)
+      {
+          PyTypeObject *b;
+  #if CYTHON_AVOID_BORROWED_REFS
+          PyObject *b0 = PySequence_GetItem(bases, i);
+          if (!b0) return -1;
+  #elif CYTHON_ASSUME_SAFE_MACROS
+          PyObject *b0 = PyTuple_GET_ITEM(bases, i);
+  #else
+          PyObject *b0 = PyTuple_GetItem(bases, i);
+          if (!b0) return -1;
+  #endif
+          b = (PyTypeObject*) b0;
+          if (!__Pyx_PyType_HasFeature(b, Py_TPFLAGS_HEAPTYPE))
+          {
+              __Pyx_TypeName b_name = __Pyx_PyType_GetFullyQualifiedName(b);
+              PyErr_Format(PyExc_TypeError,
+                  "base class '" __Pyx_FMT_TYPENAME "' is not a heap type", b_name);
+              __Pyx_DECREF_TypeName(b_name);
+  #if CYTHON_AVOID_BORROWED_REFS
+              Py_DECREF(b0);
+  #endif
+              return -1;
+          }
+          if (dictoffset == 0)
+          {
+              Py_ssize_t b_dictoffset = 0;
+  #if CYTHON_USE_TYPE_SLOTS
+              b_dictoffset = b->tp_dictoffset;
+  #else
+              PyObject *py_b_dictoffset = PyObject_GetAttrString((PyObject*)b, "__dictoffset__");
+              if (!py_b_dictoffset) goto dictoffset_return;
+              b_dictoffset = PyLong_AsSsize_t(py_b_dictoffset);
+              Py_DECREF(py_b_dictoffset);
+              if (b_dictoffset == -1 && PyErr_Occurred()) goto dictoffset_return;
+  #endif
+              if (b_dictoffset) {
+                  {
+                      __Pyx_TypeName b_name = __Pyx_PyType_GetFullyQualifiedName(b);
+                      PyErr_Format(PyExc_TypeError,
+                          "extension type '%.200s' has no __dict__ slot, "
+                          "but base type '" __Pyx_FMT_TYPENAME "' has: "
+                          "either add 'cdef dict __dict__' to the extension type "
+                          "or add '__slots__ = [...]' to the base type",
+                          type_name, b_name);
+                      __Pyx_DECREF_TypeName(b_name);
+                  }
+  #if !CYTHON_USE_TYPE_SLOTS
+                dictoffset_return:
+  #endif
+  #if CYTHON_AVOID_BORROWED_REFS
+                  Py_DECREF(b0);
+  #endif
+                  return -1;
+              }
+          }
+  #if CYTHON_AVOID_BORROWED_REFS
+          Py_DECREF(b0);
+  #endif
+      }
+      return 0;
+  }
+  #endif
+  
+/* PyType_Ready */
+  CYTHON_UNUSED static int __Pyx_PyType_HasMultipleInheritance(PyTypeObject *t) {
+      while (t) {
+          PyObject *bases = __Pyx_PyType_GetSlot(t, tp_bases, PyObject*);
+          if (bases) {
+              return 1;
+          }
+          t = __Pyx_PyType_GetSlot(t, tp_base, PyTypeObject*);
+      }
+      return 0;
+  }
+  static int __Pyx_PyType_Ready(PyTypeObject *t) {
+  #if CYTHON_USE_TYPE_SPECS || !CYTHON_COMPILING_IN_CPYTHON || defined(PYSTON_MAJOR_VERSION)
+      (void)__Pyx_PyObject_CallMethod0;
+  #if CYTHON_USE_TYPE_SPECS
+      (void)__Pyx_validate_bases_tuple;
+  #endif
+      return PyType_Ready(t);
+  #else
+      int r;
+      if (!__Pyx_PyType_HasMultipleInheritance(t)) {
+          return PyType_Ready(t);
+      }
+      PyObject *bases = __Pyx_PyType_GetSlot(t, tp_bases, PyObject*);
+      if (bases && unlikely(__Pyx_validate_bases_tuple(t->tp_name, t->tp_dictoffset, bases) == -1))
+          return -1;
+  #if !defined(PYSTON_MAJOR_VERSION)
+      {
+          int gc_was_enabled;
+      #if PY_VERSION_HEX >= 0x030A00b1
+          gc_was_enabled = PyGC_Disable();
+          (void)__Pyx_PyObject_CallMethod0;
+      #else
+          PyObject *ret, *py_status;
+          PyObject *gc = NULL;
+          #if (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM+0 >= 0x07030400) &&\
+                  !CYTHON_COMPILING_IN_GRAAL
+          gc = PyImport_GetModule(__pyx_mstate_global->__pyx_kp_u_gc);
+          #endif
+          if (unlikely(!gc)) gc = PyImport_Import(__pyx_mstate_global->__pyx_kp_u_gc);
+          if (unlikely(!gc)) return -1;
+          py_status = __Pyx_PyObject_CallMethod0(gc, __pyx_mstate_global->__pyx_kp_u_isenabled);
+          if (unlikely(!py_status)) {
+              Py_DECREF(gc);
+              return -1;
+          }
+          gc_was_enabled = __Pyx_PyObject_IsTrue(py_status);
+          Py_DECREF(py_status);
+          if (gc_was_enabled > 0) {
+              ret = __Pyx_PyObject_CallMethod0(gc, __pyx_mstate_global->__pyx_kp_u_disable);
+              if (unlikely(!ret)) {
+                  Py_DECREF(gc);
+                  return -1;
+              }
+              Py_DECREF(ret);
+          } else if (unlikely(gc_was_enabled == -1)) {
+              Py_DECREF(gc);
+              return -1;
+          }
+      #endif
+          t->tp_flags |= Py_TPFLAGS_HEAPTYPE;
+  #if PY_VERSION_HEX >= 0x030A0000
+          t->tp_flags |= Py_TPFLAGS_IMMUTABLETYPE;
+  #endif
+  #else
+          (void)__Pyx_PyObject_CallMethod0;
+  #endif
+      r = PyType_Ready(t);
+  #if !defined(PYSTON_MAJOR_VERSION)
+          t->tp_flags &= ~Py_TPFLAGS_HEAPTYPE;
+      #if PY_VERSION_HEX >= 0x030A00b1
+          if (gc_was_enabled)
+              PyGC_Enable();
+      #else
+          if (gc_was_enabled) {
+              PyObject *tp, *v, *tb;
+              PyErr_Fetch(&tp, &v, &tb);
+              ret = __Pyx_PyObject_CallMethod0(gc, __pyx_mstate_global->__pyx_kp_u_enable);
+              if (likely(ret || r == -1)) {
+                  Py_XDECREF(ret);
+                  PyErr_Restore(tp, v, tb);
+              } else {
+                  Py_XDECREF(tp);
+                  Py_XDECREF(v);
+                  Py_XDECREF(tb);
+                  r = -1;
+              }
+          }
+          Py_DECREF(gc);
+      #endif
+      }
+  #endif
+      return r;
+  #endif
+  }
+  
+/* SetVTable */
+  static int __Pyx_SetVtable(PyTypeObject *type, void *vtable) {
+      PyObject *ob = PyCapsule_New(vtable, 0, 0);
+      if (unlikely(!ob))
+          goto bad;
+  #if CYTHON_COMPILING_IN_LIMITED_API
+      if (unlikely(PyObject_SetAttr((PyObject *) type, __pyx_mstate_global->__pyx_n_u_pyx_vtable, ob) < 0))
+  #else
+      if (unlikely(PyDict_SetItem(type->tp_dict, __pyx_mstate_global->__pyx_n_u_pyx_vtable, ob) < 0))
+  #endif
+          goto bad;
+      Py_DECREF(ob);
+      return 0;
+  bad:
+      Py_XDECREF(ob);
+      return -1;
+  }
+  
+/* GetVTable (used by MergeVTables) */
+  static void* __Pyx_GetVtable(PyTypeObject *type) {
+      void* ptr;
+  #if CYTHON_COMPILING_IN_LIMITED_API
+      PyObject *ob = PyObject_GetAttr((PyObject *)type, __pyx_mstate_global->__pyx_n_u_pyx_vtable);
+  #else
+      PyObject *ob = PyObject_GetItem(type->tp_dict, __pyx_mstate_global->__pyx_n_u_pyx_vtable);
+  #endif
+      if (!ob)
+          goto bad;
+      ptr = PyCapsule_GetPointer(ob, 0);
+      if (!ptr && !PyErr_Occurred())
+          PyErr_SetString(PyExc_RuntimeError, "invalid vtable found for imported type");
+      Py_DECREF(ob);
+      return ptr;
+  bad:
+      Py_XDECREF(ob);
+      return NULL;
+  }
+  
+/* MergeVTables */
+  static int __Pyx_MergeVtables(PyTypeObject *type) {
+      int i=0;
+      Py_ssize_t size;
+      void** base_vtables;
+      __Pyx_TypeName tp_base_name = NULL;
+      __Pyx_TypeName base_name = NULL;
+      void* unknown = (void*)-1;
+      PyObject* bases = __Pyx_PyType_GetSlot(type, tp_bases, PyObject*);
+      int base_depth = 0;
+      {
+          PyTypeObject* base = __Pyx_PyType_GetSlot(type, tp_base, PyTypeObject*);
+          while (base) {
+              base_depth += 1;
+              base = __Pyx_PyType_GetSlot(base, tp_base, PyTypeObject*);
+          }
+      }
+      base_vtables = (void**) PyMem_Malloc(sizeof(void*) * (size_t)(base_depth + 1));
+      base_vtables[0] = unknown;
+  #if CYTHON_COMPILING_IN_LIMITED_API
+      size = PyTuple_Size(bases);
+      if (size < 0) goto other_failure;
+  #else
+      size = PyTuple_GET_SIZE(bases);
+  #endif
+      for (i = 1; i < size; i++) {
+          PyObject *basei;
+          void* base_vtable;
+  #if CYTHON_AVOID_BORROWED_REFS
+          basei = PySequence_GetItem(bases, i);
+          if (unlikely(!basei)) goto other_failure;
+  #elif !CYTHON_ASSUME_SAFE_MACROS
+          basei = PyTuple_GetItem(bases, i);
+          if (unlikely(!basei)) goto other_failure;
+  #else
+          basei = PyTuple_GET_ITEM(bases, i);
+  #endif
+          base_vtable = __Pyx_GetVtable((PyTypeObject*)basei);
+  #if CYTHON_AVOID_BORROWED_REFS
+          Py_DECREF(basei);
+  #endif
+          if (base_vtable != NULL) {
+              int j;
+              PyTypeObject* base = __Pyx_PyType_GetSlot(type, tp_base, PyTypeObject*);
+              for (j = 0; j < base_depth; j++) {
+                  if (base_vtables[j] == unknown) {
+                      base_vtables[j] = __Pyx_GetVtable(base);
+                      base_vtables[j + 1] = unknown;
+                  }
+                  if (base_vtables[j] == base_vtable) {
+                      break;
+                  } else if (base_vtables[j] == NULL) {
+                      goto bad;
+                  }
+                  base = __Pyx_PyType_GetSlot(base, tp_base, PyTypeObject*);
+              }
+          }
+      }
+      PyErr_Clear();
+      PyMem_Free(base_vtables);
+      return 0;
+  bad:
+      {
+          PyTypeObject* basei = NULL;
+          PyTypeObject* tp_base = __Pyx_PyType_GetSlot(type, tp_base, PyTypeObject*);
+          tp_base_name = __Pyx_PyType_GetFullyQualifiedName(tp_base);
+  #if CYTHON_AVOID_BORROWED_REFS
+          basei = (PyTypeObject*)PySequence_GetItem(bases, i);
+          if (unlikely(!basei)) goto really_bad;
+  #elif !CYTHON_ASSUME_SAFE_MACROS
+          basei = (PyTypeObject*)PyTuple_GetItem(bases, i);
+          if (unlikely(!basei)) goto really_bad;
+  #else
+          basei = (PyTypeObject*)PyTuple_GET_ITEM(bases, i);
+  #endif
+          base_name = __Pyx_PyType_GetFullyQualifiedName(basei);
+  #if CYTHON_AVOID_BORROWED_REFS
+          Py_DECREF(basei);
+  #endif
+      }
+      PyErr_Format(PyExc_TypeError,
+          "multiple bases have vtable conflict: '" __Pyx_FMT_TYPENAME "' and '" __Pyx_FMT_TYPENAME "'", tp_base_name, base_name);
+  #if CYTHON_AVOID_BORROWED_REFS || !CYTHON_ASSUME_SAFE_MACROS
+  really_bad: // bad has failed!
+  #endif
+      __Pyx_DECREF_TypeName(tp_base_name);
+      __Pyx_DECREF_TypeName(base_name);
+  #if CYTHON_COMPILING_IN_LIMITED_API || CYTHON_AVOID_BORROWED_REFS || !CYTHON_ASSUME_SAFE_MACROS
+  other_failure:
+  #endif
+      PyMem_Free(base_vtables);
+      return -1;
+  }
+  
+/* DelItemOnTypeDict (used by SetupReduce) */
+  static int __Pyx__DelItemOnTypeDict(PyTypeObject *tp, PyObject *k) {
+      int result;
+      PyObject *tp_dict;
+  #if CYTHON_COMPILING_IN_LIMITED_API
+      tp_dict = __Pyx_GetTypeDict(tp);
+      if (unlikely(!tp_dict)) return -1;
+  #else
+      tp_dict = tp->tp_dict;
+  #endif
+      result = PyDict_DelItem(tp_dict, k);
+      if (likely(!result)) PyType_Modified(tp);
+      return result;
+  }
+  
+/* SetupReduce */
+  static int __Pyx_setup_reduce_is_named(PyObject* meth, PyObject* name) {
+    int ret;
+    PyObject *name_attr;
+    name_attr = __Pyx_PyObject_GetAttrStrNoError(meth, __pyx_mstate_global->__pyx_n_u_name);
+    if (likely(name_attr)) {
+        ret = PyObject_RichCompareBool(name_attr, name, Py_EQ);
+    } else {
+        ret = -1;
+    }
+    if (unlikely(ret < 0)) {
+        PyErr_Clear();
+        ret = 0;
+    }
+    Py_XDECREF(name_attr);
+    return ret;
+  }
+  static int __Pyx_setup_reduce(PyObject* type_obj) {
+      int ret = 0;
+      PyObject *object_reduce = NULL;
+      PyObject *object_getstate = NULL;
+      PyObject *object_reduce_ex = NULL;
+      PyObject *reduce = NULL;
+      PyObject *reduce_ex = NULL;
+      PyObject *reduce_cython = NULL;
+      PyObject *setstate = NULL;
+      PyObject *setstate_cython = NULL;
+      PyObject *getstate = NULL;
+  #if CYTHON_USE_PYTYPE_LOOKUP
+      getstate = _PyType_Lookup((PyTypeObject*)type_obj, __pyx_mstate_global->__pyx_n_u_getstate);
+  #else
+      getstate = __Pyx_PyObject_GetAttrStrNoError(type_obj, __pyx_mstate_global->__pyx_n_u_getstate);
+      if (!getstate && PyErr_Occurred()) {
+          goto __PYX_BAD;
+      }
+  #endif
+      if (getstate) {
+  #if CYTHON_USE_PYTYPE_LOOKUP
+          object_getstate = _PyType_Lookup(&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_getstate);
+  #else
+          object_getstate = __Pyx_PyObject_GetAttrStrNoError((PyObject*)&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_getstate);
+          if (!object_getstate && PyErr_Occurred()) {
+              goto __PYX_BAD;
+          }
+  #endif
+          if (object_getstate != getstate) {
+              goto __PYX_GOOD;
+          }
+      }
+  #if CYTHON_USE_PYTYPE_LOOKUP
+      object_reduce_ex = _PyType_Lookup(&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_reduce_ex); if (!object_reduce_ex) goto __PYX_BAD;
+  #else
+      object_reduce_ex = __Pyx_PyObject_GetAttrStr((PyObject*)&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_reduce_ex); if (!object_reduce_ex) goto __PYX_BAD;
+  #endif
+      reduce_ex = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_mstate_global->__pyx_n_u_reduce_ex); if (unlikely(!reduce_ex)) goto __PYX_BAD;
+      if (reduce_ex == object_reduce_ex) {
+  #if CYTHON_USE_PYTYPE_LOOKUP
+          object_reduce = _PyType_Lookup(&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_reduce); if (!object_reduce) goto __PYX_BAD;
+  #else
+          object_reduce = __Pyx_PyObject_GetAttrStr((PyObject*)&PyBaseObject_Type, __pyx_mstate_global->__pyx_n_u_reduce); if (!object_reduce) goto __PYX_BAD;
+  #endif
+          reduce = __Pyx_PyObject_GetAttrStr(type_obj, __pyx_mstate_global->__pyx_n_u_reduce); if (unlikely(!reduce)) goto __PYX_BAD;
+          if (reduce == object_reduce || __Pyx_setup_reduce_is_named(reduce, __pyx_mstate_global->__pyx_n_u_reduce_cython)) {
+              reduce_cython = __Pyx_PyObject_GetAttrStrNoError(type_obj, __pyx_mstate_global->__pyx_n_u_reduce_cython);
+              if (likely(reduce_cython)) {
+                  ret = __Pyx_SetItemOnTypeDict((PyTypeObject*)type_obj, __pyx_mstate_global->__pyx_n_u_reduce, reduce_cython); if (unlikely(ret < 0)) goto __PYX_BAD;
+                  ret = __Pyx_DelItemOnTypeDict((PyTypeObject*)type_obj, __pyx_mstate_global->__pyx_n_u_reduce_cython); if (unlikely(ret < 0)) goto __PYX_BAD;
+              } else if (reduce == object_reduce || PyErr_Occurred()) {
+                  goto __PYX_BAD;
+              }
+              setstate = __Pyx_PyObject_GetAttrStrNoError(type_obj, __pyx_mstate_global->__pyx_n_u_setstate);
+              if (!setstate) PyErr_Clear();
+              if (!setstate || __Pyx_setup_reduce_is_named(setstate, __pyx_mstate_global->__pyx_n_u_setstate_cython)) {
+                  setstate_cython = __Pyx_PyObject_GetAttrStrNoError(type_obj, __pyx_mstate_global->__pyx_n_u_setstate_cython);
+                  if (likely(setstate_cython)) {
+                      ret = __Pyx_SetItemOnTypeDict((PyTypeObject*)type_obj, __pyx_mstate_global->__pyx_n_u_setstate, setstate_cython); if (unlikely(ret < 0)) goto __PYX_BAD;
+                      ret = __Pyx_DelItemOnTypeDict((PyTypeObject*)type_obj, __pyx_mstate_global->__pyx_n_u_setstate_cython); if (unlikely(ret < 0)) goto __PYX_BAD;
+                  } else if (!setstate || PyErr_Occurred()) {
+                      goto __PYX_BAD;
+                  }
+              }
+              PyType_Modified((PyTypeObject*)type_obj);
+          }
+      }
+      goto __PYX_GOOD;
+  __PYX_BAD:
+      if (!PyErr_Occurred()) {
+          __Pyx_TypeName type_obj_name =
+              __Pyx_PyType_GetFullyQualifiedName((PyTypeObject*)type_obj);
+          PyErr_Format(PyExc_RuntimeError,
+              "Unable to initialize pickling for " __Pyx_FMT_TYPENAME, type_obj_name);
+          __Pyx_DECREF_TypeName(type_obj_name);
+      }
+      ret = -1;
+  __PYX_GOOD:
+  #if !CYTHON_USE_PYTYPE_LOOKUP
+      Py_XDECREF(object_reduce);
+      Py_XDECREF(object_reduce_ex);
+      Py_XDECREF(object_getstate);
+      Py_XDECREF(getstate);
+  #endif
+      Py_XDECREF(reduce);
+      Py_XDECREF(reduce_ex);
+      Py_XDECREF(reduce_cython);
+      Py_XDECREF(setstate);
+      Py_XDECREF(setstate_cython);
+      return ret;
+  }
+  
 /* TypeImport */
   #ifndef __PYX_HAVE_RT_ImportType_3_2_4
   #define __PYX_HAVE_RT_ImportType_3_2_4
@@ -11968,165 +16358,6 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       return value;
   }
   
-/* LimitedApiGetTypeDict (used by SetItemOnTypeDict) */
-  #if CYTHON_COMPILING_IN_LIMITED_API
-  static Py_ssize_t __Pyx_GetTypeDictOffset(void) {
-      PyObject *tp_dictoffset_o;
-      Py_ssize_t tp_dictoffset;
-      tp_dictoffset_o = PyObject_GetAttrString((PyObject*)(&PyType_Type), "__dictoffset__");
-      if (unlikely(!tp_dictoffset_o)) return -1;
-      tp_dictoffset = PyLong_AsSsize_t(tp_dictoffset_o);
-      Py_DECREF(tp_dictoffset_o);
-      if (unlikely(tp_dictoffset == 0)) {
-          PyErr_SetString(
-              PyExc_TypeError,
-              "'type' doesn't have a dictoffset");
-          return -1;
-      } else if (unlikely(tp_dictoffset < 0)) {
-          PyErr_SetString(
-              PyExc_TypeError,
-              "'type' has an unexpected negative dictoffset. "
-              "Please report this as Cython bug");
-          return -1;
-      }
-      return tp_dictoffset;
-  }
-  static PyObject *__Pyx_GetTypeDict(PyTypeObject *tp) {
-      static Py_ssize_t tp_dictoffset = 0;
-      if (unlikely(tp_dictoffset == 0)) {
-          tp_dictoffset = __Pyx_GetTypeDictOffset();
-          if (unlikely(tp_dictoffset == -1 && PyErr_Occurred())) {
-              tp_dictoffset = 0; // try again next time?
-              return NULL;
-          }
-      }
-      return *(PyObject**)((char*)tp + tp_dictoffset);
-  }
-  #endif
-  
-/* SetItemOnTypeDict (used by FixUpExtensionType) */
-  static int __Pyx__SetItemOnTypeDict(PyTypeObject *tp, PyObject *k, PyObject *v) {
-      int result;
-      PyObject *tp_dict;
-  #if CYTHON_COMPILING_IN_LIMITED_API
-      tp_dict = __Pyx_GetTypeDict(tp);
-      if (unlikely(!tp_dict)) return -1;
-  #else
-      tp_dict = tp->tp_dict;
-  #endif
-      result = PyDict_SetItem(tp_dict, k, v);
-      if (likely(!result)) {
-          PyType_Modified(tp);
-          if (unlikely(PyObject_HasAttr(v, __pyx_mstate_global->__pyx_n_u_set_name))) {
-              PyObject *setNameResult = PyObject_CallMethodObjArgs(v, __pyx_mstate_global->__pyx_n_u_set_name,  (PyObject *) tp, k, NULL);
-              if (!setNameResult) return -1;
-              Py_DECREF(setNameResult);
-          }
-      }
-      return result;
-  }
-  
-/* FixUpExtensionType (used by FetchCommonType) */
-  static int __Pyx_fix_up_extension_type_from_spec(PyType_Spec *spec, PyTypeObject *type) {
-  #if __PYX_LIMITED_VERSION_HEX > 0x030900B1
-      CYTHON_UNUSED_VAR(spec);
-      CYTHON_UNUSED_VAR(type);
-      CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
-  #else
-      const PyType_Slot *slot = spec->slots;
-      int changed = 0;
-  #if !CYTHON_COMPILING_IN_LIMITED_API
-      while (slot && slot->slot && slot->slot != Py_tp_members)
-          slot++;
-      if (slot && slot->slot == Py_tp_members) {
-  #if !CYTHON_COMPILING_IN_CPYTHON
-          const
-  #endif  // !CYTHON_COMPILING_IN_CPYTHON)
-              PyMemberDef *memb = (PyMemberDef*) slot->pfunc;
-          while (memb && memb->name) {
-              if (memb->name[0] == '_' && memb->name[1] == '_') {
-                  if (strcmp(memb->name, "__weaklistoffset__") == 0) {
-                      assert(memb->type == T_PYSSIZET);
-                      assert(memb->flags == READONLY);
-                      type->tp_weaklistoffset = memb->offset;
-                      changed = 1;
-                  }
-                  else if (strcmp(memb->name, "__dictoffset__") == 0) {
-                      assert(memb->type == T_PYSSIZET);
-                      assert(memb->flags == READONLY);
-                      type->tp_dictoffset = memb->offset;
-                      changed = 1;
-                  }
-  #if CYTHON_METH_FASTCALL
-                  else if (strcmp(memb->name, "__vectorcalloffset__") == 0) {
-                      assert(memb->type == T_PYSSIZET);
-                      assert(memb->flags == READONLY);
-                      type->tp_vectorcall_offset = memb->offset;
-                      changed = 1;
-                  }
-  #endif  // CYTHON_METH_FASTCALL
-  #if !CYTHON_COMPILING_IN_PYPY
-                  else if (strcmp(memb->name, "__module__") == 0) {
-                      PyObject *descr;
-                      assert(memb->type == T_OBJECT);
-                      assert(memb->flags == 0 || memb->flags == READONLY);
-                      descr = PyDescr_NewMember(type, memb);
-                      if (unlikely(!descr))
-                          return -1;
-                      int set_item_result = PyDict_SetItem(type->tp_dict, PyDescr_NAME(descr), descr);
-                      Py_DECREF(descr);
-                      if (unlikely(set_item_result < 0)) {
-                          return -1;
-                      }
-                      changed = 1;
-                  }
-  #endif  // !CYTHON_COMPILING_IN_PYPY
-              }
-              memb++;
-          }
-      }
-  #endif  // !CYTHON_COMPILING_IN_LIMITED_API
-  #if !CYTHON_COMPILING_IN_PYPY
-      slot = spec->slots;
-      while (slot && slot->slot && slot->slot != Py_tp_getset)
-          slot++;
-      if (slot && slot->slot == Py_tp_getset) {
-          PyGetSetDef *getset = (PyGetSetDef*) slot->pfunc;
-          while (getset && getset->name) {
-              if (getset->name[0] == '_' && getset->name[1] == '_' && strcmp(getset->name, "__module__") == 0) {
-                  PyObject *descr = PyDescr_NewGetSet(type, getset);
-                  if (unlikely(!descr))
-                      return -1;
-                  #if CYTHON_COMPILING_IN_LIMITED_API
-                  PyObject *pyname = PyUnicode_FromString(getset->name);
-                  if (unlikely(!pyname)) {
-                      Py_DECREF(descr);
-                      return -1;
-                  }
-                  int set_item_result = __Pyx_SetItemOnTypeDict(type, pyname, descr);
-                  Py_DECREF(pyname);
-                  #else
-                  CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
-                  int set_item_result = PyDict_SetItem(type->tp_dict, PyDescr_NAME(descr), descr);
-                  #endif
-                  Py_DECREF(descr);
-                  if (unlikely(set_item_result < 0)) {
-                      return -1;
-                  }
-                  changed = 1;
-              }
-              ++getset;
-          }
-      }
-  #else
-      CYTHON_UNUSED_VAR(__Pyx__SetItemOnTypeDict);
-  #endif  // !CYTHON_COMPILING_IN_PYPY
-      if (changed)
-          PyType_Modified(type);
-  #endif  // PY_VERSION_HEX > 0x030900B1
-      return 0;
-  }
-  
 /* AddModuleRef (used by FetchSharedCythonModule) */
   #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
     static PyObject *__Pyx_PyImport_AddModuleObjectRef(PyObject *name) {
@@ -12331,25 +16562,6 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       }
       return 0;
   }
-  
-/* CallTypeTraverse (used by CythonFunctionShared) */
-  #if !CYTHON_USE_TYPE_SPECS || (!CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x03090000)
-  #else
-  static int __Pyx_call_type_traverse(PyObject *o, int always_call, visitproc visit, void *arg) {
-      #if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x03090000
-      if (__Pyx_get_runtime_version() < 0x03090000) return 0;
-      #endif
-      if (!always_call) {
-          PyTypeObject *base = __Pyx_PyObject_GetSlot(o, tp_base, PyTypeObject*);
-          unsigned long flags = PyType_GetFlags(base);
-          if (flags & Py_TPFLAGS_HEAPTYPE) {
-              return 0;
-          }
-      }
-      Py_VISIT((PyObject*)Py_TYPE(o));
-      return 0;
-  }
-  #endif
   
 /* PyMethodNew (used by CythonFunctionShared) */
   #if CYTHON_COMPILING_IN_LIMITED_API
@@ -14113,6 +18325,256 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       #endif
   #endif
   
+/* CIntFromPy */
+  static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *x) {
+  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wconversion"
+  #endif
+      const int neg_one = (int) -1, const_zero = (int) 0;
+  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+  #pragma GCC diagnostic pop
+  #endif
+      const int is_unsigned = neg_one > const_zero;
+      if (unlikely(!PyLong_Check(x))) {
+          int val;
+          PyObject *tmp = __Pyx_PyNumber_Long(x);
+          if (!tmp) return (int) -1;
+          val = __Pyx_PyLong_As_int(tmp);
+          Py_DECREF(tmp);
+          return val;
+      }
+      if (is_unsigned) {
+  #if CYTHON_USE_PYLONG_INTERNALS
+          if (unlikely(__Pyx_PyLong_IsNeg(x))) {
+              goto raise_neg_overflow;
+          } else if (__Pyx_PyLong_IsCompact(x)) {
+              __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
+          } else {
+              const digit* digits = __Pyx_PyLong_Digits(x);
+              assert(__Pyx_PyLong_DigitCount(x) > 1);
+              switch (__Pyx_PyLong_DigitCount(x)) {
+                  case 2:
+                      if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) >= 2 * PyLong_SHIFT)) {
+                              return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                          }
+                      }
+                      break;
+                  case 3:
+                      if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) >= 3 * PyLong_SHIFT)) {
+                              return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                          }
+                      }
+                      break;
+                  case 4:
+                      if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) >= 4 * PyLong_SHIFT)) {
+                              return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                          }
+                      }
+                      break;
+              }
+          }
+  #endif
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
+          if (unlikely(Py_SIZE(x) < 0)) {
+              goto raise_neg_overflow;
+          }
+  #else
+          {
+              int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+              if (unlikely(result < 0))
+                  return (int) -1;
+              if (unlikely(result == 1))
+                  goto raise_neg_overflow;
+          }
+  #endif
+          if ((sizeof(int) <= sizeof(unsigned long))) {
+              __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
+          } else if ((sizeof(int) <= sizeof(unsigned PY_LONG_LONG))) {
+              __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+          }
+      } else {
+  #if CYTHON_USE_PYLONG_INTERNALS
+          if (__Pyx_PyLong_IsCompact(x)) {
+              __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
+          } else {
+              const digit* digits = __Pyx_PyLong_Digits(x);
+              assert(__Pyx_PyLong_DigitCount(x) > 1);
+              switch (__Pyx_PyLong_SignedDigitCount(x)) {
+                  case -2:
+                      if ((8 * sizeof(int) - 1 > 1 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                              return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+                  case 2:
+                      if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                              return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+                  case -3:
+                      if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                              return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+                  case 3:
+                      if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                              return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+                  case -4:
+                      if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
+                              return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+                  case 4:
+                      if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
+                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                          } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
+                              return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                          }
+                      }
+                      break;
+              }
+          }
+  #endif
+          if ((sizeof(int) <= sizeof(long))) {
+              __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
+          } else if ((sizeof(int) <= sizeof(PY_LONG_LONG))) {
+              __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
+          }
+      }
+      {
+          int val;
+          int ret = -1;
+  #if PY_VERSION_HEX >= 0x030d00A6 && !CYTHON_COMPILING_IN_LIMITED_API
+          Py_ssize_t bytes_copied = PyLong_AsNativeBytes(
+              x, &val, sizeof(val), Py_ASNATIVEBYTES_NATIVE_ENDIAN | (is_unsigned ? Py_ASNATIVEBYTES_UNSIGNED_BUFFER | Py_ASNATIVEBYTES_REJECT_NEGATIVE : 0));
+          if (unlikely(bytes_copied == -1)) {
+          } else if (unlikely(bytes_copied > (Py_ssize_t) sizeof(val))) {
+              goto raise_overflow;
+          } else {
+              ret = 0;
+          }
+  #elif PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
+          int one = 1; int is_little = (int)*(unsigned char *)&one;
+          unsigned char *bytes = (unsigned char *)&val;
+          ret = _PyLong_AsByteArray((PyLongObject *)x,
+                                      bytes, sizeof(val),
+                                      is_little, !is_unsigned);
+  #else
+          PyObject *v;
+          PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
+          int bits, remaining_bits, is_negative = 0;
+          int chunk_size = (sizeof(long) < 8) ? 30 : 62;
+          if (likely(PyLong_CheckExact(x))) {
+              v = __Pyx_NewRef(x);
+          } else {
+              v = PyNumber_Long(x);
+              if (unlikely(!v)) return (int) -1;
+              assert(PyLong_CheckExact(v));
+          }
+          {
+              int result = PyObject_RichCompareBool(v, Py_False, Py_LT);
+              if (unlikely(result < 0)) {
+                  Py_DECREF(v);
+                  return (int) -1;
+              }
+              is_negative = result == 1;
+          }
+          if (is_unsigned && unlikely(is_negative)) {
+              Py_DECREF(v);
+              goto raise_neg_overflow;
+          } else if (is_negative) {
+              stepval = PyNumber_Invert(v);
+              Py_DECREF(v);
+              if (unlikely(!stepval))
+                  return (int) -1;
+          } else {
+              stepval = v;
+          }
+          v = NULL;
+          val = (int) 0;
+          mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
+          shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
+          for (bits = 0; bits < (int) sizeof(int) * 8 - chunk_size; bits += chunk_size) {
+              PyObject *tmp, *digit;
+              long idigit;
+              digit = PyNumber_And(stepval, mask);
+              if (unlikely(!digit)) goto done;
+              idigit = PyLong_AsLong(digit);
+              Py_DECREF(digit);
+              if (unlikely(idigit < 0)) goto done;
+              val |= ((int) idigit) << bits;
+              tmp = PyNumber_Rshift(stepval, shift);
+              if (unlikely(!tmp)) goto done;
+              Py_DECREF(stepval); stepval = tmp;
+          }
+          Py_DECREF(shift); shift = NULL;
+          Py_DECREF(mask); mask = NULL;
+          {
+              long idigit = PyLong_AsLong(stepval);
+              if (unlikely(idigit < 0)) goto done;
+              remaining_bits = ((int) sizeof(int) * 8) - bits - (is_unsigned ? 0 : 1);
+              if (unlikely(idigit >= (1L << remaining_bits)))
+                  goto raise_overflow;
+              val |= ((int) idigit) << bits;
+          }
+          if (!is_unsigned) {
+              if (unlikely(val & (((int) 1) << (sizeof(int) * 8 - 1))))
+                  goto raise_overflow;
+              if (is_negative)
+                  val = ~val;
+          }
+          ret = 0;
+      done:
+          Py_XDECREF(shift);
+          Py_XDECREF(mask);
+          Py_XDECREF(stepval);
+  #endif
+          if (unlikely(ret))
+              return (int) -1;
+          return val;
+      }
+  raise_overflow:
+      PyErr_SetString(PyExc_OverflowError,
+          "value too large to convert to int");
+      return (int) -1;
+  raise_neg_overflow:
+      PyErr_SetString(PyExc_OverflowError,
+          "can't convert negative value to int");
+      return (int) -1;
+  }
+  
 /* CIntToPy */
   static CYTHON_INLINE PyObject* __Pyx_PyLong_From_unsigned_int(unsigned int value) {
   #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -14820,6 +19282,75 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       }
   }
   
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyLong_From_short(short value) {
+  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wconversion"
+  #endif
+      const short neg_one = (short) -1, const_zero = (short) 0;
+  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+  #pragma GCC diagnostic pop
+  #endif
+      const int is_unsigned = neg_one > const_zero;
+      if (is_unsigned) {
+          if (sizeof(short) < sizeof(long)) {
+              return PyLong_FromLong((long) value);
+          } else if (sizeof(short) <= sizeof(unsigned long)) {
+              return PyLong_FromUnsignedLong((unsigned long) value);
+  #if !CYTHON_COMPILING_IN_PYPY
+          } else if (sizeof(short) <= sizeof(unsigned PY_LONG_LONG)) {
+              return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+  #endif
+          }
+      } else {
+          if (sizeof(short) <= sizeof(long)) {
+              return PyLong_FromLong((long) value);
+          } else if (sizeof(short) <= sizeof(PY_LONG_LONG)) {
+              return PyLong_FromLongLong((PY_LONG_LONG) value);
+          }
+      }
+      {
+          unsigned char *bytes = (unsigned char *)&value;
+  #if !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x030d00A4
+          if (is_unsigned) {
+              return PyLong_FromUnsignedNativeBytes(bytes, sizeof(value), -1);
+          } else {
+              return PyLong_FromNativeBytes(bytes, sizeof(value), -1);
+          }
+  #elif !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030d0000
+          int one = 1; int little = (int)*(unsigned char *)&one;
+          return _PyLong_FromByteArray(bytes, sizeof(short),
+                                       little, !is_unsigned);
+  #else
+          int one = 1; int little = (int)*(unsigned char *)&one;
+          PyObject *from_bytes, *result = NULL, *kwds = NULL;
+          PyObject *py_bytes = NULL, *order_str = NULL;
+          from_bytes = PyObject_GetAttrString((PyObject*)&PyLong_Type, "from_bytes");
+          if (!from_bytes) return NULL;
+          py_bytes = PyBytes_FromStringAndSize((char*)bytes, sizeof(short));
+          if (!py_bytes) goto limited_bad;
+          order_str = PyUnicode_FromString(little ? "little" : "big");
+          if (!order_str) goto limited_bad;
+          {
+              PyObject *args[3+(CYTHON_VECTORCALL ? 1 : 0)] = { NULL, py_bytes, order_str };
+              if (!is_unsigned) {
+                  kwds = __Pyx_MakeVectorcallBuilderKwds(1);
+                  if (!kwds) goto limited_bad;
+                  if (__Pyx_VectorcallBuilder_AddArgStr("signed", __Pyx_NewRef(Py_True), kwds, args+3, 0) < 0) goto limited_bad;
+              }
+              result = __Pyx_Object_Vectorcall_CallFromBuilder(from_bytes, args+1, 2 | __Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET, kwds);
+          }
+          limited_bad:
+          Py_XDECREF(kwds);
+          Py_XDECREF(order_str);
+          Py_XDECREF(py_bytes);
+          Py_XDECREF(from_bytes);
+          return result;
+  #endif
+      }
+  }
+  
 /* FormatTypeName */
   #if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x030d0000
   static __Pyx_TypeName
@@ -15107,256 +19638,6 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       PyErr_SetString(PyExc_OverflowError,
           "can't convert negative value to long");
       return (long) -1;
-  }
-  
-/* CIntFromPy */
-  static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *x) {
-  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wconversion"
-  #endif
-      const int neg_one = (int) -1, const_zero = (int) 0;
-  #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-  #pragma GCC diagnostic pop
-  #endif
-      const int is_unsigned = neg_one > const_zero;
-      if (unlikely(!PyLong_Check(x))) {
-          int val;
-          PyObject *tmp = __Pyx_PyNumber_Long(x);
-          if (!tmp) return (int) -1;
-          val = __Pyx_PyLong_As_int(tmp);
-          Py_DECREF(tmp);
-          return val;
-      }
-      if (is_unsigned) {
-  #if CYTHON_USE_PYLONG_INTERNALS
-          if (unlikely(__Pyx_PyLong_IsNeg(x))) {
-              goto raise_neg_overflow;
-          } else if (__Pyx_PyLong_IsCompact(x)) {
-              __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
-          } else {
-              const digit* digits = __Pyx_PyLong_Digits(x);
-              assert(__Pyx_PyLong_DigitCount(x) > 1);
-              switch (__Pyx_PyLong_DigitCount(x)) {
-                  case 2:
-                      if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) >= 2 * PyLong_SHIFT)) {
-                              return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                          }
-                      }
-                      break;
-                  case 3:
-                      if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) >= 3 * PyLong_SHIFT)) {
-                              return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                          }
-                      }
-                      break;
-                  case 4:
-                      if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) >= 4 * PyLong_SHIFT)) {
-                              return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                          }
-                      }
-                      break;
-              }
-          }
-  #endif
-  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
-          if (unlikely(Py_SIZE(x) < 0)) {
-              goto raise_neg_overflow;
-          }
-  #else
-          {
-              int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-              if (unlikely(result < 0))
-                  return (int) -1;
-              if (unlikely(result == 1))
-                  goto raise_neg_overflow;
-          }
-  #endif
-          if ((sizeof(int) <= sizeof(unsigned long))) {
-              __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
-          } else if ((sizeof(int) <= sizeof(unsigned PY_LONG_LONG))) {
-              __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-          }
-      } else {
-  #if CYTHON_USE_PYLONG_INTERNALS
-          if (__Pyx_PyLong_IsCompact(x)) {
-              __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
-          } else {
-              const digit* digits = __Pyx_PyLong_Digits(x);
-              assert(__Pyx_PyLong_DigitCount(x) > 1);
-              switch (__Pyx_PyLong_SignedDigitCount(x)) {
-                  case -2:
-                      if ((8 * sizeof(int) - 1 > 1 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                              return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-                  case 2:
-                      if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                              return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-                  case -3:
-                      if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                              return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-                  case 3:
-                      if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                              return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-                  case -4:
-                      if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
-                              return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-                  case 4:
-                      if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
-                          if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                              __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                          } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
-                              return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                          }
-                      }
-                      break;
-              }
-          }
-  #endif
-          if ((sizeof(int) <= sizeof(long))) {
-              __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
-          } else if ((sizeof(int) <= sizeof(PY_LONG_LONG))) {
-              __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
-          }
-      }
-      {
-          int val;
-          int ret = -1;
-  #if PY_VERSION_HEX >= 0x030d00A6 && !CYTHON_COMPILING_IN_LIMITED_API
-          Py_ssize_t bytes_copied = PyLong_AsNativeBytes(
-              x, &val, sizeof(val), Py_ASNATIVEBYTES_NATIVE_ENDIAN | (is_unsigned ? Py_ASNATIVEBYTES_UNSIGNED_BUFFER | Py_ASNATIVEBYTES_REJECT_NEGATIVE : 0));
-          if (unlikely(bytes_copied == -1)) {
-          } else if (unlikely(bytes_copied > (Py_ssize_t) sizeof(val))) {
-              goto raise_overflow;
-          } else {
-              ret = 0;
-          }
-  #elif PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
-          int one = 1; int is_little = (int)*(unsigned char *)&one;
-          unsigned char *bytes = (unsigned char *)&val;
-          ret = _PyLong_AsByteArray((PyLongObject *)x,
-                                      bytes, sizeof(val),
-                                      is_little, !is_unsigned);
-  #else
-          PyObject *v;
-          PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
-          int bits, remaining_bits, is_negative = 0;
-          int chunk_size = (sizeof(long) < 8) ? 30 : 62;
-          if (likely(PyLong_CheckExact(x))) {
-              v = __Pyx_NewRef(x);
-          } else {
-              v = PyNumber_Long(x);
-              if (unlikely(!v)) return (int) -1;
-              assert(PyLong_CheckExact(v));
-          }
-          {
-              int result = PyObject_RichCompareBool(v, Py_False, Py_LT);
-              if (unlikely(result < 0)) {
-                  Py_DECREF(v);
-                  return (int) -1;
-              }
-              is_negative = result == 1;
-          }
-          if (is_unsigned && unlikely(is_negative)) {
-              Py_DECREF(v);
-              goto raise_neg_overflow;
-          } else if (is_negative) {
-              stepval = PyNumber_Invert(v);
-              Py_DECREF(v);
-              if (unlikely(!stepval))
-                  return (int) -1;
-          } else {
-              stepval = v;
-          }
-          v = NULL;
-          val = (int) 0;
-          mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
-          shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
-          for (bits = 0; bits < (int) sizeof(int) * 8 - chunk_size; bits += chunk_size) {
-              PyObject *tmp, *digit;
-              long idigit;
-              digit = PyNumber_And(stepval, mask);
-              if (unlikely(!digit)) goto done;
-              idigit = PyLong_AsLong(digit);
-              Py_DECREF(digit);
-              if (unlikely(idigit < 0)) goto done;
-              val |= ((int) idigit) << bits;
-              tmp = PyNumber_Rshift(stepval, shift);
-              if (unlikely(!tmp)) goto done;
-              Py_DECREF(stepval); stepval = tmp;
-          }
-          Py_DECREF(shift); shift = NULL;
-          Py_DECREF(mask); mask = NULL;
-          {
-              long idigit = PyLong_AsLong(stepval);
-              if (unlikely(idigit < 0)) goto done;
-              remaining_bits = ((int) sizeof(int) * 8) - bits - (is_unsigned ? 0 : 1);
-              if (unlikely(idigit >= (1L << remaining_bits)))
-                  goto raise_overflow;
-              val |= ((int) idigit) << bits;
-          }
-          if (!is_unsigned) {
-              if (unlikely(val & (((int) 1) << (sizeof(int) * 8 - 1))))
-                  goto raise_overflow;
-              if (is_negative)
-                  val = ~val;
-          }
-          ret = 0;
-      done:
-          Py_XDECREF(shift);
-          Py_XDECREF(mask);
-          Py_XDECREF(stepval);
-  #endif
-          if (unlikely(ret))
-              return (int) -1;
-          return val;
-      }
-  raise_overflow:
-      PyErr_SetString(PyExc_OverflowError,
-          "value too large to convert to int");
-      return (int) -1;
-  raise_neg_overflow:
-      PyErr_SetString(PyExc_OverflowError,
-          "can't convert negative value to int");
-      return (int) -1;
   }
   
 /* FastTypeChecks */
