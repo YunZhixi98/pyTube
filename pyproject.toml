@@ -5,12 +5,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pyneutube"
 dynamic = ["version"]
-description = "Python reimplementation of the NeuTube tracing workflow."
+description = "Python-based implementation and extension of the NeuTube tracing framework."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
-  { name = "PyNeuTube contributors" },
+    { name = "Zhixi Yun" },
+    { name = "Kangxu Fan" },
+    { name = "Yufeng Liu" },
+    { name = "Hanchuan Peng" },
 ]
 keywords = ["neuron tracing", "microscopy", "swc", "neuroscience", "image analysis"]
 classifiers = [
@@ -38,9 +41,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/YunZhixi98/pyNeuTube"
-Source = "https://github.com/YunZhixi98/pyNeuTube"
-Issues = "https://github.com/YunZhixi98/pyNeuTube/issues"
+Homepage = "https://github.com/YunZhixi98/pyTube"
+Source = "https://github.com/YunZhixi98/pyTube"
+Issues = "https://github.com/YunZhixi98/pyTube/issues"
 
 [project.scripts]
 pyneutube-trace = "pyneutube.cli:main"
