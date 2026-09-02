@@ -1,0 +1,81 @@
+name: Build wheels
+
+on:
+  workflow_dispatch:
+
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build_wheels:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux x86_64
+            os: ubuntu-latest
+
+          - name: Windows x64
+            os: windows-latest
+
+          - name: macOS Intel
+            os: macos-15-intel
+
+          - name: macOS Apple Silicon
+            os: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v4.2.0
+        with:
+          output-dir: wheelhouse
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v7
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  release:
+    name: Upload wheels to GitHub Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build_wheels
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all wheels
+        uses: actions/download-artifact@v8
+        with:
+          pattern: wheels-*
+          path: dist
+          merge-multiple: true
+
+      - name: Show wheels
+        run: ls -lh dist/
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release already exists, uploading wheels..."
+            gh release upload "$GITHUB_REF_NAME" dist/*.whl --clobber
+          else
+            echo "Creating release..."
+            gh release create "$GITHUB_REF_NAME" dist/*.whl \
+              --title "$GITHUB_REF_NAME" \
+              --generate-notes
+          fi
