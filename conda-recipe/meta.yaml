@@ -36,8 +36,8 @@ requirements:
     - pynrrd >=1.0
 
 about:
-  home: https://github.com/YunZhixi98/pyNeuTube
-  summary: Python reimplementation of the NeuTube tracing workflow.
+  home: https://github.com/YunZhixi98/pyTube
+  summary: Python-based implementation and extension of the NeuTube tracing framework.
   license: BSD-3-Clause
   license_file: LICENSE
 
