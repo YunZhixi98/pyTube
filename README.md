@@ -1,6 +1,7 @@
 # PyTube
 
-PyTube is a Python reimplementation of the NeuTube tracing workflow for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
+PyTube is a Python-based implementation and extension of the NeuTube tracing framework for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
+
 
 ## Current scope
 
@@ -30,6 +31,11 @@ For a local source tree:
 ```bash
 python -m pip install .
 ```
+For a prebuilt wheel:
+
+```bash
+pip install <wheel-file>
+```
 
 Published wheels do not require Cython at install time.
 
@@ -39,7 +45,7 @@ For a local `conda` environment from this repository:
 
 ```bash
 conda env create -f environment.yml
-conda activate pyneutube
+conda activate pytube
 ```
 
 All of these install paths include the supported runtime I/O formats.
@@ -303,3 +309,7 @@ This project benefited greatly from the contributions of:
 
 - [**Yufeng Liu**](https://github.com/crazylyf) - For his work on the development and optimization of code.
 - [**Kangxu Fan**](https://github.com/fkxyyds) - For his assistance in testing and cross-version alignment.
+
+## Remarks
+
+The Python distribution and import name is `pyneutube` to avoid conflict with the unrelated `pytube` package on PyPI.
