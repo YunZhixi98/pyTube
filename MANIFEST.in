@@ -12,11 +12,9 @@ graft conda-recipe
 graft docs
 graft examples
 graft pyneutube
-graft tests
 graft tools
 
 recursive-include pyneutube *.pyx *.pxd *.c
-recursive-include tests *.py
 
 include examples/data/reference_volume.nii.gz
 include examples/data/reference_neutube.swc

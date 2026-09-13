@@ -1,5 +1,4 @@
 
-from math import floor
 from typing import Tuple, Callable, Literal, Optional
 
 import numpy as np
@@ -15,26 +14,33 @@ from .geometry import segment_segment_distance
 def get_inner_chain_range(chain: SegmentChain, chain_idx: int, ref_coord: np.ndarray, 
                           dist_threshold: float = Defaults.SEG_LENGTH*2.5) -> Tuple[int, int]:
     """ tz_locseg_chain.c: static void locseg_chain_point_range(...) """
-    accum_dist = 0.0  # accumulated distance from ref_coord
-    start_idx = chain_idx  # current index in chain
     n_chain = len(chain)
+    if n_chain == 0:
+        return 0, -1
 
-    while start_idx >= 0 and accum_dist < dist_threshold:
-        cur_seg = chain[start_idx]
-        accum_dist += np.linalg.norm(cur_seg.start_coord - ref_coord)
-        start_idx -= 1
-    if start_idx < 0:
-        start_idx = 0
+    chain_idx = max(0, min(chain_idx, n_chain - 1))
 
-    accum_dist = 0.0
-    end_idx = chain_idx + 1
+    start_idx = chain_idx
+    accum_dist = float(np.linalg.norm(chain[chain_idx].start_coord - ref_coord))
+    probe_idx = chain_idx
 
-    while end_idx < n_chain and accum_dist < dist_threshold:
-        cur_seg = chain[end_idx]
-        accum_dist += np.linalg.norm(cur_seg.end_coord - ref_coord)
-        end_idx += 1
-    if end_idx >= n_chain:
-        end_idx = n_chain - 1
+    while accum_dist < dist_threshold:
+        probe_idx -= 1
+        if probe_idx < 0:
+            break
+        accum_dist += float(np.linalg.norm(chain[probe_idx].start_coord - ref_coord))
+        start_idx = probe_idx
+
+    end_idx = chain_idx
+    accum_dist = float(np.linalg.norm(chain[chain_idx].end_coord - ref_coord))
+    probe_idx = chain_idx
+
+    while accum_dist < dist_threshold:
+        probe_idx += 1
+        if probe_idx >= n_chain:
+            break
+        accum_dist += float(np.linalg.norm(chain[probe_idx].end_coord - ref_coord))
+        end_idx = probe_idx
 
     return start_idx, end_idx
 
@@ -56,14 +62,23 @@ def get_chain_side_bright_point(chain: SegmentChain, signal_image: np.ndarray,
                                 side: Literal['head', 'tail']) -> np.ndarray:
     if side == 'head':
         seg = chain[0]
-        coords = seg.start_coord + seg.dir_v * np.arange(0, floor((seg.length-1)/2)+1, 1).reshape(-1, 1)
     else:
         seg = chain[-1]
-        coords = seg.end_coord - seg.dir_v * np.arange(0, floor((seg.length-1)/2)+1, 1).reshape(-1, 1)
+
+    sample_count = max(1, int(np.floor((seg.length - 1.0) / 2.0)) + 1)
+    offsets = np.arange(sample_count, dtype=np.float64).reshape(-1, 1)
+
+    if side == 'head':
+        coords = seg.start_coord + seg.dir_v * offsets
+    else:
+        coords = seg.end_coord - seg.dir_v * offsets
 
     intensities = sample_voxels(signal_image, coords)
-    idx = np.argmax(intensities)
+    valid_indices = np.flatnonzero(~np.isnan(intensities))
+    if valid_indices.size == 0:
+        return coords[0]
 
+    idx = valid_indices[np.argmax(intensities[valid_indices])]
     return coords[idx]
 
 
@@ -82,6 +97,7 @@ def interpolate_chain(chain: SegmentChain, ref_point: np.ndarray, ort: Optional[
 
     closest1 = None
     index = None
+    interp_lambda = 0.0
 
     if ort is None:
         raise NotImplementedError
@@ -99,7 +115,12 @@ def interpolate_chain(chain: SegmentChain, ref_point: np.ndarray, ort: Optional[
                 min_dist = tmp_min_dist
                 min_index = i
                 closest1 = tmp_closest1
-                interp_lambda = np.linalg.norm(closest1 - start_pos) / np.linalg.norm(end_pos - start_pos)
+                segment = end_pos - start_pos
+                segment_len2 = float(np.dot(segment, segment))
+                if segment_len2 > 0.0:
+                    interp_lambda = float(np.dot(closest1 - start_pos, segment) / segment_len2)
+                else:
+                    interp_lambda = 0.0
 
     if interp_lambda > 0.0 and interp_lambda < 1.0:
         start_pos = coords[min_index]
@@ -141,6 +162,7 @@ def interpolate_chain(chain: SegmentChain, ref_point: np.ndarray, ort: Optional[
                 chain.insert(start_seg_idx, interp_seg)
                 index = start_seg_idx
         else:
+            # chain._invalidate_label_bbox()
             r1 = chain[start_seg_idx].radius
             r2 = chain[end_seg_idx].radius
             interp_seg = prev_seg.copy()

@@ -43,7 +43,7 @@ def _extension_source(stem: str, *, use_cython: bool) -> str:
 def _extra_compile_args() -> list[str]:
     if sys.platform == "win32":
         return ["/O2"]
-    return ["-O3"]
+    return ["-O3", "-std=gnu99"]
 
 
 def _strip_compiler_compat_flags(command):
@@ -91,6 +91,13 @@ class PyNeuTubeBuildExt(build_ext):
 
 def build_extensions(*, use_cython: bool = False) -> list[Extension]:
     extensions = [
+        Extension(
+            "pyneutube.core.io.vaa3d_accel",
+            [_extension_source("pyneutube/core/io/vaa3d_accel", use_cython=use_cython)],
+            include_dirs=[np.get_include()],
+            define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
+            extra_compile_args=_extra_compile_args(),
+        ),
         Extension(
             "pyneutube.core.processing.local_maximum",
             [_extension_source("pyneutube/core/processing/local_maximum", use_cython=use_cython)],
@@ -156,6 +163,19 @@ def build_extensions(*, use_cython: bool = False) -> list[Extension]:
             )
         )
 
+    optimization_accel_stem = "pyneutube/tracers/pyNeuTube/optimization_accel"
+    optimization_accel_c = ROOT / f"{optimization_accel_stem}.c"
+    if use_cython or optimization_accel_c.exists():
+        extensions.append(
+            Extension(
+                "pyneutube.tracers.pyNeuTube.optimization_accel",
+                [_extension_source(optimization_accel_stem, use_cython=use_cython)],
+                include_dirs=[np.get_include()],
+                define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
+                extra_compile_args=_extra_compile_args(),
+            )
+        )
+
     if use_cython:
         if cythonize is None:
             raise RuntimeError(
@@ -174,4 +194,4 @@ def build_setup_kwargs(*, use_cython: bool = False) -> dict[str, object]:
 
 
 if __name__ == "__main__":
-    setup(**build_setup_kwargs(use_cython=cythonize is not None))
+    setup(**build_setup_kwargs(use_cython=False))

@@ -6,7 +6,7 @@ tracing.py
 Definition of tracing segments and utilities of tracing.
 """
 
-from functools import cache, lru_cache
+from functools import lru_cache
 from itertools import islice
 from typing import Callable, List, Tuple, Literal, Union
 from tqdm import tqdm
@@ -17,44 +17,88 @@ from scipy.optimize import minimize
 
 from pyneutube.core.math_utils import get_bounding_box
 from pyneutube.core.processing.sampling import sample_voxels
-from pyneutube.core.processing.transform import rotate_by_theta_psi, normalize_euler_zx
+from pyneutube.core.processing.transform import rotate_by_theta_psi_fast
 
 from .config import TraceStatus, Defaults, TraceDirection
+from .filters import MexicanHatFilter, correlation_score, dot_score, mean_intensity_score
 from .tracing_base import BaseTracingSegment
-from .filters import MexicanHatFilter, correlation_score, mean_intensity_score
 from .seg_utils import set_coordinates, set_orientation
 from .geometry import point_in_seg
-from .optimization import optimize_segment
+from .optimization import optimize_segment, optimize_segment_C
 from .tracing_utils import label_tracing_mask
 # from filters0 import correlation_score, mean_intensity_score
 
 
 _SEG_FILTER = MexicanHatFilter()
 _ORIENTATION_SEG_FILTER = MexicanHatFilter(max_dist2=0.81)
-_MULTI_TRIAL_THETA_OFFSETS = (0.0, np.pi / 8, -np.pi / 8, np.pi / 16, -np.pi / 16)
-_MULTI_TRIAL_PSI_OFFSETS = (0.0, np.pi / 4, -np.pi / 4, np.pi / 8, -np.pi / 8)
+_HEMISPHERE_UNIFORM_POINTS = 200
+_HEMISPHERE_REFINE_COARSE_POINTS = 96
+_HEMISPHERE_REFINE_TOP_K = 6
+_HEMISPHERE_REFINE_ANGLE = np.deg2rad(6.0)
+# _MULTI_TRIAL_THETA_OFFSETS = (0.0, np.pi / 8, -np.pi / 8, np.pi / 16, -np.pi / 16)
+# _MULTI_TRIAL_PSI_OFFSETS = (0.0, np.pi / 4, -np.pi / 4, np.pi / 8, -np.pi / 8)
 
 
-# zx: backup
-# @lru_cache(maxsize=16)
-# def _orientation_search_schedule(length: float) -> tuple[tuple[float, tuple[float, ...]], ...]:
-#     schedule = []
-#     for theta in np.arange(0.1, np.pi * 0.75, 0.2):
-#         psi_step = 2.0 / length / np.sin(theta)
-#         psi_values = tuple(float(value) for value in np.arange(0, 2 * np.pi, psi_step))
-#         schedule.append((float(theta), psi_values))
-#     return tuple(schedule)
-
-@cache
-def _orientation_search_schedule() -> tuple[tuple[float, tuple[float, ...]], ...]:
+# C original
+@lru_cache(maxsize=16)
+def _orientation_search_schedule(length: float = Defaults.SEG_LENGTH) -> tuple[tuple[float, tuple[float, ...]], ...]:
     schedule = []
-    thetas = np.arccos(np.linspace(-1, 1, num=12, endpoint=False))  # uniform sampling on the surface of sphere
-    total_sin_theta = np.sum(np.sin(thetas))
-    for theta in thetas:
-        Ni = max(1, int(np.round(400 * np.sin(theta) / total_sin_theta)))
-        psi_values = tuple(float(value) for value in np.linspace(0, 2*np.pi, num=Ni, endpoint=False))
+    for theta in np.arange(0.1, np.pi * 0.75, 0.2):
+        psi_step = 2.0 / length / np.sin(theta)
+        psi_values = tuple(float(value) for value in np.arange(0, 2 * np.pi, psi_step))
         schedule.append((float(theta), psi_values))
     return tuple(schedule)
+
+
+@lru_cache(maxsize=16)
+def _hemisphere_uniform_orientation_schedule(
+    num_points: int = _HEMISPHERE_UNIFORM_POINTS,
+) -> tuple[tuple[float, tuple[float, ...]], ...]:
+    golden_angle = np.pi * (3.0 - np.sqrt(5.0))
+    indices = np.arange(num_points)
+    z = np.linspace(0.0, 1.0, num=num_points, endpoint=False) + 0.5 / num_points
+    theta_values = np.arccos(z)
+    psi_values = np.mod(indices * golden_angle, 2.0 * np.pi)
+    return tuple(
+        (float(theta), (float(psi),))
+        for theta, psi in zip(theta_values, psi_values, strict=True)
+    )
+
+
+def _orientation_vector_to_theta_psi(vector: np.ndarray) -> tuple[float, float]:
+    direction = np.asarray(vector, dtype=np.float64)
+    norm = np.linalg.norm(direction)
+    if norm == 0:
+        raise ValueError("Orientation vector must be non-zero.")
+    direction = direction / norm
+    if direction[2] < 0.0:
+        direction = -direction
+    theta = float(np.arccos(np.clip(direction[2], -1.0, 1.0)))
+    psi = float(np.arctan2(direction[0], -direction[1]) % (2 * np.pi))
+    return theta, psi
+
+
+@lru_cache(maxsize=1024)
+def _vector_refined_orientation_candidates(
+    theta: float,
+    psi: float,
+    angle_step: float = _HEMISPHERE_REFINE_ANGLE,
+) -> tuple[tuple[float, float], ...]:
+    center = np.asarray(_cached_orientation_vector(float(theta), float(psi)), dtype=np.float64)
+    center /= np.linalg.norm(center)
+    reference = np.array([0.0, 0.0, 1.0], dtype=np.float64)
+    if abs(float(np.dot(center, reference))) > 0.95:
+        reference = np.array([1.0, 0.0, 0.0], dtype=np.float64)
+    tangent_u = np.cross(center, reference)
+    tangent_u /= np.linalg.norm(tangent_u)
+    tangent_v = np.cross(center, tangent_u)
+
+    candidates = []
+    for offset_u in (-1.0, 0.0, 1.0):
+        for offset_v in (-1.0, 0.0, 1.0):
+            refined = center + angle_step * (offset_u * tangent_u + offset_v * tangent_v)
+            candidates.append(_orientation_vector_to_theta_psi(refined))
+    return tuple(candidates)
 
 
 @lru_cache(maxsize=4096)
@@ -184,12 +228,15 @@ class TracingSegment(BaseTracingSegment):
         """
         Perform mean shift using filtered value of image intensity
         """
-        coords_3d, _, weights_3d = _SEG_FILTER(self)
+        coords_3d, _, _ = _SEG_FILTER(self)
         intensities = sample_voxels(image, coords_3d)
-        coords_3d_weights = intensities * weights_3d
-        if np.sum(coords_3d_weights) != 0:
-            centroid = np.average(coords_3d, weights=coords_3d_weights, axis=0)
-            self._set_coordinate(centroid, 'center')
+        valid_mask = np.isfinite(intensities)
+        if np.any(valid_mask):
+            valid_coords = coords_3d[valid_mask]
+            valid_intensities = intensities[valid_mask]
+            if np.sum(valid_intensities) != 0:
+                centroid = np.average(valid_coords, weights=valid_intensities, axis=0)
+                self._set_coordinate(centroid, 'center')
 
         return
     
@@ -200,30 +247,78 @@ class TracingSegment(BaseTracingSegment):
         best_score = -np.inf
         best_theta, best_psi = self.theta, self.psi
         center_coord = self.center_coord.copy()
+        half_length = (self.length - 1.0) * 0.5
 
-        
-        # backup: zx's solution
-        # thetas = np.arccos(np.linspace(-1, 1, num=12, endpoint=False))  # uniform sampling on the surface of sphere
-        # total_sin_theta = np.sum(np.sin(thetas))
-        # for theta in thetas:
-        #     Ni = max(1, int(np.round(400 * np.sin(theta) / total_sin_theta)))
-        #     psis = np.linspace(0, 2*np.pi, num=Ni, endpoint=False)
-        #     for psi in psis:
+        # For a fixed radius/scale/length, the orientation filter weights are
+        # invariant and only the local coordinates need rotation per candidate.
+        base_seg = self.copy()
+        base_seg.theta = 0.0
+        base_seg.psi = 0.0
+        base_seg._set_orientation()
+        base_coords_3d, _, weights_3d = _ORIENTATION_SEG_FILTER(base_seg, rel_pos="local")
 
-        for theta, psi_values in _orientation_search_schedule():
-            for psi in psi_values:
-                self.theta, self.psi = theta, psi
-                self._set_orientation()
-                self._set_coordinate(center_coord, 'center')
+        search_mode = getattr(Defaults, "ORIENTATION_SEARCH_MODE", "grid")
+        if search_mode == "grid":
+            for theta, psi_values in _orientation_search_schedule(self.length):
+                for psi in psi_values:
+                    dir_v = np.asarray(
+                        _cached_orientation_vector(float(theta), float(psi)),
+                        dtype=np.float64,
+                    )
+                    start_coord = center_coord - half_length * dir_v
+                    coords_3d = rotate_by_theta_psi_fast(base_coords_3d, theta, psi, None)
+                    coords_3d += start_coord
+                    intensities = sample_voxels(image, coords_3d)
+                    score = correlation_score(intensities, weights_3d)
 
-                coords_3d, _, weights_3d = _ORIENTATION_SEG_FILTER(self)
-
+                    if score > best_score:
+                        best_score = score
+                        best_theta, best_psi = theta, psi
+        elif search_mode in {"hemisphere_uniform", "hemisphere_uniform_refine"}:
+            def score_candidate(theta: float, psi: float) -> float:
+                dir_v = np.asarray(
+                    _cached_orientation_vector(float(theta), float(psi)),
+                    dtype=np.float64,
+                )
+                start_coord = center_coord - half_length * dir_v
+                coords_3d = rotate_by_theta_psi_fast(base_coords_3d, theta, psi, None)
+                coords_3d += start_coord
                 intensities = sample_voxels(image, coords_3d)
-                score = correlation_score(intensities, weights_3d)
+                return correlation_score(intensities, weights_3d)
 
+            def update_best(theta: float, psi: float) -> float:
+                nonlocal best_score, best_theta, best_psi
+                score = score_candidate(theta, psi)
                 if score > best_score:
                     best_score = score
                     best_theta, best_psi = theta, psi
+                return score
+
+            coarse_scores = []
+            if search_mode == "hemisphere_uniform":
+                schedule = _hemisphere_uniform_orientation_schedule()
+            else:
+                schedule = _hemisphere_uniform_orientation_schedule(_HEMISPHERE_REFINE_COARSE_POINTS)
+            for theta, psi_values in schedule:
+                psi = psi_values[0]
+                score = update_best(theta, psi)
+                coarse_scores.append((score, theta, psi))
+
+            if search_mode == "hemisphere_uniform_refine":
+                coarse_scores.sort(reverse=True, key=lambda item: item[0])
+                seen = {
+                    (round(theta, 12), round(psi_values[0], 12))
+                    for theta, psi_values in schedule
+                }
+                for _score, theta, psi in coarse_scores[:_HEMISPHERE_REFINE_TOP_K]:
+                    for refined_theta, refined_psi in _vector_refined_orientation_candidates(theta, psi):
+                        key = (round(refined_theta, 12), round(refined_psi, 12))
+                        if key in seen:
+                            continue
+                        seen.add(key)
+                        update_best(refined_theta, refined_psi)
+        else:
+            raise ValueError(f"Unknown orientation search mode: {search_mode!r}")
 
         self.theta, self.psi = best_theta, best_psi
         self._set_orientation()
@@ -249,32 +344,12 @@ class TracingSegment(BaseTracingSegment):
         return
 
     def fit_segment(self, image: np.ndarray,
-                    score_func: Callable[[np.ndarray, np.ndarray], Union[np.ndarray, float]] = correlation_score,
-                    multi_trials: bool = False) -> bool:
+                    score_func: Callable[[np.ndarray, np.ndarray], Union[np.ndarray, float]] = dot_score,
+                    ) -> bool:
 
-        if multi_trials:
-            thetas = [self.theta + offset for offset in _MULTI_TRIAL_THETA_OFFSETS]
-            psis = [self.psi + offset for offset in _MULTI_TRIAL_PSI_OFFSETS]
+        max_x = [self.radius, self.theta, self.psi, self.scale]
 
-            tmpseg = self.copy()
-            i = 0
-            for theta in thetas:
-                for psi in psis:
-                    x_init = [self.radius, theta, psi, self.scale]
-                    tmpseg.theta, tmpseg.psi = x_init[1:3]
-                    tmpseg._set_orientation()
-                    score, _ = tmpseg.score_segment(image, [correlation_score, mean_intensity_score])
-                    if i == 0:
-                        max_score = score
-                        max_x = x_init
-                    elif score > max_score:
-                        max_score = score
-                        max_x = x_init
-                    i += 1
-        else:
-            max_x = [self.radius, self.theta, self.psi, self.scale]
-
-        max_params = optimize_segment(self, image, score_func, var_init=max_x)
+        max_params = optimize_segment_C(self, image, score_func, var_init=max_x)
 
         if max_params.success:
             self.radius, self.theta, self.psi, self.scale = max_params.x
@@ -378,6 +453,47 @@ class SegmentChain:
 
         self.mean_intensity = None
         self.mean_score = None
+        self.label_bboxes = None
+
+    def _invalidate_label_bbox(self) -> None:
+        self.label_bboxes = None
+
+    def get_label_bbox(
+        self,
+        start: int | None = None,
+    end: int | None = None,
+    ) -> np.ndarray | None:
+        if self.label_bboxes is None or len(self) == 0:
+            return None
+
+        if start is None:
+            start = 0
+        if end is None:
+            end = len(self) - 1
+        if start > end:
+            return None
+
+        selected = self.label_bboxes[start:end + 1]
+        valid = selected[:, 0] >= 0
+        if not np.any(valid):
+            return None
+
+        selected = selected[valid]
+        return np.array(
+            [
+                selected[:, 0].min(),
+                selected[:, 1].max(),
+                selected[:, 2].min(),
+                selected[:, 3].max(),
+                selected[:, 4].min(),
+                selected[:, 5].max(),
+            ],
+            dtype=np.intp,
+        )
+
+    def _remove_segment(self, idx: int) -> None:
+        self._segments.pop(idx)
+        self._invalidate_label_bbox()
 
     def append(self, segment: TracingSegment):
         """
@@ -386,12 +502,14 @@ class SegmentChain:
         if not isinstance(segment, TracingSegment):
             raise TypeError("Can only add TracingSegment objects")
         self._segments.append(segment)
+        self._invalidate_label_bbox()
 
     def insert(self, idx: int, segment: TracingSegment):
         """
         Insert a segment at position `idx` in the chain and re-validate connectivity.
         """
         self._segments.insert(idx, segment)
+        self._invalidate_label_bbox()
 
     @property
     def segments(self) -> List[TracingSegment]:
@@ -516,14 +634,21 @@ class SegmentChain:
             if side!='both':  # 'both' is somehow an initial check for seed's seg.
                 if seg.score < seg.get_norm_min_score(self._stop_seg_trace_score):
                     self._trace_status[side_idx] = TraceStatus.LOW_SCORE
-                    self._segments.pop(seg_idx)  # delete this segment
+                    self._remove_segment(seg_idx)  # delete this segment
                     # print(f'pop seg_idx={seg_idx} on side={side}, score={seg.score}')
                     return
+                
+                radius = seg.radius * sqrt(seg.scale)
 
-                if seg.radius > 25:
+                if radius > 25:
                     self._trace_status[side_idx] = TraceStatus.SEG_TOO_THICK
-                    self._segments.pop(seg_idx)
-                    # print(f'pop seg_idx={seg_idx} on side={side}, radius={seg.radius}')
+                    self._remove_segment(seg_idx)
+                    return
+
+                if radius < Defaults.MIN_SEG_RADIUS:
+                    self._trace_status[side_idx] = TraceStatus.SEG_TOO_THIN
+                    self._remove_segment(seg_idx)
+                    return
 
                 if len(self) >= 2:
                     # 
@@ -533,7 +658,7 @@ class SegmentChain:
                     intensity_change = cur_seg.mean_intensity / seg_prev.mean_intensity
                     if intensity_change < 0.5:
                         self._trace_status[side_idx] = TraceStatus.SIGNAL_CHANGED
-                        self._segments.pop(seg_idx)
+                        self._remove_segment(seg_idx)
                         # print(f'pop seg_idx={seg_idx} on side={side}', 'status=signal_changed')
 
                         return
@@ -544,18 +669,23 @@ class SegmentChain:
                         ratio = r1 / r2
                         if ratio > 2.0 or ratio < 0.5:
                             self._trace_status[side_idx] = TraceStatus.RADIUS_CHANGED
-                            self._segments.pop(seg_idx)
+                            self._remove_segment(seg_idx)
                             
                             return 
 
                     #
                     loop_flag = False
+                    endpoint_flag = "start" if side_idx == 0 else "end"
+                    opposite_endpoint_flag = "end" if side_idx == 0 else "start"
                     for tmpseg in self._segments[seg_idx+1:len(self)+seg_idx][::1 if side_idx==0 else -1]:
-                        loop_flag = test_seg_overlap(tmpseg, seg, seg2_coord_flag='start' if side_idx==0 else 'end')
+                        if tmpseg is seg_prev:
+                            continue
+
+                        loop_flag = test_seg_overlap(tmpseg, seg, seg2_coord_flag=endpoint_flag)
                         if loop_flag:
                             break
                         if test_seg_overlap(tmpseg, seg, seg2_coord_flag='center'):
-                            if test_seg_overlap(tmpseg, seg, seg2_coord_flag='end' if side_idx==0 else 'start'):
+                            if not test_seg_overlap(tmpseg, seg, seg2_coord_flag=opposite_endpoint_flag):
                                 loop_flag = True
                                 break
                             elif test_seg_turn(tmpseg, seg, max_angle=np.pi/2):
@@ -564,7 +694,7 @@ class SegmentChain:
 
                     if loop_flag:
                         self._trace_status[side_idx] = TraceStatus.LOOP_FORMED
-                        self._segments.pop(seg_idx)
+                        self._remove_segment(seg_idx)
                         
             return
 
@@ -627,20 +757,20 @@ class SegmentChain:
     def _remove_overlap_sides(self) -> None:
         if len(self) >= 2:
             if test_seg_overlap(self._segments[1], self._segments[0], 'sides'):
-                self._segments.pop(0)
+                self._remove_segment(0)
         
         if len(self) >= 2:
             if test_seg_overlap(self._segments[-2], self._segments[-1], 'sides'):
-                self._segments.pop(-1)
+                self._remove_segment(-1)
 
     def _remove_turn_sides(self) -> None:
         if len(self) >= 2:
             if test_seg_turn_2(self._segments[1], self._segments[0], max_angle=1.0):
-                self._segments.pop(0)
+                self._remove_segment(0)
 
         if len(self) >= 2:
             if test_seg_turn_2(self._segments[-2], self._segments[-1], max_angle=1.0):
-                self._segments.pop(-1)
+                self._remove_segment(-1)
 
     def _refresh_endpoint_scores(self, signal_image: np.ndarray) -> None:
         if len(self) <= 1:
@@ -661,8 +791,8 @@ class SegmentChain:
         # forward trace
         while self._trace_status[1] == TraceStatus.NORMAL and len(self) < self._max_seg_num:
             new_seg = self._init_next_seg(side='tail')
-            success = new_seg.fit_segment(signal_image, multi_trials=True)
-            #print(len(self), self[-1],'\n',new_seg,'\n', self._trace_status[1])
+            success = new_seg.fit_segment(signal_image)
+            # print(len(self), self[-1],'\n',new_seg,'\n', self._trace_status[1])
 
             if success:
                 self.append(new_seg)
@@ -676,7 +806,7 @@ class SegmentChain:
         if self._trace_status[0] == TraceStatus.NORMAL:
             while self._trace_status[0] == TraceStatus.NORMAL and len(self) < self._max_seg_num:
                 new_seg = self._init_next_seg(side='head')
-                success = new_seg.fit_segment(signal_image, multi_trials=True)
+                success = new_seg.fit_segment(signal_image)
                 new_seg.flip_segment()
                 # print(len(self), self[0],'\n',new_seg,'\n', self._trace_status[0])
 
@@ -687,26 +817,6 @@ class SegmentChain:
 
                 self._check_chain_status(trace_mask, 'head')
         
-        if False:
-            # get all parameters distributions
-            scales, radii, psis, thetas = [], [], [], []
-            for seg in self._segments:
-                try:
-                    scales.append(round(seg.scale.item(), 3))
-                    radii.append(round(seg.radius.item(), 3))
-                    psis.append(round(seg.psi.item(), 3))
-                    thetas.append(round(seg.theta.item(), 3))
-                except AttributeError:
-                    scales.append(round(seg.scale, 3))
-                    radii.append(round(seg.radius, 3))
-                    psis.append(round(seg.psi, 3))
-                    thetas.append(round(seg.theta, 3))
-
-            print('scale: ', scales)
-            print('radii: ', radii)
-            print('psi: ', psis)
-            print('theta: ', thetas)
-            print('\n')
         
         if len(self) >= 2:
             if self._trace_status[1] != TraceStatus.HIT_MARK:
@@ -790,13 +900,78 @@ class SegmentChains:
                 )
             )
             if keep_chain:
-                for seg in chain: 
-                    label_tracing_mask(seg, self.trace_mask, dilate=True)
+                label_tracing_mask(chain, self.trace_mask, dilate=True)
                 self.append(chain)
             if progress_callback is not None:
                 progress_callback("generate_neuron_trace", seed_idx + 1, total)
         if verbose:
             print(f"Number of chains: {len(self)}")
+
+    def generate_neuron_trace_lazy_seed_scoring(
+        self,
+        seeds,
+        signal_image: np.ndarray,
+        *,
+        max_seeds: int | None = None,
+        verbose: int = 1,
+        check_timeout=None,
+        progress_callback=None,
+    ) -> list:
+        seed_iterable = islice(seeds, max_seeds) if max_seeds is not None else seeds
+        total = min(len(seeds), max_seeds) if max_seeds is not None else len(seeds)
+        scored_seeds = []
+        skipped_by_trace_mask = 0
+        rejected_by_seed_filter = 0
+        if progress_callback is not None:
+            progress_callback("generate_neuron_trace", 0, total)
+        for seed_idx, seed in enumerate(
+            tqdm(seed_iterable, desc="Generating chains", disable=verbose < 1)
+        ):
+            if check_timeout is not None and seed_idx % 8 == 0:
+                check_timeout("lazy seed scoring")
+            if self.trace_mask[tuple(seed.coord[::-1])]:
+                skipped_by_trace_mask += 1
+                if progress_callback is not None:
+                    progress_callback("generate_neuron_trace", seed_idx + 1, total)
+                continue
+
+            seed.score_seed(signal_image)
+            if not (
+                seed.score > seed.seg.get_norm_min_score(Defaults.MIN_SEED_SCORE)
+                and seed.seg.radius <= Defaults.MAX_SEED_RADIUS
+            ):
+                rejected_by_seed_filter += 1
+                if progress_callback is not None:
+                    progress_callback("generate_neuron_trace", seed_idx + 1, total)
+                continue
+
+            scored_seeds.append(seed)
+            chain = SegmentChain(seed.seg.copy())
+            chain.generate_chain_trace(signal_image, self.trace_mask)
+            keep_chain = (
+                not chain._blocked_by_init_hit and (
+                    chain.path_length >= self._min_chain_length
+                    or chain._trace_status[0] == TraceStatus.HIT_MARK
+                    or chain._trace_status[1] == TraceStatus.HIT_MARK
+                )
+            )
+            if keep_chain:
+                label_tracing_mask(chain, self.trace_mask, dilate=True)
+                self.append(chain)
+            if progress_callback is not None:
+                progress_callback("generate_neuron_trace", seed_idx + 1, total)
+        self.lazy_seed_scored_count = len(scored_seeds)
+        self.lazy_seed_skipped_by_trace_mask = skipped_by_trace_mask
+        self.lazy_seed_rejected_by_seed_filter = rejected_by_seed_filter
+        if verbose:
+            print(f"Number of chains: {len(self)}")
+            print(
+                "Lazy seed scoring: "
+                f"scored={len(scored_seeds)}, "
+                f"skipped_by_trace_mask={skipped_by_trace_mask}, "
+                f"rejected_by_seed_filter={rejected_by_seed_filter}"
+            )
+        return scored_seeds
 
     def filter_chains(self, *, verbose: int = 1):
         if len(self) > 100:
@@ -808,7 +983,7 @@ class SegmentChains:
                 scores = [seg.score for seg in chain]
                 chain.mean_intensity = np.mean(intensities)
                 chain.mean_score = np.mean(scores)
-                if (chain.mean_score >= self._min_chain_score) or (chain.mean_intensity < min_intensity):
+                if (chain.mean_score >= self._min_chain_score) and (chain.mean_intensity < min_intensity):
                     min_intensity = chain.mean_intensity
 
                 # mean_intensities.append(chain.mean_intensity)
@@ -817,7 +992,7 @@ class SegmentChains:
             # min_intensity = min(mean_intensities) if mean_intensities else np.inf
             self._chains = [
                 chain for chain, score in zip(self._chains, mean_scores)
-                if (score >= self._min_chain_score) and (chain.mean_intensity >= min_intensity)
+                if (score >= self._min_chain_score) or (chain.mean_intensity >= min_intensity)
             ]
             if verbose:
                 print(f"Number of chains after filtering: {len(self)}")
@@ -855,11 +1030,7 @@ def test_seg_overlap(seg1: TracingSegment, seg2: TracingSegment, seg2_coord_flag
     elif seg2_coord_flag == 'sides':
         seg2_coords = (seg2.start_coord, seg2.end_coord)
 
-    flags = [False, False]
-    for i in range(len(seg2_coords)):
-        flags[i] = point_in_seg(seg1, seg2_coords[i])
-
-    return all(flags)
+    return all(point_in_seg(seg1, coord) for coord in seg2_coords)
 
 
 def test_seg_turn(seg1: TracingSegment, seg2: TracingSegment, max_angle: float = 1) -> bool:

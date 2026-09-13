@@ -1,10 +1,11 @@
-# PyNeuTube
+# PyTube
 
-PyNeuTube is a Python reimplementation of the NeuTube tracing workflow for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
+PyTube is a Python-based implementation and extension of the NeuTube tracing framework for 3D microscopy volumes. This repository is trimmed to a minimal reusable release surface focused on image I/O, preprocessing, tracing, and SWC export.
+
 
 ## Current scope
 
-PyNeuTube currently provides:
+PyTube currently provides:
 
 - multi-format 3D image I/O through `ImageParser`
 - SWC parsing and export through `Neuron`
@@ -19,22 +20,21 @@ Heavy debug inspection modules are intentionally not part of the release surface
 
 Recommended Python versions: `3.10` to `3.12`.
 
-Install from PyPI with `pip`:
-
-```bash
-python -m pip install pyneutube
-```
-
 If you need the latest source version instead of a published package, install from GitHub:
 
 ```bash
-python -m pip install "git+https://github.com/YunZhixi98/pyNeuTube.git"
+python -m pip install "git+https://github.com/YunZhixi98/pyTube.git"
 ```
 
 For a local source tree:
 
 ```bash
 python -m pip install .
+```
+For a prebuilt wheel:
+
+```bash
+pip install <wheel-file>
 ```
 
 Published wheels do not require Cython at install time.
@@ -45,7 +45,7 @@ For a local `conda` environment from this repository:
 
 ```bash
 conda env create -f environment.yml
-conda activate pyneutube
+conda activate pytube
 ```
 
 All of these install paths include the supported runtime I/O formats.
@@ -118,6 +118,8 @@ outputs = trace_directory(
     overwrite=False,
 )
 ```
+
+Tracing entry points also accept `seed_strategy="lazy"` to defer seed scoring until tracing reaches each candidate; `n_jobs` or `trace_n_jobs` still applies to EDT-based candidate generation.
 
 Command line:
 
@@ -251,9 +253,16 @@ For `extract_trace_seeds(...)`:
 
 This staged workflow is useful when you want to adjust tracing config between steps or inspect seeds and chains before the final morphology reconstruction.
 
+For staged lazy tracing, pass `seed_strategy="lazy"` to `extract_trace_seeds(...)`. The returned seeds are unscored candidates; `generate_trace_chains(...)` routes them through lazy seed scoring by default:
+
+```python
+seeds = extract_trace_seeds(image, seed_strategy="lazy", n_jobs=4)
+chains = generate_trace_chains(seeds, image)
+```
+
 ## Trace config
 
-Tracing APIs accept an optional `config` argument. By default, PyNeuTube uses the built-in tracer config in `pyneutube.tracers.pyNeuTube.config`. To override it, pass a Python module path that exposes `Defaults` and optionally `Optimization` with the same attribute names as the built-in config:
+Tracing APIs accept an optional `config` argument. By default, PyTube uses the built-in tracer config in `pyneutube.tracers.pyNeuTube.config`. To override it, pass a Python module path that exposes `Defaults` and optionally `Optimization` with the same attribute names as the built-in config:
 
 ```python
 result = trace_file(
@@ -286,11 +295,9 @@ Recommended local checks:
 ```bash
 python Cython_setup.py build_ext --inplace
 python tools/dev/smoke_imports.py
-python -m pytest -q
-ruff check .
 ```
 
-`python Cython_setup.py build_ext --inplace` is only needed for local extension-development workflows. End users should install the published wheel or run `python -m pip install .`, not manage `Cython` manually.
+`python Cython_setup.py build_ext --inplace` is only needed for local extension-development workflows. End users should install the published wheel or run `python -m pip install .`, not manage `Cython` manually. 
 
 ## License
 
@@ -302,3 +309,7 @@ This project benefited greatly from the contributions of:
 
 - [**Yufeng Liu**](https://github.com/crazylyf) - For his work on the development and optimization of code.
 - [**Kangxu Fan**](https://github.com/fkxyyds) - For his assistance in testing and cross-version alignment.
+
+## Remarks
+
+The Python distribution and import name is `pyneutube` to avoid conflict with the unrelated `pytube` package on PyPI.

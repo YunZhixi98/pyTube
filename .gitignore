@@ -180,3 +180,5 @@ examples/reference_volume_trace.png
 examples/reference_volume_trace.swc
 tests/
 Cython_setup_legacy.py
+docs/test.ipynb
+analysis/

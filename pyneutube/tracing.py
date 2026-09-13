@@ -29,9 +29,9 @@ from pyneutube.core.io.image_parser import ImageParser
 from pyneutube.core.io.swc_parser import Neuron
 from pyneutube.core.processing.filtering import (
     connectivity_filter,
+    estimate_background_level,
     local_max_filter,
     refine_local_max_threshold,
-    subtract_background,
     threshold_filter,
     triangle_threshold,
 )
@@ -76,6 +76,7 @@ _TRACE_PROGRESS_STAGE_LABELS = {
 }
 _TRACE_PROGRESS_REFRESH_EVERY = 100
 _TRACE_PROGRESS_MIN_INTERVAL = 0.2
+_MORPHOLOGY_STRUCTURE = np.ones((3, 3, 3), dtype=bool)
 
 
 @dataclass
@@ -129,6 +130,21 @@ def _resolve_n_jobs(n_jobs: int) -> int:
     if n_jobs <= 0:
         raise ValueError("`n_jobs` must be a positive integer or -1.")
     return n_jobs
+
+
+def _resolve_seed_strategy(seed_strategy: str | None) -> str:
+    strategy = "eager" if seed_strategy is None else seed_strategy
+    strategy = str(strategy).lower()
+    if strategy not in {"eager", "lazy"}:
+        raise ValueError("`seed_strategy` must be one of {'eager', 'lazy'}.")
+    return strategy
+
+
+def _resolve_chain_seed_strategy(seed_strategy: str | None, seeds: Seeds) -> str:
+    strategy = "auto" if seed_strategy is None else str(seed_strategy).lower()
+    if strategy == "auto":
+        return "lazy" if not getattr(seeds, "scored", True) else "eager"
+    return _resolve_seed_strategy(strategy)
 
 
 def _make_timeout_checker(
@@ -289,12 +305,33 @@ class _QueuedBatchProgressReporter:
         self._last_emit_at = now
 
 
+def _signal_dtype(source: np.ndarray) -> type[np.floating]:
+    """
+    Pick the narrowest float that stores the background-subtracted volume exactly.
+
+    8/16-bit integers stay within [-32768, 65535], so every value is an integer
+    below 2**24 that float32 holds exactly, and the kernels reading the volume
+    widen each sample to double anyway. Wider integers can exceed 2**24 and a
+    float input would be rounded, so both keep double precision.
+    """
+    dtype = source.dtype
+    if dtype.kind in "iu" and dtype.itemsize <= 2:
+        return np.float32
+    return np.float64
+
+
 def _prepare_signal_image(image: np.ndarray, *, verbose: int = 1) -> np.ndarray:
     t0 = perf_counter()
-    signal_image = subtract_background(
-        np.ascontiguousarray(np.asarray(image), dtype=np.float64),
-        verbose=max(verbose - 1, 0),
-    )
+    source = np.asarray(image)
+    # Histogram the source in its native dtype, then subtract in place;
+    # `subtract_background` would allocate a second full-volume temporary.
+    background_level = estimate_background_level(source, verbose=max(verbose - 1, 0))
+    signal_image = source.astype(_signal_dtype(source), order="C")
+    if background_level:
+        signal_image -= background_level
+    # `subtract_background` only clips when the level exceeds the image minimum;
+    # clipping unconditionally is the same, since otherwise nothing went negative.
+    np.maximum(signal_image, 0.0, out=signal_image)
     _time_step(verbose, "subtract_background", t0)
     return signal_image
 
@@ -308,8 +345,12 @@ def _build_binary_image(
     t0 = perf_counter()
     binary_image = threshold_filter(signal_image, float(threshold))
     binary_image = connectivity_filter(binary_image, 4, n_neighbors=26)
-    binary_image = binary_dilation(binary_image, structure=np.ones((3, 3, 3)), border_value=0)
-    binary_image = binary_erosion(binary_image, structure=np.ones((3, 3, 3)), border_value=1)
+    binary_image = binary_dilation(
+        binary_image.astype(bool, copy=False),
+        structure=_MORPHOLOGY_STRUCTURE,
+        border_value=0,
+    )
+    binary_image = binary_erosion(binary_image, structure=_MORPHOLOGY_STRUCTURE, border_value=1)
     _time_step(verbose, "binary_mask", t0)
     return np.ascontiguousarray(binary_image, dtype=np.uint8)
 
@@ -318,8 +359,7 @@ def _estimate_threshold(signal_image: np.ndarray, *, verbose: int = 1) -> float:
     t0 = perf_counter()
     local_max_mask = local_max_filter(signal_image)
     _time_step(verbose, "local_max_filter", t0)
-
-    local_max_values = signal_image[local_max_mask > 0]
+    local_max_values = signal_image[local_max_mask.view(bool)]
     if local_max_values.size == 0:
         raise ValueError("No local maxima were found in the input volume.")
 
@@ -332,11 +372,22 @@ def _estimate_threshold(signal_image: np.ndarray, *, verbose: int = 1) -> float:
         return threshold
 
     t0 = perf_counter()
-    threshold = float(triangle_threshold(local_max_values))
+    threshold = float(
+        triangle_threshold(
+            local_max_values,
+            max_height_value=int(np.max(local_max_values)) - 1,
+        )
+    )
     _time_step(verbose, f"triangle_threshold={threshold:.3f}", t0)
 
     t0 = perf_counter()
-    threshold = float(refine_local_max_threshold(signal_image, threshold))
+    threshold = float(
+        refine_local_max_threshold(
+            signal_image,
+            threshold,
+            threshold_source=local_max_values,
+        )
+    )
     _time_step(verbose, f"refine_local_max_threshold={threshold:.3f}", t0)
     return threshold
 
@@ -436,6 +487,7 @@ def trace_volume(
     verbose: int = 1,
     return_intermediates: bool = False,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = None,
 ) -> TracingResult:
     return _trace_volume_internal(
         image,
@@ -444,6 +496,7 @@ def trace_volume(
         verbose=verbose,
         return_intermediates=return_intermediates,
         config=config,
+        seed_strategy=seed_strategy,
     )
 
 
@@ -458,10 +511,12 @@ def _trace_volume_internal(
     filter_chains: bool = True,
     return_intermediates: bool = False,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = None,
     progress_callback: Callable[[str, int | None, int | None], None] | None = None,
 ) -> TracingResult:
     with _temporary_trace_config(config):
         resolved_n_jobs = _resolve_n_jobs(n_jobs)
+        resolved_seed_strategy = _resolve_seed_strategy(seed_strategy)
         _, check_timeout = _make_timeout_checker(timeout)
 
         check_timeout("preprocess_volume")
@@ -477,15 +532,23 @@ def _trace_volume_internal(
             t0 = perf_counter()
             seeds = Seeds()
             _emit_trace_progress(progress_callback, "generate_tracing_seeds")
-            seeds.generate_tracing_seeds(
-                active_signal_image,
-                active_binary_image,
-                n_jobs=resolved_n_jobs,
-                verbose=verbose,
-                check_timeout=check_timeout,
-                shared_image=shared_image_spec,
-                progress_callback=progress_callback,
-            )
+            if resolved_seed_strategy == "lazy":
+                seeds.generate_seed_candidates(
+                    active_binary_image,
+                    n_jobs=resolved_n_jobs,
+                    verbose=verbose,
+                    check_timeout=check_timeout,
+                )
+            else:
+                seeds.generate_tracing_seeds(
+                    active_signal_image,
+                    active_binary_image,
+                    n_jobs=resolved_n_jobs,
+                    verbose=verbose,
+                    check_timeout=check_timeout,
+                    shared_image=shared_image_spec,
+                    progress_callback=progress_callback,
+                )
             _time_step(verbose, "generate_tracing_seeds", t0)
             check_timeout("generate_tracing_seeds")
 
@@ -496,14 +559,28 @@ def _trace_volume_internal(
             t0 = perf_counter()
             chains = SegmentChains(image_shape=active_signal_image.shape)
             _emit_trace_progress(progress_callback, "generate_neuron_trace")
-            chains.generate_neuron_trace(
-                seeds,
-                active_signal_image,
-                max_seeds=max_seeds,
-                verbose=verbose,
-                check_timeout=check_timeout,
-                progress_callback=progress_callback,
-            )
+            if resolved_seed_strategy == "lazy":
+                seeds = Seeds(
+                    chains.generate_neuron_trace_lazy_seed_scoring(
+                        seeds,
+                        active_signal_image,
+                        max_seeds=max_seeds,
+                        verbose=verbose,
+                        check_timeout=check_timeout,
+                        progress_callback=progress_callback,
+                    ),
+                    seed_strategy="lazy",
+                    scored=True,
+                )
+            else:
+                chains.generate_neuron_trace(
+                    seeds,
+                    active_signal_image,
+                    max_seeds=max_seeds,
+                    verbose=verbose,
+                    check_timeout=check_timeout,
+                    progress_callback=progress_callback,
+                )
             if filter_chains:
                 check_timeout("filter_chains")
                 chains.filter_chains(verbose=verbose)
@@ -546,7 +623,7 @@ def _trace_volume_internal(
                 binary_image=binary_image_result,
             )
 
-        if resolved_n_jobs > 1:
+        if resolved_n_jobs > 1 and resolved_seed_strategy == "eager":
             with _shared_array(signal_image) as (shared_signal_image, shared_image_spec):
                 del signal_image
                 return _run_trace(shared_signal_image, binary_image, shared_image_spec)
@@ -566,6 +643,7 @@ def trace_file(
     on_exists: str | None = None,
     return_intermediates: bool = False,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = None,
 ) -> TracingResult:
     return _trace_file_internal(
         image_path,
@@ -578,6 +656,7 @@ def trace_file(
         on_exists=on_exists,
         return_intermediates=return_intermediates,
         config=config,
+        seed_strategy=seed_strategy,
     )
 
 
@@ -596,6 +675,7 @@ def _trace_file_internal(
     filter_chains: bool = True,
     return_intermediates: bool = False,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = None,
     progress_callback: Callable[[str, int | None, int | None], None] | None = None,
 ) -> TracingResult:
     _, check_timeout = _make_timeout_checker(timeout)
@@ -657,6 +737,7 @@ def _trace_file_internal(
         filter_chains=filter_chains,
         return_intermediates=return_intermediates,
         config=config,
+        seed_strategy=seed_strategy,
         progress_callback=progress_callback,
     )
     result.image_path = image_path
@@ -741,6 +822,7 @@ def _trace_file_record(
     verbose: int,
     overwrite: bool,
     config: str | None,
+    seed_strategy: str | None,
     progress_callback: Callable[[str], None] | None = None,
 ) -> dict[str, object]:
     started_at = perf_counter()
@@ -755,6 +837,7 @@ def _trace_file_record(
                 verbose=verbose,
                 overwrite=overwrite,
                 config=config,
+                seed_strategy=seed_strategy,
             )
         else:
             result = _trace_file_internal(
@@ -766,6 +849,7 @@ def _trace_file_record(
                 verbose=verbose,
                 overwrite=overwrite,
                 config=config,
+                seed_strategy=seed_strategy,
                 progress_callback=progress_callback,
             )
     except Exception as exc:
@@ -796,9 +880,9 @@ def _trace_file_record(
 
 
 def _trace_file_worker(
-    payload: tuple[str, str, str | None, int, float | None, int, bool, str | None, object | None],
+    payload: tuple[str, str, str | None, int, float | None, int, bool, str | None, str | None, object | None],
 ) -> dict[str, object]:
-    input_path, output_swc, visualization_dir, n_jobs, timeout, verbose, overwrite, config, progress_queue = payload
+    input_path, output_swc, visualization_dir, n_jobs, timeout, verbose, overwrite, config, seed_strategy, progress_queue = payload
 
     progress_callback = None
     if progress_queue is not None:
@@ -816,6 +900,7 @@ def _trace_file_worker(
         verbose,
         overwrite,
         config,
+        seed_strategy,
         progress_callback=progress_callback,
     )
 
@@ -859,6 +944,7 @@ def trace_files(
     overwrite: bool = False,
     on_exists: str | None = None,
     config: str | None = None,
+    seed_strategy: str | None = None,
 ) -> list[Path]:
     image_paths = [Path(path) for path in input_paths]
     if not image_paths:
@@ -876,6 +962,7 @@ def trace_files(
     output_dir.mkdir(parents=True, exist_ok=True)
     resolved_batch_n_jobs = _resolve_n_jobs(batch_n_jobs)
     resolved_trace_n_jobs = _resolve_n_jobs(trace_n_jobs)
+    resolved_seed_strategy = _resolve_seed_strategy(seed_strategy)
     exists_policy = _resolve_on_exists(on_exists, default="skip")
     manifest = Path(manifest_path) if manifest_path is not None else None
 
@@ -889,7 +976,7 @@ def trace_files(
 
     show_progress = verbose >= 1
     completed_outputs: list[Path] = []
-    jobs: list[tuple[str, str, str | None, int, float | None, int, bool, str | None]] = []
+    jobs: list[tuple[str, str, str | None, int, float | None, int, bool, str | None, str | None]] = []
     progress = tqdm(
         total=len(image_paths),
         desc="Tracing files",
@@ -949,6 +1036,7 @@ def trace_files(
                     0,
                     overwrite,
                     config,
+                    resolved_seed_strategy,
                 )
             )
 
@@ -1255,6 +1343,7 @@ def trace_directory(
     overwrite: bool = False,
     on_exists: str | None = None,
     config: str | None = None,
+    seed_strategy: str | None = None,
 ) -> list[Path]:
     input_dir = Path(input_dir)
     image_paths = sorted(
@@ -1275,6 +1364,7 @@ def trace_directory(
         overwrite=overwrite,
         on_exists=on_exists,
         config=config,
+        seed_strategy=seed_strategy,
     )
 
 
@@ -1289,9 +1379,11 @@ def extract_trace_seeds(
     output_path: str | Path | None = None,
     visualization_path: str | Path | None = None,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = None,
     check_timeout: Callable[[str | None], None] | None = None,
 ) -> Seeds:
     with _temporary_trace_config(config):
+        resolved_seed_strategy = _resolve_seed_strategy(seed_strategy)
         if check_timeout is None:
             _, check_timeout = _make_timeout_checker(timeout)
         volume = _load_image_volume(image)
@@ -1306,7 +1398,16 @@ def extract_trace_seeds(
             binary_image = np.ascontiguousarray(np.asarray(binary_image), dtype=np.uint8)
         seeds = Seeds()
         resolved_n_jobs = _resolve_n_jobs(n_jobs)
-        if resolved_n_jobs > 1:
+        if resolved_seed_strategy == "lazy":
+            seeds.generate_seed_candidates(
+                binary_image,
+                n_jobs=resolved_n_jobs,
+                verbose=verbose,
+                check_timeout=check_timeout,
+            )
+            seeds.seed_strategy = "lazy"
+            seeds.scored = False
+        elif resolved_n_jobs > 1:
             with _shared_array(signal_image) as (shared_signal_image, shared_image_spec):
                 seeds.generate_tracing_seeds(
                     shared_signal_image,
@@ -1347,21 +1448,35 @@ def generate_trace_chains(
     output_path: str | Path | None = None,
     visualization_path: str | Path | None = None,
     config: str | ModuleType | None = None,
+    seed_strategy: str | None = "auto",
     check_timeout: Callable[[str | None], None] | None = None,
 ) -> SegmentChains:
     with _temporary_trace_config(config):
+        resolved_seed_strategy = _resolve_chain_seed_strategy(seed_strategy, seeds)
+        if resolved_seed_strategy == "eager" and not getattr(seeds, "scored", True):
+            raise ValueError("Unscored seed candidates require seed_strategy='lazy' or 'auto'.")
         if check_timeout is None:
             _, check_timeout = _make_timeout_checker(timeout)
         volume = _load_image_volume(image)
         signal_image = _prepare_signal_image(volume, verbose=verbose)
         chains = SegmentChains(image_shape=signal_image.shape)
-        chains.generate_neuron_trace(
-            seeds,
-            signal_image,
-            max_seeds=max_seeds,
-            verbose=verbose,
-            check_timeout=check_timeout,
-        )
+        if resolved_seed_strategy == "lazy":
+            chains.generate_neuron_trace_lazy_seed_scoring(
+                seeds,
+                signal_image,
+                max_seeds=max_seeds,
+                verbose=verbose,
+                check_timeout=check_timeout,
+                progress_callback=None,
+            )
+        else:
+            chains.generate_neuron_trace(
+                seeds,
+                signal_image,
+                max_seeds=max_seeds,
+                verbose=verbose,
+                check_timeout=check_timeout,
+            )
         if filter_chains:
             check_timeout("filter_chains")
             chains.filter_chains(verbose=verbose)

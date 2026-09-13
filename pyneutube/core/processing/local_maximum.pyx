@@ -14,56 +14,120 @@ ctypedef np.uint8_t UINT8_t
 np.import_array()
 
 ctypedef np.float64_t FLOAT64_t
- 
+ctypedef np.float32_t FLOAT32_t
+
+ctypedef fused IMAGE_t:
+    FLOAT32_t
+    FLOAT64_t
+
+
 @boundscheck(False)
-@wraparound(False)   
-def Stack_Locmax_Region(np.ndarray[FLOAT64_t, ndim=3] img_padding,
+@wraparound(False)
+def Stack_Locmax_Region(np.ndarray[IMAGE_t, ndim=3] image,
                         np.ndarray[UINT8_t, ndim=3] loc_max_mask):
+    """
+    Clear every entry of `loc_max_mask` whose voxel is not a regional maximum.
+
+    Neighbors outside the volume count as background (value 0, mask 0), which
+    reproduces the earlier zero-padded implementation without allocating a
+    padded copy. The work queue stores flat indices instead of (z, y, x)
+    triples, so it costs 4 rather than 12 bytes per voxel, and it is left
+    uninitialised so untouched pages are never faulted in.
+
+    Accepts float32 or float64; comparisons are always in double precision, so
+    both specialisations return the same mask for the same values.
+
+    `loc_max_mask` is modified in place and returned.
+    """
 
     cdef:
-        FLOAT64_t[:, :, ::1] img = np.ascontiguousarray(img_padding)
-        UINT8_t[:, :, ::1] mask = np.ascontiguousarray(loc_max_mask)
-        Py_ssize_t z, y, x, n
-        int dz, dy, dx, nz, ny, nx, tail = 0, head = 0
-        FLOAT64_t c, n_val
-        int depth = img.shape[0], height = img.shape[1], width = img.shape[2]
-        int64_t total = (depth - 2) * (height - 2) * (width - 2)
-        int[:, ::1] nonlocmax_queue = np.zeros((total, 3), dtype=np.int32)
+        IMAGE_t[:, :, ::1] img = image
+        UINT8_t[:, :, ::1] mask = loc_max_mask
+        Py_ssize_t depth = img.shape[0]
+        Py_ssize_t height = img.shape[1]
+        Py_ssize_t width = img.shape[2]
+        Py_ssize_t plane = height * width
+        Py_ssize_t total = depth * plane
+        Py_ssize_t z, y, x, nz, ny, nx, n, rest
+        Py_ssize_t head = 0, tail = 0
+        Py_ssize_t n_neighbors = neighbors_18.shape[0]
+        int dz, dy, dx
+        int on_border
+        double c, n_val
+        int* queue
 
-    # Step 1: Initialization
-    for z in range(1, depth - 1):
-        for y in range(1, height - 1):
-            for x in range(1, width - 1):
-                c = img[z, y, x]
-                for n in range(neighbors_18.shape[0]):
-                    dz, dy, dx = neighbors_18[n, 0], neighbors_18[n, 1], neighbors_18[n, 2]
-                    n_val = img[z + dz, y + dy, x + dx]
-                    if n_val > c:
-                        mask[z, y, x] = 0
-                        nonlocmax_queue[tail, 0] = z
-                        nonlocmax_queue[tail, 1] = y
-                        nonlocmax_queue[tail, 2] = x
+    if total > 2147483647:
+        raise MemoryError(
+            f"Stack_Locmax_Region supports at most 2**31-1 voxels, got {total}."
+        )
+
+    queue = <int*> malloc(total * sizeof(int))
+    if queue == NULL:
+        raise MemoryError("Unable to allocate the regional-maximum work queue.")
+
+    try:
+        # Step 1: a voxel with a strictly greater neighbor is not a maximum.
+        for z in range(depth):
+            for y in range(height):
+                for x in range(width):
+                    c = img[z, y, x]
+                    if c == 0:
+                        continue
+                    on_border = (z == 0 or z == depth - 1 or
+                                 y == 0 or y == height - 1 or
+                                 x == 0 or x == width - 1)
+                    for n in range(n_neighbors):
+                        dz = neighbors_18[n, 0]
+                        dy = neighbors_18[n, 1]
+                        dx = neighbors_18[n, 2]
+                        nz = z + dz
+                        ny = y + dy
+                        nx = x + dx
+                        if on_border:
+                            if (nz < 0 or nz >= depth or
+                                    ny < 0 or ny >= height or
+                                    nx < 0 or nx >= width):
+                                n_val = 0
+                            else:
+                                n_val = img[nz, ny, nx]
+                        else:
+                            n_val = img[nz, ny, nx]
+                        if n_val > c:
+                            mask[z, y, x] = 0
+                            queue[tail] = <int> (z * plane + y * width + x)
+                            tail += 1
+                            break
+
+        # Step 2: propagate "not a maximum" to equal-or-lower neighbors.
+        while head < tail:
+            rest = queue[head]
+            head += 1
+            z = rest / plane
+            rest = rest - z * plane
+            y = rest / width
+            x = rest - y * width
+            c = img[z, y, x]
+            for n in range(n_neighbors):
+                dz = neighbors_18[n, 0]
+                dy = neighbors_18[n, 1]
+                dx = neighbors_18[n, 2]
+                nz = z + dz
+                ny = y + dy
+                nx = x + dx
+                if (nz < 0 or nz >= depth or
+                        ny < 0 or ny >= height or
+                        nx < 0 or nx >= width):
+                    continue
+                if mask[nz, ny, nx]:
+                    n_val = img[nz, ny, nx]
+                    if n_val <= c:
+                        mask[nz, ny, nx] = 0
+                        queue[tail] = <int> (nz * plane + ny * width + nx)
                         tail += 1
-                        break
+    finally:
+        free(queue)
 
-    # Processing the queue
-    while head < tail:
-        z, y, x = nonlocmax_queue[head, 0], nonlocmax_queue[head, 1], nonlocmax_queue[head, 2]
-        head += 1
-        c = img[z, y, x]
-        for n in range(neighbors_18.shape[0]):
-            dz, dy, dx = neighbors_18[n, 0], neighbors_18[n, 1], neighbors_18[n, 2]
-            nz, ny, nx = z + dz, y + dy, x + dx
-            if mask[nz, ny, nx]:
-                n_val = img[nz, ny, nx]
-                if n_val <= c:
-                    mask[nz, ny, nx] = 0
-                    nonlocmax_queue[tail, 0] = nz
-                    nonlocmax_queue[tail, 1] = ny
-                    nonlocmax_queue[tail, 2] = nx
-                    tail += 1
-
-    return loc_max_mask[1:-1, 1:-1, 1:-1]
+    return loc_max_mask
 
 
 # please note that this function can be replaced by introducing scipy.ndimage.label and other minor operations.
@@ -124,23 +188,26 @@ def Stack_Locmax_Region(np.ndarray[FLOAT64_t, ndim=3] img_padding,
 #     return labeled, object_count
 
 
-def Stack_Local_Max(np.ndarray[FLOAT64_t, ndim=3] image):
+def Stack_Local_Max(np.ndarray[IMAGE_t, ndim=3] image):
     """
     Cythonized maximum filter mask:
     - 13 forward neighbors only
     - center<neighbor -> zero center
     - center>=neighbor -> kill neighbor
+
+    Accepts float32 or float64; comparisons are always in double precision, so
+    both specialisations return the same mask for the same values.
     """
     cdef:
         int depth = image.shape[0]
         int height = image.shape[1]
         int width = image.shape[2]
         np.ndarray[UINT8_t, ndim=3] out = np.ones_like(image, dtype=np.uint8)
-        FLOAT64_t[:,:,:] img = image
+        IMAGE_t[:,:,:] img = image
         UINT8_t[:,:,:] res = out
         int z, y, x, i, j
         int dz, dy, dx, nz, ny, nx
-        FLOAT64_t c, n
+        double c, n
 
 
     # process boundaries first

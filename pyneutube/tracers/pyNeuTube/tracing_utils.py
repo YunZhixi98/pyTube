@@ -40,19 +40,13 @@ def _dense_segment_coords(seg: BaseTracingSegment) -> np.ndarray:
     local_coords += np.asarray(seg.start_coord, dtype=np.float64)
     return local_coords
 
-def label_tracing_mask(seg: BaseTracingSegment, trace_mask: np.ndarray, dilate: bool) -> np.ndarray:
-    """
-    label traced voxels by dilated segment on a tracing mask
-    """
-    seg_dilated = seg.copy()
-    if dilate:
-        seg_dilated._dilate_segment()
+def _write_label_coords(
+    coords_int: np.ndarray,
+    trace_mask: np.ndarray,
+):
+    if coords_int.size == 0:
+        return trace_mask, None
 
-    coords_3d = _dense_segment_coords(seg_dilated)
-    if coords_3d.size == 0:
-        return trace_mask
- 
-    coords_int = np.rint(coords_3d).astype(np.intp)  # use np.intp for indexing
     xs = coords_int[:, 0]
     ys = coords_int[:, 1]
     zs = coords_int[:, 2]
@@ -60,7 +54,7 @@ def label_tracing_mask(seg: BaseTracingSegment, trace_mask: np.ndarray, dilate: 
     sz, sy, sx = trace_mask.shape
     valid = (xs >= 0) & (xs < sx) & (ys >= 0) & (ys < sy) & (zs >= 0) & (zs < sz)
     if not np.any(valid):
-        return trace_mask
+        return trace_mask, None
 
     xs = xs[valid]
     ys = ys[valid]
@@ -68,4 +62,64 @@ def label_tracing_mask(seg: BaseTracingSegment, trace_mask: np.ndarray, dilate: 
 
     trace_mask[zs, ys, xs] = 1
 
+    bbox = np.array(
+        [xs.min(), xs.max(), ys.min(), ys.max(), zs.min(), zs.max()],
+        dtype=np.intp,
+    )
+    return trace_mask, bbox
+
+
+def label_tracing_mask(
+    seg,
+    trace_mask: np.ndarray,
+    dilate: bool,
+    *,
+    start: int | None = None,
+    end: int | None = None,
+):
+    """
+    label traced voxels by dilated segment on a tracing mask
+    """
+    if hasattr(seg, "_segments") and hasattr(seg, "label_bboxes"):
+        if start is None:
+            start = 0
+        if end is None:
+            end = len(seg) - 1
+
+        if seg.label_bboxes is None or seg.label_bboxes.shape != (len(seg), 6):
+            seg.label_bboxes = np.full((len(seg), 6), -1, dtype=np.intp)
+        if start > end or len(seg) == 0:
+            return trace_mask
+
+        for idx in range(start, end + 1):
+            seg_dilated = seg[idx].copy()
+            if dilate:
+                seg_dilated._dilate_segment()
+            coords_3d = _dense_segment_coords(seg_dilated)
+            if coords_3d.size == 0:
+                seg.label_bboxes[idx] = -1
+                continue
+
+            coords_int = np.rint(coords_3d).astype(np.intp)
+            trace_mask, bbox = _write_label_coords(coords_int, trace_mask)
+            if bbox is None:
+                seg.label_bboxes[idx] = -1
+            else:
+                seg.label_bboxes[idx] = bbox
+
+        return trace_mask
+
+    if start is not None or end is not None:
+        raise ValueError("Segment subrange is only supported for SegmentChain inputs.")
+
+    seg_dilated = seg.copy()
+    if dilate:
+        seg_dilated._dilate_segment()
+
+    coords_3d = _dense_segment_coords(seg_dilated)
+    if coords_3d.size == 0:
+        return trace_mask
+
+    coords_int = np.rint(coords_3d).astype(np.intp)
+    trace_mask, _ = _write_label_coords(coords_int, trace_mask)
     return trace_mask

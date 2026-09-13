@@ -6,6 +6,7 @@ from ._version import __version__
 from .io import ImageParser, Neuron
 from .processing import (
     connectivity_filter,
+    estimate_background_level,
     local_max_filter,
     refine_local_max_threshold,
     subtract_background,
@@ -48,6 +49,7 @@ __all__ = [
     "load_trace_stage",
     "SUPPORTED_IMAGE_SUFFIXES",
     "subtract_background",
+    "estimate_background_level",
     "threshold_filter",
     "triangle_threshold",
     "refine_local_max_threshold",

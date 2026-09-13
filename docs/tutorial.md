@@ -2,18 +2,10 @@
 
 ## 1. Install
 
-Install PyNeuTube first. The recommended published-package installs are:
+Install PyTube first. The recommended published-package installs are:
 
 ```bash
-python -m pip install pyneutube
-# or
-conda install -c conda-forge pyneutube
-```
-
-If you need the latest source version instead of a published package:
-
-```bash
-python -m pip install "git+https://github.com/YunZhixi98/pyNeuTube.git"
+python -m pip install "git+https://github.com/YunZhixi98/pyTube.git"
 ```
 
 For a local repository checkout, the fuller source-install options are documented in the main `README.md`.
@@ -86,6 +78,7 @@ Key runtime controls:
 - `verbose`: controls progress logging
 - `visualization_dir`: optional output directory for `result/`, `seeds/`, and `chains/` PNG overlays
 - `config`: optional Python module path for trace config overrides
+- `seed_strategy`: `"eager"` by default; `"lazy"` defers seed scoring until tracing reaches each candidate
 
 The public tracing entry points intentionally keep this parameter set small. They are designed for stable file- and runtime-level control, not for exposing every internal tracing heuristic. Lower-level tracing constants and reconstruction rules still live in internal modules and may change between revisions, so method-tuning experiments should pin a specific commit and document any internal overrides explicitly.
 
@@ -151,6 +144,13 @@ This staged mode lets you reuse intermediate artifacts, compare config overrides
 - `binary_image`, in which case that binary mask is used directly and `threshold` is ignored
 
 If neither is provided, it runs the full preprocess path internally.
+
+For staged lazy tracing, the seed stage returns unscored candidates:
+
+```python
+seeds = extract_trace_seeds(image, seed_strategy="lazy", n_jobs=4)
+chains = generate_trace_chains(seeds, image)  # auto-routes lazy candidates
+```
 
 ## 6. Batch processing
 

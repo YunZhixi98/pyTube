@@ -22,6 +22,11 @@ class Defaults:
     MIN_CHAIN_SCORE = 0.6
     CROSSOVER_TEST: bool = False
 
+    # "grid": original C NeuTube-style 307 directions.
+    # "hemisphere_uniform": 200 golden-angle upper-hemisphere axis samples.
+    # "hemisphere_uniform_refine": 96 samples plus local unit-vector refinement.
+    ORIENTATION_SEARCH_MODE: str = "hemisphere_uniform_refine"
+
     Max_Edge_Capacity: int = 1073741824 # 1G, maybe larger if necessary
 
 
@@ -45,6 +50,7 @@ class TraceStatus(Enum):
     LOOP_FORMED = auto()
     SIGNAL_CHANGED = auto()
     RADIUS_CHANGED = auto()
+    SEG_TOO_THIN = auto()
 
 
 class TraceDirection(Enum):

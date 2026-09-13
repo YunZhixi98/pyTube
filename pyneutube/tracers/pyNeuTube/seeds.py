@@ -41,8 +41,18 @@ def _resolve_n_jobs(n_jobs: int) -> int:
 
 def _seed_priority_order(coords: np.ndarray, values: np.ndarray) -> np.ndarray:
     xyz_coords = coords[:, ::-1]
-    priority = np.abs(values - Defaults.MAX_CONF_RADIUS)
+    # Widen first so the ordering cannot depend on the distance map's precision.
+    priority = np.abs(values.astype(np.float64, copy=False) - Defaults.MAX_CONF_RADIUS)
     return np.lexsort((xyz_coords[:, 2], xyz_coords[:, 1], xyz_coords[:, 0], -priority))
+
+
+def _filter_interior_seed_coords(coords: np.ndarray, shape: tuple[int, ...]) -> np.ndarray:
+    if coords.size == 0:
+        return coords
+
+    upper_bound = np.asarray(shape, dtype=coords.dtype) - 1
+    valid = np.all(coords > 0, axis=1) & np.all(coords < upper_bound, axis=1)
+    return coords[valid]
 
 
 _SEED_SCORE_IMAGE = None
@@ -209,9 +219,17 @@ class Seeds:
     Generally, initial seeds are the position of local maxima of the distance transformed image.
     """
 
-    def __init__(self, seeds: list[Seed] | Seed | None = None):
+    def __init__(
+        self,
+        seeds: list[Seed] | Seed | None = None,
+        *,
+        seed_strategy: str = "eager",
+        scored: bool = True,
+    ):
         seeds = [] if seeds is None else ([seeds] if isinstance(seeds, Seed) else seeds)
         self._seeds: list[Seed] = list(seeds)
+        self.seed_strategy = seed_strategy
+        self.scored = scored
 
     def __len__(self):
         return len(self._seeds)
@@ -250,27 +268,27 @@ class Seeds:
         Initialize seeds based on the local maxima of the distance transformed binary image.
         """
         self._seeds = []
+        # `edt` computes in single precision; only the extracted maxima are promoted.
         dt_image = edt.edt(
             binary_image,
             anisotropy=(1, 1, 1),
             black_border=True,
             parallel=_resolve_n_jobs(n_jobs),
-        ).astype(np.float64)
+        )
 
         dt_local_max_mask = maximum_filter_mask(dt_image, verbose=max(verbose - 1, 0))
-        coords = np.argwhere(dt_local_max_mask)
+        coords = _filter_interior_seed_coords(np.argwhere(dt_local_max_mask), dt_image.shape)
+        coords_values = dt_image[tuple(coords.T)].astype(np.float64)
 
-        coords_values = dt_image[tuple(coords.T)]
-
-        # arg_idx = _seed_priority_order(coords, coords_values)
-        arg_idx = np.arange(len(coords))
+        arg_idx = _seed_priority_order(coords, coords_values)
+        # arg_idx = np.arange(len(coords))
         for coord, value in zip(coords[arg_idx], coords_values[arg_idx], strict=True):
             self.append(Seed(coord=coord[::-1], value=value))  # xyz-order
         _vprint(verbose, f"{len(self)} seeds found")
 
         return
 
-    def _reduce_seeds(self, binary_image: np.ndarray, *, n_jobs: int = 1, verbose: int = 1) -> None:
+    def _reduce_seeds(self, binary_image: np.ndarray, *, verbose: int = 1) -> None:
         """
         Filter seeds based on the size of connected components in the binary image.
         """
@@ -291,10 +309,16 @@ class Seeds:
             counts = histogram1d(flat, bins=imax - imin + 1, range=(imin, imax + 1)).astype("int64")
             large_component_mask = counts >= min_seed_size
             large_component_mask[0] = False
-            valid_component_voxels = large_component_mask[image_conn_labeled]
-            self._initialize_seeds(
-                valid_component_voxels.astype(np.uint8), n_jobs=n_jobs, verbose=verbose
-            )
+
+            # Dropping whole components leaves the EDT of the survivors intact
+            # (the ball of radius EDT(p) is all-foreground and 26-connected to
+            # `p`), so re-running EDT + maximum filter on the reduced mask would
+            # return these very seeds; select them directly instead.
+            zyx = np.asarray(self.coords[:, ::-1], dtype=np.intp)
+            seed_labels = image_conn_labeled[zyx[:, 0], zyx[:, 1], zyx[:, 2]]
+            keep = large_component_mask[seed_labels]
+            self._seeds = [seed for seed, keep_seed in zip(self._seeds, keep) if keep_seed]
+            _vprint(verbose, f"{len(self)} seeds found")
 
         return
 
@@ -305,10 +329,10 @@ class Seeds:
         self._seeds.sort(
             key=lambda seed: (
                 -seed.score,
-                # -abs(seed.value - Defaults.MAX_CONF_RADIUS),
-                # int(seed.coord[0]),
-                # int(seed.coord[1]),
-                # int(seed.coord[2]),
+                -abs(seed.value - Defaults.MAX_CONF_RADIUS),
+                int(seed.coord[0]),
+                int(seed.coord[1]),
+                int(seed.coord[2]),
             )
         )
 
@@ -458,6 +482,7 @@ class Seeds:
                     shm.unlink()
 
         _vprint(verbose, f"Number of labeled seeds: {nlabeled}")
+        self.scored = True
 
         return
 
@@ -486,11 +511,13 @@ class Seeds:
         shared_image: SharedImageSpec | None = None,
         progress_callback=None,
     ):
+        self.seed_strategy = "eager"
+        self.scored = False
         t0 = time.time()
         if check_timeout is not None:
             check_timeout("seed initialization")
         self._initialize_seeds(binary_image, n_jobs=n_jobs, verbose=verbose)
-        self._reduce_seeds(binary_image, n_jobs=n_jobs, verbose=verbose)
+        self._reduce_seeds(binary_image, verbose=verbose)
         _vprint(verbose, f"--> seed_init: {time.time() - t0:.6f}s")
         if check_timeout is not None:
             check_timeout("seed scoring")
@@ -508,5 +535,26 @@ class Seeds:
         self._filter_seeds()
         _vprint(verbose, f"Number of seed after filtering: {len(self)}")
         self._sort_seeds()
+        self.scored = True
+
+        return
+
+    def generate_seed_candidates(
+        self,
+        binary_image: np.ndarray,
+        *,
+        n_jobs: int = 1,
+        verbose: int = 1,
+        check_timeout=None,
+    ):
+        self.seed_strategy = "lazy"
+        self.scored = False
+        t0 = time.time()
+        if check_timeout is not None:
+            check_timeout("seed initialization")
+        self._initialize_seeds(binary_image, n_jobs=n_jobs, verbose=verbose)
+        self._reduce_seeds(binary_image, verbose=verbose)
+        self._sort_seeds()
+        _vprint(verbose, f"--> seed_candidates: {time.time() - t0:.6f}s")
 
         return

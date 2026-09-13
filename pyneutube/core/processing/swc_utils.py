@@ -372,7 +372,8 @@ def optimal_downsample(neuron: Neuron):
         """
         interp_node = _interpolate_node(node1, node2, ref_node)
         size_scale = 1.2
-        if _squared_distance(ref_node[2:5], interp_node[2:5]) * (size_scale * size_scale) < interp_node[5] * interp_node[5]:
+        # Match NeuTu: the interpolated proxy must stay within half a radius.
+        if _squared_distance(ref_node[2:5], interp_node[2:5]) * 4.0 < interp_node[5] * interp_node[5]:
             if ref_node[5] / size_scale < interp_node[5] < ref_node[5] * size_scale:
                 return True
 

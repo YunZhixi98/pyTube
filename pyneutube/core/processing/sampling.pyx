@@ -16,13 +16,20 @@ cimport numpy as cnp
 from scipy.ndimage import map_coordinates
 cimport cython
 
-from libc.math cimport floor, ceil
+from libc.math cimport NAN, ceil, floor
 
 cnp.import_array()
 
 # Define numpy array types
 ctypedef cnp.float64_t DTYPE_t
 ctypedef cnp.intp_t ITYPE_t
+
+# The signal volume is float32 whenever that is exact, so the samplers are
+# compiled for both widths. Every sample is widened to `double` before any
+# arithmetic, so both specialisations agree on identical values.
+ctypedef fused IMAGE_t:
+    cnp.float32_t
+    cnp.float64_t
 
 #@cython.boundscheck(False)
 #@cython.wraparound(False)
@@ -59,7 +66,7 @@ ctypedef cnp.intp_t ITYPE_t
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef inline double trilinear_interpolate(double[:, :, ::1] image, 
+cdef inline double trilinear_interpolate(IMAGE_t[:, :, ::1] image,
                                          double x, double y, double z,
                                          int width, int height, int depth) nogil:
     """Fast trilinear interpolation for 3D images."""
@@ -78,7 +85,7 @@ cdef inline double trilinear_interpolate(double[:, :, ::1] image,
     
     # Check bounds
     if x0 < 0 or x1 >= width or y0 < 0 or y1 >= height or z0 < 0 or z1 >= depth:
-        return 0.0
+        return NAN
     
     # Calculate weights
     wx = x - x0
@@ -113,23 +120,24 @@ cdef inline double nearest_neighbor(double[:, ::1] image, double x, double y) no
     iy = <int>(y + 0.5)
     
     if ix < 0 or ix >= width or iy < 0 or iy >= height:
-        return 0.0
+        return NAN
     
     return image[iy, ix]
 
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def sample_voxels(double[:, :, ::1] image,
+def sample_voxels(IMAGE_t[:, :, ::1] image,
                    double[:, ::1] coords,
                    int order=1):
     """
     Fast 3D sampling with custom interpolation.
-    
+
     Parameters
     ----------
     image : 3D array
-        Input image
+        Input image, float32 or float64. Samples are widened to double before
+        any arithmetic, so both widths agree on identical values.
     coords : array, shape (N, 3)
         Coordinates as (x, y, z)
     order : int
@@ -169,7 +177,7 @@ def sample_voxels(double[:, :, ::1] image,
                     iz >= 0 and iz < depth):
                     result_view[i] = image[iz, iy, ix]
                 else:
-                    result_view[i] = 0.0
+                    result_view[i] = NAN
         else:
             # Trilinear interpolation
             for i in range(n_points):
@@ -179,5 +187,4 @@ def sample_voxels(double[:, :, ::1] image,
                 result_view[i] = trilinear_interpolate(image, x, y, z, width, height, depth)
     
     return result
-
 

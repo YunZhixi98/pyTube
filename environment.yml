@@ -1,4 +1,4 @@
-name: pyneutube
+name: pytube
 channels:
   - conda-forge
 dependencies:

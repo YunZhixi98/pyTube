@@ -21,6 +21,11 @@ try:  # Optional runtime dependency.
 except ImportError:  # pragma: no cover - optional dependency
     nrrd = None
 
+try:  # Optional compiled accelerator.
+    from . import vaa3d_accel
+except ImportError:  # pragma: no cover - extension may be absent in source checkouts
+    vaa3d_accel = None
+
 
 def _vprint(verbose: int, message: str) -> None:
     if verbose:
@@ -118,6 +123,9 @@ def _read_v3draw_header(path: Path) -> tuple[tuple[int, int, int], np.dtype, dic
 
 def load_v3draw(path: str | os.PathLike[str]) -> np.ndarray:
     path = Path(path)
+    if vaa3d_accel is not None:
+        return _normalized_volume(vaa3d_accel.load_v3draw(path))
+
     format_key = b"raw_image_stack_by_hpeng"
     with path.open("rb") as handle:
         if handle.read(len(format_key)) != format_key:
@@ -177,6 +185,15 @@ def save_v3draw(image: np.ndarray, path: str | os.PathLike[str]) -> None:
                 order="C"
             )
         )
+
+
+def save_v3dpbd(image: np.ndarray, path: str | os.PathLike[str]) -> None:
+    path = Path(path)
+    volume = np.ascontiguousarray(_normalized_volume(np.asarray(image)))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if vaa3d_accel is None:
+        raise RuntimeError("Vaa3D PBD saving requires the compiled image I/O extension.")
+    vaa3d_accel.save_v3dpbd(volume, path)
 
 
 class PBD:
@@ -456,6 +473,9 @@ class PBD:
 
     def load_image(self, path: str | os.PathLike[str]) -> np.ndarray:
         path = Path(path)
+        if vaa3d_accel is not None:
+            return _normalized_volume(vaa3d_accel.load_v3dpbd(path))
+
         self.decompression_prior = 0
         format_key = b"v3d_volume_pkbitdf_encod"
         with path.open("rb") as handle:
@@ -686,6 +706,11 @@ class ImageParser:
         if fmt == "v3draw":
             save_v3draw(volume, out_path)
             _vprint(verbose, f"Saved Vaa3D raw volume to {out_path}")
+            return
+
+        if fmt == "v3dpbd":
+            save_v3dpbd(volume, out_path)
+            _vprint(verbose, f"Saved Vaa3D PBD volume to {out_path}")
             return
 
         if fmt == "nifti":

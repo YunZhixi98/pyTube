@@ -33,6 +33,9 @@ from .tracing_utils import label_tracing_mask
 from .chain_utils import get_chain_side_bright_point, get_inner_chain_range, interpolate_chain
 
 
+_CANDIDATE_FALLBACK_RATIO = 0.5
+
+
 def postprocess_reconstruction(neuron: Neuron, *, verbose: int = 1, check_timeout=None) -> Neuron:
     import time
 
@@ -112,6 +115,10 @@ def _bbox_distance(min1: np.ndarray, max1: np.ndarray, min2: np.ndarray, max2: n
     return float(np.linalg.norm(gap))
 
 
+def _connection_distance_limit(max_radius: float, dist_thresh: float) -> float:
+    return float(2 * np.sqrt(max_radius**2 + ((Defaults.SEG_LENGTH - 1) / 2) ** 2) + dist_thresh)
+
+
 def _chain_broadphase_stats(chains: SegmentChains):
     stats = []
     for chain in chains:
@@ -122,6 +129,13 @@ def _chain_broadphase_stats(chains: SegmentChains):
         start_coords = np.asarray([seg.start_coord for seg in chain], dtype=np.float64)
         end_coords = np.asarray([seg.end_coord for seg in chain], dtype=np.float64)
         chain_coords = np.vstack((start_coords, end_coords))
+        segment_bounds = [
+            (
+                np.minimum(start_coord, end_coord),
+                np.maximum(start_coord, end_coord),
+            )
+            for start_coord, end_coord in zip(start_coords, end_coords)
+        ]
         head_coords = np.vstack(
             (
                 np.asarray(chain[0].start_coord, dtype=np.float64),
@@ -143,6 +157,7 @@ def _chain_broadphase_stats(chains: SegmentChains):
                 "tail_min": tail_coords.min(axis=0),
                 "tail_max": tail_coords.max(axis=0),
                 "max_radius": max(float(seg.radius) for seg in chain),
+                "segment_bounds": segment_bounds,
             }
         )
 
@@ -172,8 +187,70 @@ def _can_skip_connect_test(chain1_stats, chain2_stats, dist_thresh: float) -> bo
         ),
     )
     max_radius = max(chain1_stats["max_radius"], chain2_stats["max_radius"])
-    distance_limit = 2 * np.sqrt(max_radius**2 + ((Defaults.SEG_LENGTH - 1) / 2) ** 2) + dist_thresh
+    distance_limit = _connection_distance_limit(max_radius, dist_thresh)
     return min_bbox_dist > distance_limit
+
+
+def _grid_index_bounds(
+    min_corner: np.ndarray,
+    max_corner: np.ndarray,
+    cell_size: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    min_index = np.floor(min_corner / cell_size).astype(np.int32)
+    max_index = np.floor(max_corner / cell_size).astype(np.int32)
+    return min_index, max_index
+
+
+def _iter_grid_keys(
+    min_index: np.ndarray,
+    max_index: np.ndarray,
+):
+    for ix in range(int(min_index[0]), int(max_index[0]) + 1):
+        for iy in range(int(min_index[1]), int(max_index[1]) + 1):
+            for iz in range(int(min_index[2]), int(max_index[2]) + 1):
+                yield (ix, iy, iz)
+
+
+def _build_segment_spatial_grid(
+    broadphase_stats,
+    cell_size: float,
+) -> dict[tuple[int, int, int], list[int]]:
+    spatial_grid: dict[tuple[int, int, int], list[int]] = {}
+    for chain_idx, chain_stats in enumerate(broadphase_stats):
+        if chain_stats is None:
+            continue
+        for segment_min, segment_max in chain_stats["segment_bounds"]:
+            min_index, max_index = _grid_index_bounds(segment_min, segment_max, cell_size)
+            for key in _iter_grid_keys(min_index, max_index):
+                bucket = spatial_grid.setdefault(key, [])
+                if not bucket or bucket[-1] != chain_idx:
+                    bucket.append(chain_idx)
+    return spatial_grid
+
+
+def _candidate_indices_from_segment_grid(
+    chain_stats,
+    spatial_grid: dict[tuple[int, int, int], list[int]],
+    distance_limit: float,
+    cell_size: float,
+    *,
+    fallback_limit: int,
+) -> set[int] | None:
+    candidate_indices: set[int] = set()
+    for box_min, box_max in (
+        (chain_stats["head_min"], chain_stats["head_max"]),
+        (chain_stats["tail_min"], chain_stats["tail_max"]),
+    ):
+        query_min_index, query_max_index = _grid_index_bounds(
+            box_min - distance_limit,
+            box_max + distance_limit,
+            cell_size,
+        )
+        for key in _iter_grid_keys(query_min_index, query_max_index):
+            candidate_indices.update(spatial_grid.get(key, ()))
+            if len(candidate_indices) > fallback_limit:
+                return None
+    return candidate_indices
 
 
 class ChainConnector:
@@ -217,7 +294,6 @@ class ChainConnector:
         self,
         chain1: SegmentChain,
         chain2: SegmentChain,
-        signal_image,
         conn: Neurocomp_Conn,
         *,
         chain2_max_radius: float | None = None,
@@ -235,7 +311,7 @@ class ChainConnector:
             tail.length = 2.0
 
         chain2_segments = chain2._segments
-        min_sdist = min(
+        min_center_dist = min(
             seg_chain_dist_upper_bound(chain2, head),
             seg_chain_dist_upper_bound(chain2, tail),
         )
@@ -243,11 +319,12 @@ class ChainConnector:
         if chain2_max_radius is None:
             chain2_max_radius = max((seg.radius for seg in chain2_segments), default=0.0)
         max_radius = max(head.radius, tail.radius, chain2_max_radius)
-        if min_sdist > 2*np.sqrt(max_radius**2+((Defaults.SEG_LENGTH-1)/2)**2)+self.dist_thresh:
+        if min_center_dist > 2*np.sqrt(max_radius**2+((Defaults.SEG_LENGTH-1)/2)**2)+self.dist_thresh:
             conn.mode = ConnectorType.NEUROCOMP_CONN_NONE
             conn.cost = 10.0
             return False
 
+        min_sdist = float("inf")
         conn.min_pdist = float("inf")
         head_ball_radius = head._set_ball_radius()
         tail_ball_radius = tail._set_ball_radius()
@@ -260,7 +337,7 @@ class ChainConnector:
                 seg_ball_radius = seg._set_ball_radius()
 
             seg_center = seg.center_coord
-            if (norm(seg_center - head_center) - seg_ball_radius - head_ball_radius) < min_sdist:
+            if (norm(seg_center - head_center) - seg_ball_radius - head_ball_radius) < min_center_dist:
                 surface_dist, tmp_intersection_p = seg_to_seg_surface(head, seg)
                 update = False
                 if surface_dist < min_sdist:
@@ -278,7 +355,7 @@ class ChainConnector:
                     conn.info[1] = i
                     conn.pos = tmp_intersection_p
 
-            if (norm(seg_center - tail_center) - seg_ball_radius - tail_ball_radius) < min_sdist:
+            if (norm(seg_center - tail_center) - seg_ball_radius - tail_ball_radius) < min_center_dist:
                 surface_dist, tmp_intersection_p = seg_to_seg_surface(tail, seg)
                 update = False
                 if surface_dist < min_sdist:
@@ -331,7 +408,11 @@ class ChainConnector:
             min_idx = tmp_min_idx
             chain1_seg = chain1[-1]
 
-        if np.any(bright_point < 0) or np.any((bright_point+1) > signal_image.shape):
+        xyz_max = np.array(
+            [signal_image.shape[2] - 1, signal_image.shape[1] - 1, signal_image.shape[0] - 1],
+            dtype=np.float64,
+        )
+        if np.any(bright_point < 0) or np.any(bright_point > xyz_max):
             return []
         
         sgw.update_stack_graph_workspace_by_seg_chain(chain1_seg, chain2, signal_image)
@@ -355,15 +436,21 @@ class ChainConnector:
                 sgw.group_mask = np.zeros(signal_image.shape, dtype=np.uint8)
             else:
                 sgw.group_mask.fill(0)
-            for i in range(start_index, end_index + 1):
-                label_tracing_mask(chain[i], sgw.group_mask, dilate=True)
-            
-            tmpcoords = [chain[end_index].start_coord, chain[end_index].end_coord]
-            last_chain_bbox = np.array([np.min(tmpcoords, axis=0), np.max(tmpcoords, axis=0)])
-            x1, y1, z1 = np.floor(last_chain_bbox[0]-1).astype(int)
-            x2, y2, z2 = np.ceil(last_chain_bbox[1]+1).astype(int)
-            sgw.set_range(int(start_pos[0]), x1, int(start_pos[1]), y1, int(start_pos[2]), z1)
-            sgw.update_range(x2, y2, z2)
+            label_tracing_mask(
+                chain,
+                sgw.group_mask,
+                dilate=True,
+                start=start_index,
+                end=end_index,
+            )
+            bbox = chain.get_label_bbox(start_index, end_index)
+            if bbox is None:
+                sgw.set_range(int(start_pos[0]), int(start_pos[0]), int(start_pos[1]), int(start_pos[1]), int(start_pos[2]), int(start_pos[2]))
+            else:
+                sgw.set_range(int(start_pos[0]), int(bbox[0]), int(start_pos[1]), int(bbox[2]), int(start_pos[2]), int(bbox[4]))
+                sgw.update_range(int(bbox[1]), int(bbox[3]), int(bbox[5]))
+        else:
+            sgw.set_range(int(start_pos[0]), int(end_pos[0]), int(start_pos[1]), int(end_pos[1]), int(start_pos[2]), int(end_pos[2]))
         
         sgw.expand_range(np.full(3, 10))
         sgw.validate_range(signal_image.shape[2], signal_image.shape[1], signal_image.shape[0])
@@ -375,7 +462,7 @@ class ChainConnector:
             offset_path = sgw.stack_route(signal_image, start_pos, end_pos)
         else:
             self._vprint('too far')
-            raise NotImplementedError
+            raise NotImplementedError  # tz_locseg_chain.c Locseg_Chain_Shortest_Path_Pt
         
         path = []
         nvoxels = signal_image.size
@@ -405,14 +492,15 @@ class ChainConnector:
         if path_length >= 5:
             
             for i in range(path_length):
-                coord = np.array(np.unravel_index(path[i], signal_image.shape))
+                coord_zyx = np.array(np.unravel_index(path[i], signal_image.shape))
+                coord_xyz = coord_zyx[::-1]
                 if hit_index < 3:
                     if conn.info[0] == 0:
-                        hit_index = point_in_chain_index(coord, chain)
+                        hit_index = point_in_chain_index(coord_xyz, chain)
                     else:
-                        hit_index = point_in_chain_index(coord, chain[::-1])
+                        hit_index = point_in_chain_index(coord_xyz, chain[::-1])
                 
-                intensity = signal_image[coord[0], coord[1], coord[2]]
+                intensity = signal_image[coord_zyx[0], coord_zyx[1], coord_zyx[2]]
                 if intensity == 0 or intensity < sgw.argv[3]-sgw.argv[4]:
                     dark_count+=1
                 else:
@@ -422,11 +510,11 @@ class ChainConnector:
                 conn.mode = ConnectorType.NEUROCOMP_CONN_NONE
             else:
                 if dark_count+ bright_count >= 2:
-                    prev_coord = np.unravel_index(path[path_length - 2], signal_image.shape)
+                    prev_coord = np.array(np.unravel_index(path[path_length - 2], signal_image.shape))[::-1]
                     count = 0
                     conn.ort = np.zeros(3, dtype=np.float64)
                     for i in range(path_length - 3, -1, -1):
-                        coord = np.array(np.unravel_index(path[i], signal_image.shape))
+                        coord = np.array(np.unravel_index(path[i], signal_image.shape))[::-1]
                         conn.ort += prev_coord - coord
                         prev_coord = coord
                         count += 1
@@ -489,12 +577,33 @@ class ChainConnector:
             self.sp_test = False
 
         broadphase_stats = _chain_broadphase_stats(chains)
+        global_max_radius = max(
+            (stats["max_radius"] for stats in broadphase_stats if stats is not None),
+            default=0.0,
+        )
+        global_distance_limit = _connection_distance_limit(global_max_radius, self.dist_thresh)
+        cell_size = max(float(global_distance_limit), 1.0)
+        spatial_grid = _build_segment_spatial_grid(broadphase_stats, cell_size)
+        candidate_fallback_limit = max(1, int(_CANDIDATE_FALLBACK_RATIO * nchains))
 
         for i, chain1 in enumerate(chains):
             if check_timeout is not None and i % 4 == 0:
                 check_timeout("chain connection")
             chain1_stats = broadphase_stats[i]
-            for j, chain2 in enumerate(chains):
+            if chain1_stats is None:
+                continue
+
+            candidate_indices = _candidate_indices_from_segment_grid(
+                chain1_stats,
+                spatial_grid,
+                global_distance_limit,
+                cell_size,
+                fallback_limit=candidate_fallback_limit,
+            )
+            candidate_iter = range(nchains) if candidate_indices is None else sorted(candidate_indices)
+
+            for j in candidate_iter:
+                chain2 = chains[j]
                 if i == j:
                     continue
                 chain2_stats = broadphase_stats[j]
@@ -512,7 +621,6 @@ class ChainConnector:
                 is_possible_connect = self.connect_test(
                     chain1,
                     chain2,
-                    signal_image,
                     conn,
                     chain2_max_radius=None if chain2_stats is None else chain2_stats["max_radius"],
                 )

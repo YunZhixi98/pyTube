@@ -20,6 +20,13 @@ ctypedef np.float64_t DTYPE_f64
 ctypedef np.int32_t DTYPE_i32
 ctypedef np.uint8_t DTYPE_u8
 
+# The signal volume is float32 whenever that is exact, so the graph builders are
+# compiled for both widths. Every voxel is widened to `double` before it reaches
+# the weight function, so both specialisations agree on identical values.
+ctypedef fused STACK_t:
+    np.float32_t
+    np.float64_t
+
 
 # Enum for GraphType
 cpdef enum GraphType:
@@ -418,8 +425,8 @@ cpdef double stack_voxel_weight_cy(double d, double v1, double v2,
 @cython.wraparound(False)
 @cython.cdivision(True)
 cpdef void add_edges_cy(
-    Graph graph,  
-    const double[:, :, :] stack,  # 3D stack data
+    Graph graph,
+    const STACK_t[:, :, :] stack,  # 3D stack data (float32 or float64)
     const unsigned char[:] cond,  # Condition array
     const int[:] x_offset,
     const int[:] y_offset, 
@@ -471,7 +478,7 @@ cpdef void add_edges_cy(
 @cython.cdivision(True)
 cpdef void build_stack_graph_cy(
     Graph graph,
-    const double[:, :, :] stack,
+    const STACK_t[:, :, :] stack,
     int conn,
     const int[:] stack_range,
     const int[:] x_offset,

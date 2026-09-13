@@ -18,7 +18,7 @@ def point_in_seg(seg: BaseTracingSegment, coord: np.ndarray, is_local=False):
     x, y, z = coord_local
 
     flag = False
-    if z>=-0.5 and z<=seg.length:
+    if z>=-0.5 and z<=seg.length-0.5:
         d2 = (x/seg.scale)**2 + y**2
         if d2 <= seg.radius**2:
             flag = True

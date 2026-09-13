@@ -195,7 +195,7 @@ def save_seed_overlay_figure(
         ax.scatter(
             center_coords[:, 0],
             center_coords[:, 1],
-            s=10,
+            s=3,
             c=np.asarray(center_colors),
             edgecolors="none",
             alpha=0.95,

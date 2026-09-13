@@ -18,6 +18,9 @@ class Neuron(object):
         self.somata = None
         self.bifur_indices = None
         self.tip_indices = None
+        self.node_ids = None
+        self.parent_ids = None
+        self.node_types = None
 
         self.nidHash = None
         self.indexChildren = None
@@ -44,15 +47,14 @@ class Neuron(object):
         if self.swc.size == 0:
             raise ValueError("SWC input is empty.")
         self.length = len(self.swc)
+        self.node_ids = self.swc[:, 0].astype(np.int64, copy=False)
+        self.node_types = self.swc[:, 1].astype(np.int16, copy=False)
+        self.parent_ids = self.swc[:, 6].astype(np.int64, copy=False)
         # self.soma = self.get_soma()
 
-        self.nidHash = {}
-        self.indexChildren = []
-        for i in range(self.length):
-            self.nidHash[self.swc[i][0]] = i
-            self.indexChildren.append([])
-        for i in range(self.length):
-            pid = self.swc[i][6]
+        self.nidHash = {node_id: i for i, node_id in enumerate(self.node_ids)}
+        self.indexChildren = [[] for _ in range(self.length)]
+        for i, pid in enumerate(self.parent_ids):
             idx = self.nidHash.get(pid)
             if idx is None:
                 continue
@@ -66,16 +68,17 @@ class Neuron(object):
             stack = list(self.indexChildren[self.nidHash[soma[0]]])
             while stack:
                 cur_idx = stack.pop()
-                dfs_edges.append((self.nidHash[self.swc[cur_idx][6]], cur_idx))
+                dfs_edges.append((self.nidHash[self.parent_ids[cur_idx]], cur_idx))
                 children = self.indexChildren[cur_idx]
                 stack.extend(children)
         self.dfs_edges = dfs_edges
 
         # self.soma_idx = self.nidHash[self.soma[0]]
-        pid_uni, pid_count = np.unique(self.swc[:, 6][self.swc[:, 6] != -1], return_counts=True)
+        valid_parent_ids = self.parent_ids[self.parent_ids != -1]
+        pid_uni, pid_count = np.unique(valid_parent_ids, return_counts=True)
         
         self.bifur_indices = np.array([self.nidHash.get(x) for x in pid_uni[pid_count > 1]])
-        self.tip_indices = np.where(np.isin(self.swc[:, 0], np.setdiff1d(self.swc[:, 0], self.swc[:, 6])))[0]
+        self.tip_indices = np.flatnonzero(~np.isin(self.node_ids, self.parent_ids))
 
         return self
 
@@ -136,9 +139,12 @@ class Neuron(object):
 
 
     def get_soma(self, allow_multiple=False, strict=False):
-        somata = self.swc[(self.swc[:, 1] == 1) & (self.swc[:, 6] == -1)]
+        node_types = self.node_types
+        parent_ids = self.parent_ids
+        node_ids = self.node_ids
+        somata = self.swc[(node_types == 1) & (parent_ids == -1)]
         if somata.size == 0:
-            somata = self.swc[self.swc[:, 6] == -1]
+            somata = self.swc[parent_ids == -1]
         if strict:
             if somata.size == 0:
                 warnings.warn(f"{self.fn} no soma detected...", UserWarning)
@@ -147,7 +153,7 @@ class Neuron(object):
                 return somata[0]
             return somata
         
-        somata = self.swc[~np.isin(self.swc[:, 6], self.swc[:, 0])]
+        somata = self.swc[~np.isin(parent_ids, node_ids)]
 
         if somata.size == 0:
             warnings.warn(f"{self.fn} no soma detected...", UserWarning)
