@@ -147,6 +147,13 @@ def build_extensions(*, use_cython: bool = False) -> list[Extension]:
             define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
             extra_compile_args=_extra_compile_args(),
         ),
+        Extension(
+            "pyneutube.tracers.pyNeuTube.tracing_mask_accel",
+            [_extension_source("pyneutube/tracers/pyNeuTube/tracing_mask_accel", use_cython=use_cython)],
+            include_dirs=[np.get_include()],
+            define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
+            extra_compile_args=_extra_compile_args(),
+        ),
     ]
 
     shortest_path_stem = "pyneutube/tracers/pyNeuTube/shortest_path_accel"

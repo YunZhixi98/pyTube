@@ -89,105 +89,53 @@ def remove_zigzag(neuron: Neuron):
         swc = _filtered_swc(swc, nodes_to_remove)
         neuron.initialize(swc)
 
+def _breadth_first_indices(neuron: Neuron):
+    """Snapshot node order before changing tree links."""
+    order = [neuron.nidHash[soma[0]] for soma in neuron.somata]
+    for index in order:
+        order.extend(neuron.indexChildren[index])
+    return order
+
+
 def tune_branch(neuron: Neuron):
-    """
-    Optimize branch connections by bypassing intermediate nodes when beneficial.
-    Reconnects nodes to grandparents if it reduces distance and maintains sharp turns.
-    """
-    # Cache frequently accessed attributes
+    """Adjust continuation branches using the C candidate-distance rule."""
     nid_hash = neuron.nidHash
     children_map = neuron.indexChildren
     swc = neuron.swc
-    
-    # Pre-compute positions for faster distance calculations
     positions = swc[:, 2:5]
-    
-    # Track modifications
     modified = False
-    
-    # Get soma indices more efficiently
-    soma_indices = {nid_hash[soma[0]] for soma in neuron.somata}
-    
-    # Process each soma's subtree
-    for soma_idx in soma_indices:
-        stack = deque(children_map[soma_idx])
-        
-        while stack:
-            cur_idx = stack.pop()
-            cur_node = swc[cur_idx]
-            
-            # Get parent node
-            parent_id = cur_node[6]
-            if parent_id == -1:
-                continue
-                
-            parent_idx = nid_hash.get(parent_id)
-            if parent_idx is None:
-                continue
-            
-            if len(children_map[parent_idx]) > 1:
-                stack.extend(children_map[cur_idx])
-                continue
 
-            parent_node = swc[parent_idx]
-            
-            # Get grandparent node
-            gparent_id = parent_node[6]
-            if gparent_id == -1:
-                continue
-                
-            gparent_idx = nid_hash.get(gparent_id)
-            if gparent_idx is None:
-                continue
-            
-            # Skip if grandparent has only one child (no branching point)
-            if len(children_map[gparent_idx]) == 1:
-                stack.extend(children_map[cur_idx])
-                continue
-            
-            # Get great-grandparent node
-            ggparent_id = swc[gparent_idx][6]
-            if ggparent_id == -1:
-                stack.extend(children_map[cur_idx])
-                continue
-                
-            ggparent_idx = nid_hash.get(ggparent_id)
-            if ggparent_idx is None:
-                stack.extend(children_map[cur_idx])
-                continue
-            
-            # Check turn conditions
-            min_dist = np.inf
-            new_pid = None
-            if not is_sharp_turn(positions[gparent_idx], positions[parent_idx], positions[cur_idx]):
-                min_dist = min(min_dist, _squared_distance(positions[parent_idx], positions[gparent_idx]))
-            if not is_sharp_turn(positions[ggparent_idx], positions[parent_idx], positions[cur_idx]):
-                tmp_dist = _squared_distance(positions[parent_idx], positions[ggparent_idx])
-                if tmp_dist < min_dist:
-                    min_dist = tmp_dist
-                    new_pid = ggparent_id
-                    modified = True
+    # Snapshot traversal before reparenting, so every subtree is visited once.
+    for cur_idx in _breadth_first_indices(neuron):
+        parent_idx = nid_hash.get(swc[cur_idx, 6])
+        if parent_idx is None or len(children_map[parent_idx]) != 1:
+            continue
+        gparent_idx = nid_hash.get(swc[parent_idx, 6])
+        if gparent_idx is None or len(children_map[gparent_idx]) <= 1:
+            continue
 
-            gparent_children = children_map[gparent_idx]
-            for child_idx in gparent_children[::-1]:  # child_idx is previous sibling in DFS
-                if parent_idx == child_idx:
-                    break
-                if is_sharp_turn(positions[child_idx], positions[parent_idx], positions[cur_idx]):
-                    tmp_dist = _squared_distance(positions[parent_idx], positions[child_idx])
-                    if tmp_dist < min_dist:
-                        min_dist = tmp_dist
-                        new_pid = swc[child_idx][0]
-                        modified = True
+        min_dist = np.inf
+        new_parent_idx = gparent_idx
+        if not is_sharp_turn(positions[gparent_idx], positions[parent_idx], positions[cur_idx]):
+            min_dist = _squared_distance(positions[parent_idx], positions[gparent_idx])
 
-            # modify the children_map of gparent node
-            if new_pid is not None:
-                swc[parent_idx][6] = new_pid
-                children_map[nid_hash[new_pid]].insert(0, parent_idx)
-                children_map[gparent_idx].remove(parent_idx)
+        ggparent_idx = nid_hash.get(swc[gparent_idx, 6])
+        candidates = [] if ggparent_idx is None else [ggparent_idx]
+        candidates.extend(idx for idx in children_map[gparent_idx] if idx != parent_idx)
+        for candidate_idx in candidates:
+            # C Forming_Turn returns FALSE for these unconnected candidates.
+            # Its adjacency guard means this is a distance-only comparison.
+            distance = _squared_distance(positions[parent_idx], positions[candidate_idx])
+            if distance < min_dist:
+                min_dist = distance
+                new_parent_idx = candidate_idx
 
-            stack.extend(children_map[cur_idx])
-    
-    # Only reinitialize if modifications were made
+        if new_parent_idx != gparent_idx:
+            swc[parent_idx, 6] = swc[new_parent_idx, 0]
+            children_map[gparent_idx].remove(parent_idx)
+            children_map[new_parent_idx].append(parent_idx)
+            modified = True
+
     if modified:
         neuron.initialize(swc)
 
@@ -216,64 +164,48 @@ def remove_spur(neuron: Neuron):
 
 
 def merge_close_point(neuron: Neuron, threshold=0.01):
-
+    """Merge close parent/child and adjacent sibling nodes throughout the tree."""
     nid_hash = neuron.nidHash
     children_map = neuron.indexChildren
     swc = neuron.swc
-
+    positions = swc[:, 2:5]
     nodes_to_remove = set()
-
-    stack = deque()
     threshold2 = threshold * threshold
-    
-    for soma in neuron.somata:
-        soma_idx = nid_hash[soma[0]]
-        stack.extend(children_map[soma_idx])
 
-        while stack:
-            cur_idx = stack.pop()
-            cur_node = swc[cur_idx]  # for updating the parent
+    # Match C's breadth-first snapshot while keeping live parent/child links.
+    for cur_idx in _breadth_first_indices(neuron):
+        if cur_idx in nodes_to_remove:
+            continue
+        parent_idx = nid_hash.get(swc[cur_idx, 6])
+        if parent_idx is None:
+            continue
+        siblings = children_map[parent_idx]
 
-            parent1_idx = nid_hash[cur_node[6]]
-            parent1_node = swc[parent1_idx]  # main node to calculate
-
-            parent2_idx = nid_hash.get(parent1_node[6])
-            if parent2_idx is None:
-                stack.extend(children_map[cur_idx])
-                continue
-
-            parent2_node = swc[parent2_idx]
-            parent1_children = list(children_map[parent1_idx])  # need a copy or it will be modified
-
-            if _squared_distance(parent1_node[2:5], parent2_node[2:5]) < threshold2:
-                
-                parent2_nid = parent2_node[0]
-                for child_idx in children_map[parent1_idx]:
-                    swc[child_idx][6] = parent2_nid
-
-                nodes_to_remove.add(parent1_idx)
-        
-            elif len(parent1_children) > 1 and cur_idx == parent1_children[0]:  # the last child in DFS
-                parent1_children = deque(parent1_children)
-                child1_idx = parent1_children.pop()
-                while parent1_children:
-                    child2_idx = parent1_children.pop()
-
-                    child1_node = swc[child1_idx]
-                    child2_node = swc[child2_idx]
-
-                    if _squared_distance(child1_node[2:5], child2_node[2:5]) < threshold2:
-                        child1_nid = child1_node[0]
-                        for child_idx in children_map[child2_idx]:
-                            swc[child_idx][6] = child1_nid
-
-                        nodes_to_remove.add(child2_idx)
-                    else:
-                        child1_idx = child2_idx
+        if _squared_distance(positions[cur_idx], positions[parent_idx]) < threshold2:
+            children = children_map[cur_idx]
+            for child_idx in children:
+                swc[child_idx, 6] = swc[parent_idx, 0]
+            slot = siblings.index(cur_idx)
+            siblings[slot:slot + 1] = children
+            children_map[cur_idx] = []
+            nodes_to_remove.add(cur_idx)
+        elif siblings[-1] == cur_idx:
+            # As in C, keep the first of two consecutive close siblings.
+            slot = 0
+            while slot + 1 < len(siblings):
+                keep_idx, drop_idx = siblings[slot:slot + 2]
+                if _squared_distance(positions[keep_idx], positions[drop_idx]) < threshold2:
+                    for child_idx in children_map[drop_idx]:
+                        swc[child_idx, 6] = swc[keep_idx, 0]
+                    children_map[keep_idx].extend(children_map[drop_idx])
+                    children_map[drop_idx] = []
+                    siblings.pop(slot + 1)
+                    nodes_to_remove.add(drop_idx)
+                else:
+                    slot += 1
 
     if nodes_to_remove:
-        swc = _filtered_swc(swc, nodes_to_remove)
-        neuron.initialize(swc)
+        neuron.initialize(_filtered_swc(swc, nodes_to_remove))
 
     return
 
@@ -292,6 +224,18 @@ def remove_overshoot(neuron: Neuron):
     parent_ids = swc[:, 6].astype(int).ravel()
     
     remove_set = set()
+
+    def remove_continuation(index):
+        parent_idx = nid_hash[parent_ids[index]]
+        children = children_map[index]
+        for child_idx in children:
+            parent_ids[child_idx] = swc[parent_idx, 0]
+            swc[child_idx, 6] = swc[parent_idx, 0]
+        siblings = children_map[parent_idx]
+        slot = siblings.index(index)
+        siblings[slot:slot + 1] = children
+        children_map[index] = []
+        remove_set.add(index)
     
     # Get bifurcation points (excluding soma)
     soma_indices = {nid_hash[soma[0]] for soma in neuron.somata}
@@ -315,11 +259,10 @@ def remove_overshoot(neuron: Neuron):
                         
                         # Check angle
                         if is_sharp_turn(gparent_pos, parent_pos, bifur_pos):
-                            remove_set.add(parent_idx)
-                            swc[bifur_idx][6] = swc[gparent_idx][0]
+                            remove_continuation(parent_idx)
         
         # Check children side
-        for child_idx in children_map[bifur_idx]:
+        for child_idx in list(children_map[bifur_idx]):
             if child_idx in remove_set:
                 continue
                 
@@ -334,8 +277,7 @@ def remove_overshoot(neuron: Neuron):
                     
                     # Check angle
                     if is_sharp_turn(bifur_pos, child_pos, gchild_pos):
-                        remove_set.add(child_idx)
-                        swc[gchild_idx][6] = swc[bifur_idx][0]
+                        remove_continuation(child_idx)
     
     # Apply removals
     if remove_set:
